@@ -58,7 +58,8 @@ export default async function (b) {
         await b.esperar(400);
         const bloqueado = await b.eval("document.querySelector('[data-siguiente]').disabled");
         const pestana = await b.eval("document.querySelector('.pestana.activa')?.dataset.pestana");
-        const esperada = await b.eval(`EJERCICIOS.pestanaInicial(${P}) || 'html'`);
+        // La pestaña indicada o, si no, la primera que tenga el editor (en lecciones solo de JS no hay HTML)
+        const esperada = await b.eval(`EJERCICIOS.pestanaInicial(${P}) || document.querySelector('.pestana')?.dataset.pestana`);
         // Revisar sin tocar nada (código inicial) debe suspender
         await b.eval("document.querySelector('[data-revisar]').click()");
         await esperarRevision(b);

@@ -65,6 +65,7 @@
       const n = attr.name;
       if (!a.hasAttribute(n) || !a.getAttribute(n).trim() && (n === "class" || n === "style")) {
         if (n === "class") return "A " + nombre(a) + " le falta la clase `" + attr.value.trim() + "`.";
+        if (n === "style") return "A " + nombre(a) + " le falta el estilo en línea (`style`) que pide el enunciado.";
         return "A " + nombre(a) + " le falta el atributo `" + n + "`.";
       }
       const va = a.getAttribute(n).trim();
@@ -333,6 +334,9 @@
     const ini = paso.inicial || {};
     if ((ini.html || "").trim() && !(ini.css || "").trim() && (paso.solucion.css || "").trim()) return "css";
     if ((paso.solucion.js || "").trim() && !(ini.js || "").trim()) return "js";
+    // El JS viene empezado (p. ej. un esqueleto) y el HTML y el CSS ya están hechos: se abre en JS
+    const igual = (a, b) => String(a || "").trim() === String(b || "").trim();
+    if ((ini.js || "").trim() && !igual(ini.js, paso.solucion.js) && igual(ini.html, paso.solucion.html) && igual(ini.css, paso.solucion.css)) return "js";
     return undefined;
   }
 

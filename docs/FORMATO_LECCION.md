@@ -133,7 +133,8 @@ Reglas para escribir el enunciado:
   ```
   Los formularios de los ejercicios llevan `novalidate`: si no, un campo `required` vacío impide el `submit`.
 - Lecciones solo de consola (js-01, js-02): pon `pestanas: ["js"]` en la lección; el resultado se convierte en una
-  consola grande (el código se sigue ejecutando en un marco invisible). Un `ejemplo` con `js` y sin `html` también
+  consola grande (el código se sigue ejecutando en un marco invisible). `pestanas` también vale **en un paso**
+  (`ejercicio` o `reto`) para un ejercicio solo de consola dentro de una lección con HTML. Un `ejemplo` con `js` y sin `html` también
   se muestra así; con `html` y `js`, el resultado lleva la consola debajo.
 
 ### Herramientas del resultado en el Mundo JavaScript (las da el motor, ver `js/editor.js`)
@@ -221,8 +222,11 @@ Reglas de las comprobaciones:
   página: si una pulsa un botón, la siguiente ve el resultado. Para que cada una empiece de cero, usa `recargar`:
   - `await PRUEBA.recargar(doc)` → `{ doc, win }` de una copia que vuelve a ejecutar el código **original** (como F5).
     Conserva el `localStorage` de práctica (ideal para «recuerda el nombre al recargar»); con `{ borrarDatos: true }` empieza vacío.
+    Con `{ sinDatos: ["chistes.json"] }`, en esa copia `fetch("datos/chistes.json")` da 404 (para comprobar que el alumno trata el error).
   - `PRUEBA.escribir(campo, "texto")` → escribe en un `input`/`textarea`/`select` y lanza `input` y `change`.
   - `await PRUEBA.esperarA(() => condición, 1500)` → espera hasta que se cumpla (p. ej. que lleguen los datos de un `fetch`).
+  - `PRUEBA.codigo(doc)` → el JS que escribió el alumno, sin comentarios (con `{ comentarios: true }`, tal cual).
+    Para comprobar **cómo** se hizo algo (que use `const`, una plantilla, `*`…). Úsalo con moderación: mejor comprobar el efecto.
   - `win.__logs` → array con cada línea de la consola (ya formateada). `win.__errores` → errores de JS `[{ mensaje, linea }]`.
   - Enviar un formulario: `form.requestSubmit()` (con `novalidate` en el `<form>`). Pulsar: `boton.click()`.
   - Ejemplo: `prueba: async (doc) => { const v = await PRUEBA.recargar(doc); v.doc.querySelector("#mas").click(); v.doc.querySelector("#mas").click(); return v.doc.querySelector("#n").textContent === "2"; }`

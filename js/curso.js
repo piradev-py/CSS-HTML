@@ -86,20 +86,20 @@
       lema: "Dale vida e interacción a tu web",
       pestanas: ["html", "css", "js"],
       lecciones: [
-        { id: "js-01", archivo: "js-01-que-es-js.js", titulo: "¿Qué es JavaScript?", listo: false },
-        { id: "js-02", archivo: "js-02-variables.js", titulo: "Variables y consola", listo: false },
-        { id: "js-03", archivo: "js-03-dom.js", titulo: "Seleccionar elementos (DOM)", listo: false },
-        { id: "js-04", archivo: "js-04-cambiar-dom.js", titulo: "Cambiar texto, estilos y clases", listo: false },
-        { id: "js-05", archivo: "js-05-funciones.js", titulo: "Funciones", listo: false },
-        { id: "js-06", archivo: "js-06-eventos.js", titulo: "Eventos", listo: false },
-        { id: "js-07", archivo: "js-07-condiciones.js", titulo: "Condiciones", listo: false },
-        { id: "js-08", archivo: "js-08-arrays-y-bucles.js", titulo: "Arrays y bucles", listo: false },
-        { id: "js-09", archivo: "js-09-objetos.js", titulo: "Objetos", listo: false },
-        { id: "js-10", archivo: "js-10-crear-elementos.js", titulo: "Crear elementos desde JS", listo: false },
-        { id: "js-11", archivo: "js-11-validar-formularios.js", titulo: "Validar formularios", listo: false },
-        { id: "js-12", archivo: "js-12-localstorage.js", titulo: "Guardar datos: localStorage", listo: false },
-        { id: "js-13", archivo: "js-13-fetch.js", titulo: "Pedir datos con fetch", listo: false },
-        { id: "js-14", archivo: "js-14-proyecto-tareas.js", titulo: "Proyecto final: lista de tareas", listo: false }
+        { id: "js-01", archivo: "js-01-que-es-js.js", titulo: "¿Qué es JavaScript?", listo: true },
+        { id: "js-02", archivo: "js-02-variables.js", titulo: "Variables y consola", listo: true },
+        { id: "js-03", archivo: "js-03-dom.js", titulo: "Seleccionar elementos (DOM)", listo: true },
+        { id: "js-04", archivo: "js-04-cambiar-dom.js", titulo: "Cambiar texto, estilos y clases", listo: true },
+        { id: "js-05", archivo: "js-05-funciones.js", titulo: "Funciones", listo: true },
+        { id: "js-06", archivo: "js-06-eventos.js", titulo: "Eventos", listo: true },
+        { id: "js-07", archivo: "js-07-condiciones.js", titulo: "Condiciones", listo: true },
+        { id: "js-08", archivo: "js-08-arrays-y-bucles.js", titulo: "Arrays y bucles", listo: true },
+        { id: "js-09", archivo: "js-09-objetos.js", titulo: "Objetos", listo: true },
+        { id: "js-10", archivo: "js-10-crear-elementos.js", titulo: "Crear elementos desde JS", listo: true },
+        { id: "js-11", archivo: "js-11-validar-formularios.js", titulo: "Validar formularios", listo: true },
+        { id: "js-12", archivo: "js-12-localstorage.js", titulo: "Guardar datos: localStorage", listo: true },
+        { id: "js-13", archivo: "js-13-fetch.js", titulo: "Pedir datos con fetch", listo: true },
+        { id: "js-14", archivo: "js-14-proyecto-tareas.js", titulo: "Proyecto final: lista de tareas", listo: true }
       ]
     }
   ];

@@ -135,7 +135,7 @@ async function pruebas() {
 export default async function (b) {
   await b.tam(1280, 900);
   await b.ir(BASE + "tests/verificar-lecciones.html");
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 480; i++) {
     if (!(await b.eval("document.querySelector('[data-resumen]').textContent")).includes("Comprobando")) break;
     await b.esperar(500);
   }

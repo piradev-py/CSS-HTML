@@ -132,7 +132,9 @@
       }
       let tabla = {};
       try { tabla = parent.__csshtmlDatos || {}; } catch (e) { /* sin padre */ }
-      const existe = Object.prototype.hasOwnProperty.call(tabla, m[1]);
+      // Un marco puede "perder" archivos a propósito (PRUEBA.recargar(doc, { sinDatos: [...] })) para probar el 404
+      const ocultos = (marco && marco.__sinDatos) || [];
+      const existe = Object.prototype.hasOwnProperty.call(tabla, m[1]) && !ocultos.includes(m[1]);
       const texto = !existe ? "Not Found" : typeof tabla[m[1]] === "string" ? tabla[m[1]] : JSON.stringify(tabla[m[1]]);
       const respuesta = {
         __csshtmlRespuesta: true,

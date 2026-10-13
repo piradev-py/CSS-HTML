@@ -254,75 +254,76 @@ leer y modificar la página (DOM) en respuesta a eventos; crear elementos desde 
 formularios; guardar datos en el navegador; pedir datos con `fetch`; y construir una aplicación
 completa de lista de tareas.
 
-### js-01 · ¿Qué es JavaScript? · 25 XP 🚧
+### js-01 · ¿Qué es JavaScript? · 25 XP ✅
 - **Objetivo:** entender qué hace JavaScript y escribir tus primeras instrucciones.
 - **Conceptos nuevos:** JavaScript («el cerebro de la web»), instrucción, `console.log()`, la consola, textos entre comillas, comentarios `//`.
 - **Reto:** mostrar en la consola un saludo y tu comida favorita.
 
-### js-02 · Variables y consola · 35 XP 🚧
+### js-02 · Variables y consola · 35 XP ✅
 - **Objetivo:** guardar datos en variables y hacer operaciones con ellos.
 - **Conceptos nuevos:** variable, `let`, `const`, texto (string), número, operadores `+ - * /`, plantillas de texto `` `Hola ${nombre}` ``.
 - **Reto:** calcular la edad de tu perro en «años humanos» y mostrar la frase en la consola.
 
-### js-03 · Seleccionar elementos (DOM) · 35 XP 🚧
+### js-03 · Seleccionar elementos (DOM) · 35 XP ✅
 - **Objetivo:** encontrar desde JavaScript cualquier elemento de la página.
 - **Conceptos nuevos:** DOM (el árbol de la página), `document`, `querySelector()`, `querySelectorAll()`, `textContent` (leer).
 - **Reto:** leer el texto del título de la página y del primer párrafo y mostrarlos en la consola.
 
-### js-04 · Cambiar texto, estilos y clases · 40 XP 🚧
+### js-04 · Cambiar texto, estilos y clases · 40 XP ✅
 - **Objetivo:** modificar la página desde JavaScript.
 - **Conceptos nuevos:** asignar `textContent`, `elemento.style.propiedad`, `classList.add/remove/toggle`, por qué preferir clases a `style`.
 - **Reto:** cambiar el texto del título, ponerle color y añadir la clase `modo-noche` al `body`.
 
-### js-05 · Funciones · 40 XP 🚧
+### js-05 · Funciones · 40 XP ✅
 - **Objetivo:** agrupar instrucciones en una «receta» reutilizable.
 - **Conceptos nuevos:** `function`, llamar a una función, parámetros, `return`, funciones flecha (presentación).
 - **Reto:** función `saludar(nombre)` que devuelve un saludo y se usa para rellenar dos párrafos.
 
-### js-06 · Eventos · 45 XP 🚧
+### js-06 · Eventos · 45 XP ✅
 - **Objetivo:** hacer que la página reaccione a lo que hace el usuario.
-- **Conceptos nuevos:** evento, `addEventListener`, `click`, `input`, función como respuesta a un evento.
-- **Reto:** botón de «me gusta» ❤️ que suma 1 al contador cada vez que se pulsa.
+- **Conceptos nuevos:** evento, `addEventListener`, `click`, `input`, función como respuesta a un evento, `campo.value` (leer lo escrito), contador con `let` y los atajos `+=`/`++`.
+- **Reto:** botón de «me gusta» ❤️ que suma 1 al contador cada vez que se pulsa y se marca como `activo`.
 
-### js-07 · Condiciones · 40 XP 🚧
+### js-07 · Condiciones · 40 XP ✅
 - **Objetivo:** tomar decisiones en el código.
-- **Conceptos nuevos:** booleanos (`true`/`false`), comparaciones (`===`, `!==`, `>`, `<`), `if`, `else`, `else if`, `&&`, `||`.
+- **Conceptos nuevos:** booleanos (`true`/`false`), comparaciones (`===`, `!==`, `>`, `<`, `>=`, `<=`), `if`, `else`, `else if`, `&&`, `||`, longitud de un texto (`texto.length`).
 - **Reto:** semáforo de contraseña: al escribir, mostrar «débil», «media» o «fuerte» según su longitud.
 
-### js-08 · Arrays y bucles · 45 XP 🚧
+### js-08 · Arrays y bucles · 45 XP ✅
 - **Objetivo:** trabajar con listas de datos y repetir acciones.
-- **Conceptos nuevos:** array, índice, `length`, `push()`, bucle `for…of`, `forEach()`.
-- **Reto:** sumar las puntuaciones de una partida guardadas en un array y mostrar el total.
+- **Conceptos nuevos:** array, índice, `length`, `push()`, bucle `for…of`, `forEach()` (también sobre `querySelectorAll`), acumulador. No se enseña `while` ni el `for` con índice.
+- **Reto:** sumar las puntuaciones de una partida guardadas en un array y mostrar el total; un botón «Ronda extra» añade una puntuación y recalcula.
 
-### js-09 · Objetos · 40 XP 🚧
+### js-09 · Objetos · 40 XP ✅
 - **Objetivo:** agrupar datos relacionados con nombre.
 - **Conceptos nuevos:** objeto, `{ clave: valor }`, acceso con punto, modificar propiedades, arrays de objetos.
 - **Reto:** ficha de un personaje (nombre, vida, nivel) y subirle de nivel al pulsar un botón.
 
-### js-10 · Crear elementos desde JS · 45 XP 🚧
+### js-10 · Crear elementos desde JS · 45 XP ✅
 - **Objetivo:** generar HTML nuevo a partir de datos.
 - **Conceptos nuevos:** `document.createElement()`, `append()`, `remove()`, pintar un array de datos en la página.
-- **Reto:** pintar en un `<ul>` la lista de canciones de un array y añadir una canción nueva desde un campo de texto.
+- **Reto:** pintar en un `<ul>` la lista de canciones de un array y añadir una canción nueva desde un campo de texto y un botón (sin formulario: llega en js-11).
 
-### js-11 · Validar formularios · 50 XP 🚧
+### js-11 · Validar formularios · 50 XP ✅
 - **Objetivo:** comprobar lo que escribe el usuario antes de enviarlo.
-- **Conceptos nuevos:** evento `submit`, `preventDefault()`, `.value`, `.trim()`, mensajes de error accesibles.
+- **Conceptos nuevos:** evento `submit`, el parámetro `evento`, `preventDefault()`, `.value` (repaso), `.trim()`, `.includes()`, el «no» `!`, mensajes de error accesibles.
 - **Reto:** formulario de registro que muestra un error si el nombre está vacío o el email no tiene `@`, y un mensaje de éxito si todo va bien.
 
-### js-12 · Guardar datos: localStorage · 45 XP 🚧
+### js-12 · Guardar datos: localStorage · 45 XP ✅
 - **Objetivo:** recordar datos aunque se recargue la página.
 - **Conceptos nuevos:** `localStorage.setItem/getItem/removeItem`, JSON, `JSON.stringify()`, `JSON.parse()`.
 - **Reto:** recordar el nombre del usuario y saludarle al volver.
 
-### js-13 · Pedir datos con fetch · 55 XP 🚧
+### js-13 · Pedir datos con fetch · 55 XP ✅
 - **Objetivo:** traer datos de un servidor y mostrarlos en la página.
 - **Conceptos nuevos:** asincronía («pedir y esperar»), `fetch()`, `async`/`await`, `.json()`, `try`/`catch`.
-- **Reto:** pedir una lista de chistes (JSON) y mostrar uno al azar al pulsar un botón.
+- **Conceptos nuevos (además):** `respuesta.ok` y `respuesta.status` (404).
+- **Reto:** pedir una lista de chistes (JSON) y mostrar el siguiente al pulsar un botón (tras el último vuelve al primero), avisando si no se pueden cargar. «Al azar» se descartó para no meter `Math.random` sin enseñarlo.
 
-### js-14 · Proyecto final: lista de tareas · 60 XP 🚧
+### js-14 · Proyecto final: lista de tareas · 60 XP ✅
 - **Objetivo:** construir una aplicación completa combinando todo el curso.
 - **Conceptos nuevos:** ninguno nuevo: integración (estado en un array de objetos, pintar, eventos, guardar).
-- **Reto (jefe final del curso):** lista de tareas que permite añadir, marcar como hecha, borrar y que recuerda las tareas al recargar.
+- **Reto (jefe final del curso):** lista de tareas que permite añadir, marcar como hecha, borrar y que recuerda las tareas al recargar. Se construye por etapas con tres ejercicios (pintar, añadir, marcar y borrar) y acaba con un cierre del curso.
 
 ---
 
@@ -369,11 +370,11 @@ El motivo de casi todos es la regla de oro del curso: **una idea por lección y 
 - **El DOM se queda pronto (js-03 y js-04)** a propósito: ver la página cambiar en la lección 3 motiva mucho
   más que diez lecciones de teoría con la consola.
 
-### Dudas técnicas para el motor (para decidir con quien lo construye)
-- **js-12 (localStorage):** si el resultado se muestra en un `iframe` con `sandbox` sin `allow-same-origin`,
-  `localStorage` lanza error. Habrá que permitirlo o simularlo para esa lección.
-- **js-13 (fetch):** depender de una API externa rompe el reto sin conexión. Propuesta: que el reto pida un
-  JSON que el motor sirva o simule (o una URL `data:`), y dejar la API real como «pruébalo» opcional.
+### Dudas técnicas para el motor (resueltas)
+- **js-12 (localStorage):** el resultado usa un `localStorage` «de práctica» que vive en su `iframe`: funciona como
+  el real, sobrevive a 🔄 Recargar y nunca toca el progreso del curso (ver `docs/FORMATO_LECCION.md`).
+- **js-13 (fetch):** `fetch("datos/archivo.json")` lo sirve el motor sin internet con los `datos` que declara la
+  lección; cualquier otra URL usa el `fetch` real.
 - **html-02:** como el navegador siempre crea `<html>`, `<head>` y `<body>`, el reto comprueba cosas que no se
   autogeneran (`<meta charset>` y un `<title>` con la palabra «mascota»). Si el motor inyecta su propia
   `<meta charset>`, esa comprobación saldría verde sola; el reto sigue siendo válido porque el `<title>` y el `<h1>` no.

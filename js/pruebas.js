@@ -121,6 +121,7 @@
   /**
    * Mundo JavaScript: vuelve a cargar el código ORIGINAL de la página (como pulsar F5) en una copia oculta.
    * Conserva el localStorage de práctica, salvo con { borrarDatos: true }. Devuelve { doc, win }.
+   * { sinDatos: ["chistes.json"] }: en esa copia, fetch("datos/chistes.json") da 404 (para probar los errores).
    * Útil para que cada comprobación empiece de cero o para ver si algo "se recuerda" al recargar.
    */
   async function recargar(doc, opciones = {}) {
@@ -131,7 +132,20 @@
     copias.push(marco);
     marco.__almacen = opciones.borrarDatos ? {} : viejo.__almacen || {};
     marco.__almacenSesion = {};
+    marco.__sinDatos = opciones.sinDatos || [];
     return cargarEn(marco, fuente, { conservarDatos: true, movimiento: opciones.movimiento });
+  }
+
+  /**
+   * Mundo JavaScript: el código JS que escribió el alumno, sin comentarios (de línea y de bloque) por defecto.
+   * Para los retos que deben comprobar CÓMO se hizo algo (usar variables, una plantilla…), no solo el resultado.
+   */
+  function codigo(doc, opciones = {}) {
+    const s = doc.querySelector("script[data-csshtml=alumno]");
+    const texto = s ? s.textContent : "";
+    if (opciones.comentarios) return texto;
+    // Quita comentarios sin tocar lo que va dentro de comillas (p. ej. "https://…")
+    return texto.replace(/("(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'|`(?:\\[\s\S]|[^`\\])*`)|\/\/[^\n]*|\/\*[\s\S]*?\*\//g, (t, cadena) => cadena || "");
   }
 
   /** Escribe en un campo como lo haría el alumno: cambia su valor y lanza los eventos input y change. */
@@ -180,7 +194,7 @@
   }
 
   window.PRUEBA = {
-    clonar, recargar, escribir, esperar, esperarA, esperarCalma, limpiar, reglas, textoCSS,
+    clonar, recargar, codigo, escribir, esperar, esperarA, esperarCalma, limpiar, reglas, textoCSS,
     prepararCSS, prepararHTML, asentar, cargarEn, crearMarco
   };
 })();

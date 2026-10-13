@@ -13,6 +13,9 @@ node tests/navegador/cdp.mjs esc-motor.mjs
 # Pruebas del motor del Mundo JavaScript (consola, errores, localStorage, fetch, acciones)
 node tests/navegador/cdp.mjs esc-motor-js.mjs
 
+# Capturas de varios pasos del Mundo JavaScript (consola, localStorage, proyecto final)
+node tests/navegador/cdp.mjs esc-fotos-js.mjs
+
 # Recorrer un mundo entero: ejercicio, controles, quiz, reto y victoria de cada lección
 MUNDO=2 node tests/navegador/cdp.mjs esc-mundo.mjs        # bash
 set MUNDO=2&& node tests\navegador\cdp.mjs esc-mundo.mjs  # cmd de Windows

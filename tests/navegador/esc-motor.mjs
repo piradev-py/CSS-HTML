@@ -6,7 +6,7 @@ export default async function (b) {
   await b.reducido(); // como el Windows del usuario: el resultado no debe depender de esto
   await b.ir(BASE + "tests/verificar-lecciones.html");
   // Esperar a que la verificación automática termine: comparte los marcos ocultos
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 480; i++) {
     if (!(await b.eval("document.querySelector('[data-resumen]').textContent")).includes("Comprobando")) break;
     await b.esperar(500);
   }
