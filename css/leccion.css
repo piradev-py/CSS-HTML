@@ -381,7 +381,7 @@ iframe.resultado {
 /* ---------- Avisos y victoria ---------- */
 .aviso-grande { max-width: 520px; margin: 40px auto; text-align: center; }
 .aviso-emoji { font-size: 4rem; }
-.modal-victoria .tagui { width: 96px; height: 96px; animation: saltar 1.2s ease-in-out 1, flotar 6s ease-in-out 1.2s infinite; }
+.modal-victoria .tagui { width: 96px; height: 96px; animation: saltar 1.2s ease-in-out 1, respirar-tagui 4.5s ease-in-out 1.2s infinite; }
 .xp-ganada { font-size: 1.8rem; font-weight: 900; color: var(--xp); margin: 6px 0; }
 .texto-suave { color: var(--texto-suave); }
 .subida-nivel,

@@ -138,7 +138,8 @@
   transition: transform 0.12s, box-shadow 0.12s;
 }
 .mundo-js .nodo { color: #2b2238; }
-a.nodo:hover { transform: translateY(-3px) scale(1.04); }
+/* El hover se mide en toda la fila: si fuese en el círculo, al subir se saldría del ratón y rebotaría */
+.nodo-fila:hover a.nodo { transform: translateY(-3px); }
 a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc); }
 
 .nodo.completada { background: var(--color); }
@@ -171,7 +172,9 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
   font-weight: 900;
   font-size: 0.85rem;
   white-space: nowrap;
-  animation: flotar 6s ease-in-out infinite;
+  transform-origin: 50% 100%;    /* respira hacia arriba, apoyado en el círculo */
+  will-change: transform;        /* animación suave por la tarjeta gráfica */
+  animation: respirar-suave 4.5s ease-in-out infinite;
   z-index: 1;
 }
 .nodo-estrellas { margin-top: 10px; font-size: 0.9rem; letter-spacing: 1px; line-height: 1; }

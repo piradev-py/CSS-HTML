@@ -163,7 +163,9 @@
   width: 72px;
   height: 72px;
   flex-shrink: 0;
-  animation: flotar 6s ease-in-out infinite;
+  transform-origin: 50% 92%;     /* respira desde los pies */
+  will-change: transform;        /* la anima la tarjeta gráfica: sin saltos de píxel */
+  animation: respirar-tagui 4.5s ease-in-out infinite;
 }
 .mascota .bocadillo {
   position: relative;
@@ -186,12 +188,19 @@
   border-bottom: 2px solid var(--borde);
   transform: rotate(45deg);
 }
-/* Reacciones suaves y de una sola vez; después Tagui vuelve a flotar con calma */
-.mascota.alegre .tagui { animation: saltar 1.2s ease-in-out 1, flotar 6s ease-in-out 1.2s infinite; }
-.mascota.triste .tagui { animation: temblar 0.9s ease-in-out 1, flotar 6s ease-in-out 0.9s infinite; }
+/* Reacciones suaves y de una sola vez; después Tagui vuelve a respirar con calma */
+.mascota.alegre .tagui { animation: saltar 1.2s ease-in-out 1, respirar-tagui 4.5s ease-in-out 1.2s infinite; }
+.mascota.triste .tagui { animation: temblar 0.9s ease-in-out 1, respirar-tagui 4.5s ease-in-out 0.9s infinite; }
 
-/* Movimientos lentos y cortos: transmiten calma */
-@keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+/* Movimientos lentos y suaves: transmiten calma */
+@keyframes respirar-tagui {
+  0%, 100% { transform: scale(1, 1); }
+  50% { transform: scale(1.035, 1.05); }
+}
+@keyframes respirar-suave { /* para globos de aviso: un leve "inflarse" */
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
 @keyframes saltar { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-8px) rotate(-2deg); } }
 @keyframes temblar { 0%, 100% { transform: translateX(0); } 30% { transform: translateX(-3px); } 70% { transform: translateX(3px); } }
 
