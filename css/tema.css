@@ -50,6 +50,7 @@
   --sombra-boton: 0 5px 0;
   --fuente: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
   --fuente-codigo: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  --fuente-titulo: "Concert One", "Nunito", "Segoe UI", system-ui, sans-serif;
 
   /* Respiración de Tagui y del aviso "¡Empieza aquí!"
      Duración del ciclo completo: la mitad para inflarse y la otra mitad para desinflarse */

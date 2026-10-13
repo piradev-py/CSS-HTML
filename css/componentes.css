@@ -19,13 +19,14 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  font-family: var(--fuente-codigo);
-  font-weight: 800;
-  font-size: 1.25rem;
+  font-family: var(--fuente-titulo);
+  font-weight: 400;              /* Concert One solo tiene un grosor */
+  font-size: 1.6rem;
+  line-height: 1;
   text-decoration: none;
   color: var(--texto);
   white-space: nowrap;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
 }
 .logo .ang { color: var(--mundo-html); }
 .logo .css { color: var(--mundo-css); }
