@@ -1,0 +1,20 @@
+# Pruebas en el navegador
+
+Scripts que controlan **Microsoft Edge sin ventana** (por DevTools) para recorrer la web como un alumno.
+Necesitan Node 22 o superior (usa el `WebSocket` integrado) y Edge instalado en la ruta por defecto.
+
+```bash
+# Verificación automática de todas las lecciones listas (tests/verificar-lecciones.html)
+node tests/navegador/cdp.mjs esc-tests.mjs
+
+# Recorrer un mundo entero: ejercicio, controles, quiz, reto y victoria de cada lección
+MUNDO=2 node tests/navegador/cdp.mjs esc-mundo.mjs        # bash
+set MUNDO=2&& node tests\navegador\cdp.mjs esc-mundo.mjs  # cmd de Windows
+```
+
+- `cdp.mjs` arranca Edge con un perfil temporal (progreso vacío), ejecuta el escenario y al final informa de
+  **cualquier error de JavaScript** de la página.
+- Los escenarios reciben una API sencilla: `ir(url)`, `eval(expr)`, `tam(ancho, alto)`, `foto(nombre)`,
+  `oscuro(bool)`, `movimiento()` (desactiva «reducir movimiento»), `reducido()` y `cdp(método, params)`.
+- Edge sin ventana activa «reducir movimiento» por defecto; llama a `movimiento()` para medir animaciones.
+- Las capturas (`*.png`) y los perfiles temporales se guardan aquí y git los ignora.
