@@ -53,7 +53,7 @@
 
   /* Respiración de Tagui y del aviso "¡Empieza aquí!"
      Duración del ciclo completo: la mitad para inflarse y la otra mitad para desinflarse */
-  --ritmo-respiracion: 22s;
+  --ritmo-respiracion: 4s;
 
   color-scheme: light;
 }
