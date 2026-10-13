@@ -149,14 +149,15 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
   font-size: 1.3rem;
 }
 .nodo.proximamente { cursor: help; }
+/* El nodo actual no se mueve: solo su halo "respira" despacio */
 .nodo.actual {
-  animation: latido 1.6s ease-in-out infinite;
   outline: 5px solid color-mix(in srgb, var(--color) 35%, transparent);
   outline-offset: 5px;
+  animation: respirar 5s ease-in-out infinite;
 }
-@keyframes latido {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.07); }
+@keyframes respirar {
+  0%, 100% { outline-offset: 4px; outline-color: color-mix(in srgb, var(--color) 40%, transparent); }
+  50% { outline-offset: 8px; outline-color: color-mix(in srgb, var(--color) 15%, transparent); }
 }
 
 .globo-actual {
@@ -170,7 +171,7 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
   font-weight: 900;
   font-size: 0.85rem;
   white-space: nowrap;
-  animation: flotar 2s ease-in-out infinite;
+  animation: flotar 6s ease-in-out infinite;
   z-index: 1;
 }
 .nodo-estrellas { margin-top: 10px; font-size: 0.9rem; letter-spacing: 1px; line-height: 1; }
