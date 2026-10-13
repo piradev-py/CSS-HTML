@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificar lecciones · &lt;CSS-HTML&gt;</title>
+  <link rel="stylesheet" href="../css/tema.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <style>
+    main { width: min(1000px, 100%); margin: 0 auto; padding: 24px 16px; }
+    .resumen { font-size: 1.3rem; font-weight: 900; margin: 12px 0 20px; }
+    table { width: 100%; border-collapse: collapse; background: var(--superficie); border-radius: 12px; overflow: hidden; }
+    th, td { padding: 8px 12px; border-bottom: 1px solid var(--borde); text-align: left; vertical-align: top; font-size: 0.95rem; }
+    th { background: var(--superficie-2); }
+    .ok { color: var(--exito); font-weight: 900; }
+    .mal { color: var(--error); font-weight: 900; }
+    ul { margin: 0; padding-left: 18px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>🧪 Verificación de lecciones</h1>
+    <p>Para cada lección lista comprueba que: la estructura cumple el formato, la <b>solución</b> pasa todas las
+      comprobaciones y el código <b>inicial</b> falla al menos una.</p>
+    <div class="resumen" data-resumen>Comprobando…</div>
+    <table>
+      <thead><tr><th>Lección</th><th>Formato</th><th>Solución</th><th>Inicial</th><th>Detalles</th></tr></thead>
+      <tbody data-filas></tbody>
+    </table>
+  </main>
+
+  <script src="../js/curso.js"></script>
+  <script src="../js/progreso.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/editor.js"></script>
+  <script src="../js/retos.js"></script>
+  <script>
+    (async function () {
+      const filas = document.querySelector("[data-filas]");
+      const resumen = document.querySelector("[data-resumen]");
+      const listas = CURSO.listaPlana().filter(l => l.listo);
+      const marco = document.createElement("iframe");
+      marco.style.cssText = "position:absolute;left:-10000px;width:800px;height:600px;";
+      document.body.appendChild(marco);
+
+      function cargar(l) {
+        return new Promise(res => {
+          const s = document.createElement("script");
+          s.src = CURSO.ruta(l.id, "../");
+          s.onload = () => res(true);
+          s.onerror = () => res(false);
+          document.body.appendChild(s);
+        });
+      }
+
+      function revisarFormato(l, lec) {
+        const errores = [];
+        if (!lec) return ["El archivo no llama a CURSO.registrar con id " + l.id];
+        if (lec.titulo !== l.titulo) errores.push("Título distinto al del índice: «" + lec.titulo + "»");
+        if (!lec.objetivo) errores.push("Falta objetivo");
+        if (!Array.isArray(lec.pasos) || !lec.pasos.length) return errores.concat("No tiene pasos");
+        const retos = lec.pasos.filter(p => p.tipo === "reto");
+        if (retos.length !== 1) errores.push("Debe tener exactamente 1 reto (tiene " + retos.length + ")");
+        if (lec.pasos[lec.pasos.length - 1].tipo !== "reto") errores.push("El último paso no es el reto");
+        const tipos = ["explicacion", "pruebalo", "controles", "quiz", "reto"];
+        lec.pasos.forEach((p, i) => {
+          if (!tipos.includes(p.tipo)) errores.push("Paso " + (i + 1) + ": tipo desconocido «" + p.tipo + "»");
+          if (p.tipo === "quiz" && !(p.correcta >= 0 && p.correcta < (p.opciones || []).length)) errores.push("Paso " + (i + 1) + ": 'correcta' fuera de rango");
+          if (p.tipo === "controles" && !(p.controles || []).length) errores.push("Paso " + (i + 1) + ": controles vacíos");
+        });
+        retos.forEach(r => {
+          const n = (r.comprobaciones || []).length;
+          if (n < 1 || n > 5) errores.push("El reto tiene " + n + " comprobaciones");
+          if (!(r.pistas || []).length) errores.push("El reto no tiene pistas");
+          if (!r.solucion) errores.push("El reto no tiene solución");
+        });
+        return errores;
+      }
+
+      let bien = 0;
+      for (const l of listas) {
+        const cargado = await cargar(l);
+        const lec = CURSO.lecciones[l.id];
+        const errores = cargado ? revisarFormato(l, lec) : ["No se pudo cargar " + CURSO.ruta(l.id)];
+        let solOk = false, iniOk = false;
+        const detalles = errores.slice();
+        const reto = lec && lec.pasos && lec.pasos.find(p => p.tipo === "reto");
+        if (reto && reto.solucion) {
+          const rSol = await RETOS.evaluar(reto.solucion, reto.comprobaciones, marco);
+          solOk = rSol.every(Boolean);
+          rSol.forEach((ok, i) => { if (!ok) detalles.push("La solución falla: «" + reto.comprobaciones[i].texto + "»"); });
+          const rIni = await RETOS.evaluar(reto.inicial || {}, reto.comprobaciones, marco);
+          iniOk = rIni.some(r => !r);
+          if (!iniOk) detalles.push("El código inicial ya pasa todas las comprobaciones");
+        }
+        const todo = !errores.length && solOk && iniOk;
+        if (todo) bien++;
+        const tr = document.createElement("tr");
+        const celda = ok => '<td class="' + (ok ? "ok" : "mal") + '">' + (ok ? "✓" : "✗") + "</td>";
+        tr.innerHTML = "<td><b>" + l.id + "</b><br>" + UI.escapar(l.titulo) + "</td>" +
+          celda(!errores.length) + celda(solOk) + celda(iniOk) +
+          "<td>" + (detalles.length ? "<ul>" + detalles.map(d => "<li>" + UI.escapar(d) + "</li>").join("") + "</ul>" : "—") + "</td>";
+        filas.appendChild(tr);
+      }
+      resumen.innerHTML = (bien === listas.length ? "✅ " : "❌ ") + bien + " de " + listas.length + " lecciones correctas";
+      resumen.className = "resumen " + (bien === listas.length ? "ok" : "mal");
+      document.title = (bien === listas.length ? "✓ " : "✗ ") + document.title;
+    })();
+  </script>
+</body>
+</html>

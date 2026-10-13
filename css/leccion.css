@@ -1,0 +1,437 @@
+/* ============================================================
+   <CSS-HTML> · Vista de lección, editor, playground y retos
+   ============================================================ */
+body { --color: var(--mundo-html); --color-osc: var(--mundo-html-osc); }
+body[data-mundo="css"] { --color: var(--mundo-css); --color-osc: var(--mundo-css-osc); }
+body[data-mundo="hc"] { --color: var(--mundo-hc); --color-osc: var(--mundo-hc-osc); }
+body[data-mundo="js"] { --color: var(--mundo-js); --color-osc: var(--mundo-js-osc); }
+
+.leccion {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 20px 16px 120px;
+}
+
+/* ---------- Encabezado de la lección ---------- */
+.leccion-top { margin-bottom: 18px; }
+.miga {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 99px;
+  background: var(--color);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+body[data-mundo="js"] .miga { color: #2b2238; }
+.leccion-titulo { margin: 10px 0 4px; font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 900; }
+.objetivo { color: var(--texto-suave); font-weight: 600; }
+
+.puntos-pasos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.punto-paso {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 2px solid var(--borde);
+  background: var(--superficie);
+  font-size: 1.05rem;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.punto-paso:disabled { cursor: default; filter: grayscale(1); opacity: 0.35; }
+.punto-paso.visto { opacity: 1; border-color: var(--color); }
+.punto-paso.actual {
+  opacity: 1;
+  border-color: var(--color);
+  background: color-mix(in srgb, var(--color) 18%, var(--superficie));
+  transform: scale(1.12);
+}
+
+/* ---------- Paso ---------- */
+.paso-actual {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: entrar-paso 0.35s ease;
+}
+@keyframes entrar-paso { from { opacity: 0; transform: translateY(10px); } }
+
+.tarjeta-texto { font-size: 1.12rem; }
+.tarjeta-texto h2 { font-size: 1.4rem; font-weight: 900; }
+.tarjeta-texto p:last-child { margin: 0; }
+.paso-explicacion .tarjeta-texto { border-left: 8px solid var(--color); }
+
+/* Ejemplo: código + resultado */
+.ejemplo {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+.ejemplo-codigo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ejemplo-resultado { min-width: 0; }
+.etiqueta-codigo {
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--texto-suave);
+  margin: 4px 0 2px;
+}
+.etiqueta-html { color: var(--mundo-html); }
+.etiqueta-css { color: var(--mundo-css); }
+.etiqueta-js { color: var(--mundo-js-osc); }
+
+iframe.resultado {
+  display: block;
+  width: 100%;
+  height: 260px;
+  border: 2px solid var(--borde);
+  border-radius: var(--radio-sm);
+  background: #fff;
+}
+.ejemplo iframe.resultado { height: 140px; }
+
+/* ---------- Paneles (editor y playground) ---------- */
+.editor-vivo,
+.playground {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--superficie);
+  border: 2px solid var(--borde);
+  border-radius: var(--radio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+.panel iframe.resultado { border: 0; border-radius: 0; flex: 1; min-height: 260px; }
+.barra-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--superficie-2);
+  border-bottom: 2px solid var(--borde);
+  min-height: 48px;
+}
+.titulo-panel { font-weight: 800; padding-left: 4px; }
+.aviso-resultado { font-size: 0.82rem; color: var(--texto-suave); font-weight: 700; text-align: right; }
+
+.pestanas { display: flex; gap: 6px; flex-wrap: wrap; }
+.pestana {
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: transparent;
+  color: var(--texto-suave);
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.pestana:hover { background: var(--superficie); }
+.pestana.activa { background: var(--superficie); color: var(--texto); border-color: var(--borde); }
+.pestana-html.activa { border-color: var(--mundo-html); }
+.pestana-css.activa { border-color: var(--mundo-css); }
+.pestana-js.activa { border-color: var(--mundo-js); }
+
+.mini-boton {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 2px solid var(--borde);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.mini-boton:hover { background: var(--fondo-2); }
+
+/* Área de código: textarea transparente encima del resaltado */
+.area-codigo {
+  position: relative;
+  height: 300px;
+  background: var(--codigo-fondo);
+  overflow: hidden;
+}
+.area-codigo textarea,
+.area-codigo .capa-resaltado {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 14px 14px 14px 52px;
+  border: 0;
+  font-family: var(--fuente-codigo);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0;
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+}
+.area-codigo .capa-resaltado { color: var(--codigo-texto); pointer-events: none; scrollbar-width: none; }
+.area-codigo .capa-resaltado::-webkit-scrollbar { display: none; }
+.area-codigo .capa-resaltado code { font: inherit; }
+.area-codigo textarea {
+  resize: none;
+  background: transparent;
+  color: transparent;
+  caret-color: #fff;
+  outline: none;
+}
+.area-codigo textarea::selection { background: rgba(121, 192, 255, 0.35); color: transparent; }
+.area-codigo .numeros {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  padding: 14px 8px 14px 0;
+  font-family: var(--fuente-codigo);
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: right;
+  color: #5d5978;
+  white-space: pre;
+  user-select: none;
+  pointer-events: none;
+}
+.area-codigo:focus-within { box-shadow: inset 0 0 0 3px var(--color); }
+
+/* Consola (Mundo JavaScript) */
+.consola {
+  border-top: 2px solid var(--borde);
+  background: #14131f;
+  color: #e8e6f0;
+  font-family: var(--fuente-codigo);
+  font-size: 0.85rem;
+  max-height: 140px;
+  overflow-y: auto;
+}
+.consola-titulo { padding: 6px 12px; font-family: var(--fuente); font-weight: 800; color: #aaa6c0; position: sticky; top: 0; background: #14131f; }
+.consola-lineas { padding: 0 12px 8px; min-height: 32px; }
+.consola-linea { padding: 2px 0; border-bottom: 1px solid #23222f; white-space: pre-wrap; }
+.consola-linea.error { color: #ff9a9a; }
+
+/* ---------- Playground de controles ---------- */
+.lista-controles { display: flex; flex-direction: column; gap: 14px; padding: 16px; }
+.control { display: flex; flex-direction: column; gap: 6px; cursor: pointer; }
+.control-nombre { display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
+.control-valor {
+  padding: 2px 10px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--color) 15%, var(--superficie));
+  color: var(--texto);
+  font-family: var(--fuente-codigo);
+  font-size: 0.85rem;
+}
+.control input[type="range"] { width: 100%; accent-color: var(--color); height: 28px; cursor: pointer; }
+.control input[type="color"] {
+  width: 100%;
+  height: 42px;
+  border: 2px solid var(--borde);
+  border-radius: 10px;
+  padding: 2px;
+  background: var(--superficie);
+  cursor: pointer;
+}
+.opciones-control { display: flex; flex-wrap: wrap; gap: 6px; }
+.opcion-control {
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--borde);
+  background: var(--superficie);
+  color: var(--texto);
+  font-family: var(--fuente-codigo);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.opcion-control.activa { border-color: var(--color); background: color-mix(in srgb, var(--color) 15%, var(--superficie)); font-weight: 800; }
+.playground pre.codigo { border-radius: 0; min-height: 90px; }
+.playground iframe.resultado { min-height: 200px; }
+
+/* ---------- Quiz ---------- */
+.quiz h2 { font-size: 1.3rem; font-weight: 900; }
+.opciones-quiz { display: flex; flex-direction: column; gap: 10px; }
+.opcion-quiz {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--borde);
+  border-radius: 14px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--borde);
+  transition: transform 0.08s;
+}
+.opcion-quiz:hover:not(:disabled) { border-color: var(--color); }
+.opcion-quiz:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 var(--borde); }
+.opcion-quiz .letra {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  border: 2px solid var(--borde);
+  font-weight: 900;
+}
+.opcion-quiz.correcta { border-color: var(--exito); background: color-mix(in srgb, var(--exito) 14%, var(--superficie)); box-shadow: 0 4px 0 var(--exito-osc); }
+.opcion-quiz.correcta .letra { background: var(--exito); border-color: var(--exito); color: #fff; }
+.opcion-quiz.incorrecta { border-color: var(--error); background: color-mix(in srgb, var(--error) 10%, var(--superficie)); animation: temblar 0.35s; }
+.opcion-quiz:disabled:not(.correcta) { cursor: default; opacity: 0.6; }
+.explicacion-quiz { margin-top: 14px; font-weight: 700; }
+.explicacion-quiz:empty { display: none; }
+
+/* ---------- Reto ---------- */
+.reto { display: flex; flex-direction: column; gap: 18px; }
+.reto-enunciado { border: 3px solid var(--color); }
+.etiqueta-reto {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 99px;
+  background: var(--mundo-js);
+  color: #2b2238;
+  font-weight: 900;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+.enunciado { font-size: 1.15rem; font-weight: 700; }
+.comprobaciones { list-style: none; padding: 0; margin: 0 0 14px; display: flex; flex-direction: column; gap: 8px; }
+.comprobaciones li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--superficie-2);
+  font-weight: 700;
+  transition: background 0.2s;
+}
+.comprobaciones .marca {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid var(--bloqueado);
+  color: var(--bloqueado);
+  font-weight: 900;
+}
+.comprobaciones li.ok { background: color-mix(in srgb, var(--exito) 15%, var(--superficie)); }
+.comprobaciones li.ok .marca { background: var(--exito); border-color: var(--exito); color: #fff; }
+.comprobaciones li.pop { animation: pop 0.4s cubic-bezier(.2,.9,.3,1.6); }
+.comprobaciones li.sacudir { animation: temblar 0.35s; background: color-mix(in srgb, var(--error) 12%, var(--superficie)); }
+@keyframes pop { 50% { transform: scale(1.04); } }
+
+.pistas-mostradas { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.pistas-mostradas:empty { display: none; }
+.pista-mostrada {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--aviso) 18%, var(--superficie));
+  border: 2px solid var(--aviso);
+  animation: entrar-paso 0.3s ease;
+}
+.reto-botones { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- Navegación entre pasos ---------- */
+.navegacion-pasos {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  background: color-mix(in srgb, var(--superficie) 94%, transparent);
+  backdrop-filter: blur(8px);
+  border-top: 2px solid var(--borde);
+}
+.contador-pasos { color: var(--texto-suave); font-weight: 800; font-size: 0.9rem; }
+/* En el reto la barra deja de flotar para no tapar los botones de Comprobar / Pista */
+.paso-reto + .navegacion-pasos {
+  position: static;
+  margin-top: 24px;
+  border: 2px solid var(--borde);
+  border-radius: var(--radio);
+}
+.leccion:has(.paso-reto) { padding-bottom: 40px; }
+.navegacion-pasos .boton.oculto { display: inline-flex !important; visibility: hidden; }
+
+/* ---------- Avisos y victoria ---------- */
+.aviso-grande { max-width: 520px; margin: 40px auto; text-align: center; }
+.aviso-emoji { font-size: 4rem; }
+.modal-victoria .tagui { width: 96px; height: 96px; animation: saltar 0.7s ease 3; }
+.xp-ganada { font-size: 1.8rem; font-weight: 900; color: var(--xp); margin: 6px 0; }
+.texto-suave { color: var(--texto-suave); }
+.subida-nivel,
+.insignia-nueva {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-weight: 700;
+}
+.subida-nivel { background: color-mix(in srgb, var(--xp) 15%, var(--superficie)); border: 2px solid var(--xp); }
+.insignia-nueva {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  background: color-mix(in srgb, var(--mundo-js) 18%, var(--superficie));
+  border: 2px solid var(--mundo-js);
+}
+.insignia-nueva span { font-size: 2rem; }
+
+/* ---------- Pantallas anchas: dos columnas ---------- */
+@media (min-width: 900px) {
+  .ejemplo { grid-template-columns: 1fr 1fr; align-items: start; }
+  .editor-vivo, .playground { grid-template-columns: 1fr 1fr; }
+  .playground { grid-template-columns: 340px 1fr; }
+  .area-codigo { height: 380px; }
+}
+
+/* Reto en pantallas anchas: instrucciones fijas a la izquierda, editor a la derecha */
+@media (min-width: 1000px) {
+  .reto {
+    display: grid;
+    grid-template-columns: minmax(300px, 390px) 1fr;
+    align-items: start;
+    gap: 18px;
+  }
+  .reto-cabeza { display: flex; flex-direction: column; gap: 14px; }
+  .reto .enunciado { font-size: 1.05rem; }
+  .reto .editor-vivo { grid-template-columns: 1fr; }
+  .reto .area-codigo { height: 300px; }
+  .reto .panel iframe.resultado { min-height: 220px; }
+  .reto .reto-botones .boton.grande { padding: 12px 20px; font-size: 1.05rem; }
+}
+
+@media (max-width: 640px) {
+  .navegacion-pasos { padding: 10px 12px; }
+  .navegacion-pasos .boton { padding: 10px 14px; }
+  .navegacion-pasos .boton.grande { padding: 12px 18px; font-size: 1rem; }
+  .contador-pasos { font-size: 0.8rem; }
+  .tarjeta { padding: 16px; }
+  .area-codigo textarea, .area-codigo .capa-resaltado, .area-codigo .numeros { font-size: 14px; }
+  .reto-botones .boton { flex: 1 1 auto; }
+}

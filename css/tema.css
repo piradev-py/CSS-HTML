@@ -1,0 +1,148 @@
+/* ============================================================
+   <CSS-HTML> · Tema: colores, tipografía y modo claro/oscuro
+   ============================================================ */
+:root {
+  /* Fondo y texto */
+  --fondo: #fff8ef;
+  --fondo-2: #ffefdc;
+  --superficie: #ffffff;
+  --superficie-2: #f7f3ee;
+  --borde: #ead9c6;
+  --texto: #2b2238;
+  --texto-suave: #6d6278;
+
+  /* Colores de cada mundo */
+  --mundo-html: #f26b38;
+  --mundo-html-osc: #c84d1e;
+  --mundo-css: #3b82f6;
+  --mundo-css-osc: #1f5fcc;
+  --mundo-hc: #8b5cf6;
+  --mundo-hc-osc: #6a3bd6;
+  --mundo-js: #f2b100;
+  --mundo-js-osc: #c48d00;
+
+  /* Estados */
+  --exito: #22b35e;
+  --exito-osc: #178a46;
+  --error: #ef4f5f;
+  --error-osc: #c83242;
+  --aviso: #ffb020;
+  --xp: #9b5cff;
+  --bloqueado: #c9bfb4;
+  --bloqueado-osc: #a89c90;
+
+  /* Código */
+  --codigo-fondo: #1f1d2e;
+  --codigo-texto: #e8e6f0;
+  --codigo-etiqueta: #ff7b72;
+  --codigo-atributo: #ffb86c;
+  --codigo-valor: #a5e075;
+  --codigo-comentario: #7d7896;
+  --codigo-propiedad: #79c0ff;
+  --codigo-selector: #ff9bd2;
+  --codigo-palabra: #c792ea;
+  --codigo-numero: #f8c555;
+
+  /* Medidas */
+  --radio: 18px;
+  --radio-sm: 12px;
+  --sombra: 0 6px 20px rgba(80, 50, 20, 0.10);
+  --sombra-boton: 0 5px 0;
+  --fuente: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --fuente-codigo: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+
+  color-scheme: light;
+}
+
+/* Modo oscuro automático (si el usuario no eligió claro) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fondo: #161827;
+    --fondo-2: #1d2033;
+    --superficie: #23263b;
+    --superficie-2: #2b2f48;
+    --borde: #3a3f5c;
+    --texto: #f1eefa;
+    --texto-suave: #aaa6c0;
+    --bloqueado: #4a4e68;
+    --bloqueado-osc: #363a52;
+    --sombra: 0 6px 20px rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+  }
+}
+
+/* Modo oscuro elegido a mano */
+:root[data-theme="dark"] {
+  --fondo: #161827;
+  --fondo-2: #1d2033;
+  --superficie: #23263b;
+  --superficie-2: #2b2f48;
+  --borde: #3a3f5c;
+  --texto: #f1eefa;
+  --texto-suave: #aaa6c0;
+  --bloqueado: #4a4e68;
+  --bloqueado-osc: #363a52;
+  --sombra: 0 6px 20px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
+p { margin: 0 0 0.8em; }
+a { color: var(--mundo-css); }
+img, svg { max-width: 100%; }
+
+/* Sin ligaduras: el alumno debe ver los caracteres reales (<!--, =>, !=…), no flechas */
+code, pre, textarea {
+  font-family: var(--fuente-codigo);
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+:not(pre) > code {
+  background: var(--superficie-2);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 0.05em 0.35em;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 3px solid var(--mundo-css);
+  outline-offset: 2px;
+}
+
+.oculto { display: none !important; }
+
+.solo-lector {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

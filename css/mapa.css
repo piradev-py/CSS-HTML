@@ -1,0 +1,235 @@
+/* ============================================================
+   <CSS-HTML> · Pantalla de inicio y mapa de niveles
+   ============================================================ */
+.contenido {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+/* ---------- Bienvenida ---------- */
+.bienvenida {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px 24px;
+  margin-bottom: 36px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--mundo-css) 22%, transparent), transparent 45%),
+    radial-gradient(circle at 5% 95%, color-mix(in srgb, var(--mundo-html) 22%, transparent), transparent 45%),
+    var(--superficie);
+  border: 2px solid var(--borde);
+  box-shadow: var(--sombra);
+}
+.bienvenida .mascota .tagui { width: 88px; height: 88px; }
+.bienvenida h1 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); font-weight: 900; }
+.bienvenida .resaltado {
+  background: linear-gradient(90deg, var(--mundo-html), var(--mundo-hc), var(--mundo-css));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bienvenida p { color: var(--texto-suave); font-size: 1.08rem; max-width: 60ch; }
+.bienvenida-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 8px; }
+
+/* ---------- Mundo ---------- */
+.mundo {
+  --color: var(--mundo-html);
+  --color-osc: var(--mundo-html-osc);
+  margin-bottom: 40px;
+}
+.mundo-css { --color: var(--mundo-css); --color-osc: var(--mundo-css-osc); }
+.mundo-hc { --color: var(--mundo-hc); --color-osc: var(--mundo-hc-osc); }
+.mundo-js { --color: var(--mundo-js); --color-osc: var(--mundo-js-osc); }
+
+.mundo-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 22px;
+  background: var(--color);
+  color: #fff;
+  box-shadow: 0 6px 0 var(--color-osc);
+}
+.mundo-js .mundo-cabecera { color: #2b2238; }
+.mundo-cabecera h2 { margin: 0; font-size: 1.45rem; font-weight: 900; }
+.mundo-cabecera p { margin: 0; opacity: 0.9; font-weight: 600; }
+.mundo-num { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; }
+.mundo-emoji {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  font-size: 2rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.25);
+}
+.mundo-progreso {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.mundo-progreso small { font-size: 0.75rem; opacity: 0.85; font-weight: 700; }
+.mini-barra {
+  width: 90px;
+  height: 10px;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.mini-barra div { height: 100%; background: #fff; border-radius: 99px; }
+.mundo-cerrado .mundo-cabecera { filter: saturate(0.35); }
+
+/* ---------- Camino de nodos ---------- */
+.camino { position: relative; padding: 52px 0 8px; }
+.camino-linea {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.camino-linea path {
+  fill: none;
+  stroke: var(--borde);
+  stroke-width: 6;
+  stroke-dasharray: 2 14;
+  stroke-linecap: round;
+}
+
+.nodos {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.nodo-fila {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 190px;
+  transform: translateX(calc(var(--d) * 1px));
+}
+
+.nodo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  text-decoration: none;
+  background: var(--color);
+  box-shadow: 0 7px 0 var(--color-osc);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.mundo-js .nodo { color: #2b2238; }
+a.nodo:hover { transform: translateY(-3px) scale(1.04); }
+a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc); }
+
+.nodo.completada { background: var(--color); }
+.nodo.bloqueada,
+.nodo.proximamente {
+  background: var(--bloqueado);
+  box-shadow: 0 7px 0 var(--bloqueado-osc);
+  font-size: 1.3rem;
+}
+.nodo.proximamente { cursor: help; }
+.nodo.actual {
+  animation: latido 1.6s ease-in-out infinite;
+  outline: 5px solid color-mix(in srgb, var(--color) 35%, transparent);
+  outline-offset: 5px;
+}
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+
+.globo-actual {
+  position: absolute;
+  top: -34px;
+  padding: 3px 12px;
+  border-radius: 10px;
+  background: var(--superficie);
+  border: 2px solid var(--color);
+  color: var(--color-osc);
+  font-weight: 900;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  animation: flotar 2s ease-in-out infinite;
+  z-index: 1;
+}
+.nodo-estrellas { margin-top: 10px; font-size: 0.9rem; letter-spacing: 1px; line-height: 1; }
+.nodo-titulo {
+  margin-top: 10px;
+  padding: 2px 10px;
+  border-radius: 8px;
+  background: var(--fondo);
+  font-weight: 800;
+  font-size: 0.92rem;
+  text-align: center;
+  line-height: 1.25;
+}
+.nodo-estrellas + .nodo-titulo { margin-top: 4px; }
+
+/* ---------- Insignias ---------- */
+.seccion-insignias h2 { font-size: 1.5rem; font-weight: 900; }
+.rejilla-insignias {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+.insignia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 10px;
+  text-align: center;
+  background: var(--superficie);
+  border: 2px dashed var(--borde);
+  border-radius: 18px;
+  color: var(--texto-suave);
+}
+.insignia small { font-size: 0.78rem; line-height: 1.3; }
+.insignia-emoji { font-size: 2.2rem; filter: grayscale(1); opacity: 0.6; }
+.insignia.ganada { border-style: solid; border-color: var(--mundo-js); color: var(--texto); box-shadow: var(--sombra); }
+.insignia.ganada .insignia-emoji { filter: none; opacity: 1; }
+
+.pie {
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  padding: 24px 16px 40px;
+}
+
+@media (min-width: 720px) {
+  .bienvenida { flex-direction: row; align-items: center; }
+  /* En pantallas anchas Tagui se pone a la derecha, con el bocadillo encima */
+  .bienvenida .mascota { flex-direction: column-reverse; align-items: center; order: 2; max-width: 260px; flex-shrink: 0; }
+  .bienvenida .mascota .bocadillo::before { left: calc(50% - 7px); bottom: -9px; transform: rotate(-45deg); }
+}
+
+@media (max-width: 520px) {
+  .nodo-fila { transform: translateX(calc(var(--d) * 0.55px)); width: 160px; }
+  .mundo-cabecera { flex-wrap: wrap; gap: 12px; padding: 14px 16px; }
+  .mundo-cabecera > div:nth-child(2) { flex: 1; min-width: 0; }
+  .mundo-cabecera h2 { font-size: 1.25rem; }
+  .mundo-emoji { width: 46px; height: 46px; font-size: 1.6rem; }
+  .mundo-progreso { margin-left: 0; flex-direction: row; align-items: center; width: 100%; }
+  .mini-barra { flex: 1; }
+}
