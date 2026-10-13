@@ -92,6 +92,8 @@
           const rSol = await RETOS.evaluar(EDITOR.conBase(reto.solucion, reto.cssBase), reto.comprobaciones, marco);
           solOk = rSol.every(Boolean);
           rSol.forEach((ok, i) => { if (!ok) detalles.push("La solución falla: «" + reto.comprobaciones[i].texto + "»"); });
+          const erroresSol = marco.contentWindow.__errores || [];
+          if (erroresSol.length) { solOk = false; detalles.push("La solución del reto tiene errores de JS: " + erroresSol.map(e => e.mensaje).join(" · ")); }
           const rIni = await RETOS.evaluar(EDITOR.conBase(reto.inicial || {}, reto.cssBase), reto.comprobaciones, marco);
           iniOk = rIni.some(r => !r);
           if (!iniOk) detalles.push("El código inicial ya pasa todas las comprobaciones");
@@ -100,10 +102,19 @@
         let ejOk = true;
         const ejercicios = (lec && lec.pasos || []).filter(p => p.tipo === "ejercicio");
         for (const ej of ejercicios) {
-          const conSol = await EJERCICIOS.revisar(ej.solucion, ej.solucion, null, ej.cssBase);
+          const conSol = await EJERCICIOS.revisar(ej.solucion, ej.solucion, null, ej.cssBase, ej.acciones);
           if (!conSol.ok) { ejOk = false; detalles.push("Ejercicio: la solución no se aprueba a sí misma (" + conSol.mensaje + ")"); }
-          const conIni = await EJERCICIOS.revisar(Object.assign({ html: "", css: "", js: "" }, ej.inicial), ej.solucion, null, ej.cssBase);
+          const conIni = await EJERCICIOS.revisar(Object.assign({ html: "", css: "", js: "" }, ej.inicial), ej.solucion, null, ej.cssBase, ej.acciones);
           if (conIni.ok) { ejOk = false; detalles.push("Ejercicio: el código inicial ya está resuelto"); }
+          if ((ej.solucion.js || "").trim()) {
+            const v = await PRUEBA.cargarEn(marco, EDITOR.construirDocumento(EDITOR.conBase(ej.solucion, ej.cssBase)), {});
+            const errs = v.win.__errores || [];
+            if (errs.length) { ejOk = false; detalles.push("Ejercicio: la solución tiene errores de JS: " + errs.map(e => e.mensaje).join(" · ")); }
+            for (const acc of ej.acciones || []) {
+              const sel = acc.clic || acc.escribir || acc.elegir || acc.enviar;
+              if (!sel || !v.doc.querySelector(sel)) { ejOk = false; detalles.push("Ejercicio: la acción apunta a «" + sel + "», que no existe en la solución"); }
+            }
+          }
         }
         const todo = !errores.length && solOk && iniOk && ejOk;
         if (todo) bien++;

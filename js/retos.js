@@ -31,9 +31,16 @@
     const miTurno = ++turno;
     const marco = iframe || obtenerIframe();
     PRUEBA.limpiar();
+    const html = EDITOR.construirDocumento(codigo);
+    // Cada evaluación empieza con el localStorage de práctica vacío; __fuente permite PRUEBA.recargar(doc)
+    marco.__almacen = {};
+    marco.__almacenSesion = {};
+    marco.__fuente = html;
     return new Promise(resolver => {
       marco.onload = () => {
         setTimeout(async () => {
+          if (!iframe && miTurno !== turno) return resolver(null);
+          await PRUEBA.esperarCalma(marco.contentWindow);
           if (!iframe && miTurno !== turno) return resolver(null);
           const doc = marco.contentDocument;
           const win = marco.contentWindow;
@@ -49,17 +56,22 @@
         }, 60);
       };
       // Movimiento "normal" siempre: el resultado no depende de si el sistema reduce las animaciones
-      marco.srcdoc = PRUEBA.prepararHTML(EDITOR.construirDocumento(codigo), {});
+      marco.srcdoc = PRUEBA.prepararHTML(html, {});
     });
   }
 
-  /** Pestaña con la que se abre el reto: la indicada o, si el HTML ya viene hecho y solo falta CSS, la de CSS. */
+  /**
+   * Pestaña con la que se abre el reto: la indicada o, si el HTML ya viene hecho, la primera que falta
+   * por escribir (CSS si solo falta CSS, JS si solo falta JS).
+   */
   function pestanaReto(paso) {
     if (paso.pestana) return paso.pestana;
     const ini = paso.inicial || {};
     const sol = paso.solucion || {};
     const igual = (a, b) => String(a || "").trim() === String(b || "").trim();
-    if ((ini.html || "").trim() && igual(ini.html, sol.html) && !igual(ini.css, sol.css) && igual(ini.js, sol.js)) return "css";
+    if (!(ini.html || "").trim() || !igual(ini.html, sol.html)) return undefined;
+    if (!igual(ini.css, sol.css) && igual(ini.js, sol.js)) return "css";
+    if (!igual(ini.js, sol.js) && igual(ini.css, sol.css)) return "js";
     return undefined;
   }
 
@@ -191,5 +203,5 @@
     return { raiz, editor };
   }
 
-  window.RETOS = { evaluar, crear };
+  window.RETOS = { evaluar, crear, pestanaReto };
 })();

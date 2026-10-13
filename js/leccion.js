@@ -178,10 +178,11 @@
               '<div class="etiqueta-codigo etiqueta-' + k + '">' + k.toUpperCase() + "</div>" +
               '<pre class="codigo">' + UI.resaltar(paso.ejemplo[k], k) + "</pre>").join("") +
             "</div>", "panel-ejemplo"));
-          const pr = panel("👀 Resultado", '<iframe class="resultado" title="Resultado del ejemplo"></iframe>', "panel-resultado");
-          colResultado.appendChild(pr);
-          pr.querySelector("iframe").srcdoc = EDITOR.construirDocumento(paso.ejemplo);
-          if (paso.dispositivos) EDITOR.anadirDispositivos(pr);
+          // Con JS se añade la consola; si además no hay HTML, la consola ocupa todo el resultado
+          const res = EDITOR.crearResultado({ consola: !!paso.ejemplo.js, soloConsola: !!paso.ejemplo.js && !paso.ejemplo.html });
+          colResultado.appendChild(res.panel);
+          res.mostrar(paso.ejemplo);
+          if (paso.dispositivos) EDITOR.anadirDispositivos(res.panel);
           if (paso.consejo) zona.appendChild(MASCOTA.crear(UI.md(paso.consejo)));
         } else {
           // Sin ejemplo: Tagui ocupa la pizarra con su consejo

@@ -14,11 +14,15 @@
      paran en su primer fotograma, así los valores no "bailan".
    Uso en un reto: const v = await PRUEBA.clonar(doc, { estado: "hover" });
                    v.win.getComputedStyle(v.doc.querySelector("li")).backgroundColor
+   Mundo JavaScript: PRUEBA.recargar(doc) vuelve a ejecutar el código
+   desde cero (conserva el localStorage de práctica), PRUEBA.escribir()
+   rellena un campo y PRUEBA.esperarA() espera a que algo ocurra.
    ============================================================ */
 (function () {
   const CLASES = { hover: "__csshtml-hover", focus: "__csshtml-focus", active: "__csshtml-active" };
   const FALSO = "(min-width: 999999px)";
   const VERDADERO = "(min-width: 0px)";
+  const esperar = ms => new Promise(r => setTimeout(r, ms));
 
   /** Reescribe un CSS para forzar un estado y fijar el modo de movimiento. */
   function prepararCSS(css, opciones = {}) {
@@ -71,10 +75,26 @@
     return f;
   }
 
-  /** Carga un HTML completo en un marco oculto y lo deja asentado. */
-  function cargarEn(marco, html, opciones) {
+  /**
+   * Espera a que la página "se calme": que terminen sus fetch (window.__pendientes, ver js/editor.js).
+   * Como mucho `maximo` ms. Las promesas que dependen del fetch se resuelven antes del siguiente setTimeout.
+   */
+  async function esperarCalma(win, maximo = 2500) {
+    const fin = Date.now() + maximo;
+    while (Date.now() < fin && win && win.__pendientes > 0) await esperar(30);
+    await esperar(30);
+  }
+
+  /**
+   * Carga un HTML completo en un marco oculto y lo deja asentado.
+   * El localStorage de práctica del marco empieza vacío, salvo con { conservarDatos: true }.
+   */
+  function cargarEn(marco, html, opciones = {}) {
+    if (!opciones.conservarDatos) { marco.__almacen = {}; marco.__almacenSesion = {}; }
+    marco.__fuente = html;
     return new Promise(resolver => {
-      marco.onload = () => setTimeout(() => {
+      marco.onload = () => setTimeout(async () => {
+        await esperarCalma(marco.contentWindow);
         asentar(marco.contentDocument, opciones);
         // Un fotograma más para que el navegador recalcule estilos con las clases puestas
         setTimeout(() => resolver({ doc: marco.contentDocument, win: marco.contentWindow, marco }), 30);
@@ -90,10 +110,47 @@
    */
   let copias = [];
   async function clonar(doc, opciones = {}) {
-    const html = "<!DOCTYPE html>" + doc.documentElement.outerHTML;
+    // Se copia la página tal y como está ahora; el JS del alumno no se vuelve a ejecutar
+    const html = ("<!DOCTYPE html>" + doc.documentElement.outerHTML)
+      .replace(/<script data-csshtml="alumno"[\s\S]*?<\/script>/, "");
     const marco = crearMarco(opciones.ancho, opciones.alto);
     copias.push(marco);
     return cargarEn(marco, html, opciones);
+  }
+
+  /**
+   * Mundo JavaScript: vuelve a cargar el código ORIGINAL de la página (como pulsar F5) en una copia oculta.
+   * Conserva el localStorage de práctica, salvo con { borrarDatos: true }. Devuelve { doc, win }.
+   * Útil para que cada comprobación empiece de cero o para ver si algo "se recuerda" al recargar.
+   */
+  async function recargar(doc, opciones = {}) {
+    const viejo = doc.defaultView && doc.defaultView.frameElement;
+    const fuente = viejo && viejo.__fuente;
+    if (!fuente) throw new Error("PRUEBA.recargar: no sé qué código cargar");
+    const marco = crearMarco(opciones.ancho || viejo.clientWidth, opciones.alto || viejo.clientHeight);
+    copias.push(marco);
+    marco.__almacen = opciones.borrarDatos ? {} : viejo.__almacen || {};
+    marco.__almacenSesion = {};
+    return cargarEn(marco, fuente, { conservarDatos: true, movimiento: opciones.movimiento });
+  }
+
+  /** Escribe en un campo como lo haría el alumno: cambia su valor y lanza los eventos input y change. */
+  function escribir(campo, texto) {
+    if (!campo) return false;
+    campo.value = texto;
+    campo.dispatchEvent(new Event("input", { bubbles: true }));
+    campo.dispatchEvent(new Event("change", { bubbles: true }));
+    return true;
+  }
+
+  /** Espera hasta que condicion() sea verdadera (o pasen `maximo` ms). Devuelve si se cumplió. */
+  async function esperarA(condicion, maximo = 1500) {
+    const fin = Date.now() + maximo;
+    for (;;) {
+      try { if (condicion()) return true; } catch (e) { /* aún no existe */ }
+      if (Date.now() > fin) return false;
+      await esperar(40);
+    }
   }
 
   function limpiar() {
@@ -122,5 +179,8 @@
     return salida;
   }
 
-  window.PRUEBA = { clonar, limpiar, reglas, textoCSS, prepararCSS, prepararHTML, asentar, cargarEn, crearMarco };
+  window.PRUEBA = {
+    clonar, recargar, escribir, esperar, esperarA, esperarCalma, limpiar, reglas, textoCSS,
+    prepararCSS, prepararHTML, asentar, cargarEn, crearMarco
+  };
 })();

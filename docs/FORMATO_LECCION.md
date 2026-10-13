@@ -112,6 +112,48 @@ Reglas para escribir el enunciado:
   con el CSS vacío. Se aplica igual al alumno y a la solución, así que no cuenta en la revisión. No pongas en
   `cssBase` las propiedades que el ejercicio pide escribir.
 
+#### Ejercicios en el Mundo JavaScript
+- Lo normal: el **HTML ya escrito** en `inicial.html` (y CSS decorativo en `cssBase` si hace falta) y el JS vacío.
+  La `solucion` repite exactamente ese HTML y añade el `js`. El editor se abre solo en la pestaña JS.
+- Se compara el **efecto** del código, no cómo está escrito: la página final (etiquetas, textos, atributos, clases,
+  estilos en línea por su valor calculado, `value`/`checked` de los campos) y **cada línea de la consola**
+  (con la misma flexibilidad de texto: sin mayúsculas, signos ni espacios de más). Los nombres de variables dan igual.
+  Por eso el enunciado debe dar **los textos exactos** que salen en la consola o en la página.
+- Si el código del alumno lanza un error de JS, el revisor lo dice primero, con la línea y en lenguaje de novato.
+- **`acciones`** (opcional): si el ejercicio reacciona a lo que hace el usuario, la revisión simula esas acciones en las
+  dos páginas, una a una, y compara página y consola **después de cada una**. Sin `acciones`, un ejercicio de eventos
+  se aprobaría con el editor vacío (el verificador lo detecta: «el código inicial ya está resuelto»).
+  ```js
+  acciones: [
+    { clic: "#mas" },                         // pulsa el elemento (vale para button, checkbox, li…)
+    { escribir: "#nombre", texto: "Ana" },    // escribe en un campo (lanza input y change)
+    { elegir: "select", valor: "grande" },    // elige una opción de un <select> (lanza input y change)
+    { enviar: "form" }                        // envía el formulario (lanza submit)
+  ]
+  ```
+  Los formularios de los ejercicios llevan `novalidate`: si no, un campo `required` vacío impide el `submit`.
+- Lecciones solo de consola (js-01, js-02): pon `pestanas: ["js"]` en la lección; el resultado se convierte en una
+  consola grande (el código se sigue ejecutando en un marco invisible). Un `ejemplo` con `js` y sin `html` también
+  se muestra así; con `html` y `js`, el resultado lleva la consola debajo.
+
+### Herramientas del resultado en el Mundo JavaScript (las da el motor, ver `js/editor.js`)
+- **Consola** bajo el resultado, con formato legible: `["pan", 2]`, `{ nombre: "Ana", vida: 100 }`,
+  `<h1 id="t">Hola</h1>`, `NodeList(3) [<li>, <li>, <li>]`, `Promise { … }`. `console.warn` sale en amarillo y
+  `console.error` en rojo. Los errores salen traducidos y con la línea: «(línea 3) 🤔 Usas «consola» pero no existe…».
+- Botón **🔄 Recargar**: vuelve a ejecutar el código como si se recargara la página.
+- `alert()`, `confirm()` y `prompt()` no bloquean: se avisan en la consola (`prompt` devuelve `null`). No se enseñan.
+- **`localStorage` de práctica**: funciona como el real, pero vive en el resultado (no toca el progreso del curso).
+  Sobrevive a 🔄 Recargar y a cada cambio del código; se vacía al salir del paso o con «↺ Reiniciar».
+  La consola muestra «💾 N datos guardados» con un botón para borrarlos. En las revisiones siempre empieza vacío.
+- **`fetch("datos/archivo.json")` sin internet**: la lección declara sus archivos y el motor los sirve con un pequeño
+  retraso (300 ms), para que se note el «pedir y esperar». Respuesta con `ok`, `status`, `json()` y `text()`;
+  un archivo que no existe da `404` (`ok: false`). Cualquier otra URL usa el `fetch` real (necesita internet).
+  ```js
+  CURSO.registrar({ id: "js-13", …, datos: { "chistes.json": [{ pregunta: "…", respuesta: "…" }] }, pasos: [ … ] });
+  ```
+  Las revisiones (ejercicios y retos) esperan a que terminen los `fetch` antes de comparar.
+- No hay protección contra bucles infinitos: no enseñes `while` (el temario usa `for…of` y `forEach`).
+
 ### `pruebalo` — editor libre, sin nota (ya no se usa en lecciones nuevas)
 ```js
 { tipo: "pruebalo",
@@ -175,6 +217,15 @@ Reglas de las comprobaciones:
   - `PRUEBA.textoCSS(doc)` → todo el CSS de la página sin comentarios (para buscar `@keyframes`, `@media`…).
   - Pseudo-elementos sin ayudante: `win.getComputedStyle(el, "::before").content`.
   - Para comparar «antes / con el ratón encima», compara `getComputedStyle` del `doc` normal con el de la copia.
+- **Ayudantes `PRUEBA` para el Mundo JavaScript.** Las comprobaciones se ejecutan una tras otra sobre **la misma**
+  página: si una pulsa un botón, la siguiente ve el resultado. Para que cada una empiece de cero, usa `recargar`:
+  - `await PRUEBA.recargar(doc)` → `{ doc, win }` de una copia que vuelve a ejecutar el código **original** (como F5).
+    Conserva el `localStorage` de práctica (ideal para «recuerda el nombre al recargar»); con `{ borrarDatos: true }` empieza vacío.
+  - `PRUEBA.escribir(campo, "texto")` → escribe en un `input`/`textarea`/`select` y lanza `input` y `change`.
+  - `await PRUEBA.esperarA(() => condición, 1500)` → espera hasta que se cumpla (p. ej. que lleguen los datos de un `fetch`).
+  - `win.__logs` → array con cada línea de la consola (ya formateada). `win.__errores` → errores de JS `[{ mensaje, linea }]`.
+  - Enviar un formulario: `form.requestSubmit()` (con `novalidate` en el `<form>`). Pulsar: `boton.click()`.
+  - Ejemplo: `prueba: async (doc) => { const v = await PRUEBA.recargar(doc); v.doc.querySelector("#mas").click(); v.doc.querySelector("#mas").click(); return v.doc.querySelector("#n").textContent === "2"; }`
 - **`dispositivos: true`** (en `ejercicio`, `reto` y `explicacion` con `ejemplo`): añade al resultado los botones
   💻 Libre / 📱 Móvil (375 px) y la medida en px del resultado. Úsalo en las lecciones de responsive.
 - Entre 2 y 4 comprobaciones, escritas como frases que un novato entiende.

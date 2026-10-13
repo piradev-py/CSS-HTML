@@ -115,7 +115,11 @@
   window.CURSO = {
     MUNDOS,
     lecciones,
-    registrar(leccion) { lecciones[leccion.id] = leccion; },
+    registrar(leccion) {
+      lecciones[leccion.id] = leccion;
+      // Archivos falsos para fetch("datos/…") en el Mundo JavaScript (ver js/editor.js)
+      if (leccion.datos) window.__csshtmlDatos = Object.assign(window.__csshtmlDatos || {}, leccion.datos);
+    },
     listaPlana,
     buscar(id) { return listaPlana().find(l => l.id === id) || null; },
     siguiente(id) {

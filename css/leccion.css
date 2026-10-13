@@ -297,10 +297,30 @@ iframe.resultado {
   min-height: 90px;
   overflow-y: auto;
 }
-.consola-titulo { padding: 6px 12px; font-family: var(--fuente); font-weight: 800; color: #aaa6c0; position: sticky; top: 0; background: #14131f; }
+.consola-titulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 12px;
+  font-family: var(--fuente);
+  font-weight: 800;
+  color: #aaa6c0;
+  position: sticky;
+  top: 0;
+  background: #14131f;
+}
+.consola-almacen { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #ffd479; }
+.consola-almacen[hidden] { display: none; }
+.consola-almacen .mini-boton { padding: 2px 8px; font-size: 0.75rem; background: #23222f; color: #e8e6f0; border-color: #3a3850; }
 .consola-lineas { padding: 0 12px 8px; min-height: 32px; }
-.consola-linea { padding: 2px 0; border-bottom: 1px solid #23222f; white-space: pre-wrap; }
+.consola-lineas:empty::before { content: attr(data-vacia); color: #6f6b88; font-style: italic; }
+.consola-linea { padding: 2px 0; border-bottom: 1px solid #23222f; white-space: pre-wrap; overflow-wrap: anywhere; }
 .consola-linea.error { color: #ff9a9a; }
+.consola-linea.aviso { color: #ffd479; }
+/* Lecciones sin HTML (solo JS): la consola ocupa todo el resultado; el <iframe> sigue ejecutando el código */
+.solo-consola iframe.resultado { display: none; }
+.solo-consola .consola { flex: 1; height: auto; border-top: 0; font-size: 0.95rem; }
 
 /* ---------- Controles visuales ---------- */
 .panel-controles .lista-controles { flex: 1; min-height: 0; overflow-y: auto; }
