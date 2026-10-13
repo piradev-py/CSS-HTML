@@ -21,7 +21,11 @@ luego HTML y CSS juntos, y por último JavaScript para dar vida a las páginas.
 - **Textos cortos:** máximo ~120 palabras por paso. Frases simples. Tutea al alumno.
 - **Nada de jerga sin explicar.** La primera vez que aparece una palabra técnica, explícala en una frase.
 - **Ejemplos que funcionan tal cual**, cortos y con contenido simpático (recetas, mascotas, videojuegos, música).
-- Estructura típica de una lección: 2–3 `explicacion` → 1 `pruebalo` → `controles` (cuando sea CSS visual) → 1 `quiz` → 1 `reto` final.
+- Estructura típica de una lección: 2–3 `explicacion` → 1 `ejercicio` → `controles` (cuando sea CSS visual) → 1 `quiz` → 1 `reto` final.
+- **Ejercicios de resolución** (decisión del usuario): el editor empieza vacío y el alumno escribe el código él solo,
+  para obligarle a pensar. El enunciado dice con exactitud qué etiquetas, textos (en **negrita**) y atributos escribir,
+  porque se revisa contra una solución única (con flexibilidad en mayúsculas y puntuación de los textos, no en el código).
+  No uses el tipo `pruebalo` en lecciones nuevas. Lee la sección `ejercicio` de `docs/FORMATO_LECCION.md`.
 - **Retos alcanzables:** 2–4 comprobaciones redactadas como frases claras y 2 pistas graduales
   (la primera orienta, la segunda casi da la respuesta). El código inicial da un punto de partida, no la solución.
 - Los `consejo` los dice la mascota **Tagui** (una etiqueta `< >` con ojos): úsalos para trucos, errores típicos o ánimo.

@@ -24,7 +24,7 @@
       comprobaciones y el código <b>inicial</b> falla al menos una.</p>
     <div class="resumen" data-resumen>Comprobando…</div>
     <table>
-      <thead><tr><th>Lección</th><th>Formato</th><th>Solución</th><th>Inicial</th><th>Detalles</th></tr></thead>
+      <thead><tr><th>Lección</th><th>Formato</th><th>Solución</th><th>Inicial</th><th>Ejercicios</th><th>Detalles</th></tr></thead>
       <tbody data-filas></tbody>
     </table>
   </main>
@@ -34,6 +34,7 @@
   <script src="../js/ui.js"></script>
   <script src="../js/editor.js"></script>
   <script src="../js/retos.js"></script>
+  <script src="../js/ejercicios.js"></script>
   <script>
     (async function () {
       const filas = document.querySelector("[data-filas]");
@@ -62,11 +63,12 @@
         const retos = lec.pasos.filter(p => p.tipo === "reto");
         if (retos.length !== 1) errores.push("Debe tener exactamente 1 reto (tiene " + retos.length + ")");
         if (lec.pasos[lec.pasos.length - 1].tipo !== "reto") errores.push("El último paso no es el reto");
-        const tipos = ["explicacion", "pruebalo", "controles", "quiz", "reto"];
+        const tipos = ["explicacion", "pruebalo", "ejercicio", "controles", "quiz", "reto"];
         lec.pasos.forEach((p, i) => {
           if (!tipos.includes(p.tipo)) errores.push("Paso " + (i + 1) + ": tipo desconocido «" + p.tipo + "»");
           if (p.tipo === "quiz" && !(p.correcta >= 0 && p.correcta < (p.opciones || []).length)) errores.push("Paso " + (i + 1) + ": 'correcta' fuera de rango");
           if (p.tipo === "controles" && !(p.controles || []).length) errores.push("Paso " + (i + 1) + ": controles vacíos");
+          if (p.tipo === "ejercicio" && (!p.enunciado || !p.solucion)) errores.push("Paso " + (i + 1) + ": ejercicio sin enunciado o sin solución");
         });
         retos.forEach(r => {
           const n = (r.comprobaciones || []).length;
@@ -93,12 +95,21 @@
           iniOk = rIni.some(r => !r);
           if (!iniOk) detalles.push("El código inicial ya pasa todas las comprobaciones");
         }
-        const todo = !errores.length && solOk && iniOk;
+        // Ejercicios: la solución aprueba y el editor inicial (vacío) suspende
+        let ejOk = true;
+        const ejercicios = (lec && lec.pasos || []).filter(p => p.tipo === "ejercicio");
+        for (const ej of ejercicios) {
+          const conSol = await EJERCICIOS.revisar(ej.solucion, ej.solucion);
+          if (!conSol.ok) { ejOk = false; detalles.push("Ejercicio: la solución no se aprueba a sí misma (" + conSol.mensaje + ")"); }
+          const conIni = await EJERCICIOS.revisar(Object.assign({ html: "", css: "", js: "" }, ej.inicial), ej.solucion);
+          if (conIni.ok) { ejOk = false; detalles.push("Ejercicio: el código inicial ya está resuelto"); }
+        }
+        const todo = !errores.length && solOk && iniOk && ejOk;
         if (todo) bien++;
         const tr = document.createElement("tr");
         const celda = ok => '<td class="' + (ok ? "ok" : "mal") + '">' + (ok ? "✓" : "✗") + "</td>";
         tr.innerHTML = "<td><b>" + l.id + "</b><br>" + UI.escapar(l.titulo) + "</td>" +
-          celda(!errores.length) + celda(solOk) + celda(iniOk) +
+          celda(!errores.length) + celda(solOk) + celda(iniOk) + (ejercicios.length ? celda(ejOk) : "<td>—</td>") +
           "<td>" + (detalles.length ? "<ul>" + detalles.map(d => "<li>" + UI.escapar(d) + "</li>").join("") + "</ul>" : "—") + "</td>";
         filas.appendChild(tr);
       }

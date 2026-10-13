@@ -44,17 +44,16 @@ CURSO.registrar({
       }
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Juega con las imágenes:\n\n• Cambia el número de `width` y mira cómo crece o encoge.\n• Cambia el `src` por otra imagen: `recursos/img/gato.svg`, `recursos/img/perro.svg`, `recursos/img/pizza.svg` o `recursos/img/montana.svg`.\n• Escribe mal la ruta a propósito (por ejemplo `gatoo.svg`) y verás aparecer el texto del `alt`.",
-      inicial: {
-        html: `<h1>Conoce a Tagui</h1>
-<figure>
-  <img src="recursos/img/logo-tagui.svg" alt="Tagui, una etiqueta naranja con ojos grandes y una sonrisa" width="120">
-  <figcaption>Tagui, la mascota de este curso, posando para la foto.</figcaption>
-</figure>
+      tipo: "ejercicio",
+      enunciado: "¡Pon en la página a Tagui, la mascota del curso! Escribe **una sola** etiqueta `<img>` con estos tres atributos, en este orden:\n\n• `src=\"recursos/img/logo-tagui.svg\"`\n• `alt` con el texto **Tagui, una etiqueta naranja con ojos grandes**\n• `width=\"120\"`\n\nRecuerda: `<img>` es una etiqueta vacía, así que no lleva cierre.",
+      pistas: [
+        "Todo va dentro de una sola etiqueta: <img …>. Escribe los tres atributos uno detrás de otro, separados por espacios y con la forma nombre=\"valor\".",
+        "Empieza así:\n<img src=\"recursos/img/logo-tagui.svg\" alt=\"…\" …>\nRellena el alt con el texto del enunciado y añade el width=\"120\"."
+      ],
+      solucion: {
+        html: `<img src="recursos/img/logo-tagui.svg" alt="Tagui, una etiqueta naranja con ojos grandes" width="120">
 `,
-        css: "",
-        js: ""
+        css: ""
       }
     },
     {

@@ -85,31 +85,25 @@ CURSO.registrar({
       consejo: "Curiosidad: si no escribes `<tbody>`, el navegador lo añade él solito por dentro. Aun así, escribirlo tú deja el código mucho más claro."
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Esta tabla de planetas está a medias. Prueba a:\n\n• Añadir una fila nueva para Júpiter (tiene 95 lunas): copia un `<tr>` entero con sus dos `<td>`.\n• Cambiar un `<td>` por `<th>` y ver cómo se pone en negrita.\n• Cambiar el texto del `<caption>`.",
-      inicial: {
+      tipo: "ejercicio",
+      enunciado: "Construye una tabla `<table>` con las lunas de dos planetas 🪐. Tiene **dos filas** `<tr>`, y cada fila lleva dos celdas `<td>`:\n\n1. Primera fila: **Tierra** y **1**.\n2. Segunda fila: **Marte** y **2**.\n\nSolo hacen falta `<table>`, `<tr>` y `<td>`: sin cabeceras, sin título y sin `<thead>` ni `<tbody>`.",
+      pistas: [
+        "Escribe fila a fila: abre <table>, dentro abre un <tr> con sus dos <td>, ciérralo con </tr> y repite para la segunda fila. Al final, </table>.",
+        "La primera fila queda así:\n<tr>\n  <td>Tierra</td>\n  <td>1</td>\n</tr>\nCopia la fila, cambia los datos por Marte y 2, y mételo todo dentro de <table>…</table>."
+      ],
+      solucion: {
         html: `<table>
-  <caption>Lunas de algunos planetas 🪐</caption>
-  <thead>
-    <tr>
-      <th>Planeta</th>
-      <th>Lunas</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tierra</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>Marte</td>
-      <td>2</td>
-    </tr>
-  </tbody>
+  <tr>
+    <td>Tierra</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Marte</td>
+    <td>2</td>
+  </tr>
 </table>
 `,
-        css: "",
-        js: ""
+        css: ""
       }
     },
     {

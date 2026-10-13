@@ -46,16 +46,18 @@ Villa Código</p>`,
       consejo: "Usa el resaltado con moderación. Si lo marcas **todo** como importante… ¡ya nada lo parece! 😅"
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Envuelve «Peligro:» con `<strong>`, pon `<em>` en alguna palabra y resalta el nombre del loro con `<mark>`. Después parte la dirección del último párrafo en tres líneas con `<br>`.",
-      inicial: {
-        html: `<h1>Se busca: loro pirata</h1>
-<p>Responde al nombre de Capitán Plumas.</p>
-<p>Peligro: repite en voz alta todos tus secretos.</p>
-<p>Visto por última vez en: Puerto Galleta, Muelle 3, Barco de las velas rosas.</p>
+      tipo: "ejercicio",
+      enunciado: "Escribe la dirección del loro pirata 🦜 en **un solo** párrafo `<p>`, partida en tres líneas con `<br>`:\n\n• Primera línea: **Capitán Plumas**\n• Segunda línea: **Muelle 3**\n• Tercera línea: **Puerto Galleta**\n\nPon un `<br>` al final de la primera línea y otro al final de la segunda (al final de la tercera, no).",
+      pistas: [
+        "Todo va dentro de un único <p>…</p>. Recuerda que <br> es una etiqueta vacía: no lleva etiqueta de cierre.",
+        "Abre con <p>, escribe «Capitán Plumas» y pon <br>; escribe «Muelle 3» y pon otro <br>; escribe «Puerto Galleta» y cierra con </p>."
+      ],
+      solucion: {
+        html: `<p>Capitán Plumas<br>
+Muelle 3<br>
+Puerto Galleta</p>
 `,
-        css: "",
-        js: ""
+        css: ""
       }
     },
     {

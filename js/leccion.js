@@ -37,6 +37,7 @@
     let actual = 0;
     let maximo = yaCompletada ? leccion.pasos.length - 1 : 0;
     const quizResuelto = {};
+    const ejercicioResuelto = {};
 
     document.title = leccion.titulo + " · <CSS-HTML>";
     document.body.dataset.mundo = mundo.clave;
@@ -61,7 +62,7 @@
     const bSiguiente = principal.querySelector("[data-siguiente]");
     const contador = principal.querySelector(".contador-pasos");
 
-    const ICONO_PASO = { explicacion: "📖", pruebalo: "✍️", controles: "🎛️", quiz: "❓", reto: "🏆" };
+    const ICONO_PASO = { explicacion: "📖", pruebalo: "✍️", ejercicio: "🧠", controles: "🎛️", quiz: "❓", reto: "🏆" };
 
     leccion.pasos.forEach((p, i) => {
       const b = document.createElement("button");
@@ -75,7 +76,9 @@
 
     function puedeAvanzar() {
       const p = leccion.pasos[actual];
-      return p.tipo !== "quiz" || quizResuelto[actual];
+      if (p.tipo === "quiz") return !!quizResuelto[actual];
+      if (p.tipo === "ejercicio") return yaCompletada || !!ejercicioResuelto[actual];
+      return true;
     }
 
     function actualizarNavegacion() {
@@ -164,6 +167,18 @@
         if (i === 0 || !leccion.pasos.slice(0, i).some(p => p.tipo === "pruebalo")) {
           zona.appendChild(MASCOTA.crear("Escribe en el editor y mira cómo cambia el resultado al momento. ¡No puedes romper nada!"));
         }
+      },
+
+      ejercicio(paso, i) {
+        EJERCICIOS.crear(zona, paso, {
+          clave: id + "#paso" + i,
+          pestanas: paso.pestanas || pestanas,
+          yaResuelto: yaCompletada || ejercicioResuelto[i],
+          alResolver: () => {
+            ejercicioResuelto[i] = true;
+            actualizarNavegacion();
+          }
+        });
       },
 
       controles(paso) {

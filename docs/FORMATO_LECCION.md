@@ -54,7 +54,35 @@ Escribe `<` y `>` tal cual: el motor los escapa (no se interpretan como HTML).
   consejo: "Las etiquetas siempre van en pareja." } // opcional: lo dice la mascota Tagui
 ```
 
-### `pruebalo` — editor libre, sin nota
+### `ejercicio` — resolución desde cero (sustituye al antiguo `pruebalo`)
+El editor empieza **vacío**. El alumno escribe solo lo que pide el enunciado y pulsa **Revisar**.
+No puede avanzar hasta resolverlo (tras ver todas las pistas puede ver la solución).
+```js
+{ tipo: "ejercicio",
+  enunciado: "Escribe un título principal `<h1>` que diga **¡Hola, mundo!** y, debajo, un párrafo que diga **Esta es mi primera página web.**",
+  solucion: { html: "<h1>¡Hola, mundo!</h1>\n<p>Esta es mi primera página web.</p>", css: "" },
+  pistas: ["Un título principal se escribe con <h1>…</h1>.", "Debajo escribe <p>…</p> con la frase."],
+  inicial: { html: "" } }   // opcional: en el Mundo CSS puede venir el HTML ya hecho y el CSS vacío
+```
+Cómo se revisa (la solución es **única**, pero con flexibilidad en lo que no es código):
+- **Etiquetas**: mismas etiquetas, en el mismo orden y anidadas igual. No puede sobrar ni faltar ninguna.
+- **Textos**: se ignoran mayúsculas/minúsculas, signos de puntuación (¡!¿?.,;:«»"'…-) y espacios de más.
+  Las **tildes sí cuentan** («página» ≠ «pagina»).
+- **Atributos**: deben estar los mismos. Valores exactos (`id`, `class`, `href`, `src`…), salvo los de texto
+  para personas (`alt`, `title`, `placeholder`, `aria-label`), que son flexibles, y `type`, `charset`, `lang`,
+  `target`, `rel`, `method`, que no distinguen mayúsculas. En `class` da igual el orden.
+- **CSS**: se compara el estilo **calculado** de cada elemento en las propiedades que usa la solución
+  (`red`, `#ff0000` y `rgb(255,0,0)` valen igual).
+- **JS**: se compara la página final y lo que sale por la consola (con la misma flexibilidad de texto).
+- Si la solución es una página completa (`<html>`), también se comparan `lang` y la cabeza (`<title>`, `<meta>`).
+
+Reglas para escribir el enunciado:
+- Tiene que decir **exactamente** qué etiquetas, textos y atributos escribir: el alumno no puede adivinar.
+  Escribe los textos exactos en **negrita**.
+- Pide solo lo que se acaba de explicar. Corto: 1–3 elementos en las primeras lecciones.
+- Distinto del reto final: el ejercicio practica **una** idea; el reto combina varias.
+
+### `pruebalo` — editor libre, sin nota (ya no se usa en lecciones nuevas)
 ```js
 { tipo: "pruebalo",
   instruccion: "Cambia el texto del título y mira qué pasa.",

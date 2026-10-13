@@ -69,38 +69,22 @@ CURSO.registrar({
       consejo: "Checklist de accesibilidad de todo el Mundo HTML ✅\n• Cada `<img>` con su `alt`.\n• Cada campo con su `<label for>`.\n• Un solo `<h1>` y títulos sin saltar niveles.\n• Zonas con etiquetas semánticas.\n¡Si cumples esto, tu HTML ya es de nivel profesional!"
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Esta página ya es semántica 🐾. Añade dentro de la `<section>` un segundo `<article>` con otra noticia gatuna (con su `<h3>` y su `<p>`).\n\nDespués cambia `<aside>` y `</aside>` por `<div>` y `</div>`. ¿Ves alguna diferencia? Ninguna a la vista… pero un lector de pantalla sí la nota.",
-      inicial: {
-        html: `<header>
-  <h1>El Diario Gatuno</h1>
-  <nav>
-    <a href="#noticias">Noticias</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-</header>
-
-<main>
-  <section id="noticias">
-    <h2>Noticias</h2>
-    <article>
-      <h3>Un gato tira un vaso de la mesa</h3>
-      <img src="recursos/img/gato.svg" alt="Gato naranja de ojos grandes con cara de inocente" width="200" height="150">
-      <p>Los testigos aseguran que lo miró fijamente antes de empujarlo.</p>
-    </article>
-  </section>
-  <aside>
-    <p>Consejo del día: la caja vale más que el regalo.</p>
-  </aside>
-</main>
-
-<footer>
-  <p id="contacto">Redacción: encima del radiador.</p>
-</footer>
-`,
-        css: "",
-        js: ""
-      }
+      tipo: "ejercicio",
+      enunciado: "Escribe un trocito del **Diario Gatuno** 🐾. En este orden, sin ningún atributo:\n\n1. Un `<article>` con dos cosas dentro:\n   • un `<h2>` que diga **Un gato tira un vaso de la mesa**\n   • y debajo un `<p>` que diga **Lo miró fijamente antes de empujarlo.**\n2. Después del `</article>`, un `<aside>` con un `<p>` dentro que diga **Consejo del día: la caja vale más que el regalo.**",
+      solucion: {
+        html: `<article>
+  <h2>Un gato tira un vaso de la mesa</h2>
+  <p>Lo miró fijamente antes de empujarlo.</p>
+</article>
+<aside>
+  <p>Consejo del día: la caja vale más que el regalo.</p>
+</aside>`,
+        css: ""
+      },
+      pistas: [
+        "La noticia tiene sentido por sí sola, por eso va en <article>…</article> con su <h2> y su <p> dentro. El consejo es un «por cierto…», por eso va en <aside>…</aside>, que se abre después de cerrar el article.",
+        "Debe quedarte así:\n<article>\n  <h2>Un gato tira un vaso de la mesa</h2>\n  <p>Lo miró fijamente antes de empujarlo.</p>\n</article>\n<aside>\n  <p>Consejo del día: la caja vale más que el regalo.</p>\n</aside>"
+      ]
     },
     {
       tipo: "quiz",

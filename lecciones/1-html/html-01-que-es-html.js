@@ -36,14 +36,16 @@ CURSO.registrar({
       consejo: "El despiste más famoso del mundo: olvidar la barra `/` en la etiqueta de cierre. ¡Que no te pase a ti!"
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Este es tu primer código. Cambia los textos que hay **entre** las etiquetas y mira cómo cambia el resultado. ¿Te atreves a añadir otra línea con `<p>` y `</p>`?",
-      inicial: {
+      tipo: "ejercicio",
+      enunciado: "¡Tu primer elemento! Escribe un título `<h1>` que diga **¡Hola, mundo!**\n\nEmpieza con la etiqueta de apertura `<h1>`, después escribe el texto y termina con la etiqueta de cierre `</h1>`.",
+      pistas: [
+        "Un elemento tiene tres partes: apertura, contenido y cierre. La etiqueta de cierre es igual que la de apertura, pero con una barra / delante del nombre.",
+        "Escribe <h1>, justo después ¡Hola, mundo! y, para terminar, </h1>. Todo en la misma línea."
+      ],
+      solucion: {
         html: `<h1>¡Hola, mundo!</h1>
-<p>Esta es mi primera página web.</p>
 `,
-        css: "",
-        js: ""
+        css: ""
       }
     },
     {

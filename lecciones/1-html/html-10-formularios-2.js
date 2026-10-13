@@ -82,43 +82,20 @@ CURSO.registrar({
       consejo: "¿Radio o select? Con **pocas** opciones (2–4), usa radio: se ven todas de un vistazo. Con **muchas** (países, años…), un select ahorra espacio."
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Juega con el formulario de adopción de dragones 🐉:\n\n• Escribe letras en «Edad»: ¿te deja?\n• Pulsa «Adoptar» con el email vacío, y luego con un email sin @. ¿Qué aviso sale?\n• Cambia el `name` de uno de los radio por otro distinto y comprueba que ya puedes marcar los dos.\n\nCuando el formulario se envíe, verás un aviso arriba del resultado: en las prácticas no va a ningún sitio.",
-      inicial: {
-        html: `<h1>Adopta un dragón</h1>
-<form>
-  <p>
-    <label for="email">Tu email</label>
-    <input type="email" id="email" name="email" required>
-  </p>
-  <p>
-    <label for="edad">Edad</label>
-    <input type="number" id="edad" name="edad">
-  </p>
-
-  <p>Color del dragón:</p>
-  <input type="radio" id="rojo" name="color" value="rojo">
-  <label for="rojo">Rojo fuego</label>
-  <input type="radio" id="verde" name="color" value="verde">
-  <label for="verde">Verde musgo</label>
-
-  <p>
-    <label for="comida">Comida favorita</label>
-    <select id="comida" name="comida">
-      <option value="pimientos">Pimientos picantes</option>
-      <option value="carbon">Carbón a la brasa</option>
-    </select>
-  </p>
-  <p>
-    <label for="motivo">¿Por qué quieres un dragón?</label>
-    <textarea id="motivo" name="motivo" rows="3"></textarea>
-  </p>
+      tipo: "ejercicio",
+      enunciado: "Crea el formulario para **adoptar un dragón** 🐉. Escribe, en este orden:\n\n1. Un `<form>`. Todo lo demás va **dentro** de él (sin `<p>`).\n2. Un `<label>` con `for=\"edad\"` que diga **Edad del dragón**.\n3. Debajo, un `<input>` con `type=\"number\"`, `id=\"edad\"`, `name=\"edad\"` y `required`.\n4. Un `<button>` que diga **Adoptar**.\n\nNo añadas ningún otro atributo. Cuando lo tengas, prueba a escribir letras en el campo, o a pulsar **Adoptar** con el campo vacío.",
+      solucion: {
+        html: `<form>
+  <label for="edad">Edad del dragón</label>
+  <input type="number" id="edad" name="edad" required>
   <button>Adoptar</button>
-</form>
-`,
-        css: "",
-        js: ""
-      }
+</form>`,
+        css: ""
+      },
+      pistas: [
+        "Es como el formulario de la lección anterior, pero con type=\"number\" en vez de \"text\". El atributo required se escribe tal cual, sin =\"…\".",
+        "Dentro del form van tres líneas:\n<label for=\"edad\">Edad del dragón</label>\n<input type=\"number\" id=\"edad\" name=\"edad\" required>\n<button>Adoptar</button>"
+      ]
     },
     {
       tipo: "quiz",

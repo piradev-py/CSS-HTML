@@ -284,6 +284,30 @@ iframe.resultado {
 .explicacion-quiz { margin-top: 14px; font-weight: 700; }
 .explicacion-quiz:empty { display: none; }
 
+/* ---------- Ejercicio de resolución ---------- */
+.ejercicio { border: 3px solid var(--mundo-css); }
+.etiqueta-ejercicio {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 99px;
+  background: var(--mundo-css);
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+.resultado-revision {
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  animation: entrar-paso 0.3s ease;
+}
+.resultado-revision:empty { display: none; }
+.resultado-revision.revisando { background: var(--superficie-2); color: var(--texto-suave); }
+.resultado-revision.correcto { background: color-mix(in srgb, var(--exito) 15%, var(--superficie)); border: 2px solid var(--exito); }
+.resultado-revision.incorrecto { background: color-mix(in srgb, var(--error) 10%, var(--superficie)); border: 2px solid var(--error); }
+
 /* ---------- Reto ---------- */
 .reto { display: flex; flex-direction: column; gap: 18px; }
 .reto-enunciado { border: 3px solid var(--color); }

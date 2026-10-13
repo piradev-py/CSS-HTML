@@ -55,21 +55,20 @@ CURSO.registrar({
       consejo: "El `placeholder` **nunca sustituye al `<label>`**: en cuanto empiezas a escribir, desaparece, y ya no sabes qué te pedían. 🍦"
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Haz estas pruebas:\n\n• Haz clic en el texto «Tu superpoder»: ¿ves cómo el cursor salta al campo?\n• Cambia el `placeholder` por otro ejemplo.\n• Pulsa el botón y mira el aviso.\n• Ahora borra una letra del `for` y vuelve a hacer clic en el texto: ¡el enlace se ha roto!",
-      inicial: {
-        html: `<h1>Academia de superhéroes 🦸</h1>
-<form>
-  <p>
-    <label for="superpoder">Tu superpoder</label>
-    <input type="text" id="superpoder" name="superpoder" placeholder="Volar, hablar con gatos…">
-  </p>
-  <button>Inscribirme</button>
-</form>
-`,
-        css: "",
-        js: ""
-      }
+      tipo: "ejercicio",
+      enunciado: "Crea el formulario de la **Academia de magos** 🧙. Escribe, en este orden:\n\n1. Un `<form>`. Todo lo demás va **dentro** de él (esta vez sin `<p>`).\n2. Un `<label>` con `for=\"hechizo\"` que diga **Tu hechizo favorito**.\n3. Debajo, un `<input>` con `type=\"text\"`, `id=\"hechizo\"`, `name=\"hechizo\"` y `placeholder=\"Abracadabra\"`.\n4. Un `<button>` que diga **Apuntarme**.\n\nNo añadas ningún otro atributo. Cuando lo tengas, haz clic en el texto del label: ¡el cursor saltará al campo!",
+      solucion: {
+        html: `<form>
+  <label for="hechizo">Tu hechizo favorito</label>
+  <input type="text" id="hechizo" name="hechizo" placeholder="Abracadabra">
+  <button>Apuntarme</button>
+</form>`,
+        css: ""
+      },
+      pistas: [
+        "Abre con <form> y cierra con </form> al final, después del botón. El for del <label> y el id del <input> tienen que ser iguales: hechizo. Recuerda que <input> no lleva cierre.",
+        "Dentro del form van tres líneas:\n<label for=\"hechizo\">Tu hechizo favorito</label>\n<input type=\"text\" id=\"hechizo\" name=\"hechizo\" placeholder=\"Abracadabra\">\n<button>Apuntarme</button>"
+      ]
     },
     {
       tipo: "quiz",

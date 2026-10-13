@@ -48,17 +48,18 @@ desaparecen.</p>
       consejo: "Ordenar un texto con buenos títulos y párrafos se llama **estructurar**. Es lo primero que hace un profesional, ¡antes incluso de pensar en colores!"
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Cambia los `<h2>` por `<h3>`, `<h4>`… hasta `<h6>` y mira qué pasa (cambia la etiqueta de apertura **y** la de cierre). Después mete muchos espacios y saltos de línea dentro de un párrafo: ¿desaparecen?",
-      inicial: {
-        html: `<h1>Tortilla de patatas</h1>
-<h2>Ingredientes</h2>
-<p>Patatas, huevos, aceite, sal y (para los valientes) cebolla.</p>
-<h2>Pasos</h2>
-<p>Fríe las patatas, mézclalas con el huevo batido y dale la vuelta con mucho valor.</p>
+      tipo: "ejercicio",
+      enunciado: "Escribe tres títulos, uno debajo de otro, bajando un escalón cada vez (sin saltarte ninguno):\n\n1. Un `<h1>` que diga **Guía del espacio**.\n2. Un `<h2>` que diga **Planetas**.\n3. Un `<h3>` que diga **Marte, el planeta rojo**.\n\nSolo esos tres títulos: sin párrafos. 🚀",
+      pistas: [
+        "Cada nivel tiene su número: el más importante es <h1>, después <h2> y después <h3>. Cada uno se cierra con su misma etiqueta y una barra: <h2>…</h2>.",
+        "Escribe <h1>Guía del espacio</h1> en la primera línea. Debajo, el <h2> con «Planetas» y, por último, el <h3> con «Marte, el planeta rojo»."
+      ],
+      solucion: {
+        html: `<h1>Guía del espacio</h1>
+<h2>Planetas</h2>
+<h3>Marte, el planeta rojo</h3>
 `,
-        css: "",
-        js: ""
+        css: ""
       }
     },
     {

@@ -55,24 +55,25 @@ CURSO.registrar({
       consejo: "Truco: lo que escribas entre `<!--` y `-->` es un **comentario**. El navegador lo ignora, así que sirve para dejar notas en el código. ¡Yo los usaré para darte instrucciones en los retos!"
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Cambia el texto de `<title>` y no verás nada en el resultado: vive en la cabeza 🧠. Ahora cambia el texto del `<h1>`: ese sí se ve, porque está en el cuerpo. Prueba también a escribir una ñ o una tilde.",
-      inicial: {
+      tipo: "ejercicio",
+      enunciado: "Escribe desde cero el esqueleto completo de una página, en este orden:\n\n1. `<!DOCTYPE html>`\n2. `<html>` con el atributo `lang=\"es\"`. Todo lo demás va dentro de él.\n3. La cabeza `<head>`, y dentro: `<meta charset=\"UTF-8\">` y un `<title>` que diga **La casa de Tagui**.\n4. Debajo de la cabeza, el cuerpo `<body>`, y dentro: un título `<h1>` que diga **¡Bienvenido a mi casa!**\n\nCierra cada etiqueta (menos la meta, que no lleva cierre) y recuerda: se cierra primero la última que abriste. 🪆",
+      pistas: [
+        "Ve de fuera hacia dentro, como las muñecas rusas: escribe primero <html lang=\"es\">…</html>; dentro, <head>…</head> y debajo <body>…</body>. Después rellena cada caja.",
+        "El orden es:\n<!DOCTYPE html>\n<html lang=\"es\">\n<head> con <meta charset=\"UTF-8\"> y <title>La casa de Tagui</title> dentro, y luego </head>\n<body> con <h1>¡Bienvenido a mi casa!</h1> dentro, y luego </body>\n</html>"
+      ],
+      solucion: {
         html: `<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>El blog de Tagui</title>
+    <title>La casa de Tagui</title>
   </head>
   <body>
-    <!-- Esto es un comentario: no se ve en el resultado -->
-    <h1>Bienvenido a mi blog</h1>
-    <p>Hoy hablamos de pingüinos.</p>
+    <h1>¡Bienvenido a mi casa!</h1>
   </body>
 </html>
 `,
-        css: "",
-        js: ""
+        css: ""
       }
     },
     {

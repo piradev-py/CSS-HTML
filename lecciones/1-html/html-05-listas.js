@@ -58,25 +58,24 @@ CURSO.registrar({
       consejo: "Error típico: poner la lista de dentro **entre** dos `<li>`. La sublista vive **dentro** de un `<li>`, antes de su `</li>`."
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Cambia `<ol>` por `<ul>` (la apertura **y** el cierre) y mira cómo los números se vuelven viñetas. Añade un `<li>` nuevo en medio de la lista numerada: ¿se renumera sola? Y si te atreves, mete una sublista dentro de algún `<li>`.",
-      inicial: {
-        html: `<h2>Mis superpoderes favoritos</h2>
-<ol>
-  <li>Volar</li>
-  <li>Hablar con los gatos</li>
-  <li>Teletransporte</li>
-</ol>
-
-<h2>Para una isla desierta</h2>
-<ul>
-  <li>Protector solar</li>
-  <li>Un libro muy gordo</li>
-  <li>Una pelota llamada Wilson</li>
+      tipo: "ejercicio",
+      enunciado: "Haz la lista de la compra de un mago 🧙. Escribe una lista con viñetas `<ul>` con **dos** elementos `<li>`:\n\n1. El primero dice **Ingredientes de pociones**. Dentro de él, después de ese texto y antes de su `</li>`, mete otra lista con viñetas `<ul>` con dos `<li>`: **Ojo de sapo** y **Pelo de troll**.\n2. El segundo dice **Una varita nueva**.",
+      pistas: [
+        "Empieza por la lista grande: un <ul> con dos <li>. Luego vuelve al primer <li> y, justo después de su texto (antes de </li>), escribe la lista pequeña: otro <ul> con sus dos <li>.",
+        "El primer elemento queda así:\n<li>Ingredientes de pociones\n  <ul>\n    <li>Ojo de sapo</li>\n    <li>Pelo de troll</li>\n  </ul>\n</li>\nDebajo va el segundo <li> y, al final, el </ul> de la lista grande."
+      ],
+      solucion: {
+        html: `<ul>
+  <li>Ingredientes de pociones
+    <ul>
+      <li>Ojo de sapo</li>
+      <li>Pelo de troll</li>
+    </ul>
+  </li>
+  <li>Una varita nueva</li>
 </ul>
 `,
-        css: "",
-        js: ""
+        css: ""
       }
     },
     {

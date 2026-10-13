@@ -53,29 +53,16 @@ CURSO.registrar({
       consejo: "Truco: `href=\"#\"` sin nombre te lleva al principio de la página. ¡Perfecto para un enlace de «Volver arriba»!"
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Pulsa el enlace de la Wikipedia: como estás en la web de prácticas, no sales de aquí; verás un aviso con la dirección. Ahora pulsa «Ir a las curiosidades»: ¡salta abajo! Después cambia el `id` del último `<h2>` y comprueba que el salto deja de funcionar.",
-      inicial: {
-        html: `<h1>El rincón del pulpo 🐙</h1>
-<p>
-  <a href="https://es.wikipedia.org/wiki/Octopoda" target="_blank" rel="noopener">Los pulpos en la Wikipedia (otra pestaña)</a>
-  ·
-  <a href="#curiosidades">Ir a las curiosidades</a>
-</p>
-
-<h2>Dónde vive</h2>
-<p>En el fondo del mar, escondido entre rocas y conchas.</p>
-<p>Es un artista del camuflaje: cambia de color en un instante.</p>
-
-<h2>Qué come</h2>
-<p>Cangrejos, almejas y todo lo que pueda atrapar con sus ocho brazos.</p>
-<p>Abre los tarros de cristal él solito. ¡Más listo que muchos!</p>
-
-<h2 id="curiosidades">Curiosidades</h2>
-<p>Tiene tres corazones y la sangre azul. ¡Todo un aristócrata!</p>
+      tipo: "ejercicio",
+      enunciado: "Escribe un enlace `<a>` sobre los pulpos 🐙 que se abra en una pestaña nueva. Lleva estos tres atributos, en este orden:\n\n• `href=\"https://es.wikipedia.org/wiki/Octopoda\"`\n• `target=\"_blank\"`\n• `rel=\"noopener\"`\n\nY su texto dice **Los pulpos en la Wikipedia (se abre en otra pestaña)**.\n\nCuando lo tengas, púlsalo: como estás en la web de prácticas, no sales de aquí; verás un aviso con la dirección.",
+      pistas: [
+        "Los atributos van todos dentro de la etiqueta de apertura <a …>, separados por espacios y siempre así: nombre=\"valor\". El texto va entre <a …> y </a>.",
+        "Empieza así:\n<a href=\"https://es.wikipedia.org/wiki/Octopoda\" target=\"_blank\" …>\nFalta el rel, el texto y el cierre </a>."
+      ],
+      solucion: {
+        html: `<a href="https://es.wikipedia.org/wiki/Octopoda" target="_blank" rel="noopener">Los pulpos en la Wikipedia (se abre en otra pestaña)</a>
 `,
-        css: "",
-        js: ""
+        css: ""
       }
     },
     {

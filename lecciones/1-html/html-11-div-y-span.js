@@ -56,19 +56,16 @@ CURSO.registrar({
       consejo: "Elige apodos que digan **qué es** la cosa (`precio`, `carta`), no cómo se ve (`rojo`, `grande`): si mañana el precio pasa a ser verde, el nombre seguirá teniendo sentido. Y escríbelos en minúsculas, sin tildes ni espacios (un espacio separa dos clases)."
     },
     {
-      tipo: "pruebalo",
-      instruccion: "Cambia el primer `<span>` por `<div>` (en la apertura **y** en el cierre) y mira la frase: ¡se parte en trozos! Eso pasa porque el div es de bloque. Déjalo otra vez como span.\n\nDespués cambia el apodo de alguna `class`… ¿ves algún cambio? No, ¡todavía! 😉",
-      inicial: {
-        html: `<p>Mi grupo favorito es <span class="grupo">Los Calcetines Desparejados</span> y su mejor canción dura <span class="duracion">3 minutos</span>.</p>
-
-<div class="disco">
-  <h2>Álbum: Lavadora en Centrifugado</h2>
-  <p>Canciones: 10, todas sobre ropa perdida.</p>
-</div>
-`,
-        css: "",
-        js: ""
-      }
+      tipo: "ejercicio",
+      enunciado: "Escribe un párrafo `<p>` que diga **Mi grupo favorito es Los Calcetines Desparejados**. 🎸\n\nDentro de ese párrafo, envuelve **solo** el nombre del grupo (**Los Calcetines Desparejados**) en un `<span>` con `class=\"grupo\"`.\n\nNo añadas ningún otro atributo ni etiqueta. Fíjate en que, en el resultado, la frase sigue en una sola línea: el span no la parte.",
+      solucion: {
+        html: `<p>Mi grupo favorito es <span class="grupo">Los Calcetines Desparejados</span></p>`,
+        css: ""
+      },
+      pistas: [
+        "Primero escribe el párrafo completo con <p>…</p>. Luego pon <span class=\"grupo\"> justo antes de «Los» y </span> justo después de «Desparejados».",
+        "Debe quedarte así:\n<p>Mi grupo favorito es <span class=\"grupo\">Los Calcetines Desparejados</span></p>"
+      ]
     },
     {
       tipo: "quiz",
