@@ -1,9 +1,12 @@
 /* ============================================================
    <CSS-HTML> · Progreso del jugador (guardado en localStorage)
    XP, niveles, estrellas, insignias, racha diaria y ajustes.
+   Modo prueba: usa un progreso aparte en sessionStorage (dura
+   mientras la pestaña esté abierta) y nunca toca el progreso real.
    ============================================================ */
 (function () {
   const CLAVE = "csshtml-progreso-v1";
+  const CLAVE_PRUEBA = "csshtml-prueba-v1";
 
   const NIVELES = [
     { min: 0, nombre: "Novato", emoji: "🐣" },
@@ -37,9 +40,15 @@
     };
   }
 
+  // Marca en memoria: aunque falle sessionStorage, en modo prueba NUNCA se escribe el progreso real
+  let modoPrueba = (() => {
+    try { return sessionStorage.getItem(CLAVE_PRUEBA) !== null; } catch (e) { return false; }
+  })();
+  const enPrueba = () => modoPrueba;
+
   function cargar() {
     try {
-      const crudo = localStorage.getItem(CLAVE);
+      const crudo = enPrueba() ? sessionStorage.getItem(CLAVE_PRUEBA) : localStorage.getItem(CLAVE);
       if (!crudo) return vacio();
       const d = JSON.parse(crudo);
       const base = vacio();
@@ -55,7 +64,17 @@
   let datos = cargar();
 
   function guardar() {
-    try { localStorage.setItem(CLAVE, JSON.stringify(datos)); } catch (e) { /* sin almacenamiento: seguimos en memoria */ }
+    try {
+      if (enPrueba()) sessionStorage.setItem(CLAVE_PRUEBA, JSON.stringify(datos));
+      else localStorage.setItem(CLAVE, JSON.stringify(datos));
+    } catch (e) { /* sin almacenamiento: seguimos en memoria */ }
+  }
+
+  /** Progreso nuevo para el modo prueba: todo desbloqueado, mismos tema y sonido que el real. */
+  function datosPrueba() {
+    const d = vacio();
+    d.ajustes = Object.assign({}, datos.ajustes, { desbloquearTodo: true });
+    return d;
   }
 
   function hoy(desplazamiento = 0) {
@@ -178,11 +197,26 @@
     guardarBorrador(id, codigo) { datos.borradores[id] = codigo; guardar(); },
     borrarBorrador(id) { delete datos.borradores[id]; guardar(); },
 
+    /** Empieza el curso de cero (en modo prueba, reinicia solo la prueba). */
     reiniciar() {
+      if (enPrueba()) { datos = datosPrueba(); guardar(); return; }
       const ajustes = datos.ajustes;
       datos = vacio();
       datos.ajustes = Object.assign(ajustes, { desbloquearTodo: false });
       guardar();
+    },
+
+    enPrueba,
+    entrarPrueba() {
+      if (modoPrueba) return;
+      datos = datosPrueba();
+      modoPrueba = true;
+      guardar();
+    },
+    salirPrueba() {
+      try { sessionStorage.removeItem(CLAVE_PRUEBA); } catch (e) { /* nada que borrar */ }
+      modoPrueba = false;
+      datos = cargar();
     }
   };
 })();

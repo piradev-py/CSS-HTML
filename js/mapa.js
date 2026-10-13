@@ -135,9 +135,32 @@
     }).join("");
   }
 
+  /* ---------- Opciones del curso: modo prueba y reinicio ---------- */
+  function pintarOpciones() {
+    const cont = document.querySelector("[data-opciones-curso]");
+    const prueba = PROGRESO.enPrueba();
+    cont.innerHTML = prueba
+      ? "<h2>🧪 Estás en modo prueba</h2>" +
+        "<p>Todo está desbloqueado. Lo que hagas aquí no cambia tu progreso real y se borra al cerrar la pestaña.</p>" +
+        '<div class="opciones-botones">' +
+        '<button class="boton secundario" data-reiniciar>↺ Empezar la prueba de cero</button>' +
+        '<button class="boton" data-salir>🚪 Salir y volver a mi progreso</button></div>'
+      : "<h2>🛠️ Opciones del curso</h2>" +
+        "<p>¿Quieres echar un vistazo a cualquier lección sin que cuente? Usa el <b>modo prueba</b>: " +
+        "todo desbloqueado y tu progreso real queda intacto.</p>" +
+        '<div class="opciones-botones">' +
+        '<button class="boton morado" data-entrar>🧪 Probar el curso sin guardar</button>' +
+        '<button class="boton secundario" data-reiniciar>🔄 Reiniciar curso</button></div>';
+    const accion = (sel, fn) => { const b = cont.querySelector(sel); if (b) b.addEventListener("click", fn); };
+    accion("[data-entrar]", UI.entrarPrueba);
+    accion("[data-salir]", UI.salirPrueba);
+    accion("[data-reiniciar]", UI.reiniciarCurso);
+  }
+
   pintarBienvenida();
   pintarMundos();
   pintarInsignias();
+  pintarOpciones();
 
   let espera;
   window.addEventListener("resize", () => {

@@ -214,6 +214,12 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
 .insignia.ganada { border-style: solid; border-color: var(--mundo-js); color: var(--texto); box-shadow: var(--sombra); }
 .insignia.ganada .insignia-emoji { filter: none; opacity: 1; }
 
+/* ---------- Opciones del curso ---------- */
+.opciones-curso { margin-top: 36px; }
+.opciones-curso h2 { font-size: 1.3rem; font-weight: 900; }
+.opciones-curso p { color: var(--texto-suave); }
+.opciones-botones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+
 .pie {
   text-align: center;
   color: var(--texto-suave);

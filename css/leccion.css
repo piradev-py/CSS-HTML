@@ -143,20 +143,6 @@ iframe.resultado {
 .pestana-css.activa { border-color: var(--mundo-css); }
 .pestana-js.activa { border-color: var(--mundo-js); }
 
-.mini-boton {
-  padding: 6px 10px;
-  border-radius: 10px;
-  border: 2px solid var(--borde);
-  background: var(--superficie);
-  color: var(--texto);
-  font: inherit;
-  font-weight: 700;
-  font-size: 0.85rem;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.mini-boton:hover { background: var(--fondo-2); }
-
 /* Área de código: textarea transparente encima del resaltado */
 .area-codigo {
   position: relative;

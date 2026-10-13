@@ -183,33 +183,72 @@
     cab.querySelector('[data-accion="ajustes"]').addEventListener("click", abrirAjustes);
     refrescar();
     pintarEstado();
+    pintarFranjaPrueba(cab);
+  }
+
+  /* ---------- Modo prueba y reinicio del curso ---------- */
+  function pintarFranjaPrueba(cab) {
+    if (!PROGRESO.enPrueba() || document.querySelector(".franja-prueba")) return;
+    const franja = document.createElement("div");
+    franja.className = "franja-prueba";
+    franja.setAttribute("role", "status");
+    franja.innerHTML =
+      '<span>🧪 <b>Modo prueba</b>: todo está desbloqueado y nada se guarda en tu progreso real.</span>' +
+      '<span class="franja-botones">' +
+      '<button class="mini-boton" data-prueba-reiniciar>↺ Empezar la prueba de cero</button>' +
+      '<button class="mini-boton" data-prueba-salir>Salir de la prueba</button></span>';
+    cab.after(franja);
+    franja.querySelector("[data-prueba-reiniciar]").addEventListener("click", reiniciarCurso);
+    franja.querySelector("[data-prueba-salir]").addEventListener("click", salirPrueba);
+  }
+
+  function entrarPrueba() {
+    PROGRESO.entrarPrueba();
+    location.href = "index.html";
+  }
+
+  function salirPrueba() {
+    PROGRESO.salirPrueba();
+    location.href = "index.html";
+  }
+
+  function reiniciarCurso() {
+    const pregunta = PROGRESO.enPrueba()
+      ? "¿Empezar la prueba de cero? Solo se borra lo que has hecho en el modo prueba."
+      : "¿Reiniciar el curso? Perderás tu XP, estrellas, insignias y racha. Esto no se puede deshacer.";
+    if (!confirm(pregunta)) return;
+    PROGRESO.reiniciar();
+    location.href = "index.html";
   }
 
   function abrirAjustes() {
+    const prueba = PROGRESO.enPrueba();
     const m = CELEBRAR.modal(
       "<h2>⚙️ Ajustes</h2>" +
       '<div class="lista-ajustes">' +
       '<label>🔊 Sonidos <input type="checkbox" data-ajuste="sonido"></label>' +
-      '<label>🔓 Desbloquear todas las lecciones <input type="checkbox" data-ajuste="desbloquearTodo"></label>' +
+      (prueba ? "" : '<label>🔓 Desbloquear todas las lecciones <input type="checkbox" data-ajuste="desbloquearTodo"></label>') +
       "</div>" +
-      '<div class="acciones">' +
-      '<button class="boton secundario" data-borrar>🗑️ Borrar mi progreso</button>' +
-      '<button class="boton" data-cerrar>Listo</button></div>',
+      '<div class="acciones acciones-curso">' +
+      (prueba
+        ? '<button class="boton secundario" data-salir-prueba>🚪 Salir del modo prueba</button>'
+        : '<button class="boton morado" data-entrar-prueba>🧪 Probar el curso sin guardar</button>') +
+      '<button class="boton secundario" data-reiniciar-curso>🔄 ' + (prueba ? "Empezar la prueba de cero" : "Reiniciar curso") + "</button>" +
+      "</div>" +
+      '<div class="acciones"><button class="boton" data-cerrar>Listo</button></div>',
       { alCerrar: () => location.reload() }
     );
     m.elemento.querySelectorAll("[data-ajuste]").forEach(chk => {
       chk.checked = !!PROGRESO.ajuste(chk.dataset.ajuste);
       chk.addEventListener("change", () => PROGRESO.cambiarAjuste(chk.dataset.ajuste, chk.checked));
     });
-    m.elemento.querySelector("[data-borrar]").addEventListener("click", () => {
-      if (confirm("¿Seguro? Perderás tu XP, estrellas e insignias. Esto no se puede deshacer.")) {
-        PROGRESO.reiniciar();
-        m.cerrar();
-      }
-    });
+    const accion = (sel, fn) => { const b = m.elemento.querySelector(sel); if (b) b.addEventListener("click", fn); };
+    accion("[data-entrar-prueba]", entrarPrueba);
+    accion("[data-salir-prueba]", salirPrueba);
+    accion("[data-reiniciar-curso]", reiniciarCurso);
   }
 
   aplicarTema();
 
-  window.UI = { escapar, md, resaltar, montarCabecera, pintarEstado, aplicarTema };
+  window.UI = { escapar, md, resaltar, montarCabecera, pintarEstado, aplicarTema, entrarPrueba, salirPrueba, reiniciarCurso };
 })();

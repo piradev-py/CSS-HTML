@@ -9,6 +9,8 @@ primero **HTML**, después **CSS**, luego los dos juntos y por último **JavaScr
 - 🏆 Un reto al final de cada lección, con comprobación automática y pistas
 - ⭐ Estrellas, XP, niveles, insignias y racha diaria (se guardan en tu navegador)
 - 🌙 Modo claro y oscuro, y diseño adaptado al móvil
+- 🧪 Modo prueba para recorrer todo el curso sin tocar tu progreso, y botón para reiniciar el curso
+  (ambos al final del mapa y en ⚙️ Ajustes)
 
 ## Cómo abrirla
 

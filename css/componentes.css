@@ -144,6 +144,39 @@
 }
 .boton-icono:hover { background: var(--superficie-2); }
 
+.mini-boton {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 2px solid var(--borde);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.mini-boton:hover { background: var(--fondo-2); }
+
+/* ---------- Franja del modo prueba ---------- */
+.franja-prueba {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 14px;
+  padding: 8px 16px;
+  background: color-mix(in srgb, var(--mundo-hc) 16%, var(--superficie));
+  border-bottom: 2px solid var(--mundo-hc);
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.franja-botones { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+
+.acciones-curso { flex-direction: column; align-items: stretch; }
+
 /* ---------- Tarjeta ---------- */
 .tarjeta {
   background: var(--superficie);
