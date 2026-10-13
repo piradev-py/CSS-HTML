@@ -4,7 +4,7 @@
 (function () {
   UI.montarCabecera();
 
-  const DESPLAZAMIENTOS = [0, 70, 105, 70, 0, -70, -105, -70];
+  const ANCHO_NODO = 170;   // px que ocupa cada lección en una fila del camino
   const actual = PROGRESO.siguientePendiente();
 
   /* ---------- Bienvenida ---------- */
@@ -50,11 +50,12 @@
       const hechas = m.lecciones.filter(l => PROGRESO.estaCompletada(l.id)).length;
       const listas = m.lecciones.filter(l => l.listo).length;
       const abierto = PROGRESO.estaDesbloqueada(m.lecciones[0].id);
-      const sec = document.createElement("section");
+      // <details>: cada mundo se abre y se cierra pulsando su cabecera. Al entrar, todos cerrados.
+      const sec = document.createElement("details");
       sec.className = "mundo mundo-" + m.clave + (abierto ? "" : " mundo-cerrado");
       sec.id = "mundo-" + m.numero;
       sec.innerHTML =
-        '<header class="mundo-cabecera">' +
+        '<summary class="mundo-cabecera">' +
           '<div class="mundo-emoji" aria-hidden="true">' + (abierto ? m.emoji : "🔒") + "</div>" +
           "<div><div class=\"mundo-num\">Mundo " + m.numero + "</div>" +
           "<h2>" + UI.escapar(m.nombre) + "</h2><p>" + UI.escapar(m.lema) + "</p></div>" +
@@ -62,7 +63,8 @@
           '<div class="mini-barra"><div style="width:' + Math.round((hechas / m.lecciones.length) * 100) + '%"></div></div>' +
           (listas < m.lecciones.length ? '<small>' + listas + " disponibles</small>" : "") +
           "</div>" +
-        "</header>" +
+          '<span class="mundo-flecha" aria-hidden="true">▾</span>' +
+        "</summary>" +
         '<div class="camino"><svg class="camino-linea" aria-hidden="true"></svg><ol class="nodos"></ol></div>';
       const ol = sec.querySelector(".nodos");
       m.lecciones.forEach((l, i) => {
@@ -70,7 +72,6 @@
         const esActual = actual && actual.id === l.id;
         const li = document.createElement("li");
         li.className = "nodo-fila";
-        li.style.setProperty("--d", DESPLAZAMIENTOS[i % DESPLAZAMIENTOS.length]);
         const estrellas = PROGRESO.estrellas(l.id);
         const icono = {
           completada: "✓",
@@ -96,37 +97,72 @@
           '<div class="nodo-titulo">' + UI.escapar(l.titulo) + "</div>";
         ol.appendChild(li);
       });
+      // Al abrirlo, el camino se coloca con el ancho real (cerrado no mide nada)
+      sec.addEventListener("toggle", () => { if (sec.open) maquetarCamino(sec.querySelector(".camino")); });
       cont.appendChild(sec);
     });
-    requestAnimationFrame(dibujarCaminos);
   }
 
-  /* Dibuja la línea de puntos que une los nodos de cada mundo */
-  function dibujarCaminos() {
-    document.querySelectorAll(".camino").forEach(camino => {
-      const svg = camino.querySelector(".camino-linea");
-      const caja = camino.getBoundingClientRect();
-      const puntos = [...camino.querySelectorAll(".nodo")].map(n => {
-        const r = n.getBoundingClientRect();
-        return [r.left + r.width / 2 - caja.left, r.top + r.height / 2 - caja.top];
-      });
-      svg.setAttribute("viewBox", "0 0 " + caja.width + " " + caja.height);
-      svg.setAttribute("width", caja.width);
-      svg.setAttribute("height", caja.height);
-      let d = "";
-      puntos.forEach((p, i) => {
-        if (i === 0) { d += "M" + p[0] + " " + p[1]; return; }
-        const prev = puntos[i - 1];
-        const medio = (prev[1] + p[1]) / 2;
-        d += " C" + prev[0] + " " + medio + " " + p[0] + " " + medio + " " + p[0] + " " + p[1];
-      });
-      svg.innerHTML = '<path d="' + d + '"/>';
+  /*
+   * Camino en serpiente: las lecciones van en filas horizontales; la 1.ª fila de izquierda a derecha,
+   * la 2.ª de derecha a izquierda… y una curva en U une el final de una fila con el principio de la siguiente.
+   * Dentro de cada fila los nodos suben y bajan un poco (ola) para que el camino tenga curvas.
+   */
+  function maquetarCamino(camino) {
+    if (!camino || !camino.clientWidth) return;
+    const ol = camino.querySelector(".nodos");
+    const filas = [...ol.children];
+    const cols = Math.max(2, Math.min(6, Math.floor((camino.clientWidth - 100) / ANCHO_NODO)));
+    ol.style.setProperty("--cols", cols);
+    filas.forEach((li, i) => {
+      const fila = Math.floor(i / cols);
+      const pos = i % cols;
+      const col = fila % 2 === 0 ? pos : cols - 1 - pos;
+      li.style.gridRow = fila + 1;
+      li.style.gridColumn = col + 1;
+      li.classList.toggle("ola-baja", col % 2 === 1);
     });
+    dibujarCamino(camino, cols);
+  }
+
+  function dibujarCamino(camino, cols) {
+    const svg = camino.querySelector(".camino-linea");
+    const caja = camino.getBoundingClientRect();
+    const puntos = [...camino.querySelectorAll(".nodo")].map(n => {
+      const r = n.getBoundingClientRect();
+      return [r.left + r.width / 2 - caja.left, r.top + r.height / 2 - caja.top];
+    });
+    svg.setAttribute("viewBox", "0 0 " + caja.width + " " + caja.height);
+    svg.setAttribute("width", caja.width);
+    svg.setAttribute("height", caja.height);
+    let d = "";
+    puntos.forEach((p, i) => {
+      if (i === 0) { d += "M" + p[0] + " " + p[1]; return; }
+      const [x0, y0] = puntos[i - 1];
+      const [x1, y1] = p;
+      if (i % cols === 0) {
+        // Cambio de fila: curva en U hacia fuera (a la derecha en las filas pares, a la izquierda en las impares)
+        const lado = Math.floor((i - 1) / cols) % 2 === 0 ? 1 : -1;
+        const abre = Math.max(70, (y1 - y0) * 0.6) * lado;
+        d += " C" + (x0 + abre) + " " + y0 + " " + (x1 + abre) + " " + y1 + " " + x1 + " " + y1;
+      } else {
+        // En la fila: curva suave en S entre dos nodos a distinta altura
+        const medio = (x0 + x1) / 2;
+        d += " C" + medio + " " + y0 + " " + medio + " " + y1 + " " + x1 + " " + y1;
+      }
+    });
+    svg.innerHTML = '<path d="' + d + '"/>';
+  }
+
+  function maquetarAbiertos() {
+    document.querySelectorAll(".mundo[open] .camino").forEach(maquetarCamino);
   }
 
   /* ---------- Insignias ---------- */
   function pintarInsignias() {
     const cont = document.querySelector("[data-insignias]");
+    const ganadas = PROGRESO.INSIGNIAS.filter(ins => PROGRESO.tieneInsignia(ins.id)).length;
+    document.querySelector("[data-contador-insignias]").textContent = ganadas + "/" + PROGRESO.INSIGNIAS.length;
     cont.innerHTML = PROGRESO.INSIGNIAS.map(ins => {
       const tiene = PROGRESO.tieneInsignia(ins.id);
       return '<div class="insignia' + (tiene ? " ganada" : "") + '" title="' + UI.escapar(ins.desc) + '">' +
@@ -165,14 +201,8 @@
   let espera;
   window.addEventListener("resize", () => {
     clearTimeout(espera);
-    espera = setTimeout(dibujarCaminos, 100);
+    espera = setTimeout(maquetarAbiertos, 100);
   });
   // Las fuentes web cambian el tamaño de los nodos al cargar: redibujamos
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(dibujarCaminos);
-
-  // Lleva la vista al nodo actual si el alumno ya avanzó
-  if (actual && Object.keys(PROGRESO.datos.completadas).length > 0) {
-    const nodo = document.querySelector(".nodo.actual");
-    if (nodo) setTimeout(() => nodo.scrollIntoView({ behavior: "smooth", block: "center" }), 300);
-  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(maquetarAbiertos);
 })();

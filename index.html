@@ -16,18 +16,21 @@
 <body>
   <header class="cabecera"></header>
 
-  <main class="contenido">
-    <section class="bienvenida" data-bienvenida></section>
-
-    <div data-mundos></div>
-
-    <section class="seccion-insignias">
-      <h2>🏅 Tus insignias</h2>
+  <!-- En horizontal: insignias en una columna a la izquierda y el mapa a la derecha -->
+  <div class="inicio">
+    <aside class="seccion-insignias" aria-labelledby="titulo-insignias">
+      <h2 id="titulo-insignias">🏅 Tus insignias <span class="contador-insignias" data-contador-insignias></span></h2>
       <div class="rejilla-insignias" data-insignias></div>
-    </section>
+    </aside>
 
-    <section class="opciones-curso tarjeta" data-opciones-curso></section>
-  </main>
+    <main class="contenido">
+      <section class="bienvenida" data-bienvenida></section>
+
+      <div data-mundos></div>
+
+      <section class="opciones-curso tarjeta" data-opciones-curso></section>
+    </main>
+  </div>
 
   <footer class="pie">
     Hecho con 🧡 para quien empieza desde cero · Tu progreso se guarda en este navegador.

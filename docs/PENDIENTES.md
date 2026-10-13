@@ -7,9 +7,9 @@
 - [x] Mundo JavaScript (js-01 … js-14) — `localStorage` de práctica y `fetch("datos/…")` sin internet en el motor
 
 ## Página de inicio (index)
-- [ ] **Mundos abatibles** (plegables): que cada mundo se pueda abrir y cerrar, para no tener que bajar tanto
-      desde el principio.
-- [ ] **Insignias en una columna a la izquierda**, al lado del mapa, aprovechando la pantalla en horizontal.
+- [x] **Mundos abatibles** (plegables): cada mundo se abre y se cierra pulsando su cabecera; al entrar, todos cerrados.
+- [x] **Insignias en una columna a la izquierda** (fija al bajar), aprovechando la pantalla en horizontal.
+- [x] **Camino en serpiente**: filas horizontales con curvas en U entre filas y una ola suave dentro de cada fila.
 
 ## Para el final
 - [ ] **Selector de idioma Español / English** para hacer el curso en cualquiera de los dos idiomas

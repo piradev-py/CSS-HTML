@@ -1,10 +1,22 @@
 /* ============================================================
    <CSS-HTML> · Pantalla de inicio y mapa de niveles
    ============================================================ */
-.contenido {
-  width: min(960px, 100%);
+/* Página: en horizontal, insignias a la izquierda y mapa a la derecha; en estrecho, una columna */
+.inicio {
+  width: min(1320px, 100%);
   margin: 0 auto;
   padding: 24px 16px 64px;
+  display: grid;
+  gap: 24px;
+}
+.contenido { min-width: 0; }
+@media (min-width: 1000px) {
+  .inicio { grid-template-columns: 280px minmax(0, 1fr); align-items: start; }
+  /* La columna de insignias se queda a la vista al bajar por el mapa */
+  .seccion-insignias { position: sticky; top: 80px; max-height: calc(100vh - 96px); overflow-y: auto; }
+}
+@media (max-width: 999px) {
+  .seccion-insignias { order: 2; }
 }
 
 /* ---------- Bienvenida ---------- */
@@ -37,8 +49,16 @@
 .mundo {
   --color: var(--mundo-html);
   --color-osc: var(--mundo-html-osc);
-  margin-bottom: 40px;
+  margin-bottom: 22px;
+  interpolate-size: allow-keywords;   /* permite animar la altura hasta "auto" al abrir */
 }
+/* Mundos plegables (<details>): el contenido se despliega suavemente */
+.mundo::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition: block-size 0.35s ease, content-visibility 0.35s allow-discrete;
+}
+.mundo[open]::details-content { block-size: auto; }
 .mundo-css { --color: var(--mundo-css); --color-osc: var(--mundo-css-osc); }
 .mundo-hc { --color: var(--mundo-hc); --color-osc: var(--mundo-hc-osc); }
 .mundo-js { --color: var(--mundo-js); --color-osc: var(--mundo-js-osc); }
@@ -52,7 +72,28 @@
   background: var(--color);
   color: #fff;
   box-shadow: 0 6px 0 var(--color-osc);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: transform 0.12s, box-shadow 0.12s;
 }
+.mundo-cabecera::-webkit-details-marker { display: none; }
+.mundo-cabecera:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--color-osc); }
+.mundo-cabecera:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--color-osc); }
+.mundo-cabecera:focus-visible { outline: 4px solid var(--color-osc); outline-offset: 4px; }
+.mundo-flecha {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+.mundo[open] .mundo-flecha { transform: rotate(180deg); }
 .mundo-js .mundo-cabecera { color: #2b2238; }
 .mundo-cabecera h2 { margin: 0; font-size: 1.45rem; font-weight: 900; }
 .mundo-cabecera p { margin: 0; opacity: 0.9; font-weight: 600; }
@@ -88,7 +129,8 @@
 .mundo-cerrado .mundo-cabecera { filter: saturate(0.35); }
 
 /* ---------- Camino de nodos ---------- */
-.camino { position: relative; padding: 52px 0 8px; }
+/* Hueco a los lados para las curvas en U que unen una fila con la siguiente */
+.camino { position: relative; padding: 56px 64px 40px; }
 .camino-linea {
   position: absolute;
   inset: 0;
@@ -103,24 +145,26 @@
   stroke-linecap: round;
 }
 
+/* Serpiente: filas horizontales (la fila y la columna de cada nodo las pone js/mapa.js) */
 .nodos {
   position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 22px;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+  row-gap: 56px;
+  justify-items: center;
 }
 .nodo-fila {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 190px;
-  transform: translateX(calc(var(--d) * 1px));
+  width: 150px;
 }
+/* Ola: un nodo de cada dos baja un poco para que la fila serpentee */
+.nodo-fila.ola-baja { transform: translateY(28px); }
 
 .nodo {
   position: relative;
@@ -180,6 +224,7 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
 .nodo-estrellas { margin-top: 10px; font-size: 0.9rem; letter-spacing: 1px; line-height: 1; }
 .nodo-titulo {
   margin-top: 10px;
+  max-width: 100%;
   padding: 2px 10px;
   border-radius: 8px;
   background: var(--fondo);
@@ -191,7 +236,15 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
 .nodo-estrellas + .nodo-titulo { margin-top: 4px; }
 
 /* ---------- Insignias ---------- */
-.seccion-insignias h2 { font-size: 1.5rem; font-weight: 900; }
+.seccion-insignias {
+  padding: 18px 16px;
+  background: var(--superficie);
+  border: 2px solid var(--borde);
+  border-radius: 22px;
+  box-shadow: var(--sombra);
+}
+.seccion-insignias h2 { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; font-size: 1.3rem; font-weight: 900; }
+.contador-insignias { margin-left: auto; font-size: 0.9rem; color: var(--texto-suave); font-weight: 800; }
 .rejilla-insignias {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -213,6 +266,26 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
 .insignia-emoji { font-size: 2.2rem; filter: grayscale(1); opacity: 0.6; }
 .insignia.ganada { border-style: solid; border-color: var(--mundo-js); color: var(--texto); box-shadow: var(--sombra); }
 .insignia.ganada .insignia-emoji { filter: none; opacity: 1; }
+/* En la columna lateral: una lista compacta (emoji a la izquierda, nombre y descripción a la derecha) */
+@media (min-width: 1000px) {
+  .seccion-insignias { padding: 14px 12px; }
+  .seccion-insignias h2 { margin-bottom: 10px; font-size: 1.15rem; }
+  .rejilla-insignias { grid-template-columns: 1fr; gap: 6px; }
+  .insignia {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 0;
+    align-items: center;
+    padding: 5px 10px;
+    text-align: left;
+    border-radius: 12px;
+  }
+  .insignia-emoji { grid-row: span 2; font-size: 1.5rem; text-align: center; }
+  .insignia b { align-self: end; font-size: 0.92rem; line-height: 1.2; }
+  .insignia small { align-self: start; font-size: 0.72rem; line-height: 1.25; }
+}
 
 /* ---------- Opciones del curso ---------- */
 .opciones-curso { margin-top: 36px; }
@@ -235,8 +308,10 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
 }
 
 @media (max-width: 520px) {
-  .nodo-fila { transform: translateX(calc(var(--d) * 0.55px)); width: 160px; }
-  .mundo-cabecera { flex-wrap: wrap; gap: 12px; padding: 14px 16px; }
+  .camino { padding: 52px 36px 32px; }
+  .nodo-fila { width: 130px; }
+  .mundo-cabecera { position: relative; flex-wrap: wrap; gap: 12px; padding: 14px 64px 14px 16px; }
+  .mundo-flecha { position: absolute; top: 14px; right: 14px; }
   .mundo-cabecera > div:nth-child(2) { flex: 1; min-width: 0; }
   .mundo-cabecera h2 { font-size: 1.25rem; }
   .mundo-emoji { width: 46px; height: 46px; font-size: 1.6rem; }
