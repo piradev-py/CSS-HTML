@@ -22,10 +22,12 @@
 - [x] Fuente Concert One: ¿solo en el logo o también en los títulos grandes? → **solo en el logo**, más grande y con
       el logo de Tagui (`recursos/marca/`) delante; el `.ico` del usuario es el icono de la pestaña.
 - [x] Ejercicios: ¿las tildes cuentan («página» ≠ «pagina») o se ignoran? → **se ignoran** (la ñ sí cuenta).
-- [ ] html-10: ¿enseñar `<fieldset>`/`<legend>` ahí o en «Formularios con estilo» (hc-08)?
-- [ ] html-06: ¿hacer obligatorio `rel="noopener"` en el reto?
-- [ ] css-03: se enseña `rgb()` moderno con espacios (`rgb(255 0 0 / 0.5)`) y se menciona la forma con comas. ¿Bien así?
-- [ ] css-05: el reto «detective» prohíbe `!important` para obligar a subir la especificidad. ¿Demasiado estricto?
+- [x] html-10: `<fieldset>`/`<legend>` → **se enseña en html-10** (explicación + ejercicio, y la encuesta del reto los usa);
+      hc-10 enseña a decorarlos.
+- [x] html-06: `rel="noopener"` → **no obligatorio en el reto**; se enseña como buena costumbre y se explica que los
+      navegadores modernos ya lo aplican solos.
+- [x] css-03: `rgb()` moderno con espacios y mención de la forma con comas → **bien así**.
+- [x] css-05: el reto «detective» prohíbe `!important` → **se mantiene** (es la gracia del reto).
 
 ### Mundo HTML + CSS (dudas que dejaron las lecciones)
 - [ ] hc-02/hc-03: el CSS decorativo oculto (`cssBase`) usa `list-style: none`, que no se enseña hasta hc-04. ¿Vale así?

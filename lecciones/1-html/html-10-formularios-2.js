@@ -1,7 +1,8 @@
 /* ============================================================
    <CSS-HTML> · Mundo HTML · Lección html-10
    Formularios: más tipos de campo — email, number, password,
-   radio, checkbox, select/option, textarea y required.
+   radio, checkbox, fieldset/legend (agrupar opciones con su título),
+   select/option, textarea y required.
    Nota: en las prácticas el motor intercepta el envío del
    formulario (no va a ningún sitio). Todos los campos llevan
    su <label for> + id.
@@ -60,6 +61,44 @@ CURSO.registrar({
     },
     {
       tipo: "explicacion",
+      titulo: "Agrupar opciones: fieldset y legend",
+      texto: "Cada circulito tiene su `<label>`, pero ¿dónde va la **pregunta**? Si la escribes en un `<p>`, una persona ciega que usa un **lector de pantalla** oye «Volar, botón de opción»… ¿volar para qué? 🤔\n\nPara eso existen:\n\n• `<fieldset>`: una caja que **agrupa** campos que van juntos. El navegador le dibuja un marco.\n• `<legend>`: el **título** del grupo. Va el primero, dentro del `<fieldset>`.\n\nAhora el lector dice «¿Qué superpoder prefieres? Volar, botón de opción». Úsalos siempre en los grupos de radio y checkbox.",
+      ejemplo: {
+        html: `<form>
+  <fieldset>
+    <legend>¿Qué superpoder prefieres?</legend>
+    <input type="radio" id="volar" name="poder" value="volar">
+    <label for="volar">Volar</label>
+    <input type="radio" id="invisible" name="poder" value="invisible">
+    <label for="invisible">Ser invisible</label>
+  </fieldset>
+</form>`,
+        css: ""
+      },
+      consejo: "El marco gris que sale es el estilo que pone el navegador. En el Mundo HTML + CSS aprenderás a decorarlo como quieras."
+    },
+    {
+      tipo: "ejercicio",
+      enunciado: "Pregunta el sabor de un helado 🍦. Escribe, en este orden:\n\n1. Un `<form>` con un `<fieldset>` dentro.\n2. Dentro del `<fieldset>`, primero un `<legend>` que diga **Sabor del helado**.\n3. Después, un `<input>` con `type=\"radio\"`, `id=\"chocolate\"`, `name=\"sabor\"` y `value=\"chocolate\"`, seguido de su `<label for=\"chocolate\">` que diga **Chocolate**.\n4. Otro igual para **Fresa** (`id`, `value` y `for` = `fresa`, y el mismo `name=\"sabor\"`).",
+      solucion: {
+        html: `<form>
+  <fieldset>
+    <legend>Sabor del helado</legend>
+    <input type="radio" id="chocolate" name="sabor" value="chocolate">
+    <label for="chocolate">Chocolate</label>
+    <input type="radio" id="fresa" name="sabor" value="fresa">
+    <label for="fresa">Fresa</label>
+  </fieldset>
+</form>`,
+        css: ""
+      },
+      pistas: [
+        "El orden es: <form> → <fieldset> → <legend> con el título → los radio con sus label → cerrar </fieldset> y </form>.",
+        "Dentro del fieldset:\n<legend>Sabor del helado</legend>\n<input type=\"radio\" id=\"chocolate\" name=\"sabor\" value=\"chocolate\">\n<label for=\"chocolate\">Chocolate</label>\n…y lo mismo con fresa."
+      ]
+    },
+    {
+      tipo: "explicacion",
       titulo: "Listas desplegables y textos largos",
       texto: "Dos campos más que no son `<input>`:\n\n• `<select>` crea una **lista desplegable**. Cada opción va dentro con `<option>`: el `value` es lo que se envía y el texto es lo que se ve.\n• `<textarea>` es una **caja grande** para escribir varias líneas, como un comentario. A diferencia de `<input>`, **sí tiene etiqueta de cierre**. El atributo `rows` dice cuántas líneas se ven.\n\nCon los dos sigues usando `<label for>` + `id`, igual que siempre.",
       ejemplo: {
@@ -106,7 +145,7 @@ CURSO.registrar({
     },
     {
       tipo: "reto",
-      enunciado: "Termina la encuesta de la pizzería 🍕. Cada campo con su `<label for>` y su `id`:\n\n1. Cambia el campo del email a `type=\"email\"` y hazlo obligatorio con `required`.\n2. Tamaño: ya hay un radio «Mediana». Añade otro (por ejemplo «Familiar») con **el mismo `name`**.\n3. Ingredientes: añade al menos dos casillas `checkbox`.\n4. Masa: un `<select>` con al menos dos `<option>`.\n5. Comentarios: un `<textarea>`.",
+      enunciado: "Termina la encuesta de la pizzería 🍕. Cada campo con su `<label for>` y su `id`:\n\n1. Cambia el campo del email a `type=\"email\"` y hazlo obligatorio con `required`.\n2. Tamaño: ya hay un radio «Mediana» en su `<fieldset>`. Añade **dentro** otro (por ejemplo «Familiar») con **el mismo `name`**.\n3. Ingredientes: dentro de su `<fieldset>`, añade al menos dos casillas `checkbox`.\n4. Masa: un `<select>` con al menos dos `<option>`.\n5. Comentarios: un `<textarea>`.",
       inicial: {
         html: `<h1>Encuesta pizzera</h1>
 <form>
@@ -116,13 +155,17 @@ CURSO.registrar({
     <input type="text" id="correo" name="correo">
   </p>
 
-  <!-- 2. Añade otro radio de tamaño con el mismo name -->
-  <p>Tamaño:</p>
-  <input type="radio" id="mediana" name="tamano" value="mediana">
-  <label for="mediana">Mediana</label>
+  <fieldset>
+    <legend>Tamaño</legend>
+    <input type="radio" id="mediana" name="tamano" value="mediana">
+    <label for="mediana">Mediana</label>
+    <!-- 2. Añade otro radio de tamaño con el mismo name -->
+  </fieldset>
 
-  <!-- 3. Añade al menos dos ingredientes (checkbox) -->
-  <p>Ingredientes:</p>
+  <fieldset>
+    <legend>Ingredientes</legend>
+    <!-- 3. Añade al menos dos ingredientes (checkbox) -->
+  </fieldset>
 
   <!-- 4. Añade la masa: un select con al menos dos opciones -->
 
@@ -172,17 +215,21 @@ CURSO.registrar({
     <input type="email" id="correo" name="correo" required>
   </p>
 
-  <p>Tamaño:</p>
-  <input type="radio" id="mediana" name="tamano" value="mediana">
-  <label for="mediana">Mediana</label>
-  <input type="radio" id="familiar" name="tamano" value="familiar">
-  <label for="familiar">Familiar</label>
+  <fieldset>
+    <legend>Tamaño</legend>
+    <input type="radio" id="mediana" name="tamano" value="mediana">
+    <label for="mediana">Mediana</label>
+    <input type="radio" id="familiar" name="tamano" value="familiar">
+    <label for="familiar">Familiar</label>
+  </fieldset>
 
-  <p>Ingredientes:</p>
-  <input type="checkbox" id="pina" name="ingredientes" value="pina">
-  <label for="pina">Piña (que empiece el debate)</label>
-  <input type="checkbox" id="setas" name="ingredientes" value="setas">
-  <label for="setas">Setas</label>
+  <fieldset>
+    <legend>Ingredientes</legend>
+    <input type="checkbox" id="pina" name="ingredientes" value="pina">
+    <label for="pina">Piña (que empiece el debate)</label>
+    <input type="checkbox" id="setas" name="ingredientes" value="setas">
+    <label for="setas">Setas</label>
+  </fieldset>
 
   <p>
     <label for="masa">Masa</label>

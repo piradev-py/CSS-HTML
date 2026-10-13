@@ -77,7 +77,7 @@ accesibles (`alt`, `label`, `header`, `main`…) como lo haría un profesional.
 
 ### html-10 · Formularios: más tipos de campo · 45 XP ✅
 - **Objetivo:** elegir el campo adecuado para cada dato que se pide.
-- **Conceptos nuevos:** `type="email"`, `number`, `password`, `checkbox`, `radio` (con `name` compartido), `<select>`/`<option>`, `<textarea>`, `required`.
+- **Conceptos nuevos:** `type="email"`, `number`, `password`, `checkbox`, `radio` (con `name` compartido), `<fieldset>`/`<legend>` (agrupar opciones con su título, para lectores de pantalla), `<select>`/`<option>`, `<textarea>`, `required`.
 - **Reto:** encuesta de pizza: email, tamaño (radio), ingredientes (checkbox), masa (select) y comentarios (textarea).
 
 ### html-11 · Cajas genéricas: div y span · 30 XP ✅

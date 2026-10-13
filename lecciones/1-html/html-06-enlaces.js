@@ -26,7 +26,7 @@ CURSO.registrar({
     {
       tipo: "explicacion",
       titulo: "Abrir en una pestaña nueva",
-      texto: "Una etiqueta puede llevar **varios atributos**, separados por espacios:\n\n• `target=\"_blank\"` abre el enlace en una **pestaña nueva**, y tu página sigue abierta detrás.\n• `rel=\"noopener\"` es un cinturón de seguridad 🔒: impide que la página nueva pueda tocar la tuya. Ponlo siempre junto a `target=\"_blank\"`.\n\nÚsalo con cabeza: abrir pestañas sin avisar despista, así que guárdalo para enlaces a otras webs.",
+      texto: "Una etiqueta puede llevar **varios atributos**, separados por espacios:\n\n• `target=\"_blank\"` abre el enlace en una **pestaña nueva**, y tu página sigue abierta detrás.\n• `rel=\"noopener\"` es un cinturón de seguridad 🔒: impide que la página nueva pueda tocar la tuya. Los navegadores modernos ya lo hacen solos, pero ponerlo junto a `target=\"_blank\"` no cuesta nada y protege también en los antiguos.\n\nÚsalo con cabeza: abrir pestañas sin avisar despista, así que guárdalo para enlaces a otras webs.",
       ejemplo: {
         html: `<p>
   <a href="https://www.nasa.gov" target="_blank" rel="noopener">Fotos del espacio de la NASA (se abre en otra pestaña)</a>

@@ -185,18 +185,28 @@ input:valid {
     <input type="checkbox" id="casco" name="casco" checked>
     <label for="casco">Traigo mi propio casco</label>
   </p>
-  <p>
+  <fieldset>
+    <legend>Tu nivel</legend>
     <input type="radio" id="rapido" name="nivel" value="rapido" checked>
     <label for="rapido">Piloto rápido</label>
     <input type="radio" id="tranqui" name="nivel" value="tranqui">
     <label for="tranqui">Piloto tranquilo</label>
-  </p>
+  </fieldset>
 </form>`,
         css: `form {
   font-family: sans-serif;
   accent-color: darkorange;
+}
+fieldset {
+  border: 2px dashed darkorange;
+  border-radius: 12px;
+}
+legend {
+  font-weight: bold;
+  padding: 0 6px;
 }`
-      }
+      },
+      consejo: "¿Te acuerdas de `<fieldset>` y `<legend>`? Son cajas como cualquier otra: con `border`, `border-radius` y `padding` les quitas el marco gris del navegador y quedan a juego con tu web."
     },
     {
       tipo: "controles",

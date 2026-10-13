@@ -57,7 +57,7 @@
       "Equivocarse es parte de programar. ¡Sigue probando!",
       "Respira, mira la lista de comprobaciones y ve paso a paso."
     ],
-    acierto: ["¡Bien hecho! 🎉", "¡Eso es! 💪", "¡Genial! ✨", "¡Correcto! 🙌"],
+    acierto: ["¡Bien hecho! 🎉", "¡Eso es! 💪", "¡Genial! ✨", "¡Perfecto! 🙌"],
     fallo: ["Uy, esa no es. ¡Prueba otra vez!", "¡Casi! Piénsalo un poquito más.", "No pasa nada, inténtalo de nuevo."]
   };
 
