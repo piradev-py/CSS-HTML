@@ -195,11 +195,11 @@
 /* Movimientos lentos y suaves: transmiten calma */
 @keyframes respirar-tagui {
   0%, 100% { transform: scale(1, 1); }
-  50% { transform: scale(1.035, 1.05); }
+  50% { transform: scale(1.15, 1.25); }   /* respiración exagerada pero muy lenta */
 }
-@keyframes respirar-suave { /* para globos de aviso: un leve "inflarse" */
+@keyframes respirar-suave { /* para globos de aviso */
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
+  50% { transform: scale(1.25); }
 }
 @keyframes saltar { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-8px) rotate(-2deg); } }
 @keyframes temblar { 0%, 100% { transform: translateX(0); } 30% { transform: translateX(-3px); } 70% { transform: translateX(3px); } }

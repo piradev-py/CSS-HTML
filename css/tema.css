@@ -51,8 +51,9 @@
   --fuente: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
   --fuente-codigo: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
 
-  /* Duración de un ciclo de respiración (Tagui y aviso "¡Empieza aquí!") */
-  --ritmo-respiracion: 1s;
+  /* Respiración de Tagui y del aviso "¡Empieza aquí!"
+     Duración del ciclo completo: la mitad para inflarse y la otra mitad para desinflarse */
+  --ritmo-respiracion: 22s;
 
   color-scheme: light;
 }
