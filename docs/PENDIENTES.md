@@ -19,8 +19,9 @@
 ## Decisiones por tomar
 - [x] Mapa de inicio: ¿4 mundos en columnas (sin scroll) o dejarlo como está? → **mundos abatibles e insignias a
       la izquierda** (ver «Página de inicio»).
-- [ ] Fuente Concert One: ¿solo en el logo o también en los títulos grandes?
-- [ ] Ejercicios: ¿las tildes cuentan («página» ≠ «pagina») o se ignoran?
+- [x] Fuente Concert One: ¿solo en el logo o también en los títulos grandes? → **solo en el logo**, más grande y con
+      el logo de Tagui (`recursos/marca/`) delante; el `.ico` del usuario es el icono de la pestaña.
+- [x] Ejercicios: ¿las tildes cuentan («página» ≠ «pagina») o se ignoran? → **se ignoran** (la ñ sí cuenta).
 - [ ] html-10: ¿enseñar `<fieldset>`/`<legend>` ahí o en «Formularios con estilo» (hc-08)?
 - [ ] html-06: ¿hacer obligatorio `rel="noopener"` en el reto?
 - [ ] css-03: se enseña `rgb()` moderno con espacios (`rgb(255 0 0 / 0.5)`) y se menciona la forma con comas. ¿Bien así?
@@ -36,9 +37,9 @@
 - [x] hc-12: cabecera apretada a 375 px → **no se toca**: la web se piensa para PC/tablet en horizontal.
 
 ### Mundo JavaScript (dudas que dejaron las lecciones)
-- [ ] Ejercicios «a mano»: los ejercicios comparan el **resultado** (página + consola), no el código, así que
-      `console.log("60")` aprueba sin variables, y los de arrays/objetos (js-08, js-09) sin bucle. Los retos sí
-      miran el código cuando hace falta (`PRUEBA.codigo`). ¿Basta así o exigimos también el código en los ejercicios?
+- [x] Ejercicios «a mano»: se compara solo lo **estrictamente necesario** (el resultado). Lo que sí se exige ahora es
+      que el código esté **bien escrito** (etiquetas cerradas, `{ }` y `;` en CSS y JS): `js/escritura.js`, en ejercicios
+      y como comprobación automática de cada reto.
 - [ ] js-01: el ejercicio de la piña no empieza vacío (trae código para practicar `//`). ¿Vale esta excepción?
 - [ ] js-02: las comillas invertidas se describen como «la tecla a la derecha de la P» (teclado de España).
       ¿Añadimos una nota para teclados latinoamericanos?
@@ -47,4 +48,5 @@
 - [ ] js-14: 10 pasos con 3 ejercicios por etapas antes del jefe final. ¿Demasiado larga?
 - [ ] js-12: los ejercicios no pueden comprobar que se use `localStorage` de verdad (solo el reto, que recarga). ¿Vale?
 - [ ] js-10: «crear al pulsar un botón» es solo explicación + reto, sin ejercicio propio. ¿Añadimos uno?
-- [ ] Motor: no hay protección contra bucles infinitos (no se enseña `while`). ¿Merece la pena añadirla?
+- [x] Motor: protección contra bucles infinitos → **añadida** (un bucle infinito congelaría la pestaña y el borrador
+      guardado la volvería a congelar al abrir la lección).

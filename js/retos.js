@@ -105,6 +105,14 @@
       li.innerHTML = '<span class="marca" aria-hidden="true">○</span><span>' + UI.md(c.texto) + "</span>";
       lista.appendChild(li);
     });
+    // Comprobación que añade el motor a todos los retos: código bien escrito (js/escritura.js)
+    const liEscritura = document.createElement("li");
+    liEscritura.className = "comprobacion-escritura";
+    liEscritura.innerHTML = '<span class="marca" aria-hidden="true">○</span><span>' +
+      UI.md("Tu código está bien escrito: etiquetas cerradas, `{ }` y `;`") +
+      '<small class="detalle-escritura"></small></span>';
+    lista.appendChild(liEscritura);
+    const detalleEscritura = liEscritura.querySelector(".detalle-escritura");
 
     const bPista = raiz.querySelector("[data-pista]");
     const bSolucion = raiz.querySelector("[data-solucion]");
@@ -128,8 +136,12 @@
 
     let ultimos = [];
     async function revisar(automatico) {
-      const resultados = await evaluar(EDITOR.conBase(editor.obtener(), paso.cssBase), paso.comprobaciones);
+      const codigo = editor.obtener();
+      const resultados = await evaluar(EDITOR.conBase(codigo, paso.cssBase), paso.comprobaciones);
       if (!resultados) return;
+      const escritura = ESCRITURA.revisar(codigo);
+      resultados.push(!escritura);
+      detalleEscritura.innerHTML = escritura ? UI.md(escritura.mensaje) : "";
       const antes = ultimos;
       ultimos = resultados;
       lista.querySelectorAll("li").forEach((li, i) => {

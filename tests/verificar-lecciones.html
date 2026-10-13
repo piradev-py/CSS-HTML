@@ -33,6 +33,7 @@
   <script src="../js/progreso.js"></script>
   <script src="../js/ui.js"></script>
   <script src="../js/editor.js"></script>
+  <script src="../js/escritura.js"></script>
   <script src="../js/retos.js"></script>
   <script src="../js/pruebas.js"></script>
   <script src="../js/ejercicios.js"></script>
@@ -94,12 +95,22 @@
           rSol.forEach((ok, i) => { if (!ok) detalles.push("La solución falla: «" + reto.comprobaciones[i].texto + "»"); });
           const erroresSol = marco.contentWindow.__errores || [];
           if (erroresSol.length) { solOk = false; detalles.push("La solución del reto tiene errores de JS: " + erroresSol.map(e => e.mensaje).join(" · ")); }
+          // El motor añade a cada reto «Tu código está bien escrito»: la solución también debe cumplirlo
+          const escSol = ESCRITURA.revisar(reto.solucion);
+          if (escSol) { solOk = false; detalles.push("La solución del reto no está bien escrita: " + escSol.mensaje); }
           const rIni = await RETOS.evaluar(EDITOR.conBase(reto.inicial || {}, reto.cssBase), reto.comprobaciones, marco);
           iniOk = rIni.some(r => !r);
           if (!iniOk) detalles.push("El código inicial ya pasa todas las comprobaciones");
         }
         // Ejercicios: la solución aprueba y el editor inicial (vacío) suspende
         let ejOk = true;
+        // Los ejemplos y el código que da la lección deben estar bien escritos (es lo que el alumno copia)
+        (lec && lec.pasos || []).forEach((p, i) => {
+          [["ejemplo", p.ejemplo], ["código inicial", p.inicial]].forEach(([que, cod]) => {
+            const esc = cod && ESCRITURA.revisar(cod);
+            if (esc) { ejOk = false; detalles.push("Paso " + (i + 1) + ", " + que + " mal escrito: " + esc.mensaje); }
+          });
+        });
         const ejercicios = (lec && lec.pasos || []).filter(p => p.tipo === "ejercicio");
         for (const ej of ejercicios) {
           const conSol = await EJERCICIOS.revisar(ej.solucion, ej.solucion, null, ej.cssBase, ej.acciones);

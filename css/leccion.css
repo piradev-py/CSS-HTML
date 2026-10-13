@@ -469,6 +469,9 @@ iframe.resultado {
   font-weight: 900;
 }
 .comprobaciones li.ok { background: color-mix(in srgb, var(--exito) 15%, var(--superficie)); }
+/* Fila automática «bien escrito»: si falla, dice qué falta y dónde */
+.detalle-escritura { display: block; margin-top: 2px; font-size: 0.82rem; font-weight: 700; color: var(--error); }
+.detalle-escritura:empty { display: none; }
 .comprobaciones li.ok .marca { background: var(--exito); border-color: var(--exito); color: #fff; }
 .comprobaciones li.pop { animation: pop 0.4s cubic-bezier(.2,.9,.3,1.6); }
 .comprobaciones li.sacudir { animation: temblar 0.35s; background: color-mix(in srgb, var(--error) 12%, var(--superficie)); }

@@ -126,6 +126,33 @@ async function pruebas() {
   const faltaL = await rev({ js: 'console.log("Hola");' }, solL);
   ok("consola: falta una línea (" + faltaL.mensaje + ")", !faltaL.ok && /Me gusta la pizza/.test(faltaL.mensaje));
 
+  // 14. Bucles infinitos: se cortan con un aviso y la página sigue viva
+  const t0 = performance.now();
+  v = await cargar({ html: "<p>x</p>", js: 'const lista = [1];\nfor (const x of lista) {\n  lista.push(x);\n}\nconsole.log("sigo vivo");' });
+  ok("bucle infinito cortado en " + Math.round(performance.now() - t0) + " ms (" + JSON.stringify(v.win.__errores) + ")",
+    v.win.__errores[0]?.linea === 2 && /bucle no termina/.test(EDITOR.errorAmigable(v.win.__errores[0].mensaje)));
+  v = await cargar({ js: "let i = 0;\nwhile (true) i++;" });
+  ok("while (true) sin llaves también se corta", v.win.__errores.length === 1);
+  v = await cargar({ js: 'let s = 0;\nfor (const n of [1, 2, 3]) {\n  s = s + n;\n}\nconsole.log(s);' });
+  ok("un bucle normal funciona igual", v.win.__logs[0] === "6" && !v.win.__errores.length);
+  v = await cargar({ js: "for (const n of [1, 2]) {\n  console.log(n);\n}" });
+  ok("PRUEBA.codigo no muestra los vigilantes", !/__bucle/.test(PRUEBA.codigo(v.doc)) && /for \(const n/.test(PRUEBA.codigo(v.doc)));
+
+  // 15. Revisor de escritura en ejercicios
+  const solEsc = { html: "<h1>Hola</h1>", css: "h1 {\n  color: red;\n}" };
+  const sinPuntoComa = await rev({ html: "<h1>Hola</h1>", css: "h1 {\n  color: red\n}" }, solEsc);
+  ok("escritura: falta ; suspende (" + sinPuntoComa.mensaje + ")", !sinPuntoComa.ok && /;/.test(sinPuntoComa.mensaje));
+  const sinLlave = await rev({ html: "<h1>Hola</h1>", css: "h1 {\n  color: red;\n" }, solEsc);
+  ok("escritura: falta } suspende (" + sinLlave.mensaje + ")", !sinLlave.ok && /\}/.test(sinLlave.mensaje));
+  const sinCierre = await rev({ html: "<h1>Hola", css: solEsc.css }, solEsc);
+  ok("escritura: <h1> sin cerrar suspende (" + sinCierre.mensaje + ")", !sinCierre.ok && /<\/h1>/.test(sinCierre.mensaje));
+  const jsSinPC = await rev({ js: 'console.log("Hola")' }, { js: 'console.log("Hola");' });
+  ok("escritura: JS sin ; suspende (" + jsSinPC.mensaje + ")", !jsSinPC.ok);
+
+  // 16. Tildes: no cuentan (la ñ sí)
+  ok("tildes: «pagina» = «página»", (await rev({ html: "<p>Mi pagina</p>" }, { html: "<p>Mi página</p>" })).ok);
+  ok("ñ: «ano» ≠ «año»", !(await rev({ html: "<p>Feliz ano</p>" }, { html: "<p>Feliz año</p>" })).ok);
+
   // 13. Pestaña con la que se abren los retos de JS
   ok("reto JS se abre en la pestaña JS", RETOS.pestanaReto({ inicial: { html: "<p>a</p>" }, solucion: { html: "<p>a</p>", js: "x" } }) === "js");
   ok("reto CSS sigue abriéndose en CSS", RETOS.pestanaReto({ inicial: { html: "<p>a</p>" }, solucion: { html: "<p>a</p>", css: "p{}" } }) === "css");

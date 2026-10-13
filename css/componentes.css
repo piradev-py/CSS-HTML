@@ -21,12 +21,20 @@
   align-items: center;
   font-family: var(--fuente-titulo);
   font-weight: 400;              /* Concert One solo tiene un grosor */
-  font-size: 1.6rem;
+  font-size: 2.1rem;
   line-height: 1;
   text-decoration: none;
   color: var(--texto);
   white-space: nowrap;
   letter-spacing: 0.5px;
+}
+/* Tagui con su birrete delante del nombre */
+.logo-tagui {
+  width: 52px;
+  height: 52px;
+  margin: -6px 8px -6px -4px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.18));
 }
 .logo .ang { color: var(--mundo-html); }
 .logo .css { color: var(--mundo-css); }
@@ -375,7 +383,8 @@ pre.codigo {
 
 @media (max-width: 640px) {
   .cabecera { gap: 8px; padding: 8px 12px; }
-  .logo { font-size: 1.05rem; }
+  .logo { font-size: 1.15rem; }
+  .logo-tagui { width: 36px; height: 36px; margin: -4px 4px -4px -2px; }
   .barra-xp { min-width: 70px; }
   .barra-xp .nivel { display: none; }
   .ocultar-movil { display: none !important; }

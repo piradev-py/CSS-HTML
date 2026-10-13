@@ -142,7 +142,10 @@
    */
   function codigo(doc, opciones = {}) {
     const s = doc.querySelector("script[data-csshtml=alumno]");
-    const texto = s ? s.textContent : "";
+    // Sin los vigilantes de bucles que mete el motor (EDITOR.protegerBucles)
+    const texto = (s ? s.textContent : "")
+      .replace(/__bucle\(\d+,\d+\);/g, "")
+      .replace(/if\(__bucle\(\d+,\d+\)\|\|1\)/g, "");
     if (opciones.comentarios) return texto;
     // Quita comentarios sin tocar lo que va dentro de comillas (p. ej. "https://…")
     return texto.replace(/("(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'|`(?:\\[\s\S]|[^`\\])*`)|\/\/[^\n]*|\/\*[\s\S]*?\*\//g, (t, cadena) => cadena || "");

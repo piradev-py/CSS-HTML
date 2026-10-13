@@ -3,7 +3,9 @@
    El alumno parte de un editor vacío y escribe el código que pide
    el enunciado. Al pulsar "Revisar" se compara su resultado con la
    solución (única):
-   - Textos: sin distinguir mayúsculas, signos de puntuación ni espacios.
+   - Textos: sin distinguir mayúsculas, tildes, signos de puntuación ni espacios.
+   - Antes de comparar, el código tiene que estar bien escrito (js/escritura.js):
+     etiquetas cerradas, { } y ; en CSS y JS.
    - Código: etiquetas, atributos y valores que distinguen mayúsculas
      (id, class, href, src…) se comparan exactos.
    - CSS: se compara el estilo calculado (red = #ff0000 = rgb(255,0,0)).
@@ -19,7 +21,13 @@
 
   function normalizarTexto(t) {
     return String(t || "")
+      .normalize("NFC")
       .toLowerCase()
+      // Las tildes no cuentan («pagina» = «página»), pero la ñ sí («año» ≠ «ano»)
+      .replace(/ñ/g, "\u0000")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\u0000/g, "ñ")
       .replace(/[¡!¿?.,;:«»"'“”‘’…()\[\]\-–—_*]/g, " ")
       .replace(/\s+/g, " ")
       .trim();
@@ -279,6 +287,9 @@
   async function revisar(codigoAlumno, solucion, iframes, cssBase, acciones) {
     const vacio = !["html", "css", "js"].some(k => (codigoAlumno[k] || "").trim());
     if (vacio) return { ok: false, mensaje: "El editor está vacío. ¡Escribe tu código y vuelve a revisar!" };
+    // Bien escrito antes que nada: aunque el navegador perdone una } o un ; que falta, aquí no se aprueba
+    const escritura = ESCRITURA.revisar(codigoAlumno);
+    if (escritura) return { ok: false, mensaje: "✏️ " + escritura.mensaje };
 
     const [fa, fs] = iframes || obtenerMarcos();
     const alumno = EDITOR.conBase(codigoAlumno, cssBase);

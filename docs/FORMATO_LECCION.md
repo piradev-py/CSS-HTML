@@ -66,8 +66,14 @@ No puede avanzar hasta resolverlo (tras ver todas las pistas puede ver la soluci
 ```
 Cómo se revisa (la solución es **única**, pero con flexibilidad en lo que no es código):
 - **Etiquetas**: mismas etiquetas, en el mismo orden y anidadas igual. No puede sobrar ni faltar ninguna.
-- **Textos**: se ignoran mayúsculas/minúsculas, signos de puntuación (¡!¿?.,;:«»"'…-) y espacios de más.
-  Las **tildes sí cuentan** («página» ≠ «pagina»).
+- **Bien escrito antes que nada** (`js/escritura.js`): antes de comparar, el código del alumno tiene que estar
+  bien escrito aunque el navegador lo perdone. HTML: cada etiqueta abierta se cierra (menos las vacías como `<br>`,
+  `<img>`, `<input>`, `<meta>`), bien anidadas y sin `>` ni comillas sin cerrar. CSS: las `{ }` cuadran y **cada**
+  declaración termina en `;` (también la última). JS: `( ) [ ] { }` y comillas cuadran y cada instrucción termina en `;`.
+  El mensaje dice qué falta y en qué línea. Por eso **todo el código de la lección** (ejemplos, `inicial`, soluciones)
+  debe cumplirlo también: el verificador lo comprueba.
+- **Textos**: se ignoran mayúsculas/minúsculas, **tildes** («pagina» = «página»; la ñ sí cuenta: «ano» ≠ «año»),
+  signos de puntuación (¡!¿?.,;:«»"'…-) y espacios de más.
 - **Atributos**: deben estar los mismos. Valores exactos (`id`, `class`, `href`, `src`…), salvo los de texto
   para personas (`alt`, `title`, `placeholder`, `aria-label`), que son flexibles, y `type`, `charset`, `lang`,
   `target`, `rel`, `method`, que no distinguen mayúsculas. En `class` da igual el orden.
@@ -153,7 +159,9 @@ Reglas para escribir el enunciado:
   CURSO.registrar({ id: "js-13", …, datos: { "chistes.json": [{ pregunta: "…", respuesta: "…" }] }, pasos: [ … ] });
   ```
   Las revisiones (ejercicios y retos) esperan a que terminen los `fetch` antes de comparar.
-- No hay protección contra bucles infinitos: no enseñes `while` (el temario usa `for…of` y `forEach`).
+- **Bucles infinitos**: el motor mete un vigilante en cada `for`/`while`/`do` del alumno (`EDITOR.protegerBucles`).
+  Si un bucle lleva más de 1,5 s dando vueltas sin parar, se corta y la consola dice «🔁 Este bucle no termina nunca…»
+  con su línea. Aun así, el temario usa `for…of` y `forEach` y no enseña `while`.
 
 ### `pruebalo` — editor libre, sin nota (ya no se usa en lecciones nuevas)
 ```js
@@ -232,7 +240,8 @@ Reglas de las comprobaciones:
   - Ejemplo: `prueba: async (doc) => { const v = await PRUEBA.recargar(doc); v.doc.querySelector("#mas").click(); v.doc.querySelector("#mas").click(); return v.doc.querySelector("#n").textContent === "2"; }`
 - **`dispositivos: true`** (en `ejercicio`, `reto` y `explicacion` con `ejemplo`): añade al resultado los botones
   💻 Libre / 📱 Móvil (375 px) y la medida en px del resultado. Úsalo en las lecciones de responsive.
-- Entre 2 y 4 comprobaciones, escritas como frases que un novato entiende.
+- Entre 2 y 4 comprobaciones, escritas como frases que un novato entiende. El motor añade siempre una más al final:
+  «Tu código está bien escrito: etiquetas cerradas, `{ }` y `;`» (ver «Bien escrito antes que nada»). No la escribas tú.
 - La `solucion` debe pasar **todas** las comprobaciones y el `inicial` debe fallar **al menos una**
   (lo verifica `tests/verificar-lecciones.html`).
 

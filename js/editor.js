@@ -72,6 +72,21 @@
     });
     console.clear = () => enviar("limpiar", "");
 
+    /* ---- Vigilante de bucles: protegerBucles() mete __bucle(id, línea) en cada vuelta ----
+       Si un mismo bucle lleva más de 1,5 s dando vueltas sin parar, se corta con un error.
+       (Una pausa de más de 50 ms entre vueltas cuenta como una ejecución nueva del bucle.) */
+    const bucles = {};
+    window.__bucle = (id, linea) => {
+      const ahora = performance.now();
+      let b = bucles[id];
+      if (!b || ahora - b.ultima > 50) b = bucles[id] = { inicio: ahora, ultima: ahora };
+      b.ultima = ahora;
+      if (ahora - b.inicio > 1500) {
+        delete bucles[id];
+        throw new Error("__BUCLE__:" + linea);
+      }
+    };
+
     /* ---- Errores (con la línea del código del alumno) ---- */
     function lineaAlumno(n) {
       const s = document.querySelector("script[data-csshtml=alumno]");
@@ -80,7 +95,8 @@
     }
     window.addEventListener("error", e => {
       const msg = String(e.message || "Error").replace(/^Uncaught /, "");
-      const linea = lineaAlumno(e.lineno);
+      const bucle = /__BUCLE__:(\d+)/.exec(msg);
+      const linea = bucle ? Number(bucle[1]) : lineaAlumno(e.lineno);
       window.__errores.push({ mensaje: msg, linea });
       enviar("error", msg, linea);
     });
@@ -163,6 +179,86 @@
     });
   }
 
+  /**
+   * Mete un vigilante en cada bucle for / while / do del código del alumno para que un bucle
+   * infinito no congele la página (ni el borrador guardado la vuelva a congelar al abrir la lección).
+   * No cambia los números de línea: todo se inserta en la misma línea.
+   */
+  function protegerBucles(js) {
+    const n = js.length;
+    const lineaDe = i => js.slice(0, i).split("\n").length;
+    const saltarEspacios = k => { while (k < n && /\s/.test(js[k])) k++; return k; };
+    // Fin de un texto entre comillas que empieza en i (posición de la comilla de cierre)
+    const finTexto = i => {
+      let j = i + 1;
+      while (j < n && js[j] !== js[i]) j += js[j] === "\\" ? 2 : 1;
+      return j;
+    };
+    // Posición del ")" que cierra el "(" de la posición k, o -1
+    const cierre = k => {
+      let nivel = 0;
+      for (let j = k; j < n; j++) {
+        const c = js[j];
+        if (c === '"' || c === "'" || c === "`") j = finTexto(j);
+        else if (c === "(") nivel++;
+        else if (c === ")" && --nivel === 0) return j;
+      }
+      return -1;
+    };
+    let salida = "";
+    let id = 0;
+    let i = 0;
+    while (i < n) {
+      const c = js[i];
+      // Comentarios y textos se copian tal cual
+      if (c === "/" && (js[i + 1] === "/" || js[i + 1] === "*")) {
+        const f = js[i + 1] === "/" ? js.indexOf("\n", i) : js.indexOf("*/", i + 2);
+        const fin = f < 0 ? n : js[i + 1] === "/" ? f : f + 2;
+        salida += js.slice(i, fin);
+        i = fin;
+        continue;
+      }
+      if (c === '"' || c === "'" || c === "`") {
+        const fin = finTexto(i) + 1;
+        salida += js.slice(i, fin);
+        i = fin;
+        continue;
+      }
+      const m = /^(for|while|do)\b/.exec(js.slice(i, i + 6));
+      if (m && (i === 0 || !/[\w$.]/.test(js[i - 1]))) {
+        const vigilante = "__bucle(" + (++id) + "," + lineaDe(i) + ")";
+        const k = saltarEspacios(i + m[1].length);
+        if (m[1] === "do" && js[k] === "{") {
+          salida += js.slice(i, k + 1) + vigilante + ";";
+          i = k + 1;
+          continue;
+        }
+        if (m[1] !== "do" && js[k] === "(") {
+          const f = cierre(k);
+          const b = f > 0 ? saltarEspacios(f + 1) : n;
+          if (js[b] === "{") {
+            salida += js.slice(i, b + 1) + vigilante + ";";
+            i = b + 1;
+            continue;
+          }
+          // Sin llaves: «for (…) instrucción;» → «for (…) if (vigilante || 1) instrucción;»
+          // (el «while (…);» de un do…while o un bucle vacío se deja igual)
+          if (b < n && js[b] !== ";") {
+            salida += js.slice(i, b) + "if(" + vigilante + "||1)";
+            i = b;
+            continue;
+          }
+        }
+        salida += m[1];
+        i += m[1].length;
+        continue;
+      }
+      salida += c;
+      i++;
+    }
+    return salida;
+  }
+
   const SCRIPT_AYUDANTE = '<script data-csshtml="ayudante">(' + AYUDANTE.toString() + ")();<\/script>";
   const MARCA_ALUMNO = '<script data-csshtml="alumno">';
 
@@ -170,7 +266,7 @@
   function construirDocumento(codigo) {
     const html = codigo.html || "";
     const css = codigo.css ? "<style>\n" + codigo.css + "\n</style>" : "";
-    const js = codigo.js ? MARCA_ALUMNO + "\n" + codigo.js + "\n<\/script>" : "";
+    const js = codigo.js ? MARCA_ALUMNO + "\n" + protegerBucles(codigo.js) + "\n<\/script>" : "";
     // Sin <meta charset>: srcdoc ya es texto Unicode, y así no "regalamos" esa etiqueta en los retos de estructura
     const cabeza = SCRIPT_AYUDANTE + css;
     let doc;
@@ -206,7 +302,8 @@
     const donde = linea ? "(línea " + linea + ") " : "";
     let m;
     let t;
-    if ((m = msg.match(/(\w+) is not defined/))) t = "🤔 Usas «" + m[1] + "» pero no existe. ¿Está bien escrito? Recuerda que mayúsculas y minúsculas cuentan.";
+    if (/__BUCLE__/.test(msg)) t = "🔁 Este bucle no termina nunca y lo he parado para que la página no se congele. Revisa su condición: ¿llega a cumplirse alguna vez el final? Ojo: si añades elementos a la misma lista que estás recorriendo, no acaba nunca.";
+    else if ((m = msg.match(/(\w+) is not defined/))) t = "🤔 Usas «" + m[1] + "» pero no existe. ¿Está bien escrito? Recuerda que mayúsculas y minúsculas cuentan.";
     else if (/Cannot (read|set) propert(y|ies) of (null|undefined)/.test(msg)) t = "🔍 Intentas usar un elemento que no se encontró. Revisa el selector de querySelector.";
     else if (/is not a function/.test(msg)) t = "🧩 Algo que llamas con () no es una función. ¿Está bien escrito su nombre?";
     else if (/is not iterable/.test(msg)) t = "🔁 Intentas recorrer con for…of algo que no es una lista (array).";
@@ -466,5 +563,5 @@
     return { raiz, iframe, obtener, fijar, refrescar, enfocar: () => textarea.focus() };
   }
 
-  window.EDITOR = { crear, crearResultado, construirDocumento, conBase, errorAmigable, anadirDispositivos };
+  window.EDITOR = { crear, crearResultado, construirDocumento, conBase, errorAmigable, anadirDispositivos, protegerBucles };
 })();

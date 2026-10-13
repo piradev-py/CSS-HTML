@@ -129,6 +129,7 @@
   /* ---------- Cabecera ---------- */
   const LOGO =
     '<a class="logo" href="index.html" aria-label="&lt;CSS-HTML&gt;, ir al inicio">' +
+    '<img class="logo-tagui" src="recursos/marca/tagui-logo-160.png" alt="" width="52" height="52">' +
     '<span class="ang">&lt;</span><span class="css">CSS</span><span class="guion">-</span>' +
     '<span class="html">HTML</span><span class="ang">&gt;</span></a>';
 

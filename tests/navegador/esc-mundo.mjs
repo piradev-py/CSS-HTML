@@ -76,10 +76,10 @@ export default async function (b) {
       if (t === "controles") {
         await b.esperar(500);
         const antes = await b.eval("document.querySelector('.codigo-generado')?.textContent || ''");
-        // Mueve el primer control: deslizador al máximo, color a verde o la última opción
+        // Mueve el primer control: deslizador al máximo (o al mínimo si ya está arriba), color a verde o la última opción
         await b.eval(`(() => {
           const r = document.querySelector('.lista-controles input[type=range]');
-          if (r) { r.value = r.max; r.dispatchEvent(new Event('input')); return; }
+          if (r) { r.value = Number(r.value) === Number(r.max) ? r.min : r.max; r.dispatchEvent(new Event('input')); return; }
           const c = document.querySelector('.lista-controles input[type=color]');
           if (c) { c.value = '#00aa00'; c.dispatchEvent(new Event('input')); return; }
           const o = [...document.querySelectorAll('.opcion-control')].pop(); if (o) o.click();
