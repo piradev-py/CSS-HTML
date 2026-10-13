@@ -144,9 +144,21 @@ code, pre, textarea {
   white-space: nowrap;
 }
 
+/* Si el sistema pide reducir movimiento, las animaciones se reproducen UNA vez y al instante.
+   (Sin iteration-count: 1, una animación infinita de 0,01 ms parpadea de forma errática.) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  /* Excepción: la respiración lenta de Tagui y del aviso se mantiene (es muy suave).
+     Los saltos de reacción no se reproducen en este modo. */
+  .mascota .tagui,
+  .modal .tagui {
+    animation: respirar-tagui var(--ritmo-respiracion) ease-in-out infinite !important;
+  }
+  .globo-actual {
+    animation: respirar-suave var(--ritmo-respiracion) ease-in-out infinite !important;
   }
 }
