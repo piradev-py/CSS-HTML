@@ -18,15 +18,15 @@
         { id: "html-01", archivo: "html-01-que-es-html.js", titulo: "¿Qué es HTML?", listo: true },
         { id: "html-02", archivo: "html-02-estructura.js", titulo: "La estructura de una página", listo: true },
         { id: "html-03", archivo: "html-03-titulos-y-parrafos.js", titulo: "Títulos y párrafos", listo: true },
-        { id: "html-04", archivo: "html-04-enfasis.js", titulo: "Negritas, cursivas y énfasis", listo: false },
-        { id: "html-05", archivo: "html-05-listas.js", titulo: "Listas", listo: false },
-        { id: "html-06", archivo: "html-06-enlaces.js", titulo: "Enlaces", listo: false },
-        { id: "html-07", archivo: "html-07-imagenes.js", titulo: "Imágenes", listo: false },
-        { id: "html-08", archivo: "html-08-tablas.js", titulo: "Tablas", listo: false },
-        { id: "html-09", archivo: "html-09-formularios.js", titulo: "Formularios: campos y etiquetas", listo: false },
-        { id: "html-10", archivo: "html-10-formularios-2.js", titulo: "Formularios: más tipos de campo", listo: false },
-        { id: "html-11", archivo: "html-11-div-y-span.js", titulo: "Cajas genéricas: div y span", listo: false },
-        { id: "html-12", archivo: "html-12-semantica.js", titulo: "HTML semántico y accesible", listo: false }
+        { id: "html-04", archivo: "html-04-enfasis.js", titulo: "Negritas, cursivas y énfasis", listo: true },
+        { id: "html-05", archivo: "html-05-listas.js", titulo: "Listas", listo: true },
+        { id: "html-06", archivo: "html-06-enlaces.js", titulo: "Enlaces", listo: true },
+        { id: "html-07", archivo: "html-07-imagenes.js", titulo: "Imágenes", listo: true },
+        { id: "html-08", archivo: "html-08-tablas.js", titulo: "Tablas", listo: true },
+        { id: "html-09", archivo: "html-09-formularios.js", titulo: "Formularios: campos y etiquetas", listo: true },
+        { id: "html-10", archivo: "html-10-formularios-2.js", titulo: "Formularios: más tipos de campo", listo: true },
+        { id: "html-11", archivo: "html-11-div-y-span.js", titulo: "Cajas genéricas: div y span", listo: true },
+        { id: "html-12", archivo: "html-12-semantica.js", titulo: "HTML semántico y accesible", listo: true }
       ]
     },
     {
