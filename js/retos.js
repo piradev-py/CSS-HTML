@@ -91,6 +91,8 @@
     const editor = EDITOR.crear(raiz.querySelector(".reto-editor"), {
       pestanas,
       destinos: opciones.destinos,
+      pestanaActiva: paso.pestana,
+      cssBase: paso.cssBase,
       inicial: paso.inicial,
       codigo: PROGRESO.borrador(leccionId) || undefined,
       alCambiar: codigo => {
@@ -101,7 +103,7 @@
 
     let ultimos = [];
     async function revisar(automatico) {
-      const resultados = await evaluar(editor.obtener(), paso.comprobaciones);
+      const resultados = await evaluar(EDITOR.conBase(editor.obtener(), paso.cssBase), paso.comprobaciones);
       if (!resultados) return;
       const antes = ultimos;
       ultimos = resultados;

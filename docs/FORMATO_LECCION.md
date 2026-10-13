@@ -82,6 +82,23 @@ Reglas para escribir el enunciado:
 - Pide solo lo que se acaba de explicar. Corto: 1–3 elementos en las primeras lecciones.
 - Distinto del reto final: el ejercicio practica **una** idea; el reto combina varias.
 
+#### Ejercicios en el Mundo CSS (y siguientes)
+- Lo normal es dar el **HTML ya escrito** en `inicial.html` y dejar el CSS vacío: el alumno solo escribe CSS.
+  La `solucion` repite **exactamente** ese HTML y añade el CSS. El editor se abre solo en la pestaña CSS
+  (se puede forzar con `pestana: "html" | "css" | "js"`, también en el `reto`).
+- El enunciado dice **selector, propiedad y valor**: «Pon a los `h1` el color `tomato` y a los `p` un `font-size` de `20px`».
+- Se compara el estilo **calculado**, así que valores equivalentes valen (`#ff0000` = `red`, `1.25rem` = `20px` con la
+  fuente por defecto). Pero el **resultado** debe ser el mismo: si el enunciado dice `20px`, `21px` no vale.
+- No uses `:hover`, `:focus` ni animaciones en ejercicios: no se pueden comparar con la página quieta.
+- Fuentes: solo genéricas o del sistema (`serif`, `sans-serif`, `monospace`, `cursive`…), nunca de internet.
+  `font-family` se compara como texto exacto, así que el enunciado debe dar el valor completo.
+- Variables CSS: el enunciado debe dar el nombre exacto de la variable (`--color-principal`).
+  Su valor se compara sin distinguir mayúsculas ni espacios.
+- `cssBase` (opcional, en `ejercicio` y `reto`): CSS decorativo que se aplica **sin aparecer en el editor**
+  (colores y tamaño de las cajas, tipografía…), para que el resultado se vea bonito aunque el alumno empiece
+  con el CSS vacío. Se aplica igual al alumno y a la solución, así que no cuenta en la revisión. No pongas en
+  `cssBase` las propiedades que el ejercicio pide escribir.
+
 ### `pruebalo` — editor libre, sin nota (ya no se usa en lecciones nuevas)
 ```js
 { tipo: "pruebalo",

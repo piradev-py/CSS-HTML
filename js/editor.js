@@ -40,6 +40,12 @@
     return "<!DOCTYPE html><html><head>" + cabeza + "</head><body>\n" + html + "\n" + js + "</body></html>";
   }
 
+  /** Añade un CSS decorativo oculto (cssBase) delante del CSS del alumno: se aplica pero no se ve en el editor. */
+  function conBase(codigo, cssBase) {
+    if (!cssBase) return codigo;
+    return Object.assign({}, codigo, { css: cssBase + "\n" + (codigo.css || "") });
+  }
+
   /** Traduce errores típicos de JavaScript a algo que un novato entiende. */
   function errorAmigable(msg) {
     let m;
@@ -64,7 +70,7 @@
     const pestanas = opciones.pestanas || ["html"];
     const inicial = Object.assign({ html: "", css: "", js: "" }, opciones.inicial);
     const codigo = Object.assign({}, inicial, opciones.codigo || {});
-    let activa = pestanas[0];
+    let activa = pestanas.includes(opciones.pestanaActiva) ? opciones.pestanaActiva : pestanas[0];
     let temporizador = null;
 
     const raiz = document.createElement("div");
@@ -142,7 +148,7 @@
     function refrescar() {
       if (consola) consola.innerHTML = "";
       aviso.textContent = "";
-      iframe.srcdoc = construirDocumento(codigo);
+      iframe.srcdoc = construirDocumento(conBase(codigo, opciones.cssBase));
     }
 
     function programarRefresco() {
@@ -217,5 +223,5 @@
     return { raiz, iframe, obtener, fijar, refrescar, enfocar: () => textarea.focus() };
   }
 
-  window.EDITOR = { crear, construirDocumento, errorAmigable };
+  window.EDITOR = { crear, construirDocumento, conBase, errorAmigable };
 })();

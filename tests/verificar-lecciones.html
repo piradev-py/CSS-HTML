@@ -88,10 +88,10 @@
         const detalles = errores.slice();
         const reto = lec && lec.pasos && lec.pasos.find(p => p.tipo === "reto");
         if (reto && reto.solucion) {
-          const rSol = await RETOS.evaluar(reto.solucion, reto.comprobaciones, marco);
+          const rSol = await RETOS.evaluar(EDITOR.conBase(reto.solucion, reto.cssBase), reto.comprobaciones, marco);
           solOk = rSol.every(Boolean);
           rSol.forEach((ok, i) => { if (!ok) detalles.push("La solución falla: «" + reto.comprobaciones[i].texto + "»"); });
-          const rIni = await RETOS.evaluar(reto.inicial || {}, reto.comprobaciones, marco);
+          const rIni = await RETOS.evaluar(EDITOR.conBase(reto.inicial || {}, reto.cssBase), reto.comprobaciones, marco);
           iniOk = rIni.some(r => !r);
           if (!iniOk) detalles.push("El código inicial ya pasa todas las comprobaciones");
         }
@@ -99,9 +99,9 @@
         let ejOk = true;
         const ejercicios = (lec && lec.pasos || []).filter(p => p.tipo === "ejercicio");
         for (const ej of ejercicios) {
-          const conSol = await EJERCICIOS.revisar(ej.solucion, ej.solucion);
+          const conSol = await EJERCICIOS.revisar(ej.solucion, ej.solucion, null, ej.cssBase);
           if (!conSol.ok) { ejOk = false; detalles.push("Ejercicio: la solución no se aprueba a sí misma (" + conSol.mensaje + ")"); }
-          const conIni = await EJERCICIOS.revisar(Object.assign({ html: "", css: "", js: "" }, ej.inicial), ej.solucion);
+          const conIni = await EJERCICIOS.revisar(Object.assign({ html: "", css: "", js: "" }, ej.inicial), ej.solucion, null, ej.cssBase);
           if (conIni.ok) { ejOk = false; detalles.push("Ejercicio: el código inicial ya está resuelto"); }
         }
         const todo = !errores.length && solOk && iniOk && ejOk;

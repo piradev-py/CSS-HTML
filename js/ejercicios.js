@@ -72,8 +72,11 @@
     if (!propiedades.length) return null;
     const ca = winA.getComputedStyle(a);
     const cs = winS.getComputedStyle(s);
+    // Las variables CSS se guardan como texto: se comparan sin mayúsculas ni espacios de más
+    const normalizar = (p, v) => p.startsWith("--") ? v.trim().toLowerCase().replace(/\s+/g, " ") : v;
     for (const p of propiedades) {
-      if (ca.getPropertyValue(p) !== cs.getPropertyValue(p)) {
+      if (normalizar(p, ca.getPropertyValue(p)) !== normalizar(p, cs.getPropertyValue(p))) {
+        if (p.startsWith("--")) return "La variable `" + p + "` no existe o no tiene el valor que pide el enunciado.";
         return "El estilo de " + nombre(a) + " no coincide en `" + p + "`.";
       }
     }
@@ -157,13 +160,13 @@
    * Compara el código del alumno con la solución.
    * Devuelve una Promesa con { ok: true } o { ok: false, mensaje }.
    */
-  async function revisar(codigoAlumno, solucion, iframes) {
+  async function revisar(codigoAlumno, solucion, iframes, cssBase) {
     const vacio = !["html", "css", "js"].some(k => (codigoAlumno[k] || "").trim());
     if (vacio) return { ok: false, mensaje: "El editor está vacío. ¡Escribe tu código y vuelve a revisar!" };
 
     const [fa, fs] = iframes || obtenerMarcos();
-    const A = await cargar(fa, codigoAlumno);
-    const S = await cargar(fs, solucion);
+    const A = await cargar(fa, EDITOR.conBase(codigoAlumno, cssBase));
+    const S = await cargar(fs, EDITOR.conBase(solucion, cssBase));
     const ctx = { winA: A.win, winS: S.win, propiedades: propiedadesCSS(solucion.css) };
 
     // Página completa (<html>, <head>): se comparan el idioma y la cabeza solo si la solución los define
@@ -185,6 +188,15 @@
       }
     }
     return { ok: true };
+  }
+
+  /** Pestaña con la que se abre el editor: la indicada, o CSS si el HTML ya viene escrito y falta el CSS. */
+  function pestanaInicial(paso) {
+    if (paso.pestana) return paso.pestana;
+    const ini = paso.inicial || {};
+    if ((ini.html || "").trim() && !(ini.css || "").trim() && (paso.solucion.css || "").trim()) return "css";
+    if ((paso.solucion.js || "").trim() && !(ini.js || "").trim()) return "js";
+    return undefined;
   }
 
   /* ---------- Interfaz del ejercicio ---------- */
@@ -217,6 +229,8 @@
     const editor = EDITOR.crear(contenedor, {
       pestanas,
       destinos: opciones.destinos,
+      pestanaActiva: pestanaInicial(paso),
+      cssBase: paso.cssBase,
       inicial: Object.assign({ html: "", css: "", js: "" }, paso.inicial),
       codigo: borrador || undefined,
       alCambiar: codigo => PROGRESO.guardarBorrador(clave, codigo)
@@ -232,7 +246,7 @@
       bRevisar.disabled = true;
       salida.className = "resultado-revision revisando";
       salida.textContent = "Revisando…";
-      const r = await revisar(editor.obtener(), paso.solucion);
+      const r = await revisar(editor.obtener(), paso.solucion, null, paso.cssBase);
       bRevisar.disabled = false;
       if (r.ok) {
         salida.className = "resultado-revision correcto";
@@ -270,5 +284,5 @@
     return { editor };
   }
 
-  window.EJERCICIOS = { revisar, crear, normalizarTexto, propiedadesCSS };
+  window.EJERCICIOS = { revisar, crear, normalizarTexto, propiedadesCSS, pestanaInicial };
 })();
