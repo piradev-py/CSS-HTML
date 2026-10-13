@@ -4,24 +4,31 @@
    en directo y enseñan el código resultante.
    ============================================================ */
 (function () {
-  function crear(contenedor, paso) {
+  function crear(contenedor, paso, destinos) {
     const valores = paso.controles.map(c => c.valor !== undefined ? c.valor : (c.tipo === "rango" ? c.min : ""));
 
     const raiz = document.createElement("div");
     raiz.className = "playground";
     raiz.innerHTML =
       '<div class="panel panel-controles"><div class="barra-panel"><span class="titulo-panel">🎛️ Controles</span></div>' +
-      '<div class="lista-controles"></div></div>' +
+      '<div class="lista-controles"></div>' +
+      '<div class="barra-panel"><span class="titulo-panel">🎨 El CSS que estás creando</span></div>' +
+      '<pre class="codigo codigo-generado"></pre></div>' +
       '<div class="panel panel-resultado">' +
       '<div class="barra-panel"><span class="titulo-panel">👀 Resultado</span></div>' +
-      '<iframe class="resultado" title="Resultado"></iframe>' +
-      '<div class="barra-panel"><span class="titulo-panel">🎨 El CSS que estás creando</span></div>' +
-      '<pre class="codigo codigo-generado"></pre></div>';
-    contenedor.appendChild(raiz);
+      '<iframe class="resultado" title="Resultado"></iframe></div>';
 
     const lista = raiz.querySelector(".lista-controles");
     const iframe = raiz.querySelector("iframe");
     const pre = raiz.querySelector(".codigo-generado");
+
+    // Con "destinos", los controles van a la columna de código y el resultado a la suya
+    if (destinos) {
+      destinos.codigo.appendChild(raiz.querySelector(".panel-controles"));
+      destinos.resultado.appendChild(raiz.querySelector(".panel-resultado"));
+    } else {
+      contenedor.appendChild(raiz);
+    }
 
     paso.controles.forEach((c, i) => {
       // Con botones de opciones no usamos <label>: reenviaría el clic al primer botón

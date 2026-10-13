@@ -90,6 +90,7 @@
 
     const editor = EDITOR.crear(raiz.querySelector(".reto-editor"), {
       pestanas,
+      destinos: opciones.destinos,
       inicial: paso.inicial,
       codigo: PROGRESO.borrador(leccionId) || undefined,
       alCambiar: codigo => {

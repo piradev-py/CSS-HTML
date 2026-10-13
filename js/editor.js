@@ -91,8 +91,6 @@
         '<iframe class="resultado" title="Resultado de tu código"></iframe>' +
         (pestanas.includes("js") ? '<div class="consola" aria-live="polite"><div class="consola-titulo">🖥️ Consola</div><div class="consola-lineas"></div></div>' : "") +
       "</div>";
-    contenedor.appendChild(raiz);
-
     const textarea = raiz.querySelector("textarea");
     const capa = raiz.querySelector(".capa-resaltado");
     const capaCode = capa.querySelector("code");
@@ -100,6 +98,17 @@
     const iframe = raiz.querySelector("iframe");
     const aviso = raiz.querySelector(".aviso-resultado");
     const consola = raiz.querySelector(".consola-lineas");
+    const botonesPestana = [...raiz.querySelectorAll(".pestana")];
+    const bReiniciar = raiz.querySelector("[data-reiniciar]");
+    const panelCodigo = raiz.querySelector(".panel-codigo");
+
+    // Con "destinos", el código y el resultado van cada uno a su columna del espacio de trabajo
+    if (opciones.destinos) {
+      opciones.destinos.codigo.appendChild(panelCodigo);
+      opciones.destinos.resultado.appendChild(raiz.querySelector(".panel-resultado"));
+    } else {
+      contenedor.appendChild(raiz);
+    }
 
     function pintarResaltado() {
       const texto = textarea.value;
@@ -120,12 +129,12 @@
     function cambiarPestana(p) {
       activa = p;
       textarea.value = codigo[p] || "";
-      raiz.querySelectorAll(".pestana").forEach(b => {
+      botonesPestana.forEach(b => {
         const sel = b.dataset.pestana === p;
         b.classList.toggle("activa", sel);
         b.setAttribute("aria-selected", sel);
       });
-      raiz.dataset.lenguaje = p;
+      panelCodigo.dataset.lenguaje = p;
       textarea.scrollTop = 0;
       pintarResaltado();
     }
@@ -179,10 +188,10 @@
       }
     });
 
-    raiz.querySelectorAll(".pestana").forEach(b =>
+    botonesPestana.forEach(b =>
       b.addEventListener("click", () => cambiarPestana(b.dataset.pestana)));
 
-    raiz.querySelector("[data-reiniciar]").addEventListener("click", () => {
+    bReiniciar.addEventListener("click", () => {
       if (confirm("¿Volver al código del principio? Perderás lo que has escrito aquí.")) fijar(inicial);
     });
 

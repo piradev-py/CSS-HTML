@@ -1,6 +1,11 @@
 /* ============================================================
    <CSS-HTML> · Vista de lección (leccion.html?id=...)
-   Carga el archivo de la lección y muestra sus pasos uno a uno.
+   Espacio de trabajo a pantalla completa en 3 columnas:
+     📖 lección (texto, enunciado, pistas, navegación)
+     💻 código (editor, ejemplo o controles)
+     👀 resultado
+   Los pasos sin código (quiz, explicación sin ejemplo) unen las
+   columnas de código y resultado en una "pizarra".
    ============================================================ */
 (function () {
   const id = new URLSearchParams(location.search).get("id");
@@ -10,6 +15,7 @@
   UI.montarCabecera('<a class="boton-icono" href="index.html" aria-label="Volver al mapa">🗺️</a>');
 
   function aviso(emoji, titulo, texto) {
+    document.body.classList.remove("con-espacio");
     principal.innerHTML =
       '<div class="aviso-grande tarjeta"><div class="aviso-emoji">' + emoji + "</div><h1>" + titulo + "</h1><p>" + texto + "</p>" +
       '<a class="boton grande azul" href="index.html">🗺️ Volver al mapa</a></div>';
@@ -41,26 +47,43 @@
 
     document.title = leccion.titulo + " · <CSS-HTML>";
     document.body.dataset.mundo = mundo.clave;
+    document.body.classList.add("con-espacio");
 
     principal.innerHTML =
-      '<div class="leccion-top">' +
-        '<div class="miga">' + mundo.emoji + " " + UI.escapar(mundo.nombre) + " · Lección " + numero + "</div>" +
-        '<h1 class="leccion-titulo">' + UI.escapar(leccion.titulo) + "</h1>" +
-        '<p class="objetivo">🎯 ' + UI.md(leccion.objetivo) + "</p>" +
-        '<div class="puntos-pasos" role="list"></div>' +
-      "</div>" +
-      '<section class="paso-actual" aria-live="polite"></section>' +
-      '<nav class="navegacion-pasos">' +
-        '<button class="boton secundario" data-anterior>← Anterior</button>' +
-        '<span class="contador-pasos"></span>' +
-        '<button class="boton grande" data-siguiente>Siguiente →</button>' +
-      "</nav>";
+      '<div class="espacio-trabajo">' +
+        '<section class="col col-leccion" aria-label="Lección">' +
+          '<header class="leccion-cabeza">' +
+            '<div class="miga">' + mundo.emoji + " " + UI.escapar(mundo.nombre) + " · Lección " + numero + "</div>" +
+            '<h1 class="leccion-titulo">' + UI.escapar(leccion.titulo) + "</h1>" +
+            '<p class="objetivo" title="' + UI.escapar(leccion.objetivo) + '">🎯 ' + UI.md(leccion.objetivo) + "</p>" +
+            '<div class="puntos-pasos" role="list"></div>' +
+          "</header>" +
+          '<div class="paso-actual" aria-live="polite"></div>' +
+          '<nav class="navegacion-pasos">' +
+            '<button class="boton secundario" data-anterior>← Anterior</button>' +
+            '<span class="contador-pasos"></span>' +
+            '<button class="boton" data-siguiente>Siguiente →</button>' +
+          "</nav>" +
+        "</section>" +
+        '<div class="divisor" data-divisor="0" role="separator" aria-orientation="vertical" tabindex="0" title="Arrastra para cambiar el ancho (doble clic: restablecer)"></div>' +
+        '<section class="col col-codigo" aria-label="Código"></section>' +
+        '<div class="divisor" data-divisor="1" role="separator" aria-orientation="vertical" tabindex="0" title="Arrastra para cambiar el ancho (doble clic: restablecer)"></div>' +
+        '<section class="col col-resultado" aria-label="Resultado"></section>' +
+        '<section class="col col-pizarra"></section>' +
+      "</div>";
 
+    const espacio = principal.querySelector(".espacio-trabajo");
     const puntos = principal.querySelector(".puntos-pasos");
     const zona = principal.querySelector(".paso-actual");
+    const colCodigo = principal.querySelector(".col-codigo");
+    const colResultado = principal.querySelector(".col-resultado");
+    const colPizarra = principal.querySelector(".col-pizarra");
+    const destinos = { codigo: colCodigo, resultado: colResultado };
     const bAnterior = principal.querySelector("[data-anterior]");
     const bSiguiente = principal.querySelector("[data-siguiente]");
     const contador = principal.querySelector(".contador-pasos");
+
+    COLUMNAS.activar(espacio);
 
     const ICONO_PASO = { explicacion: "📖", pruebalo: "✍️", ejercicio: "🧠", controles: "🎛️", quiz: "❓", reto: "🏆" };
 
@@ -98,12 +121,13 @@
     function ir(i) {
       actual = i;
       maximo = Math.max(maximo, i);
-      zona.innerHTML = "";
+      [zona, colCodigo, colResultado, colPizarra].forEach(c => { c.innerHTML = ""; });
       const paso = leccion.pasos[i];
       zona.className = "paso-actual paso-" + paso.tipo;
+      espacio.classList.remove("sin-codigo");
       RENDER[paso.tipo](paso, i);
       actualizarNavegacion();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      zona.scrollTop = 0;
     }
 
     bAnterior.addEventListener("click", () => { if (actual > 0) ir(actual - 1); });
@@ -115,12 +139,12 @@
     });
 
     document.addEventListener("keydown", e => {
-      if (/^(TEXTAREA|INPUT|SELECT)$/.test(document.activeElement.tagName) || document.querySelector(".modal-fondo")) return;
+      if (/^(TEXTAREA|INPUT|SELECT)$/.test(document.activeElement.tagName) || document.activeElement.classList.contains("divisor") || document.querySelector(".modal-fondo")) return;
       if (e.key === "ArrowRight" && !bSiguiente.disabled && !bSiguiente.classList.contains("oculto")) bSiguiente.click();
       if (e.key === "ArrowLeft" && !bAnterior.disabled) bAnterior.click();
     });
 
-    /* ---------- Cómo se pinta cada tipo de paso ---------- */
+    /* ---------- Piezas comunes ---------- */
     function tarjetaTexto(titulo, texto) {
       const t = document.createElement("div");
       t.className = "tarjeta tarjeta-texto";
@@ -129,50 +153,53 @@
       return t;
     }
 
-    function ajustarAlto(iframe) {
-      iframe.addEventListener("load", () => {
-        try {
-          const alto = iframe.contentDocument.documentElement.scrollHeight;
-          iframe.style.height = Math.min(Math.max(alto + 4, 80), 420) + "px";
-        } catch (e) { /* sin acceso, se queda el alto por defecto */ }
-      });
+    /** Une las columnas de código y resultado en una sola pizarra. */
+    function usarPizarra() {
+      espacio.classList.add("sin-codigo");
+      return colPizarra;
     }
 
+    function panel(titulo, contenidoHTML, clase = "") {
+      const p = document.createElement("div");
+      p.className = "panel " + clase;
+      p.innerHTML = '<div class="barra-panel"><span class="titulo-panel">' + titulo + "</span></div>" + contenidoHTML;
+      return p;
+    }
+
+    /* ---------- Cómo se pinta cada tipo de paso ---------- */
     const RENDER = {
       explicacion(paso) {
         tarjetaTexto(paso.titulo, paso.texto);
         if (paso.ejemplo) {
-          const ej = document.createElement("div");
-          ej.className = "ejemplo";
           const bloques = ["html", "css", "js"].filter(k => paso.ejemplo[k]);
-          ej.innerHTML =
+          colCodigo.appendChild(panel("💻 Código del ejemplo",
             '<div class="ejemplo-codigo">' +
             bloques.map(k =>
               '<div class="etiqueta-codigo etiqueta-' + k + '">' + k.toUpperCase() + "</div>" +
               '<pre class="codigo">' + UI.resaltar(paso.ejemplo[k], k) + "</pre>").join("") +
-            "</div>" +
-            '<div class="ejemplo-resultado"><div class="etiqueta-codigo">👀 Resultado</div>' +
-            '<iframe class="resultado" title="Resultado del ejemplo"></iframe></div>';
-          zona.appendChild(ej);
-          const iframe = ej.querySelector("iframe");
-          ajustarAlto(iframe);
-          iframe.srcdoc = EDITOR.construirDocumento(paso.ejemplo);
+            "</div>", "panel-ejemplo"));
+          const pr = panel("👀 Resultado", '<iframe class="resultado" title="Resultado del ejemplo"></iframe>', "panel-resultado");
+          colResultado.appendChild(pr);
+          pr.querySelector("iframe").srcdoc = EDITOR.construirDocumento(paso.ejemplo);
+          if (paso.consejo) zona.appendChild(MASCOTA.crear(UI.md(paso.consejo)));
+        } else {
+          // Sin ejemplo: Tagui ocupa la pizarra con su consejo
+          const piz = usarPizarra();
+          piz.innerHTML = '<div class="pizarra-tagui"></div>';
+          piz.firstChild.appendChild(MASCOTA.crear(UI.md(paso.consejo || "Lee la explicación con calma. En los siguientes pasos escribirás tu propio código. ✍️")));
         }
-        if (paso.consejo) zona.appendChild(MASCOTA.crear(UI.md(paso.consejo)));
       },
 
-      pruebalo(paso, i) {
+      pruebalo(paso) {
         tarjetaTexto("✍️ ¡Pruébalo tú!", paso.instruccion);
-        EDITOR.crear(zona, { pestanas: paso.pestanas || pestanas, inicial: paso.inicial });
-        if (i === 0 || !leccion.pasos.slice(0, i).some(p => p.tipo === "pruebalo")) {
-          zona.appendChild(MASCOTA.crear("Escribe en el editor y mira cómo cambia el resultado al momento. ¡No puedes romper nada!"));
-        }
+        EDITOR.crear(zona, { pestanas: paso.pestanas || pestanas, inicial: paso.inicial, destinos });
       },
 
       ejercicio(paso, i) {
         EJERCICIOS.crear(zona, paso, {
           clave: id + "#paso" + i,
           pestanas: paso.pestanas || pestanas,
+          destinos,
           yaResuelto: yaCompletada || ejercicioResuelto[i],
           alResolver: () => {
             ejercicioResuelto[i] = true;
@@ -183,17 +210,20 @@
 
       controles(paso) {
         tarjetaTexto("🎛️ Juega con los controles", paso.instruccion);
-        CONTROLES.crear(zona, paso);
+        CONTROLES.crear(zona, paso, destinos);
       },
 
       quiz(paso, i) {
+        // Pregunta a la izquierda, opciones grandes en la pizarra
         const t = document.createElement("div");
         t.className = "tarjeta quiz";
-        t.innerHTML = "<h2>❓ " + UI.md(paso.pregunta) + '</h2><div class="opciones-quiz"></div><div class="explicacion-quiz"></div>';
+        t.innerHTML = "<h2>❓ " + UI.md(paso.pregunta) + '</h2><p class="texto-suave">Elige una respuesta en la pizarra →</p><div class="explicacion-quiz"></div>';
         zona.appendChild(t);
         const mascota = MASCOTA.crear("Piénsalo con calma. ¡Tú puedes!");
         zona.appendChild(mascota);
-        const cont = t.querySelector(".opciones-quiz");
+        const piz = usarPizarra();
+        piz.innerHTML = '<div class="pizarra-quiz"><div class="opciones-quiz"></div></div>';
+        const cont = piz.querySelector(".opciones-quiz");
         const exp = t.querySelector(".explicacion-quiz");
         const letras = "ABCDEF";
         paso.opciones.forEach((op, j) => {
@@ -234,6 +264,7 @@
         RETOS.crear(zona, paso, {
           leccionId: id,
           pestanas: paso.pestanas || pestanas,
+          destinos,
           mascota,
           alSuperar: ({ estrellas }) => victoria(leccion, estrellas)
         });
@@ -243,6 +274,76 @@
 
     ir(yaCompletada && location.hash === "#reto" ? leccion.pasos.length - 1 : 0);
   }
+
+  /* ---------- Columnas que se pueden redimensionar ---------- */
+  const COLUMNAS = (function () {
+    const CLAVE = "csshtml-columnas";
+    const POR_DEFECTO = [30, 36, 34];   // % del ancho: lección, código, resultado
+    const MINIMO = 240;                 // px mínimos por columna
+
+    function cargar() {
+      try {
+        const v = JSON.parse(localStorage.getItem(CLAVE));
+        if (Array.isArray(v) && v.length === 3 && v.every(n => n > 0)) return v;
+      } catch (e) { /* sin almacenamiento */ }
+      return POR_DEFECTO.slice();
+    }
+    function guardar(v) {
+      try { localStorage.setItem(CLAVE, JSON.stringify(v)); } catch (e) { /* sin almacenamiento */ }
+    }
+
+    function activar(espacio) {
+      let fr = cargar();
+      const aplicar = () => fr.forEach((v, i) => espacio.style.setProperty("--c" + (i + 1), v + "fr"));
+      aplicar();
+
+      const anchos = () => [".col-leccion", ".col-codigo", ".col-resultado"].map(s => espacio.querySelector(s).getBoundingClientRect().width);
+
+      function mover(k, delta) {
+        const w = anchos();
+        let a = w[k] + delta;
+        let b = w[k + 1] - delta;
+        if (a < MINIMO) { b -= MINIMO - a; a = MINIMO; }
+        if (b < MINIMO) { a -= MINIMO - b; b = MINIMO; }
+        w[k] = a;
+        w[k + 1] = b;
+        const total = w.reduce((s, x) => s + x, 0);
+        fr = w.map(x => Math.round((x / total) * 1000) / 10);
+        aplicar();
+      }
+
+      espacio.querySelectorAll(".divisor").forEach(div => {
+        const k = Number(div.dataset.divisor);
+        div.addEventListener("pointerdown", e => {
+          e.preventDefault();
+          div.setPointerCapture(e.pointerId);
+          document.body.classList.add("arrastrando");
+          let x = e.clientX;
+          const mov = ev => { mover(k, ev.clientX - x); x = ev.clientX; };
+          const fin = () => {
+            document.body.classList.remove("arrastrando");
+            div.removeEventListener("pointermove", mov);
+            div.removeEventListener("pointerup", fin);
+            div.removeEventListener("pointercancel", fin);
+            guardar(fr);
+          };
+          div.addEventListener("pointermove", mov);
+          div.addEventListener("pointerup", fin);
+          div.addEventListener("pointercancel", fin);
+        });
+        div.addEventListener("dblclick", () => { fr = POR_DEFECTO.slice(); aplicar(); guardar(fr); });
+        div.addEventListener("keydown", e => {
+          if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+            e.preventDefault();
+            mover(k, e.key === "ArrowLeft" ? -30 : 30);
+            guardar(fr);
+          }
+        });
+      });
+    }
+
+    return { activar };
+  })();
 
   /* ---------- Pantalla de victoria ---------- */
   function victoria(leccion, estrellas) {

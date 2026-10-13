@@ -216,6 +216,7 @@
     const borrador = PROGRESO.borrador(clave);
     const editor = EDITOR.crear(contenedor, {
       pestanas,
+      destinos: opciones.destinos,
       inicial: Object.assign({ html: "", css: "", js: "" }, paso.inicial),
       codigo: borrador || undefined,
       alCambiar: codigo => PROGRESO.guardarBorrador(clave, codigo)
