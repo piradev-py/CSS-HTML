@@ -6,13 +6,19 @@
 - [x] Mundo HTML + CSS (hc-01 … hc-12)
 - [x] Mundo JavaScript (js-01 … js-14) — `localStorage` de práctica y `fetch("datos/…")` sin internet en el motor
 
+## Página de inicio (index)
+- [ ] **Mundos abatibles** (plegables): que cada mundo se pueda abrir y cerrar, para no tener que bajar tanto
+      desde el principio.
+- [ ] **Insignias en una columna a la izquierda**, al lado del mapa, aprovechando la pantalla en horizontal.
+
 ## Para el final
 - [ ] **Selector de idioma Español / English** para hacer el curso en cualquiera de los dos idiomas
       (textos de la interfaz, lecciones, enunciados, pistas, mensajes del revisor y de Tagui).
 - [ ] Publicar la web con GitHub Pages.
 
 ## Decisiones por tomar
-- [ ] Mapa de inicio: ¿4 mundos en columnas (sin scroll) o dejarlo como está?
+- [x] Mapa de inicio: ¿4 mundos en columnas (sin scroll) o dejarlo como está? → **mundos abatibles e insignias a
+      la izquierda** (ver «Página de inicio»).
 - [ ] Fuente Concert One: ¿solo en el logo o también en los títulos grandes?
 - [ ] Ejercicios: ¿las tildes cuentan («página» ≠ «pagina») o se ignoran?
 - [ ] html-10: ¿enseñar `<fieldset>`/`<legend>` ahí o en «Formularios con estilo» (hc-08)?
