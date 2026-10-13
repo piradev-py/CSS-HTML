@@ -199,7 +199,7 @@ formularios con estilo, usar pseudo-clases y pseudo-elementos, hacer webs respon
 
 ### hc-04 · Barra de navegación · 50 XP ✅
 - **Objetivo:** construir el menú de navegación típico de cualquier web.
-- **Conceptos nuevos:** patrón `nav > ul > li > a`, quitar viñetas (`list-style`), Flexbox aplicado, enlace activo con una clase, `:hover` y `:focus-visible` en enlaces.
+- **Conceptos nuevos:** patrón `nav > ul > li > a`, combinador hijo `>` (con un submenú, frente al selector descendiente), quitar viñetas (`list-style`), Flexbox aplicado, enlace activo con una clase, `:hover` y `:focus-visible` en enlaces.
 - **Reto:** menú de una web de recetas con logo a la izquierda, enlaces a la derecha y el enlace actual resaltado.
 
 ### hc-05 · Responsive y media queries · 50 XP ✅
@@ -224,7 +224,7 @@ formularios con estilo, usar pseudo-clases y pseudo-elementos, hacer webs respon
 
 ### hc-09 · Animaciones · 50 XP ✅
 - **Objetivo:** crear animaciones que se reproducen solas.
-- **Conceptos nuevos:** `@keyframes`, `animation` (nombre, duración, repeticiones, dirección), `animation-iteration-count: infinite`, respetar `prefers-reduced-motion`.
+- **Conceptos nuevos:** `@keyframes`, `animation` (nombre, duración, repeticiones, dirección), `animation-iteration-count: infinite`, cuándo usar `normal` y cuándo `alternate` (y `@keyframes` con `0%`/`50%`/`100%`), respetar `prefers-reduced-motion`.
 - **Reto:** un fantasma que flota arriba y abajo sin parar y un indicador de «cargando» que gira.
 
 ### hc-10 · Formularios con estilo · 50 XP ✅

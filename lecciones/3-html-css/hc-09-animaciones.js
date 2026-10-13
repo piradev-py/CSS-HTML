@@ -126,7 +126,7 @@ CURSO.registrar({
     },
     {
       tipo: "controles",
-      instruccion: "La abeja ya tiene una animación que se repite sin parar. Cambia su duración, su curva y su dirección. Fíjate en lo que pasa con `normal`: al final de cada vuelta, ¡salta de golpe al principio! Por eso `alternate` queda más suave.",
+      instruccion: "La abeja ya tiene una animación que se repite sin parar. Cambia su duración, su curva y su dirección. Fíjate en lo que pasa con `normal`: al final de cada vuelta, ¡salta de golpe al principio! Es porque esta animación **termina en un sitio distinto** de donde empieza: aquí `alternate` es la buena. En el siguiente paso verás cuándo `normal` es la correcta.",
       html: `<div class="abeja">🐝</div>`,
       cssBase: `@keyframes flotar {
   from { transform: translateY(0); }
@@ -139,6 +139,45 @@ body { background-color: #fff8db; }
         { selector: ".abeja", propiedad: "animation-timing-function", tipo: "opciones", opciones: ["ease-in-out", "linear", "ease"], valor: "ease-in-out" },
         { selector: ".abeja", propiedad: "animation-direction", tipo: "opciones", opciones: ["alternate", "normal"], valor: "alternate" }
       ]
+    },
+    {
+      tipo: "explicacion",
+      titulo: "¿alternate o normal? Como en la vida real",
+      texto: "`normal` no es un error: es el valor por defecto y en las webs de verdad se usa muchísimo. La regla es sencilla:\n\n• Si la animación **termina donde empieza**, usa `normal`. Un «cargando» que gira de `0deg` a `360deg` acaba igual que empezó: no hay salto.\n• Si va **de un sitio a otro** (flotar, columpiarse), usa `alternate` para que vuelva suave.\n\nOtro truco muy usado: escribir la ida y la vuelta dentro del `@keyframes` con **porcentajes**: `0%` (inicio), `50%` (mitad) y `100%` (final). Si `0%` y `100%` son iguales, no hay salto con `normal`. 💓",
+      ejemplo: {
+        html: `<div class="fila">
+  <div class="cargando"></div>
+  <div class="corazon">💗</div>
+</div>`,
+        css: `@keyframes girar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes latir {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 30px;
+}
+.cargando {
+  width: 40px;
+  height: 40px;
+  border: 6px solid lavender;
+  border-top-color: rebeccapurple;
+  border-radius: 50%;
+  animation: girar 1.2s linear infinite;
+}
+.corazon {
+  font-size: 50px;
+  animation: latir 2s ease-in-out infinite;
+}`
+      },
+      consejo: "Fíjate: ninguna de las dos lleva `alternate` y ninguna da saltos. En el reto, el «cargando» del castillo gira justo así."
     },
     {
       tipo: "explicacion",

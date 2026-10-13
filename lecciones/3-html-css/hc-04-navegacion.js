@@ -4,8 +4,9 @@
    viñetas (list-style), Flexbox aplicado, enlace activo con una
    clase y :hover / :focus-visible en enlaces.
    Notas:
-   - El combinador hijo (>) no se ha enseñado: se usan selectores
-     descendientes (nav a, .menu a) y el patrón se dibuja con ▸.
+   - El patrón se dibuja primero con ▸ y los ejemplos usan selectores
+     descendientes (nav a, .menu a). El combinador hijo (>) se enseña
+     después con un submenú, que es donde se nota la diferencia.
    - El motor trata :focus-visible como :focus al revisar, así que
      el reto lo comprueba con PRUEBA.clonar(doc, { estado: "focus" }).
    ============================================================ */
@@ -174,6 +175,73 @@ nav a:focus-visible {
       pistas: [
         "Escribe los dos selectores, nav a:hover y nav a:focus-visible, separados por una coma antes de la llave. Dentro van las dos propiedades.",
         "Debe quedarte así:\nnav a:hover,\nnav a:focus-visible {\n  background-color: gold;\n  color: black;\n}"
+      ]
+    },
+    {
+      tipo: "explicacion",
+      titulo: "Solo los hijos directos: el combinador >",
+      texto: "Muchos menús tienen **submenús**: una lista dentro de otra. Y ahí el selector del espacio se pasa de listo: `.menu li` elige **todos** los `li` de dentro, también los del submenú.\n\nUn **combinador** es el símbolo que une dos selectores (el espacio es uno). El **combinador hijo** `>` es más estricto: `.menu > li` significa «los `li` que son **hijos directos** de `.menu`», justo un nivel por debajo. Los nietos no cuentan.\n\nEn el ejemplo, solo las opciones principales llevan la raya roja; Dulces y Saladas se quedan sin ella. 👨‍👧",
+      ejemplo: {
+        html: `<ul class="menu">
+  <li><a href="#inicio">Inicio</a></li>
+  <li><a href="#recetas">Recetas</a>
+    <ul>
+      <li><a href="#dulces">Dulces</a></li>
+      <li><a href="#saladas">Saladas</a></li>
+    </ul>
+  </li>
+  <li><a href="#contacto">Contacto</a></li>
+</ul>`,
+        css: `.menu > li {
+  border-left: 6px solid tomato;
+  padding-left: 8px;
+  margin-bottom: 6px;
+}`
+      },
+      consejo: "¿Recuerdas el esqueleto **nav ▸ ul ▸ li ▸ a**? En CSS se escribe tal cual: `nav > ul > li > a`. Cada `>` baja **un solo** nivel. Los espacios alrededor del `>` son opcionales: `.menu>li` también vale."
+    },
+    {
+      tipo: "ejercicio",
+      enunciado: "Este menú de juegos 🎮 tiene un submenú dentro de **Juegos**. Pon una raya **solo a las opciones principales**: al selector `.menu > li` ponle `border-left` con el valor `6px solid tomato`.\n\nOjo: si usas el espacio (`.menu li`) en vez de `>`, la raya saldrá también en Puzles y Carreras… y no es eso lo que se pide.",
+      cssBase: `body { font-family: sans-serif; }
+.menu { list-style: none; padding: 0; }
+.menu ul { list-style: none; padding-left: 20px; }
+.menu li { padding: 4px 8px; margin-bottom: 4px; }
+.menu a { color: #264653; font-weight: bold; text-decoration: none; }`,
+      inicial: {
+        html: `<ul class="menu">
+  <li><a href="#inicio">Inicio</a></li>
+  <li><a href="#juegos">Juegos</a>
+    <ul>
+      <li><a href="#puzles">Puzles</a></li>
+      <li><a href="#carreras">Carreras</a></li>
+    </ul>
+  </li>
+  <li><a href="#ranking">Ranking</a></li>
+</ul>
+`,
+        css: ""
+      },
+      solucion: {
+        html: `<ul class="menu">
+  <li><a href="#inicio">Inicio</a></li>
+  <li><a href="#juegos">Juegos</a>
+    <ul>
+      <li><a href="#puzles">Puzles</a></li>
+      <li><a href="#carreras">Carreras</a></li>
+    </ul>
+  </li>
+  <li><a href="#ranking">Ranking</a></li>
+</ul>
+`,
+        css: `.menu > li {
+  border-left: 6px solid tomato;
+}
+`
+      },
+      pistas: [
+        "Usa el combinador hijo entre .menu y li: así solo eliges los li que están justo un nivel por debajo de .menu.",
+        "Debe quedarte así:\n.menu > li {\n  border-left: 6px solid tomato;\n}"
       ]
     },
     {

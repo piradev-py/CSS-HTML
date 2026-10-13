@@ -22,9 +22,9 @@
 
 ### Mundo HTML + CSS (dudas que dejaron las lecciones)
 - [ ] hc-02/hc-03: el CSS decorativo oculto (`cssBase`) usa `list-style: none`, que no se enseña hasta hc-04. ¿Vale así?
-- [ ] hc-04: no se usa el combinador hijo `>` (no se ha enseñado); el patrón se dibuja «nav ▸ ul ▸ li ▸ a». ¿Enseñar `>` en algún sitio?
-- [ ] hc-06: se presenta `order` para reordenar, pero no se exige en ningún ejercicio. ¿Dejarlo o quitarlo?
-- [ ] hc-07: los controles usan las propiedades sueltas `rotate`/`scale`/`translate` (solo salen en un consejo). ¿Bien así?
-- [ ] hc-09: los controles permiten `animation-direction: normal` para ver el salto frente a `alternate`. ¿Quitar esa opción?
-- [ ] hc-11: tiene 10 pasos (proyecto). Si se hace pesada, el candidato a quitar es el ejercicio de la cabecera (repaso de hc-04).
-- [ ] hc-12: a 375 px la cabecera de la landing («🐾 Patitas» + menú) queda apretada (se parte en dos líneas). ¿Añadir una tarea de cabecera responsive?
+- [x] hc-04: combinador hijo `>` → **se enseña en hc-04** con un submenú (explicación + ejercicio).
+- [x] hc-06: `order` se presenta sin exigirlo → **se deja** (al usuario le gustan esas herramientas).
+- [x] hc-07: propiedades sueltas `rotate`/`scale`/`translate` en los controles → **se dejan**.
+- [x] hc-09: `animation-direction: normal` en los controles → **se deja**, y se añade un paso con la regla real (`normal` si acaba donde empieza, `alternate` si va de un sitio a otro, `0%`/`50%`/`100%`).
+- [x] hc-11: 10 pasos → **se deja así** (el repaso de la cabecera es bueno).
+- [x] hc-12: cabecera apretada a 375 px → **no se toca**: la web se piensa para PC/tablet en horizontal.
