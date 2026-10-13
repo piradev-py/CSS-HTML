@@ -165,7 +165,7 @@
   flex-shrink: 0;
   transform-origin: 50% 92%;     /* respira desde los pies */
   will-change: transform;        /* la anima la tarjeta gráfica: sin saltos de píxel */
-  animation: respirar-tagui 4.5s ease-in-out infinite;
+  animation: respirar-tagui var(--ritmo-respiracion) ease-in-out infinite;
 }
 .mascota .bocadillo {
   position: relative;
@@ -189,8 +189,8 @@
   transform: rotate(45deg);
 }
 /* Reacciones suaves y de una sola vez; después Tagui vuelve a respirar con calma */
-.mascota.alegre .tagui { animation: saltar 1.2s ease-in-out 1, respirar-tagui 4.5s ease-in-out 1.2s infinite; }
-.mascota.triste .tagui { animation: temblar 0.9s ease-in-out 1, respirar-tagui 4.5s ease-in-out 0.9s infinite; }
+.mascota.alegre .tagui { animation: saltar 1.2s ease-in-out 1, respirar-tagui var(--ritmo-respiracion) ease-in-out 1.2s infinite; }
+.mascota.triste .tagui { animation: temblar 0.9s ease-in-out 1, respirar-tagui var(--ritmo-respiracion) ease-in-out 0.9s infinite; }
 
 /* Movimientos lentos y suaves: transmiten calma */
 @keyframes respirar-tagui {

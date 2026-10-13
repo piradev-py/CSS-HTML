@@ -174,7 +174,7 @@ a.nodo:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--color-osc)
   white-space: nowrap;
   transform-origin: 50% 100%;    /* respira hacia arriba, apoyado en el círculo */
   will-change: transform;        /* animación suave por la tarjeta gráfica */
-  animation: respirar-suave 4.5s ease-in-out infinite;
+  animation: respirar-suave var(--ritmo-respiracion) ease-in-out infinite;
   z-index: 1;
 }
 .nodo-estrellas { margin-top: 10px; font-size: 0.9rem; letter-spacing: 1px; line-height: 1; }
