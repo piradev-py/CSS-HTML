@@ -14,7 +14,7 @@
 ## Para el final
 - [ ] **Selector de idioma Español / English** para hacer el curso en cualquiera de los dos idiomas
       (textos de la interfaz, lecciones, enunciados, pistas, mensajes del revisor y de Tagui).
-- [ ] Publicar la web con GitHub Pages.
+- [x] Publicar la web con GitHub Pages → **https://piradev-py.github.io/CSS-HTML/** (rama `main`, carpeta raíz, con `.nojekyll`).
 
 ## Decisiones por tomar
 - [x] Mapa de inicio: ¿4 mundos en columnas (sin scroll) o dejarlo como está? → **mundos abatibles e insignias a

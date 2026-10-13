@@ -17,6 +17,10 @@
 </p>
 
 <p align="center">
+  <a href="https://piradev-py.github.io/CSS-HTML/"><img alt="▶ Jugar ahora: gratis, en el navegador" src="https://img.shields.io/badge/%E2%96%B6%20JUGAR%20AHORA-gratis%2C%20en%20tu%20navegador-f26b38?style=for-the-badge&labelColor=1f1b2e" height="44"></a>
+</p>
+
+<p align="center">
   <img src="docs/capturas/inicio.png" alt="Pantalla de inicio: Tagui da la bienvenida, a la izquierda las insignias y a la derecha los cuatro mundos del curso" width="900">
 </p>
 
@@ -26,14 +30,20 @@ Un curso para aprender a hacer páginas web **aunque nunca hayas programado**.
 Funciona como un videojuego: avanzas por un mapa de **4 mundos**, cada lección es cortita, escribes tu propio
 código y ves el resultado al instante. Te acompaña **Tagui**, una etiqueta con ojos que te da ánimos y consejos.
 
-## 🚀 Empieza en 2 minutos
+## 🚀 Empieza ahora
+
+### Opción 1 · En el navegador (lo más fácil)
+
+👉 **[Abre el curso: piradev-py.github.io/CSS-HTML/](https://piradev-py.github.io/CSS-HTML/)** y pulsa **🚀 Empezar**. ¡Ya está! 🎉
+
+### Opción 2 · En tu ordenador, sin internet
 
 1. Arriba en esta página, pulsa el botón verde **`<> Code`** y después **Download ZIP**.
 2. Descomprime la carpeta que se ha descargado.
-3. Abre la carpeta y haz **doble clic en `index.html`**. ¡Ya está! 🎉
+3. Abre la carpeta y haz **doble clic en `index.html`**.
 
-> 💡 No necesitas crear una cuenta, instalar programas ni tener internet (con internet se ven unas letras más
-> bonitas, nada más). Tu progreso se guarda solo en tu navegador.
+> 💡 En los dos casos no necesitas crear una cuenta ni instalar programas. Tu progreso se guarda solo en tu
+> navegador (el de la web y el de la descarga van por separado).
 > Está pensado para **ordenador o tablet en horizontal**.
 
 ## 🗺️ Qué vas a aprender
@@ -123,7 +133,7 @@ navegador, empezarás de cero. Si quieres empezar de nuevo a propósito, usa **R
 <details>
 <summary><b>¿Funciona sin internet?</b></summary>
 
-Sí. Todo el curso funciona sin conexión; con internet solo cambian las fuentes de letra.
+Sí, si usas la **opción 2** (descargarlo): todo el curso funciona sin conexión; con internet solo cambian las fuentes de letra.
 </details>
 
 <details>
