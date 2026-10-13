@@ -63,18 +63,18 @@
       lema: "Construye interfaces de verdad",
       pestanas: ["html", "css"],
       lecciones: [
-        { id: "hc-01", archivo: "hc-01-tarjeta.js", titulo: "Maqueta una tarjeta", listo: false },
-        { id: "hc-02", archivo: "hc-02-pseudoclases.js", titulo: "Pseudo-clases", listo: false },
-        { id: "hc-03", archivo: "hc-03-pseudoelementos.js", titulo: "Pseudo-elementos", listo: false },
-        { id: "hc-04", archivo: "hc-04-navegacion.js", titulo: "Barra de navegación", listo: false },
-        { id: "hc-05", archivo: "hc-05-responsive.js", titulo: "Responsive y media queries", listo: false },
-        { id: "hc-06", archivo: "hc-06-mobile-first.js", titulo: "Mobile first", listo: false },
-        { id: "hc-07", archivo: "hc-07-transformaciones.js", titulo: "Transformaciones", listo: false },
-        { id: "hc-08", archivo: "hc-08-transiciones.js", titulo: "Transiciones", listo: false },
-        { id: "hc-09", archivo: "hc-09-animaciones.js", titulo: "Animaciones", listo: false },
-        { id: "hc-10", archivo: "hc-10-formularios-estilo.js", titulo: "Formularios con estilo", listo: false },
-        { id: "hc-11", archivo: "hc-11-landing-1.js", titulo: "Proyecto: landing page (I)", listo: false },
-        { id: "hc-12", archivo: "hc-12-landing-2.js", titulo: "Proyecto: landing page (II)", listo: false }
+        { id: "hc-01", archivo: "hc-01-tarjeta.js", titulo: "Maqueta una tarjeta", listo: true },
+        { id: "hc-02", archivo: "hc-02-pseudoclases.js", titulo: "Pseudo-clases", listo: true },
+        { id: "hc-03", archivo: "hc-03-pseudoelementos.js", titulo: "Pseudo-elementos", listo: true },
+        { id: "hc-04", archivo: "hc-04-navegacion.js", titulo: "Barra de navegación", listo: true },
+        { id: "hc-05", archivo: "hc-05-responsive.js", titulo: "Responsive y media queries", listo: true },
+        { id: "hc-06", archivo: "hc-06-mobile-first.js", titulo: "Mobile first", listo: true },
+        { id: "hc-07", archivo: "hc-07-transformaciones.js", titulo: "Transformaciones", listo: true },
+        { id: "hc-08", archivo: "hc-08-transiciones.js", titulo: "Transiciones", listo: true },
+        { id: "hc-09", archivo: "hc-09-animaciones.js", titulo: "Animaciones", listo: true },
+        { id: "hc-10", archivo: "hc-10-formularios-estilo.js", titulo: "Formularios con estilo", listo: true },
+        { id: "hc-11", archivo: "hc-11-landing-1.js", titulo: "Proyecto: landing page (I)", listo: true },
+        { id: "hc-12", archivo: "hc-12-landing-2.js", titulo: "Proyecto: landing page (II)", listo: true }
       ]
     },
     {
