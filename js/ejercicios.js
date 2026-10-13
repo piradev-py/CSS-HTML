@@ -68,7 +68,7 @@
     return null;
   }
 
-  function compararEstilos(a, s, winA, winS, propiedades) {
+  function compararEstilos(a, s, winA, winS, propiedades, pseudos = []) {
     if (!propiedades.length) return null;
     const ca = winA.getComputedStyle(a);
     const cs = winS.getComputedStyle(s);
@@ -78,6 +78,17 @@
       if (normalizar(p, ca.getPropertyValue(p)) !== normalizar(p, cs.getPropertyValue(p))) {
         if (p.startsWith("--")) return "La variable `" + p + "` no existe o no tiene el valor que pide el enunciado.";
         return "El estilo de " + nombre(a) + " no coincide en `" + p + "`.";
+      }
+    }
+    // Pseudo-elementos que usa la solución (::before, ::after…): se comparan también su contenido y sus estilos
+    for (const ps of pseudos) {
+      let pa, pss;
+      try { pa = winA.getComputedStyle(a, ps); pss = winS.getComputedStyle(s, ps); } catch (e) { continue; }
+      for (const p of ["content"].concat(propiedades)) {
+        if (p === "content" && !/::(before|after|marker)/.test(ps)) continue;
+        if (pa.getPropertyValue(p) !== pss.getPropertyValue(p)) {
+          return "El pseudo-elemento `" + ps + "` de " + nombre(a) + " no coincide en `" + p + "`.";
+        }
       }
     }
     return null;
@@ -90,7 +101,7 @@
     }
     const difAttr = compararAtributos(a, s);
     if (difAttr) return difAttr;
-    const difEstilo = compararEstilos(a, s, ctx.winA, ctx.winS, ctx.propiedades);
+    const difEstilo = compararEstilos(a, s, ctx.winA, ctx.winS, ctx.propiedades, ctx.pseudos);
     if (difEstilo) return difEstilo;
 
     const na = nodosUtiles(a);
@@ -134,11 +145,32 @@
     return [...props];
   }
 
-  function cargar(iframe, codigo) {
-    return new Promise(resolver => {
-      iframe.onload = () => setTimeout(() => resolver({ doc: iframe.contentDocument, win: iframe.contentWindow }), 80);
-      iframe.srcdoc = EDITOR.construirDocumento(codigo);
-    });
+  /** Pseudo-elementos que aparecen en el CSS de la solución. */
+  function pseudosCSS(css) {
+    const encontrados = String(css || "").match(/::(before|after|first-letter|first-line|marker|placeholder)\b/g) || [];
+    return [...new Set(encontrados)];
+  }
+
+  /**
+   * Pasadas de la revisión: siempre la página quieta y, si la solución los usa, cada estado
+   * (:hover, :focus, :active) y dos anchos de pantalla (media queries). Ver js/pruebas.js.
+   */
+  function pasadas(css) {
+    const lista = [{ prefijo: "" }];
+    const limpio = String(css || "").replace(/\/\*[\s\S]*?\*\//g, "");
+    if (/:hover\b/.test(limpio)) lista.push({ estado: "hover", prefijo: "Al pasar el ratón (`:hover`): " });
+    if (/:focus/.test(limpio)) lista.push({ estado: "focus", prefijo: "Con el foco puesto (`:focus`): " });
+    if (/:active\b/.test(limpio)) lista.push({ estado: "active", prefijo: "Mientras se pulsa (`:active`): " });
+    if (/@media[^{]*(min|max)-width/.test(limpio)) {
+      lista.push({ ancho: 375, prefijo: "En una pantalla estrecha (375 px): " });
+      lista.push({ ancho: 1280, prefijo: "En una pantalla ancha (1280 px): " });
+    }
+    return lista;
+  }
+
+  function cargar(iframe, codigo, opciones = {}) {
+    iframe.style.width = (opciones.ancho || 800) + "px";
+    return PRUEBA.cargarEn(iframe, EDITOR.construirDocumento(codigo), opciones);
   }
 
   let marcos = null;
@@ -165,19 +197,32 @@
     if (vacio) return { ok: false, mensaje: "El editor está vacío. ¡Escribe tu código y vuelve a revisar!" };
 
     const [fa, fs] = iframes || obtenerMarcos();
-    const A = await cargar(fa, EDITOR.conBase(codigoAlumno, cssBase));
-    const S = await cargar(fs, EDITOR.conBase(solucion, cssBase));
-    const ctx = { winA: A.win, winS: S.win, propiedades: propiedadesCSS(solucion.css) };
+    const alumno = EDITOR.conBase(codigoAlumno, cssBase);
+    const sol = EDITOR.conBase(solucion, cssBase);
+    const base = { propiedades: propiedadesCSS(solucion.css), pseudos: pseudosCSS(solucion.css) };
+    const lista = pasadas(solucion.css);
+    let A, S;
 
-    // Página completa (<html>, <head>): se comparan el idioma y la cabeza solo si la solución los define
-    if (/<html[\s>]/i.test(solucion.html || "")) {
-      const difHtml = compararAtributos(A.doc.documentElement, S.doc.documentElement);
-      if (difHtml) return { ok: false, mensaje: difHtml };
-      const difHead = compararElementos(A.doc.head, S.doc.head, ctx);
-      if (difHead) return { ok: false, mensaje: difHead.replace("dentro de <head>", "en la cabeza (<head>)") };
+    for (const pasada of lista) {
+      A = await cargar(fa, alumno, pasada);
+      S = await cargar(fs, sol, pasada);
+      const ctx = Object.assign({ winA: A.win, winS: S.win }, base);
+
+      // Página completa (<html>, <head>): se comparan el idioma y la cabeza solo si la solución los define
+      if (!pasada.prefijo && /<html[\s>]/i.test(solucion.html || "")) {
+        const difHtml = compararAtributos(A.doc.documentElement, S.doc.documentElement);
+        if (difHtml) return { ok: false, mensaje: difHtml };
+        const difHead = compararElementos(A.doc.head, S.doc.head, ctx);
+        if (difHead) return { ok: false, mensaje: difHead.replace("dentro de <head>", "en la cabeza (<head>)") };
+      }
+      const dif = compararElementos(A.doc.body, S.doc.body, ctx);
+      if (dif) return { ok: false, mensaje: pasada.prefijo ? pasada.prefijo + dif.charAt(0).toLowerCase() + dif.slice(1) : dif };
     }
-    const dif = compararElementos(A.doc.body, S.doc.body, ctx);
-    if (dif) return { ok: false, mensaje: dif };
+    // La consola se mira en la página quieta
+    if (lista.length > 1) {
+      A = await cargar(fa, alumno);
+      S = await cargar(fs, sol);
+    }
 
     // Consola (Mundo JavaScript)
     const logsS = (S.win.__logs || []).map(normalizarTexto);
@@ -231,6 +276,7 @@
       destinos: opciones.destinos,
       pestanaActiva: pestanaInicial(paso),
       cssBase: paso.cssBase,
+      dispositivos: paso.dispositivos,
       inicial: Object.assign({ html: "", css: "", js: "" }, paso.inicial),
       codigo: borrador || undefined,
       alCambiar: codigo => PROGRESO.guardarBorrador(clave, codigo)
@@ -284,5 +330,5 @@
     return { editor };
   }
 
-  window.EJERCICIOS = { revisar, crear, normalizarTexto, propiedadesCSS, pestanaInicial };
+  window.EJERCICIOS = { revisar, crear, normalizarTexto, propiedadesCSS, pseudosCSS, pasadas, pestanaInicial };
 })();

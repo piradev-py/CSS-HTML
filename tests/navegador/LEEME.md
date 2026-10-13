@@ -7,6 +7,9 @@ Necesitan Node 22 o superior (usa el `WebSocket` integrado) y Edge instalado en 
 # Verificación automática de todas las lecciones listas (tests/verificar-lecciones.html)
 node tests/navegador/cdp.mjs esc-tests.mjs
 
+# Pruebas del motor de revisión (hover, media queries, pseudo-elementos, animaciones)
+node tests/navegador/cdp.mjs esc-motor.mjs
+
 # Recorrer un mundo entero: ejercicio, controles, quiz, reto y victoria de cada lección
 MUNDO=2 node tests/navegador/cdp.mjs esc-mundo.mjs        # bash
 set MUNDO=2&& node tests\navegador\cdp.mjs esc-mundo.mjs  # cmd de Windows

@@ -15,6 +15,15 @@ const escribir = codigo => `(() => {
   }
 })()`;
 
+// Espera a que el botón «Revisar» termine (la revisión puede hacer varias pasadas: estados, anchos…)
+async function esperarRevision(b) {
+  await b.esperar(300);
+  for (let i = 0; i < 40; i++) {
+    if (!(await b.eval("document.querySelector('.resultado-revision').className.includes('revisando')"))) break;
+    await b.esperar(250);
+  }
+}
+
 export default async function (b) {
   await b.tam(1366, 768);
   await b.movimiento();
@@ -52,12 +61,12 @@ export default async function (b) {
         const esperada = await b.eval(`EJERCICIOS.pestanaInicial(${P}) || 'html'`);
         // Revisar sin tocar nada (código inicial) debe suspender
         await b.eval("document.querySelector('[data-revisar]').click()");
-        await b.esperar(1500);
+        await esperarRevision(b);
         const mal = await b.eval("document.querySelector('.resultado-revision').className.includes('incorrecto')");
         const msgMal = await b.eval("document.querySelector('.resultado-revision').textContent");
         await b.eval(escribir(await b.eval(`${P}.solucion`)));
         await b.eval("document.querySelector('[data-revisar]').click()");
-        await b.esperar(1500);
+        await esperarRevision(b);
         const bien = await b.eval("(() => { const r = document.querySelector('.resultado-revision'); return r.classList.contains('correcto'); })()");
         if (!bien) problemas.push("paso " + (i + 1) + ": la solución no aprueba → " + await b.eval("document.querySelector('.resultado-revision').textContent"));
         if (!bloqueado || !mal || pestana !== esperada) problemas.push("paso " + (i + 1) + ": ejercicio → bloqueado=" + bloqueado + " suspendeInicial=" + mal + " pestaña=" + pestana + "/" + esperada);

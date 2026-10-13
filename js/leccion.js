@@ -181,6 +181,7 @@
           const pr = panel("👀 Resultado", '<iframe class="resultado" title="Resultado del ejemplo"></iframe>', "panel-resultado");
           colResultado.appendChild(pr);
           pr.querySelector("iframe").srcdoc = EDITOR.construirDocumento(paso.ejemplo);
+          if (paso.dispositivos) EDITOR.anadirDispositivos(pr);
           if (paso.consejo) zona.appendChild(MASCOTA.crear(UI.md(paso.consejo)));
         } else {
           // Sin ejemplo: Tagui ocupa la pizarra con su consejo

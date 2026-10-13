@@ -532,3 +532,17 @@ iframe.resultado {
   .espacio-trabajo.sin-codigo .col-pizarra { display: flex; }
   .navegacion-pasos { position: sticky; bottom: 0; }
 }
+
+/* Botones 💻/📱 del resultado (lecciones de responsive) */
+.dispositivos { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; }
+.medida-resultado { font-size: 0.8rem; font-weight: 800; color: var(--texto-suave); font-variant-numeric: tabular-nums; min-width: 4.5em; text-align: right; }
+.dispositivos .mini-boton { padding: 4px 8px; font-size: 0.8rem; }
+.dispositivos .mini-boton.activo { background: var(--color, var(--fondo-2)); border-color: var(--color, var(--borde)); color: #fff; }
+.panel-resultado.modo-movil { background: var(--superficie-2); }
+.panel-resultado.modo-movil iframe.resultado {
+  width: 375px;
+  max-width: 100%;
+  align-self: center;
+  border-left: 2px solid var(--borde);
+  border-right: 2px solid var(--borde);
+}

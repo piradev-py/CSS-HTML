@@ -66,6 +66,31 @@
     }
   }
 
+  /**
+   * Botones 💻/📱 y medida en px del resultado, para las lecciones de responsive.
+   * Se añaden a la barra de un panel de resultado que contiene un iframe.resultado.
+   */
+  function anadirDispositivos(panel) {
+    const barra = panel.querySelector(".barra-panel");
+    const iframe = panel.querySelector("iframe.resultado");
+    const caja = document.createElement("span");
+    caja.className = "dispositivos";
+    caja.innerHTML =
+      '<span class="medida-resultado" title="Ancho del resultado"></span>' +
+      '<button class="mini-boton activo" data-movil="0" title="Usar todo el ancho del panel (arrastra los separadores para cambiarlo)">💻 Libre</button>' +
+      '<button class="mini-boton" data-movil="1" title="Ver el resultado con el ancho de un móvil (375 px)">📱 Móvil</button>';
+    barra.appendChild(caja);
+    const medida = caja.querySelector(".medida-resultado");
+    const medir = () => { medida.textContent = Math.round(iframe.getBoundingClientRect().width) + " px"; };
+    caja.querySelectorAll("[data-movil]").forEach(b => b.addEventListener("click", () => {
+      panel.classList.toggle("modo-movil", b.dataset.movil === "1");
+      caja.querySelectorAll("[data-movil]").forEach(x => x.classList.toggle("activo", x === b));
+      medir();
+    }));
+    if (window.ResizeObserver) new ResizeObserver(medir).observe(iframe);
+    medir();
+  }
+
   function crear(contenedor, opciones) {
     const pestanas = opciones.pestanas || ["html"];
     const inicial = Object.assign({ html: "", css: "", js: "" }, opciones.inicial);
@@ -107,14 +132,16 @@
     const botonesPestana = [...raiz.querySelectorAll(".pestana")];
     const bReiniciar = raiz.querySelector("[data-reiniciar]");
     const panelCodigo = raiz.querySelector(".panel-codigo");
+    const panelResultado = raiz.querySelector(".panel-resultado");
 
     // Con "destinos", el código y el resultado van cada uno a su columna del espacio de trabajo
     if (opciones.destinos) {
       opciones.destinos.codigo.appendChild(panelCodigo);
-      opciones.destinos.resultado.appendChild(raiz.querySelector(".panel-resultado"));
+      opciones.destinos.resultado.appendChild(panelResultado);
     } else {
       contenedor.appendChild(raiz);
     }
+    if (opciones.dispositivos) anadirDispositivos(panelResultado);
 
     function pintarResaltado() {
       const texto = textarea.value;
@@ -223,5 +250,5 @@
     return { raiz, iframe, obtener, fijar, refrescar, enfocar: () => textarea.focus() };
   }
 
-  window.EDITOR = { crear, construirDocumento, conBase, errorAmigable };
+  window.EDITOR = { crear, construirDocumento, conBase, errorAmigable, anadirDispositivos };
 })();

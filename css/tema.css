@@ -127,7 +127,11 @@ code, pre, textarea {
   border-radius: 6px;
   padding: 0.05em 0.35em;
   font-size: 0.9em;
-  white-space: nowrap;
+  /* Los códigos largos (animation: …) pueden partirse para no salirse de la tarjeta */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 :focus-visible {

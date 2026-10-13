@@ -30,6 +30,7 @@
   function evaluar(codigo, comprobaciones, iframe) {
     const miTurno = ++turno;
     const marco = iframe || obtenerIframe();
+    PRUEBA.limpiar();
     return new Promise(resolver => {
       marco.onload = () => {
         setTimeout(async () => {
@@ -47,8 +48,19 @@
           resolver(!iframe && miTurno !== turno ? null : resultados);
         }, 60);
       };
-      marco.srcdoc = EDITOR.construirDocumento(codigo);
+      // Movimiento "normal" siempre: el resultado no depende de si el sistema reduce las animaciones
+      marco.srcdoc = PRUEBA.prepararHTML(EDITOR.construirDocumento(codigo), {});
     });
+  }
+
+  /** Pestaña con la que se abre el reto: la indicada o, si el HTML ya viene hecho y solo falta CSS, la de CSS. */
+  function pestanaReto(paso) {
+    if (paso.pestana) return paso.pestana;
+    const ini = paso.inicial || {};
+    const sol = paso.solucion || {};
+    const igual = (a, b) => String(a || "").trim() === String(b || "").trim();
+    if ((ini.html || "").trim() && igual(ini.html, sol.html) && !igual(ini.css, sol.css) && igual(ini.js, sol.js)) return "css";
+    return undefined;
   }
 
   function crear(contenedor, paso, opciones) {
@@ -91,8 +103,9 @@
     const editor = EDITOR.crear(raiz.querySelector(".reto-editor"), {
       pestanas,
       destinos: opciones.destinos,
-      pestanaActiva: paso.pestana,
+      pestanaActiva: pestanaReto(paso),
       cssBase: paso.cssBase,
+      dispositivos: paso.dispositivos,
       inicial: paso.inicial,
       codigo: PROGRESO.borrador(leccionId) || undefined,
       alCambiar: codigo => {
