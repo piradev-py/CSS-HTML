@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.1.2 · 2026-10-14
+
+- Editor: los números de línea van en su propia franja, separada por una raya, y el código empieza después.
+  Antes, al desplazar a los lados una línea larga, el código pasaba por debajo de los números y se mezclaban.
+
 ## 1.1.1 · 2026-10-14
 
 - Editor: al escribir `}` al principio de una línea, se quita un nivel de sangría y la llave queda a la altura

@@ -234,20 +234,24 @@ iframe.resultado {
 .pestana-css.activa { border-color: var(--mundo-css); }
 .pestana-js.activa { border-color: var(--mundo-js); }
 
-/* Área de código: textarea transparente encima del resaltado */
+/* Área de código: textarea transparente encima del resaltado.
+   Los números van en su propia franja (44px + 1px de raya); el código empieza después,
+   así al desplazarlo a los lados no se mete debajo de los números. */
 .area-codigo {
   position: relative;
   flex: 1;
   min-height: 0;
-  background: var(--codigo-fondo);
+  background:
+    linear-gradient(to right, rgb(0 0 0 / 0.2) 0 44px, rgb(255 255 255 / 0.08) 44px 45px, transparent 45px),
+    var(--codigo-fondo);
   overflow: hidden;
 }
 .area-codigo textarea,
 .area-codigo .capa-resaltado {
   position: absolute;
-  inset: 0;
+  inset: 0 0 0 45px;
   margin: 0;
-  padding: 14px 14px 14px 52px;
+  padding: 14px 14px 14px 10px;
   border: 0;
   font-family: var(--fuente-codigo);
   font-size: 15px;
@@ -272,8 +276,8 @@ iframe.resultado {
   position: absolute;
   top: 0;
   left: 0;
-  width: 40px;
-  padding: 14px 8px 14px 0;
+  width: 44px;
+  padding: 14px 10px 14px 0;
   font-family: var(--fuente-codigo);
   font-size: 15px;
   line-height: 1.6;
