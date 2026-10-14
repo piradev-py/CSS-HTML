@@ -55,13 +55,13 @@ CURSO.registrar({
     },
     {
       tipo: "ejercicio",
-      enunciado: "Escribe un enlace `<a>` sobre los pulpos 🐙 que se abra en una pestaña nueva. Lleva estos tres atributos, en este orden:\n\n• `href=\"https://es.wikipedia.org/wiki/Octopoda\"`\n• `target=\"_blank\"`\n• `rel=\"noopener\"`\n\nY su texto dice **Los pulpos en la Wikipedia (se abre en otra pestaña)**.\n\nCuando lo tengas, púlsalo: como estás en la web de prácticas, no sales de aquí; verás una página de prueba con la dirección y un enlace para volver.",
+      enunciado: "Escribe un enlace `<a>` sobre los pulpos 🐙 que se abra en una pestaña nueva. Lleva estos tres atributos:\n\n• `href=\"https://es.wikipedia.org/wiki/Octopoda\"`\n• `target=\"_blank\"`\n• `rel=\"noopener\"`\n\nY su texto dice **Los pulpos en la Wikipedia**.\n\nCuando lo tengas, púlsalo: como estás en la web de prácticas, no sales de aquí; verás una página de prueba con la dirección y un enlace para volver.",
       pistas: [
         "Los atributos van todos dentro de la etiqueta de apertura <a …>, separados por espacios y siempre así: nombre=\"valor\". El texto va entre <a …> y </a>.",
-        "Empieza así:\n<a href=\"https://es.wikipedia.org/wiki/Octopoda\" target=\"_blank\" …>\nFalta el rel, el texto y el cierre </a>."
+        "Empieza así:\n<a href=\"https://es.wikipedia.org/wiki/Octopoda\" target=\"_blank\" …>\nFalta el rel, el texto «Los pulpos en la Wikipedia» y el cierre </a>."
       ],
       solucion: {
-        html: `<a href="https://es.wikipedia.org/wiki/Octopoda" target="_blank" rel="noopener">Los pulpos en la Wikipedia (se abre en otra pestaña)</a>
+        html: `<a href="https://es.wikipedia.org/wiki/Octopoda" target="_blank" rel="noopener">Los pulpos en la Wikipedia</a>
 `,
         css: ""
       }

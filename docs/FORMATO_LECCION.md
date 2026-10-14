@@ -85,6 +85,9 @@ Cómo se revisa (la solución es **única**, pero con flexibilidad en lo que no 
 Reglas para escribir el enunciado:
 - Tiene que decir **exactamente** qué etiquetas, textos y atributos escribir: el alumno no puede adivinar.
   Escribe los textos exactos en **negrita**.
+- Los textos que hay que copiar, cortos y sin paréntesis ni aclaraciones: «Los pulpos en la Wikipedia (se abre en
+  otra pestaña)» parece una nota del profesor, y el alumno no la escribe. Si una aclaración es buena costumbre,
+  cuéntala en la explicación o en el consejo, no la exijas en el texto.
 - Pide solo lo que se acaba de explicar. Corto: 1–3 elementos en las primeras lecciones.
 - Distinto del reto final: el ejercicio practica **una** idea; el reto combina varias.
 

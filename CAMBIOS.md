@@ -19,6 +19,12 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.0.1 · 2026-10-14
+
+- html-06, ejercicio de los pulpos: el texto del enlace es solo **Los pulpos en la Wikipedia**. Antes pedía
+  también «(se abre en otra pestaña)», que parecía una aclaración y no algo que hubiera que escribir.
+  El enunciado ya no dice «en este orden»: el orden de los atributos nunca contó.
+
 ## 1.0.0 · 2026-10-14
 
 Primera versión numerada.
