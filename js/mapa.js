@@ -50,7 +50,8 @@
       const hechas = m.lecciones.filter(l => PROGRESO.estaCompletada(l.id)).length;
       const listas = m.lecciones.filter(l => l.listo).length;
       const abierto = PROGRESO.estaDesbloqueada(m.lecciones[0].id);
-      // <details>: cada mundo se abre y se cierra pulsando su cabecera. Al entrar, todos cerrados.
+      // <details>: cada mundo se abre y se cierra pulsando su cabecera. Al entrar, todos cerrados,
+      // salvo si venimos de una lección (index.html#mundo-N): ver abrirMundoDelEnlace().
       const sec = document.createElement("details");
       sec.className = "mundo mundo-" + m.clave + (abierto ? "" : " mundo-cerrado");
       sec.id = "mundo-" + m.numero;
@@ -154,6 +155,14 @@
     svg.innerHTML = '<path d="' + d + '"/>';
   }
 
+  /** Si la dirección trae #mundo-N (volvemos de una lección), abre ese mundo y baja hasta él. */
+  function abrirMundoDelEnlace() {
+    const mundo = location.hash && document.getElementById(location.hash.slice(1));
+    if (!mundo || !mundo.matches("details.mundo")) return;
+    mundo.open = true;
+    mundo.scrollIntoView({ block: "start" });
+  }
+
   function maquetarAbiertos() {
     document.querySelectorAll(".mundo[open] .camino").forEach(maquetarCamino);
   }
@@ -195,6 +204,7 @@
 
   pintarBienvenida();
   pintarMundos();
+  abrirMundoDelEnlace();
   pintarInsignias();
   pintarOpciones();
 

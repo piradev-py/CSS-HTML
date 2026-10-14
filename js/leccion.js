@@ -11,14 +11,16 @@
   const id = new URLSearchParams(location.search).get("id");
   const principal = document.querySelector("main");
   const info = CURSO.buscar(id);
+  // Al volver al mapa, se abre directamente el mundo de esta lección (ver js/mapa.js)
+  const urlMapa = info ? "index.html#mundo-" + info.mundo.numero : "index.html";
 
-  UI.montarCabecera('<a class="boton-icono" href="index.html" aria-label="Volver al mapa">🗺️</a>');
+  UI.montarCabecera('<a class="boton-icono" href="' + urlMapa + '" aria-label="Volver al mapa">🗺️</a>');
 
   function aviso(emoji, titulo, texto) {
     document.body.classList.remove("con-espacio");
     principal.innerHTML =
       '<div class="aviso-grande tarjeta"><div class="aviso-emoji">' + emoji + "</div><h1>" + titulo + "</h1><p>" + texto + "</p>" +
-      '<a class="boton grande azul" href="index.html">🗺️ Volver al mapa</a></div>';
+      '<a class="boton grande azul" href="' + urlMapa + '">🗺️ Volver al mapa</a></div>';
   }
 
   if (!info) return aviso("🧭", "Lección no encontrada", "Parece que esta lección no existe. Vuelve al mapa y elige otra.");
@@ -365,7 +367,7 @@
     });
 
     let botonSiguiente = "";
-    if (sig && sig.listo) botonSiguiente = '<a class="boton grande" href="leccion.html?id=' + sig.id + '">Siguiente lección →</a>';
+    if (sig && sig.listo) botonSiguiente = '<a class="boton grande" data-siguiente-leccion href="leccion.html?id=' + sig.id + '">Siguiente lección →</a>';
     else if (sig) botonSiguiente = '<span class="texto-suave">🚧 La siguiente lección llegará pronto</span>';
 
     const m = CELEBRAR.modal(
@@ -373,10 +375,13 @@
       "<h2>¡Lección completada!</h2>" +
       '<div class="estrellas-grandes">' + [1, 2, 3].map(n => '<span class="' + (n <= estrellas ? "ganada" : "") + '" style="animation-delay:' + (n * 0.25) + 's">⭐</span>').join("") + "</div>" +
       '<p class="texto-suave">' + textoEstrellas + "</p>" + extra +
-      '<div class="acciones"><a class="boton secundario" href="index.html">🗺️ Mapa</a>' +
+      '<div class="acciones"><a class="boton secundario" href="' + urlMapa + '">🗺️ Mapa</a>' +
       '<button class="boton secundario" data-repetir>🔁 Repetir reto</button>' + botonSiguiente + "</div>"
     );
     m.elemento.querySelector(".modal").classList.add("modal-victoria");
+    // El modal enfoca su primer botón (el mapa); así Enter lleva a la siguiente lección
+    const enlaceSiguiente = m.elemento.querySelector("[data-siguiente-leccion]");
+    if (enlaceSiguiente) enlaceSiguiente.focus();
     m.elemento.querySelector("[data-repetir]").addEventListener("click", () => {
       PROGRESO.borrarBorrador(leccion.id);
       location.hash = "reto";
