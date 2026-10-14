@@ -567,13 +567,27 @@
       programarRefresco();
     }
 
+    /** La vista sigue al cursor al bajar, con un pequeño margen (una línea) bajo él para no escribir pegado al borde. */
+    function margenBajoCursor() {
+      const alto = parseFloat(getComputedStyle(textarea).lineHeight) || 24;
+      const linea = textarea.value.slice(0, textarea.selectionEnd).split("\n").length;
+      const bajoCursor = 14 + linea * alto + alto;
+      if (bajoCursor > textarea.scrollTop + textarea.clientHeight) {
+        textarea.scrollTop = bajoCursor - textarea.clientHeight;
+      }
+    }
+
     /* --- Eventos --- */
     textarea.addEventListener("input", () => {
       codigo[activa] = textarea.value;
       pintarResaltado();
       programarRefresco();
+      requestAnimationFrame(margenBajoCursor);
     });
     textarea.addEventListener("scroll", sincronizarScroll);
+    textarea.addEventListener("keyup", e => {
+      if (/^(ArrowDown|PageDown|End)$/.test(e.key)) margenBajoCursor();
+    });
 
     textarea.addEventListener("keydown", e => {
       if (e.key === "Tab" && !e.shiftKey && !e.ctrlKey && !e.altKey) {

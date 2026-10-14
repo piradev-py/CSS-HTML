@@ -251,7 +251,8 @@ iframe.resultado {
   position: absolute;
   inset: 0 0 0 45px;
   margin: 0;
-  padding: 14px 14px 14px 10px;
+  /* Abajo, un margen de una línea más: así no se escribe pegado al borde (margenBajoCursor) */
+  padding: 14px 14px 38px 10px;
   border: 0;
   font-family: var(--fuente-codigo);
   font-size: 15px;

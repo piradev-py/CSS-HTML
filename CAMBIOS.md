@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.1.5 · 2026-10-14
+
+- Editor: al escribir o bajar con las flechas, la vista sigue al cursor y deja un pequeño margen (una línea)
+  bajo él. Antes, con mucho código, se escribía pegado al borde de abajo, medio escondido.
+
 ## 1.1.4 · 2026-10-14
 
 - Revisor de escritura: avisa cuando el navegador no entiende una propiedad o un valor CSS (`space-betwen`,
