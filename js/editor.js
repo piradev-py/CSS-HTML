@@ -584,6 +584,15 @@
         }
         e.preventDefault();
         insertarTexto(textarea, "\n" + sangria);
+      } else if (e.key === "}" && textarea.selectionStart === textarea.selectionEnd) {
+        // Una "}" al principio de la línea vuelve a la altura de su "{" (quita un nivel de sangría)
+        const antes = textarea.value.slice(0, textarea.selectionStart);
+        const linea = antes.slice(antes.lastIndexOf("\n") + 1);
+        if (/^ {2,}$/.test(linea)) {
+          e.preventDefault();
+          textarea.setSelectionRange(textarea.selectionStart - 2, textarea.selectionStart);
+          insertarTexto(textarea, "}");
+        }
       }
     });
 

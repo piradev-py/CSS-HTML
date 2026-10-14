@@ -88,7 +88,7 @@ CURSO.registrar({
     },
     {
       tipo: "ejercicio",
-      enunciado: "La carta de la pizzería 🍕 ya está lista para el móvil: una columna (es el CSS base, ya escrito). Amplíala, **mobile first**, con dos media queries en este orden:\n\n1. `@media (min-width: 600px)`: al selector `.pizzas` ponle `grid-template-columns` con el valor `repeat(2, 1fr)`.\n2. `@media (min-width: 1000px)`: al selector `.pizzas` ponle `grid-template-columns` con el valor `repeat(3, 1fr)`.\n\nSi tu resultado mide menos de 600 px verás una sola columna: arrastra los separadores para ensancharlo.",
+      enunciado: "La carta de la pizzería 🍕 ya está lista para el móvil: una columna (es el CSS base, ya escrito). Amplíala, **mobile first**, con dos media queries en este orden:\n\n1. `@media (min-width: 600px)`: al selector `.pizzas` ponle `grid-template-columns` con el valor `repeat(2, 1fr)`.\n2. `@media (min-width: 1000px)`: al selector `.pizzas` ponle `grid-template-columns` con el valor `repeat(3, 1fr)`.\n\n⚠️ Ojo con las llaves: cada `@media { }` lleva **dentro** otra regla con sus propias `{ }`. La sangría (los espacios de la izquierda) no cuenta para el navegador: lo que importa es que cada `{` tenga su `}`.\n\nSi tu resultado mide menos de 600 px verás una sola columna: arrastra los separadores para ensancharlo.",
       dispositivos: true,
       cssBase: `body { font-family: sans-serif; }
 .pizzas { display: grid; gap: 10px; }
@@ -187,7 +187,7 @@ aside {
     },
     {
       tipo: "reto",
-      enunciado: "¡La web del Festival Sonido Solar 🎸! En el móvil todo va en una columna (ya está hecho: es el CSS base). Hazla **mobile first**:\n\n1. Añade al final una media query `@media (min-width: 768px)`.\n2. Dentro, pon el `.contenido` en **fila** (`flex-direction: row`), para que la barra `.lateral` quede al lado del contenido `.principal`.\n3. Dentro también, haz que `.principal` ocupe el **doble** de ancho que `.lateral` (con `flex`).\n\nPrueba con 📱 y arrastrando los separadores.",
+      enunciado: "¡La web del Festival Sonido Solar 🎸! En el móvil todo va en una columna (ya está hecho: es el CSS base). Hazla **mobile first**:\n\n1. Añade al final una media query `@media (min-width: 768px)`.\n2. Dentro, pon el `.contenido` en **fila** (`flex-direction: row`), para que la barra `.lateral` quede al lado del contenido `.principal`.\n3. Dentro también, haz que `.principal` ocupe el **doble** de ancho que `.lateral` (con `flex`).\n\n⚠️ Ojo con las llaves: la `}` de la `@media` va al final, **después** de cerrar las tres reglas de dentro. Los espacios de la izquierda no cuentan; las llaves, sí.\n\nPrueba con 📱 y arrastrando los separadores.",
       dispositivos: true,
       cssBase: `body { font-family: sans-serif; }
 .cabecera { background-color: darkorange; color: white; padding: 4px 16px; border-radius: 10px; margin-bottom: 16px; }

@@ -19,6 +19,13 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.1.1 · 2026-10-14
+
+- Editor: al escribir `}` al principio de una línea, se quita un nivel de sangría y la llave queda a la altura
+  de su `{`. Antes se quedaba metida hacia dentro, y en las `@media` (llaves dentro de llaves) costaba ver qué
+  cerraba cada una.
+- hc-06: el ejercicio y el reto avisan de que la sangría no cuenta, pero las llaves sí: cada `{` necesita su `}`.
+
 ## 1.1.0 · 2026-10-14
 
 - **Buzón de sugerencias**: botón 💬 en la cabecera (mapa y lecciones). Abre una ventana para avisar de un error,
