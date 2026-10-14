@@ -3,7 +3,8 @@
    Enlaces — <a>, atributos, href, URL, target="_blank" +
    rel="noopener", id y enlaces internos con #.
    Nota: en el resultado, los enlaces externos NO navegan (el motor
-   los intercepta y muestra un aviso); los que empiezan por # sí.
+   los intercepta y muestra una página de prueba con un enlace para
+   volver); los que empiezan por # sí saltan dentro del resultado.
    Por eso el reto comprueba atributos, no la navegación.
    ============================================================ */
 CURSO.registrar({
@@ -54,7 +55,7 @@ CURSO.registrar({
     },
     {
       tipo: "ejercicio",
-      enunciado: "Escribe un enlace `<a>` sobre los pulpos 🐙 que se abra en una pestaña nueva. Lleva estos tres atributos, en este orden:\n\n• `href=\"https://es.wikipedia.org/wiki/Octopoda\"`\n• `target=\"_blank\"`\n• `rel=\"noopener\"`\n\nY su texto dice **Los pulpos en la Wikipedia (se abre en otra pestaña)**.\n\nCuando lo tengas, púlsalo: como estás en la web de prácticas, no sales de aquí; verás un aviso con la dirección.",
+      enunciado: "Escribe un enlace `<a>` sobre los pulpos 🐙 que se abra en una pestaña nueva. Lleva estos tres atributos, en este orden:\n\n• `href=\"https://es.wikipedia.org/wiki/Octopoda\"`\n• `target=\"_blank\"`\n• `rel=\"noopener\"`\n\nY su texto dice **Los pulpos en la Wikipedia (se abre en otra pestaña)**.\n\nCuando lo tengas, púlsalo: como estás en la web de prácticas, no sales de aquí; verás una página de prueba con la dirección y un enlace para volver.",
       pistas: [
         "Los atributos van todos dentro de la etiqueta de apertura <a …>, separados por espacios y siempre así: nombre=\"valor\". El texto va entre <a …> y </a>.",
         "Empieza así:\n<a href=\"https://es.wikipedia.org/wiki/Octopoda\" target=\"_blank\" …>\nFalta el rel, el texto y el cierre </a>."

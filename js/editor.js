@@ -166,11 +166,52 @@
     };
 
     /* ---- Enlaces y formularios no salen de la práctica ---- */
+    // En un srcdoc, href="#x" apunta a la página del curso (y la cargaría aquí dentro): el salto se hace a mano
+    function irAlAncla(nombre) {
+      let destino = null;
+      try { destino = nombre ? document.getElementById(decodeURIComponent(nombre)) : null; } catch (e) { /* nombre raro */ }
+      if (destino) destino.scrollIntoView();
+      else if (!nombre || nombre.toLowerCase() === "top") window.scrollTo(0, 0);
+    }
+
+    // Los demás enlaces abren una página de prueba POR ENCIMA del ejemplo, que sigue intacto debajo.
+    // Va en un shadow DOM para que el CSS del alumno no la descoloque (ni ella toque el suyo).
+    function paginaDePrueba(direccion, pestanaNueva) {
+      const anterior = document.querySelector("csshtml-pagina-prueba");
+      if (anterior) anterior.remove();
+      const host = document.createElement("csshtml-pagina-prueba");
+      const sombra = host.attachShadow({ mode: "open" });
+      sombra.innerHTML =
+        "<style>" +
+          ":host { all: initial; position: fixed; inset: 0; z-index: 2147483647; }" +
+          ".pagina { box-sizing: border-box; height: 100%; overflow: auto; padding: 24px; background: #fffaf3; color: #2b2b3a;" +
+          " font: 16px/1.5 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }" +
+          ".direccion { max-width: 100%; padding: 6px 12px; border-radius: 999px; background: #ece6dc; font-size: 13px; word-break: break-all; }" +
+          ".icono { font-size: 48px; margin-top: 16px; }" +
+          "h1 { font-size: 24px; margin: 8px 0; }" +
+          "p { margin: 0 0 16px; max-width: 34em; }" +
+          "a { color: #fff; background: #3b82f6; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; }" +
+        "</style>" +
+        '<div class="pagina">' +
+          '<div class="direccion">🔗 <span></span></div>' +
+          '<div class="icono">🧪</div>' +
+          "<h1>Esta es una página de prueba</h1>" +
+          "<p>En las prácticas los enlaces no salen de aquí. En una web de verdad, el navegador te habría llevado a esa dirección" +
+          (pestanaNueva ? " en una pestaña nueva." : ".") + "</p>" +
+          '<a href="#">← Volver al ejemplo</a>' +
+        "</div>";
+      sombra.querySelector(".direccion span").textContent = direccion;
+      sombra.querySelector("a").addEventListener("click", e => { e.preventDefault(); host.remove(); });
+      (document.body || document.documentElement).appendChild(host);
+    }
+
     document.addEventListener("click", e => {
       const a = e.target.closest && e.target.closest("a[href]");
-      if (!a || a.getAttribute("href").charAt(0) === "#") return;
+      if (!a || e.defaultPrevented) return;
       e.preventDefault();
-      enviar("enlace", a.href);
+      const href = a.getAttribute("href").trim();
+      if (href.charAt(0) === "#") irAlAncla(href.slice(1));
+      else paginaDePrueba(href, (a.getAttribute("target") || "").trim().toLowerCase() === "_blank");
     });
     document.addEventListener("submit", e => {
       // Si el código del alumno ya lo ha frenado (preventDefault), no se avisa de ningún envío
@@ -403,9 +444,7 @@
     window.addEventListener("message", e => {
       if (e.source !== iframe.contentWindow || !e.data || !e.data.csshtml) return;
       const d = e.data;
-      if (d.csshtml === "enlace") {
-        aviso.textContent = "🔗 Enlace a: " + d.texto + " (en las prácticas no salimos de la página)";
-      } else if (d.csshtml === "formulario") {
+      if (d.csshtml === "formulario") {
         aviso.textContent = "📨 ¡Formulario enviado! (en las prácticas no se envía a ningún sitio)";
       } else if (d.csshtml === "almacen") {
         if (!almacen) return;
