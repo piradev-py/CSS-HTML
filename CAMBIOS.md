@@ -19,6 +19,13 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.1.4 · 2026-10-14
+
+- Revisor de escritura: avisa cuando el navegador no entiende una propiedad o un valor CSS (`space-betwen`,
+  `space between`, `traslateY`, `-20` sin `px`…), con la línea, y también de los espacios «raros» que llegan
+  al copiar y pegar. Antes el navegador los tiraba sin decir nada y solo salía «no coincide en
+  `justify-content`», sin pistas de qué estaba mal.
+
 ## 1.1.3 · 2026-10-14
 
 - hc-09, reto del fantasma: nueva comprobación de que el `@keyframes flotar` mueve de verdad. Antes aprobaba

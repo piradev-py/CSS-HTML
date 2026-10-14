@@ -5,7 +5,8 @@
    lo perdone:
    - HTML: cada etiqueta abierta se cierra, bien anidadas, sin `>` ni
      comillas sin cerrar.
-   - CSS: las `{ }` cuadran y cada declaración termina en `;`.
+   - CSS: las `{ }` cuadran, cada declaración termina en `;` y el
+     navegador entiende la propiedad y el valor (CSS.supports).
    - JS: `( ) [ ] { }` y las comillas cuadran, y cada instrucción
      termina en `;`.
    Uso: ESCRITURA.revisar({ html, css, js }) → null si todo está bien,
@@ -134,7 +135,30 @@
     if (alCerrar) {
       return { linea: n, mensaje: "falta el `;` al final de `" + recortar(texto) + "` (línea " + n + ")." };
     }
-    return null;
+    return revisarValor(seg, texto, n);
+  }
+
+  /**
+   * ¿Entiende el navegador esta declaración? Si no, la tira sin avisar (traslateY, -20 sin px,
+   * space-betwen…) y el alumno ve que «no funciona» sin saber por qué.
+   */
+  function revisarValor(seg, texto, n) {
+    if (typeof CSS === "undefined" || !CSS.supports) return null;
+    // Solo cuentan como espacio los de CSS: un espacio duro (copiado de una web) no lo es
+    const recortarCSS = s => s.replace(/^[ \t\r\n\f]+|[ \t\r\n\f]+$/g, "");
+    const dos = seg.indexOf(":");
+    const prop = recortarCSS(seg.slice(0, dos)).toLowerCase();
+    const valor = recortarCSS(seg.slice(dos + 1).replace(/!\s*important\s*$/i, ""));
+    if (!prop || prop.startsWith("--") || !valor || CSS.supports(prop, valor)) return null;
+    // seg y texto tienen las mismas posiciones (limpiarCSS solo cambia comentarios y comillas por espacios)
+    const original = texto.slice(dos + 1).replace(/ /g, "␣").trim();
+    if (original.includes("␣")) {
+      return { linea: n, mensaje: "en la línea " + n + " hay un espacio «raro» (␣) en `" + recortar(original) + "`, quizá de copiar y pegar: bórralo y escribe un espacio normal." };
+    }
+    if (!CSS.supports(prop, "inherit")) {
+      return { linea: n, mensaje: "la propiedad `" + prop + "` de la línea " + n + " no existe: revisa cómo está escrita." };
+    }
+    return { linea: n, mensaje: "el navegador no entiende el valor `" + recortar(original) + "` de `" + prop + "` (línea " + n + "). Revisa cómo está escrito: una letra, un guion, una unidad como `px`…" };
   }
 
   function revisarCSS(css) {
