@@ -191,7 +191,8 @@
 
   /**
    * Pasadas de la revisión: siempre la página quieta y, si la solución los usa, cada estado
-   * (:hover, :focus, :active) y dos anchos de pantalla (media queries). Ver js/pruebas.js.
+   * (:hover, :focus, :active), dos anchos de pantalla (media queries) y la mitad de las
+   * animaciones (@keyframes). Ver js/pruebas.js.
    */
   function pasadas(css) {
     const lista = [{ prefijo: "" }];
@@ -203,6 +204,8 @@
       lista.push({ ancho: 375, prefijo: "En una pantalla estrecha (375 px): " });
       lista.push({ ancho: 1280, prefijo: "En una pantalla ancha (1280 px): " });
     }
+    // Con la animación parada al principio no se ve si el "to" está bien escrito: se mira también a mitad
+    if (/@keyframes\b/.test(limpio)) lista.push({ fotograma: "mitad", prefijo: "A mitad de la animación: " });
     return lista;
   }
 

@@ -423,7 +423,12 @@
     function mostrar(codigo) {
       ultimo = codigo;
       if (consola) consola.innerHTML = "";
-      aviso.textContent = "";
+      // Con «reducir movimiento» activado en el sistema, el @media (prefers-reduced-motion: reduce) se cumple
+      // y las animaciones que quita no se mueven: se avisa para que no parezca un fallo
+      const reducido = /prefers-reduced-motion\s*:\s*reduce/.test(codigo.css || "") &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      aviso.textContent = reducido ? "🐢 Tu ordenador reduce el movimiento" : "";
+      aviso.title = reducido ? "Tienes activado «reducir movimiento» en tu sistema, así que se cumple tu @media (prefers-reduced-motion: reduce) y lo que quita no se mueve. Para verlo moverse, quita ese @media un momento o desactiva la opción." : "";
       iframe.srcdoc = construirDocumento(codigo);
     }
 

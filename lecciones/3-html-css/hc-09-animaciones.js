@@ -215,7 +215,7 @@ body { background-color: #fff8db; }
     },
     {
       tipo: "reto",
-      enunciado: "👻 ¡El castillo encantado está cargando! Dale vida:\n\n1. Escribe un `@keyframes flotar` que vaya `from` un `transform: translateY(0)` `to` un `transform: translateY(-20px)`, y pónselo al `.fantasma` con `animation: flotar 3s ease-in-out infinite alternate;`.\n2. Haz que el `.cargando` gire sin parar con el `@keyframes girar`, que ya está escrito: `animation: girar 1.2s linear infinite;` (`linear` significa «siempre a la misma velocidad», perfecto para girar).\n3. Respeta a quien prefiere menos movimiento: al final, dentro de `@media (prefers-reduced-motion: reduce)`, quita la animación del `.fantasma` con `animation: none`.\n\nSi tu ordenador tiene activado «reducir movimiento», al hacer el paso 3 verás el fantasma quieto. ¡Es la señal de que funciona!",
+      enunciado: "👻 ¡El castillo encantado está cargando! Dale vida:\n\n1. Escribe un `@keyframes flotar` que vaya `from` un `transform: translateY(0)` `to` un `transform: translateY(-20px)`, y pónselo al `.fantasma` con `animation: flotar 3s ease-in-out infinite alternate;`.\n2. Haz que el `.cargando` gire sin parar con el `@keyframes girar`, que ya está escrito: `animation: girar 1.2s linear infinite;` (`linear` significa «siempre a la misma velocidad», perfecto para girar).\n3. Respeta a quien prefiere menos movimiento: al final, dentro de `@media (prefers-reduced-motion: reduce)`, quita la animación del `.fantasma` con `animation: none`.\n\n⚠️ Si tu ordenador tiene activado «reducir movimiento», al hacer el paso 3 verás el fantasma **quieto** (y un 🐢 en el resultado). ¡Es la señal de que funciona! Para verlo flotar, borra un momento el `@media` o, en Windows, enciende Configuración → Accesibilidad → Efectos visuales → **Efectos de animación**.",
       cssBase: `body { font-family: sans-serif; }
 .escena { background-color: #2e1f47; color: white; text-align: center; padding: 40px 16px 20px; border-radius: 16px; }
 .escena p { margin: 0; }`,
@@ -260,6 +260,45 @@ body { background-color: #fff8db; }
             if (!f) return false;
             return /@keyframes\s+flotar\s*\{/.test(PRUEBA.textoCSS(doc))
               && win.getComputedStyle(f).animationName === "flotar";
+          }
+        },
+        {
+          texto: "El guion `flotar` mueve de verdad al fantasma (mira que `translateY` esté bien escrito y que el número lleve `px`)",
+          prueba: (doc, win) => {
+            // Busca el @keyframes flotar. Las declaraciones mal escritas el navegador las tira: quedan vacías.
+            let guion = null;
+            const recorrer = lista => {
+              for (const r of lista) {
+                if (r.name === "flotar" && r.cssRules && r.cssRules[0] && "keyText" in r.cssRules[0]) guion = r;
+                else if (r.cssRules) recorrer(r.cssRules);
+              }
+            };
+            for (const hoja of doc.styleSheets) {
+              try { recorrer(hoja.cssRules); } catch (e) { /* hoja no accesible */ }
+            }
+            if (!guion) return false;
+            // Mide el desplazamiento de cada fotograma con una caja de prueba
+            const medir = t => {
+              const caja = doc.createElement("div");
+              caja.style.transform = t;
+              doc.body.appendChild(caja);
+              const m = win.getComputedStyle(caja).transform;
+              caja.remove();
+              const n = (m.match(/\(([^)]*)\)/) || [, ""])[1].split(",").map(parseFloat);
+              return n.length === 6 ? [n[4], n[5]] : n.length === 16 ? [n[12], n[13]] : [0, 0];
+            };
+            const puntos = [];
+            let hayInicio = false, hayFinal = false;
+            for (const k of guion.cssRules) {
+              if (!k.style.transform) continue;
+              const claves = k.keyText.split(",").map(s => s.trim());
+              if (claves.includes("0%") || claves.includes("from")) hayInicio = true;
+              if (claves.includes("100%") || claves.includes("to")) hayFinal = true;
+              puntos.push(medir(k.style.transform));
+            }
+            // Si falta el principio o el final (o está mal escrito), el elemento parte de su sitio: (0, 0)
+            if (!hayInicio || !hayFinal) puntos.push([0, 0]);
+            return puntos.some(a => puntos.some(b => Math.hypot(a[0] - b[0], a[1] - b[1]) >= 5));
           }
         },
         {

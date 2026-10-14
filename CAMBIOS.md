@@ -19,6 +19,15 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.1.3 · 2026-10-14
+
+- hc-09, reto del fantasma: nueva comprobación de que el `@keyframes flotar` mueve de verdad. Antes aprobaba
+  con `traslateY` o sin `px`, aunque el fantasma no se moviera.
+- Ejercicios con `@keyframes`: además del primer fotograma, se compara la animación a la mitad, para detectar
+  erratas en el `to`.
+- Si el ordenador tiene activado «reducir movimiento» y el código usa `@media (prefers-reduced-motion: reduce)`,
+  el resultado muestra «🐢 Tu ordenador reduce el movimiento». El enunciado de hc-09 explica cómo verlo moverse.
+
 ## 1.1.2 · 2026-10-14
 
 - Editor: los números de línea van en su propia franja, separada por una raya, y el código empieza después.

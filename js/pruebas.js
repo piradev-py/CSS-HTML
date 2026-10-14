@@ -11,7 +11,8 @@
      cualquier ordenador ("normal" por defecto), para que las pruebas
      no dependan de si el sistema tiene las animaciones reducidas.
    - Las transiciones se dan por terminadas y las animaciones se
-     paran en su primer fotograma, así los valores no "bailan".
+     paran en su primer fotograma (o a mitad, con fotograma: "mitad"),
+     así los valores no "bailan".
    Uso en un reto: const v = await PRUEBA.clonar(doc, { estado: "hover" });
                    v.win.getComputedStyle(v.doc.querySelector("li")).backgroundColor
    Mundo JavaScript: PRUEBA.recargar(doc) vuelve a ejecutar el código
@@ -59,7 +60,12 @@
       doc.getAnimations().forEach(a => {
         try {
           if (a instanceof doc.defaultView.CSSTransition) a.finish();
-          else { a.pause(); a.currentTime = 0; }
+          else {
+            a.pause();
+            // { fotograma: "mitad" }: a mitad del primer ciclo, para ver si el guion mueve algo de verdad
+            const t = opciones.fotograma === "mitad" && a.effect ? a.effect.getComputedTiming() : null;
+            a.currentTime = t && isFinite(t.duration) ? (t.delay || 0) + t.duration / 2 : 0;
+          }
         } catch (e) { /* animación sin final: se deja como está */ }
       });
     } catch (e) { /* navegador sin getAnimations */ }
