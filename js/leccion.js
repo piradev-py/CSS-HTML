@@ -28,7 +28,7 @@
   if (!PROGRESO.estaDesbloqueada(id)) return aviso("🔒", "Lección bloqueada", "Completa antes la lección anterior para desbloquear esta.");
 
   const script = document.createElement("script");
-  script.src = CURSO.ruta(id);
+  script.src = CURSO.ruta(id) + "?v=" + CURSO.VERSION;  // ?v=: tras publicar, nada de lecciones viejas en caché
   script.onload = () => {
     const leccion = CURSO.lecciones[id];
     if (!leccion) return aviso("😵", "Algo salió mal", "El archivo de la lección no se registró correctamente.");

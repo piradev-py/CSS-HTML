@@ -236,7 +236,8 @@
         : '<button class="boton morado" data-entrar-prueba>🧪 Probar el curso sin guardar</button>') +
       '<button class="boton secundario" data-reiniciar-curso>🔄 ' + (prueba ? "Empezar la prueba de cero" : "Reiniciar curso") + "</button>" +
       "</div>" +
-      '<div class="acciones"><button class="boton" data-cerrar>Listo</button></div>',
+      '<div class="acciones"><button class="boton" data-cerrar>Listo</button></div>' +
+      '<p class="version-curso">Versión ' + CURSO.VERSION + "</p>",
       { alCerrar: () => location.reload() }
     );
     m.elemento.querySelectorAll("[data-ajuste]").forEach(chk => {

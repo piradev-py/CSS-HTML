@@ -380,6 +380,7 @@ pre.codigo {
   cursor: pointer;
 }
 .lista-ajustes input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--exito); }
+.version-curso { margin: 14px 0 0; color: var(--texto-suave); font-size: 0.85rem; }
 
 @media (max-width: 640px) {
   .cabecera { gap: 8px; padding: 8px 12px; }

@@ -207,6 +207,7 @@
   abrirMundoDelEnlace();
   pintarInsignias();
   pintarOpciones();
+  document.querySelector("[data-version]").textContent = CURSO.VERSION;
 
   let espera;
   window.addEventListener("resize", () => {
