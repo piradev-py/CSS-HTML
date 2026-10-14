@@ -19,6 +19,13 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.1.0 · 2026-10-14
+
+- **Buzón de sugerencias**: botón 💬 en la cabecera (mapa y lecciones). Abre una ventana para avisar de un error,
+  proponer una idea o preguntar una duda, con correo opcional. Se envía sin salir de la web a un Formulario de
+  Google del autor, junto con la lección, el paso y la versión. Las respuestas se revisan y se borran en su Hoja
+  de cálculo. Los códigos del formulario están en `js/sugerencias.js`.
+
 ## 1.0.2 · 2026-10-14
 
 - html-07, paso del `alt`: el ejemplo muestra una imagen que carga (la pizza) junto a la que falla a propósito

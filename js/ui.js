@@ -164,6 +164,7 @@
       '<div class="estado-jugador" data-estado-jugador></div>' +
       '<button class="boton-icono ocultar-movil" data-accion="sonido" aria-label="Activar o silenciar sonido"></button>' +
       '<button class="boton-icono" data-accion="tema" aria-label="Cambiar modo claro u oscuro"></button>' +
+      '<button class="boton-icono" data-accion="sugerencias" aria-label="Enviar una sugerencia o avisar de un error" title="Sugerencias y errores">💬</button>' +
       '<button class="boton-icono" data-accion="ajustes" aria-label="Ajustes">⚙️</button>';
     const bSonido = cab.querySelector('[data-accion="sonido"]');
     const bTema = cab.querySelector('[data-accion="tema"]');
@@ -182,6 +183,7 @@
       refrescar();
     });
     cab.querySelector('[data-accion="ajustes"]').addEventListener("click", abrirAjustes);
+    cab.querySelector('[data-accion="sugerencias"]').addEventListener("click", () => SUGERENCIAS.abrir());
     refrescar();
     pintarEstado();
     pintarFranjaPrueba(cab);
