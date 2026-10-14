@@ -19,6 +19,12 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.0.2 · 2026-10-14
+
+- html-07, paso del `alt`: el ejemplo muestra una imagen que carga (la pizza) junto a la que falla a propósito
+  (`dragon.svg`), con una frase que lo explica en el propio resultado. Antes solo salía la imagen rota y parecía
+  un fallo de la web.
+
 ## 1.0.1 · 2026-10-14
 
 - html-06, ejercicio de los pulpos: el texto del enlace es solo **Los pulpos en la Wikipedia**. Antes pedía

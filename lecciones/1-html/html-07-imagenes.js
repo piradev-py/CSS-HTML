@@ -24,9 +24,13 @@ CURSO.registrar({
     {
       tipo: "explicacion",
       titulo: "alt: describe la imagen con palabras",
-      texto: "El atributo `alt` (de «alternativo») es un texto que **describe la imagen**. Es obligatorio, y no por capricho:\n\n• Los **lectores de pantalla** lo leen en voz alta a las personas ciegas.\n• Si la imagen no carga, el navegador muestra ese texto en su lugar.\n• Los buscadores lo usan para saber qué hay en la foto.\n\nEn el ejemplo, el archivo `dragon.svg` **no existe**… ¡y aun así sabes qué debería verse! 🐉",
+      texto: "El atributo `alt` (de «alternativo») es un texto que **describe la imagen**. Es obligatorio, y no por capricho:\n\n• Los **lectores de pantalla** lo leen en voz alta a las personas ciegas.\n• Si la imagen no carga, el navegador muestra ese texto en su lugar.\n• Los buscadores lo usan para saber qué hay en la foto.\n\nEn el ejemplo, la pizza carga bien, pero el archivo `dragon.svg` **no existe, a propósito**: en su lugar ves su `alt`… ¡y aun así sabes qué debería verse! 🐉",
       ejemplo: {
-        html: `<img src="recursos/img/dragon.svg" alt="Un dragón verde comiendo palomitas en el cine">`,
+        html: `<p>Esta imagen sí existe:</p>
+<img src="recursos/img/pizza.svg" alt="Una pizza de pepperoni con hojas de albahaca" width="120">
+
+<p>Esta no existe (no hay ningún dragon.svg), así que el navegador muestra su alt:</p>
+<img src="recursos/img/dragon.svg" alt="Un dragón verde comiendo palomitas en el cine">`,
         css: ""
       },
       consejo: "Un buen `alt` describe lo que se ve, como si se lo contaras por teléfono a un amigo. «Imagen» o «foto1» no ayudan a nadie; «Perro marrón sonriendo sobre la hierba», sí."
