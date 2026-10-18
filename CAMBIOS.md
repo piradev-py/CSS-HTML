@@ -19,6 +19,22 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.2.0 · 2026-10-18
+
+- **Lecciones ampliadas** (preparan el proyecto final de la clínica «Huellas»):
+  - Mundo HTML: enlaces `tel:`, `mailto:` y a otra página propia (html-06); `width` y `height` juntos y
+    `loading="lazy"` (html-07); campos `tel`, `date` y `time` (html-10).
+  - Mundo CSS: contraste AA (css-03), fuentes de Google Fonts (css-04), contenedor con `max-width` (css-07),
+    listas sin viñetas con ejercicio (css-09) y un ejercicio de cabecera `sticky` (css-10).
+  - Mundo HTML + CSS: el menú del móvil con la clase `abierto` (hc-06), `transition: none` para quien pide menos
+    movimiento (hc-09) y `:user-invalid` (hc-10).
+  - Mundo JavaScript: `setAttribute` y `aria-expanded` (js-04), un botón «Quitar» en cada elemento con ejercicio
+    (js-10), validar muchos campos con `.checked` y una bandera (js-11) y guardar una lista de objetos (js-12).
+- Revisor de la consola: dice qué sobra o qué falta en la línea («sobra «$» al principio»), avisa de las demás líneas
+  mal y recuerda cómo va el `${…}`. Las mayúsculas no cuentan, como las tildes.
+- js-02: cómo escribir las comillas invertidas en un teclado latinoamericano.
+- El modo prueba solo existe en local (no en la web publicada). «Reiniciar curso» queda solo en ⚙️ Ajustes.
+
 ## 1.1.5 · 2026-10-14
 
 - Editor: al escribir o bajar con las flechas, la vista sigue al cursor y deja un pequeño margen (una línea)
