@@ -14,6 +14,7 @@
         proyecto: P,
         enunciado: "Añade la **meta description** del encargo a la cabeza de `index.html`.",
         captura: "recursos/huellas/web/img/portada.jpg",
+        glosario: ["<meta name=\"description\">", "<nav>"],
         inicial: { html: sinDescripcion },
         comprobaciones: [
           { texto: "Hay una meta description", repaso: "html-13", prueba: doc => !!doc.querySelector('meta[name="description"]') },

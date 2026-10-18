@@ -272,6 +272,24 @@ Funciona como un `reto` (lista de comprobaciones que se marcan en verde, pistas,
   `HUELLAS["mundo-1"]` … `HUELLAS["mundo-4"]` = `{ html, css, js, privacidad, datos }`, la web oficial al final de cada
   mundo. Se genera con `node herramientas/huellas-versiones.mjs` (sale del historial de git: commits apuntados en el script).
 - Comportamiento con fechas: `PRUEBA.recargar(doc, { hoy: "2026-10-20T10:00" })` para el reloj en ese momento.
+- `glosario: ["<table>", "<th>"]` (opcional, en el encargo): esos términos salen arriba en «⭐ Para este encargo».
+  Cada encargo lleva el botón **📚 Glosario**: un panel sobre la columna de la lección (el código y el resultado siguen
+  a la vista) con todo lo que enseñan las lecciones **anteriores**, por mundo y por tema, con buscador y «Copiar».
+
+### `glosario` de cada lección (en `CURSO.registrar`, junto a `objetivo`)
+Lo que enseña la lección, para el glosario de las lecciones de proyecto (`js/glosario.js`):
+```js
+glosario: [
+  { termino: "<label for=\"…\">", tema: "Formularios",
+    para: "El texto de un campo; `for` lleva el `id` del campo y los une.",
+    ejemplo: '<label for="nombre">Tu nombre</label>',
+    buscar: "etiqueta texto campo accesibilidad" }   // palabras extra para el buscador (sin tildes)
+]
+```
+- `tema` agrupa dentro del mundo (usa los mismos nombres en todo el mundo). `para`: una línea, en lenguaje de novato.
+- `ejemplo`: mínimo y copiable, bien escrito (lo comprueba el verificador). Se resalta como HTML si empieza por `<`,
+  como JS en el Mundo JavaScript y si no como CSS; `lenguaje: "html"` lo fuerza.
+- Hoy tienen glosario las lecciones del Mundo 1; los demás mundos lo reciben antes de su lección de proyecto.
 - Para `fetch("datos/opiniones.json")` sin internet, la lección declara `datos: HUELLAS["mundo-4"].datos`.
 
 ## 5. Pestañas del editor por mundo

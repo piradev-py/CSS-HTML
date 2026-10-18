@@ -81,6 +81,13 @@
           if (p.tipo === "controles" && !(p.controles || []).length) errores.push("Paso " + (i + 1) + ": controles vacíos");
           if (p.tipo === "ejercicio" && (!p.enunciado || !p.solucion)) errores.push("Paso " + (i + 1) + ": ejercicio sin enunciado o sin solución");
         });
+        // Glosario: cada término con su tema y su línea; el ejemplo, bien escrito (el alumno lo copia)
+        (lec.glosario || []).forEach(t => {
+          if (!t.termino || !t.tema || !t.para) errores.push("Glosario: término incompleto («" + (t.termino || "?") + "»)");
+          const lenguaje = t.lenguaje || (l.mundo.clave === "js" ? "js" : /^\s*</.test(t.ejemplo || "") ? "html" : "css");
+          const esc = t.ejemplo && ESCRITURA.revisar({ [lenguaje]: t.ejemplo });
+          if (esc) errores.push("Glosario, «" + t.termino + "»: ejemplo mal escrito: " + esc.mensaje);
+        });
         retos.concat(proyectos).forEach(r => {
           const n = (r.comprobaciones || []).length;
           const maximo = r.tipo === "proyecto" ? 12 : 5;

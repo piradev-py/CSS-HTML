@@ -96,6 +96,8 @@
     const contador = principal.querySelector(".contador-pasos");
 
     COLUMNAS.activar(espacio);
+    // Las lecciones de proyecto llevan a mano el glosario de todo lo aprendido hasta aquí
+    const glosario = leccion.pasos.some(p => p.tipo === "proyecto") ? GLOSARIO.montar(principal.querySelector(".col-leccion"), id) : null;
 
     const ICONO_PASO = { explicacion: "📖", pruebalo: "✍️", ejercicio: "🧠", controles: "🎛️", quiz: "❓", reto: "🏆", proyecto: "📋" };
 
@@ -308,6 +310,12 @@
           }
         });
         zona.querySelector(".reto-enunciado").after(mascota);
+        const bGlosario = document.createElement("button");
+        bGlosario.className = "mini-boton boton-glosario";
+        bGlosario.textContent = "📚 Glosario";
+        bGlosario.title = "Todo lo que has aprendido, con ejemplos para copiar (no pierdes tu código)";
+        bGlosario.addEventListener("click", () => glosario.alternar(paso.glosario));
+        zona.querySelector(".etiqueta-reto").after(bGlosario);
       }
     };
 

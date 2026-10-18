@@ -9,6 +9,13 @@ CURSO.registrar({
   titulo: "Tablas",
   xp: 40,
   objetivo: "Sabrás presentar datos en filas y columnas con una tabla bien construida.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<table>, <tr>, <td>", tema: "Tablas", para: "Una tabla: cada fila es un `<tr>` y cada celda un `<td>`.", ejemplo: "<table>\n  <tr><td>Lunes</td><td>9:00 – 20:30</td></tr>\n</table>", buscar: "tabla fila celda horario" },
+    { termino: "<th>", tema: "Tablas", para: "Celda de título de una columna o fila.", ejemplo: "<tr><th>Día</th><th>Horario</th></tr>", buscar: "cabecera titulo columna" },
+    { termino: "<thead> y <tbody>", tema: "Tablas", para: "Agrupan las filas de cabecera y las del cuerpo.", ejemplo: "<table>\n  <thead><tr><th>Día</th><th>Horario</th></tr></thead>\n  <tbody><tr><td>Lunes</td><td>9:00 – 20:30</td></tr></tbody>\n</table>", buscar: "cabecera cuerpo grupo" },
+    { termino: "<caption>", tema: "Tablas", para: "El título de la tabla. Va justo después de `<table>`.", ejemplo: "<table>\n  <caption>Horario de la clínica</caption>\n  …\n</table>", buscar: "titulo tabla" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

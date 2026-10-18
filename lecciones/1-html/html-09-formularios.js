@@ -11,6 +11,14 @@ CURSO.registrar({
   titulo: "Formularios: campos y etiquetas",
   xp: 40,
   objetivo: "Sabrás crear un formulario sencillo con campos de texto bien etiquetados y un botón.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<form>", tema: "Formularios", para: "La caja de un formulario.", ejemplo: "<form id=\"form-cita\">\n  …\n</form>", buscar: "formulario" },
+    { termino: "<label for=\"…\">", tema: "Formularios", para: "El texto de un campo; `for` lleva el `id` del campo y los une.", ejemplo: "<label for=\"nombre\">Tu nombre</label>\n<input type=\"text\" id=\"nombre\" name=\"nombre\">", buscar: "etiqueta texto campo accesibilidad" },
+    { termino: "<input type=\"text\">", tema: "Formularios", para: "Un campo para escribir; `name` es el nombre del dato.", ejemplo: "<input type=\"text\" id=\"nombre\" name=\"nombre\" placeholder=\"Ana\">", buscar: "campo caja escribir" },
+    { termino: "placeholder", tema: "Formularios", para: "Texto de ejemplo dentro del campo vacío (no sustituye al `label`).", ejemplo: "<input type=\"text\" placeholder=\"Ana\">", buscar: "ejemplo pista gris" },
+    { termino: "<button>", tema: "Formularios", para: "Un botón; dentro de un formulario, lo envía.", ejemplo: "<button type=\"submit\">Pedir cita</button>", buscar: "boton enviar" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

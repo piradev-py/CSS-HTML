@@ -10,6 +10,15 @@ CURSO.registrar({
   titulo: "La estructura de una página",
   xp: 30,
   objetivo: "Sabrás escribir el esqueleto de toda página web y qué va en la cabeza y qué en el cuerpo.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<!DOCTYPE html>", tema: "Estructura", para: "La primera línea: avisa de que es HTML moderno.", ejemplo: "<!DOCTYPE html>", buscar: "esqueleto pagina" },
+    { termino: "<html lang=\"es\">", tema: "Estructura", para: "La caja que envuelve toda la página; `lang` dice en qué idioma está.", ejemplo: "<html lang=\"es\">\n  …\n</html>", buscar: "idioma esqueleto" },
+    { termino: "<head> y <body>", tema: "Estructura", para: "La cabeza (lo que no se ve) y el cuerpo (lo que sí se ve).", ejemplo: "<head>\n  <title>Mi web</title>\n</head>\n<body>\n  <h1>Hola</h1>\n</body>", buscar: "cabeza cuerpo esqueleto" },
+    { termino: "<meta charset=\"UTF-8\">", tema: "La cabeza", para: "Para que las tildes y la ñ se vean bien. Va en el `<head>`.", ejemplo: "<meta charset=\"UTF-8\">", buscar: "tildes acentos letras" },
+    { termino: "<title>", tema: "La cabeza", para: "El texto de la pestaña del navegador y de los buscadores.", ejemplo: "<title>Huellas · Clínica veterinaria</title>", buscar: "pestaña titulo nombre" },
+    { termino: "<!-- comentario -->", tema: "Lo básico", para: "Una nota para personas: el navegador no la enseña.", ejemplo: "<!-- Aquí empieza el menú -->", buscar: "nota apunte ocultar" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

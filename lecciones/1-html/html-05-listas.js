@@ -7,6 +7,11 @@ CURSO.registrar({
   titulo: "Listas",
   xp: 30,
   objetivo: "Sabrás crear listas con viñetas, listas numeradas y listas dentro de listas.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<ul> y <li>", tema: "Listas", para: "Lista con puntos (sin orden); cada elemento va en un `<li>`.", ejemplo: "<ul>\n  <li>Perros</li>\n  <li>Gatos</li>\n</ul>", buscar: "lista puntos vinetas menu" },
+    { termino: "<ol>", tema: "Listas", para: "Lista numerada, cuando el orden importa.", ejemplo: "<ol>\n  <li>Pide cita</li>\n  <li>Ven a la clínica</li>\n</ol>", buscar: "numerada pasos orden" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

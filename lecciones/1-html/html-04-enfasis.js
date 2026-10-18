@@ -8,6 +8,13 @@ CURSO.registrar({
   titulo: "Negritas, cursivas y énfasis",
   xp: 30,
   objetivo: "Sabrás resaltar palabras dentro de un texto diferenciando «importante» de «con énfasis».",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<strong>", tema: "Texto", para: "Algo importante (se ve en negrita).", ejemplo: "<p>Abierto <strong>24 horas</strong></p>", buscar: "negrita importante" },
+    { termino: "<em>", tema: "Texto", para: "Énfasis, como cuando lo dirías con otro tono (se ve en cursiva).", ejemplo: "<p>Para <em>toda</em> su vida</p>", buscar: "cursiva enfasis" },
+    { termino: "<mark>", tema: "Texto", para: "Resalta un trozo, como un rotulador fosforito.", ejemplo: "<p>Trae la <mark>cartilla</mark></p>", buscar: "resaltar subrayar fosforito" },
+    { termino: "<br>", tema: "Texto", para: "Un salto de línea dentro del mismo párrafo. Etiqueta vacía: no se cierra.", ejemplo: "<p>Calle Mayor, 12<br>Madrid</p>", buscar: "salto linea direccion" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

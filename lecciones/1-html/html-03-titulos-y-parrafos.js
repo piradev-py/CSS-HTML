@@ -7,6 +7,11 @@ CURSO.registrar({
   titulo: "Títulos y párrafos",
   xp: 30,
   objetivo: "Sabrás usar <h1>…<h6> y <p> para ordenar un texto.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<h1> … <h6>", tema: "Texto", para: "Títulos de más a menos importante. Un solo `<h1>` por página y sin saltar niveles.", ejemplo: "<h1>Huellas</h1>\n<h2>Servicios</h2>\n<h3>Vacunación</h3>", buscar: "titulo encabezado cabecera" },
+    { termino: "<p>", tema: "Texto", para: "Un párrafo de texto.", ejemplo: "<p>Cuidamos de tu mascota.</p>", buscar: "parrafo texto" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

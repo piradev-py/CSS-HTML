@@ -13,6 +13,13 @@ CURSO.registrar({
   titulo: "La cabeza de la página",
   xp: 40,
   objetivo: "Sabrás escribir en el <head> lo que leen el navegador, los buscadores y las redes sociales, aunque tú no lo veas.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<meta name=\"description\">", tema: "La cabeza", para: "El resumen que enseña el buscador bajo el título.", ejemplo: "<meta name=\"description\" content=\"Clínica veterinaria cercana…\">", buscar: "resumen buscador google seo" },
+    { termino: "<meta name=\"viewport\">", tema: "La cabeza", para: "Para que el móvil use su ancho de verdad. Cópiala tal cual.", ejemplo: "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">", buscar: "movil responsive pantalla" },
+    { termino: "<link rel=\"icon\">", tema: "La cabeza", para: "El favicon: el icono de la pestaña.", ejemplo: "<link rel=\"icon\" href=\"img/favicon.svg\">", buscar: "favicon icono pestaña" },
+    { termino: "Open Graph (og:…)", tema: "La cabeza", para: "La tarjeta que sale al compartir el enlace. Usan `property`.", ejemplo: "<meta property=\"og:title\" content=\"Huellas\">\n<meta property=\"og:description\" content=\"…\">\n<meta property=\"og:image\" content=\"img/portada.jpg\">\n<meta property=\"og:type\" content=\"website\">", buscar: "redes compartir tarjeta whatsapp" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

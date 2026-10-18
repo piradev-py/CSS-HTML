@@ -10,6 +10,14 @@ CURSO.registrar({
   titulo: "Imágenes",
   xp: 35,
   objetivo: "Sabrás insertar imágenes accesibles con su texto alternativo y su pie de foto.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<img>", tema: "Imágenes", para: "Una imagen: `src` es el archivo y `alt`, el texto para quien no la ve. Etiqueta vacía.", ejemplo: "<img src=\"img/portada.jpg\" alt=\"Un perro y un gato tumbados al sol\">", buscar: "imagen foto dibujo" },
+    { termino: "alt", tema: "Imágenes", para: "Describe la imagen; si es solo decoración, `alt=\"\"`.", ejemplo: "<img src=\"img/iconos/huella.svg\" alt=\"\">", buscar: "texto alternativo accesibilidad lector pantalla" },
+    { termino: "width y height", tema: "Imágenes", para: "El tamaño de la imagen: así el navegador reserva su hueco y la página no salta.", ejemplo: "<img src=\"img/logo.svg\" alt=\"\" width=\"48\" height=\"48\">", buscar: "ancho alto tamano" },
+    { termino: "loading=\"lazy\"", tema: "Imágenes", para: "Carga la imagen solo cuando se va a ver: la página abre antes.", ejemplo: "<img src=\"img/equipo-1.jpg\" alt=\"…\" width=\"300\" height=\"300\" loading=\"lazy\">", buscar: "carga diferida rapido rendimiento" },
+    { termino: "<figure> y <figcaption>", tema: "Imágenes", para: "Una imagen con su pie de foto.", ejemplo: "<figure>\n  <img src=\"img/equipo-1.jpg\" alt=\"…\">\n  <figcaption>Dra. Marta Ruiz</figcaption>\n</figure>", buscar: "pie de foto leyenda equipo" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

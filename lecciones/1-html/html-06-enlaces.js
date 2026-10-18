@@ -12,6 +12,14 @@ CURSO.registrar({
   titulo: "Enlaces",
   xp: 35,
   objetivo: "Sabrás enlazar a otras webs y a otras partes de la misma página.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<a href=\"…\">", tema: "Enlaces", para: "Un enlace: `href` dice a dónde lleva.", ejemplo: "<a href=\"https://www.ejemplo.es\">Visítanos</a>", buscar: "enlace link vinculo url" },
+    { termino: "href=\"#id\"", tema: "Enlaces", para: "Enlace a una parte de la misma página: la que tiene ese `id`.", ejemplo: "<a href=\"#cita\">Pide tu cita</a>\n…\n<section id=\"cita\">…</section>", buscar: "ancla interno saltar seccion menu" },
+    { termino: "target=\"_blank\"", tema: "Enlaces", para: "Abre el enlace en otra pestaña (con `rel=\"noopener\"`, por seguridad).", ejemplo: "<a href=\"https://maps.google.com\" target=\"_blank\" rel=\"noopener\">Cómo llegar</a>", buscar: "pestaña nueva ventana mapa" },
+    { termino: "href=\"tel:\" y href=\"mailto:\"", tema: "Enlaces", para: "Enlaces que llaman por teléfono o escriben un email.", ejemplo: "<a href=\"tel:+34910000000\">910 000 000</a>\n<a href=\"mailto:hola@huellas.es\">hola@huellas.es</a>", buscar: "telefono llamar correo email contacto" },
+    { termino: "href=\"otra.html\"", tema: "Enlaces", para: "Enlace a otra página de tu web, por su nombre de archivo.", ejemplo: "<a href=\"privacidad.html\">Privacidad</a>", buscar: "pagina propia archivo ruta relativa" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

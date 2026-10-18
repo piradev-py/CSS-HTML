@@ -7,6 +7,10 @@ CURSO.registrar({
   titulo: "¿Qué es HTML?",
   xp: 20,
   objetivo: "Entenderás qué es una página web, qué es HTML y cómo se escribe una etiqueta.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "etiqueta", tema: "Lo básico", para: "Marca el principio y el final de un trozo de página: `<p>` abre y `</p>` cierra.", ejemplo: "<p>Hola</p>", buscar: "apertura cierre elemento" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

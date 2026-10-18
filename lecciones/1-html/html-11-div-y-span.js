@@ -10,6 +10,12 @@ CURSO.registrar({
   titulo: "Cajas genéricas: div y span",
   xp: 30,
   objetivo: "Sabrás agrupar contenido con <div> y <span> y ponerles un apodo con class para darles estilo más adelante.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<div>", tema: "Cajas", para: "Una caja de bloque sin significado, para agrupar (y luego dar estilo).", ejemplo: "<div class=\"tarjeta\">\n  …\n</div>", buscar: "caja bloque agrupar contenedor" },
+    { termino: "<span>", tema: "Cajas", para: "Una caja en línea, para un trozo dentro de una frase.", ejemplo: "<p>Nivel <span class=\"nivel\">3</span></p>", buscar: "trozo linea" },
+    { termino: "class", tema: "Cajas", para: "Un apodo para el elemento; el CSS lo usará. Puede repetirse.", ejemplo: "<article class=\"servicio\">…</article>", buscar: "clase apodo nombre estilo" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

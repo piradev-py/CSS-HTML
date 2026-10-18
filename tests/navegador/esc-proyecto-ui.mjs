@@ -28,6 +28,14 @@ export default async function (b) {
   b.log("Pestañas: " + await b.eval("[...document.querySelectorAll('.pestana')].map(t => t.innerText).join(', ')"));
   b.log("Siguiente bloqueado: " + await b.eval("document.querySelector('[data-siguiente]').disabled"));
   await b.foto("proyecto-paso1");
+  // Glosario: términos de las lecciones anteriores, los del encargo arriba, y el buscador
+  await b.eval("document.querySelector('.boton-glosario').click()"); await b.esperar(1500);
+  b.log("Glosario: " + await b.eval("document.querySelectorAll('.g-entrada').length") + " entradas; destacados: " +
+    await b.eval("[...document.querySelectorAll('.g-grupo')][0].querySelectorAll('.g-termino').length"));
+  await b.foto("proyecto-glosario");
+  await b.eval("(() => { const q = document.querySelector('.g-buscar'); q.value = 'telefono'; q.dispatchEvent(new Event('input')); })()");
+  b.log("Buscar «telefono»: " + await b.eval("[...document.querySelectorAll('.g-entrada:not([hidden]) .g-termino')].map(e => e.textContent).join(' · ')"));
+  await b.eval("document.querySelector('.glosario [data-cerrar]').click()");
   // Al escribir la description el encargo se supera solo y se puede seguir
   await b.eval(enPagina(anadirDescripcion));
   await b.esperar(2500);

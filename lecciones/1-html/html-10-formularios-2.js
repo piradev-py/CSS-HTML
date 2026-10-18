@@ -12,6 +12,17 @@ CURSO.registrar({
   titulo: "Formularios: más tipos de campo",
   xp: 45,
   objetivo: "Sabrás elegir el campo adecuado para cada dato: email, número, contraseña, opciones, listas y textos largos.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "type=\"email\", \"number\", \"tel\"", tema: "Formularios", para: "Campos para un email, un número o un teléfono.", ejemplo: "<input type=\"email\" id=\"email\" name=\"email\">\n<input type=\"tel\" id=\"telefono\" name=\"telefono\">", buscar: "correo numero telefono" },
+    { termino: "type=\"date\" y type=\"time\"", tema: "Formularios", para: "Campos para elegir un día o una hora.", ejemplo: "<input type=\"date\" id=\"fecha\" name=\"fecha\">\n<input type=\"time\" id=\"hora\" name=\"hora\">", buscar: "fecha dia hora calendario" },
+    { termino: "type=\"checkbox\"", tema: "Formularios", para: "Una casilla que se marca o no.", ejemplo: "<input type=\"checkbox\" id=\"privacidad\" name=\"privacidad\">\n<label for=\"privacidad\">Acepto la privacidad</label>", buscar: "casilla marcar aceptar" },
+    { termino: "type=\"radio\"", tema: "Formularios", para: "Elegir una sola opción: todas con el mismo `name`.", ejemplo: "<input type=\"radio\" id=\"si\" name=\"primera\" value=\"si\">\n<label for=\"si\">Sí</label>", buscar: "opcion elegir una" },
+    { termino: "<fieldset> y <legend>", tema: "Formularios", para: "Agrupan campos con un título.", ejemplo: "<fieldset>\n  <legend>Tu mascota</legend>\n  …\n</fieldset>", buscar: "grupo agrupar titulo" },
+    { termino: "<select> y <option>", tema: "Formularios", para: "Una lista desplegable de opciones.", ejemplo: "<select id=\"mascota\" name=\"mascota\">\n  <option value=\"perro\">Perro</option>\n  <option value=\"gato\">Gato</option>\n</select>", buscar: "desplegable lista opciones elegir" },
+    { termino: "<textarea>", tema: "Formularios", para: "Un campo para escribir varias líneas.", ejemplo: "<textarea id=\"motivo\" name=\"motivo\"></textarea>", buscar: "texto largo comentario mensaje" },
+    { termino: "required", tema: "Formularios", para: "El campo es obligatorio: el formulario no se envía vacío.", ejemplo: "<input type=\"text\" id=\"nombre\" name=\"nombre\" required>", buscar: "obligatorio validar" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

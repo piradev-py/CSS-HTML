@@ -11,6 +11,16 @@ CURSO.registrar({
   titulo: "HTML semántico y accesible",
   xp: 50,
   objetivo: "Sabrás usar etiquetas que dicen lo que son para que buscadores y lectores de pantalla entiendan tu página.",
+  // Lo que enseña esta lección, para el glosario de las lecciones de proyecto (js/glosario.js)
+  glosario: [
+    { termino: "<header>", tema: "Semántica", para: "La cabecera: logo, título y menú.", ejemplo: "<header>\n  <a href=\"#inicio\">Huellas</a>\n  <nav>…</nav>\n</header>", buscar: "cabecera arriba logo" },
+    { termino: "<nav>", tema: "Semántica", para: "El menú principal de enlaces.", ejemplo: "<nav>\n  <ul>\n    <li><a href=\"#servicios\">Servicios</a></li>\n  </ul>\n</nav>", buscar: "menu navegacion enlaces" },
+    { termino: "<main>", tema: "Semántica", para: "El contenido principal. Uno por página.", ejemplo: "<main>\n  <section id=\"servicios\">…</section>\n</main>", buscar: "principal contenido" },
+    { termino: "<section>", tema: "Semántica", para: "Una parte de la página sobre un tema, con su título.", ejemplo: "<section id=\"equipo\">\n  <h2>Nuestro equipo</h2>\n</section>", buscar: "seccion parte bloque" },
+    { termino: "<article>", tema: "Semántica", para: "Algo que tiene sentido por sí solo: una noticia, una tarjeta, una opinión.", ejemplo: "<article class=\"servicio\">\n  <h3>Vacunación</h3>\n  <p>…</p>\n</article>", buscar: "tarjeta noticia opinion" },
+    { termino: "<aside>", tema: "Semántica", para: "Contenido secundario, de «por cierto…».", ejemplo: "<aside>\n  <p>¿Sabías que…?</p>\n</aside>", buscar: "lateral secundario" },
+    { termino: "<footer>", tema: "Semántica", para: "El pie de la página: contacto, autoría, letra pequeña.", ejemplo: "<footer>\n  <p>© Huellas</p>\n</footer>", buscar: "pie abajo contacto" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

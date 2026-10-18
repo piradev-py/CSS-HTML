@@ -65,8 +65,9 @@
         rutas desde la carpeta de Huellas, borrador compartido, captura del encargo, «📚 Repasa» en lo que falla),
         versiones oficiales por mundo (`herramientas/huellas-versiones.mjs` → `lecciones/huellas/versiones.js`), reloj fijo
         (`PRUEBA.recargar(doc, { hoy })`) y batería `esc-proyecto` (23 de 23) + `esc-proyecto-ui`.
-        Falta: el **glosario** (panel + términos declarados en cada lección). `privacidad.html` va como material hecho
-        (en la vista previa su enlace abre la página de prueba).
+        Glosario: panel con buscador y «Copiar» (`js/glosario.js`) y términos del Mundo 1 (56).
+        Falta: los términos de los mundos 2, 3 y 4 (cada uno antes de su lección de proyecto, fases 4–6).
+        `privacidad.html` va como material hecho (en la vista previa su enlace abre la página de prueba).
   - Los **proyectos finales de cada mundo** y parte de los ejercicios de cada lección van construyendo esa misma web:
     Mundo HTML → su estructura y contenido; Mundo CSS → su aspecto; HTML + CSS → maquetación completa y responsive;
     JavaScript → interactividad (menú, formulario, carrito o reservas…).
