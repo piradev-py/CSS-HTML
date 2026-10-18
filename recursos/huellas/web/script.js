@@ -59,6 +59,9 @@ function pintarServicios(lista) {
   }
 }
 
+pintarServicios(servicios);
+
+// ---------- 5. Filtrar los servicios por mascota ----------
 function filtrar(mascota) {
   const elegidos = servicios.filter((servicio) => servicio.mascotas.includes(mascota));
   pintarServicios(elegidos);
@@ -92,7 +95,7 @@ botonExoticos.addEventListener("click", () => {
   filtrar("exotico");
 });
 
-// ---------- 5. Pedir cita: comprobar el formulario ----------
+// ---------- 6. Pedir cita: comprobar el formulario ----------
 const formulario = document.querySelector("#form-cita");
 const campoMascota = document.querySelector("#mascota");
 const campoFecha = document.querySelector("#fecha");
@@ -121,6 +124,10 @@ function comprobar(campo, estaBien, mensaje) {
     campo.classList.add("con-error");
   }
   return estaBien;
+}
+
+function resumen(cita) {
+  return `${cita.mascota} · ${cita.fecha} a las ${cita.hora} · a nombre de ${cita.nombre}`;
 }
 
 formulario.addEventListener("submit", (evento) => {
@@ -154,7 +161,7 @@ formulario.addEventListener("submit", (evento) => {
   confirmacion.textContent = "¡Cita reservada! " + resumen(cita);
 });
 
-// ---------- 6. Mis citas: guardadas en el navegador ----------
+// ---------- 7. Mis citas: guardadas en el navegador ----------
 const listaCitas = document.querySelector("#lista-citas");
 const sinCitas = document.querySelector("#sin-citas");
 
@@ -163,10 +170,6 @@ let citas = JSON.parse(localStorage.getItem("huellas-citas")) || [];
 
 function guardarCitas() {
   localStorage.setItem("huellas-citas", JSON.stringify(citas));
-}
-
-function resumen(cita) {
-  return `${cita.mascota} · ${cita.fecha} a las ${cita.hora} · a nombre de ${cita.nombre}`;
 }
 
 function pintarCitas() {
@@ -196,7 +199,9 @@ function pintarCitas() {
   }
 }
 
-// ---------- 7. Opiniones desde un archivo de datos ----------
+pintarCitas();
+
+// ---------- 8. Opiniones desde un archivo de datos ----------
 const listaOpiniones = document.querySelector("#lista-opiniones");
 
 async function cargarOpiniones() {
@@ -219,7 +224,4 @@ async function cargarOpiniones() {
   }
 }
 
-// ---------- Al cargar la página ----------
-pintarServicios(servicios);
-pintarCitas();
 cargarOpiniones();
