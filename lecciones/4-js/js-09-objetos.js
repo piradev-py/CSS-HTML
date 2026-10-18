@@ -17,6 +17,11 @@ CURSO.registrar({
   titulo: "Objetos",
   xp: 40,
   objetivo: "Sabrás agrupar datos relacionados en un objeto, leerlos y cambiarlos, y guardar varios objetos en un array.",
+  glosario: [
+    { termino: "objeto { clave: valor }", tema: "Objetos", para: "Una ficha con datos con nombre.", ejemplo: "const cita = { mascota: \"Perro\", fecha: \"2026-10-21\", hora: \"10:00\" };", buscar: "objeto ficha datos clave" },
+    { termino: "objeto.clave", tema: "Objetos", para: "Lee o cambia un dato de la ficha.", ejemplo: "console.log(cita.fecha);\ncita.hora = \"11:00\";", buscar: "acceder propiedad punto" },
+    { termino: "array de objetos", tema: "Objetos", para: "Una lista de fichas: los datos de una web.", ejemplo: "const servicios = [\n  { nombre: \"Cirugía\", mascotas: [\"perro\", \"gato\"] }\n];", buscar: "lista fichas datos" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

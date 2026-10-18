@@ -26,6 +26,12 @@ CURSO.registrar({
   titulo: "Pedir datos con fetch",
   xp: 55,
   objetivo: "Sabrás pedir datos a un servidor con fetch, esperar la respuesta con async y await, mostrarlos en la página y avisar si algo falla.",
+  glosario: [
+    { termino: "fetch()", tema: "Datos de internet", para: "Pide un archivo o unos datos; la respuesta llega después.", ejemplo: "const respuesta = await fetch(\"datos/opiniones.json\");", buscar: "pedir datos archivo internet" },
+    { termino: "async / await", tema: "Datos de internet", para: "`await` espera la respuesta; solo se usa dentro de una función `async`.", ejemplo: "async function cargar() {\n  const respuesta = await fetch(\"datos/opiniones.json\");\n  const datos = await respuesta.json();\n}", buscar: "esperar asincrono" },
+    { termino: ".json()", tema: "Datos de internet", para: "Convierte la respuesta en datos de JavaScript.", ejemplo: "const opiniones = await respuesta.json();", buscar: "json convertir respuesta" },
+    { termino: "try / catch", tema: "Datos de internet", para: "Si algo falla dentro de `try`, se va a `catch` en vez de romper la página.", ejemplo: "try {\n  const respuesta = await fetch(\"datos/opiniones.json\");\n} catch (error) {\n  console.log(\"No se pudo cargar\");\n}", buscar: "error fallo capturar" }
+  ],
   datos: {
     "chistes.json": [
       { pregunta: "¿Qué le dice una iguana a su hermana gemela?", respuesta: "¡Somos iguanitas!" },

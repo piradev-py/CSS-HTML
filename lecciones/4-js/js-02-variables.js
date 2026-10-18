@@ -21,6 +21,11 @@ CURSO.registrar({
   titulo: "Variables y consola",
   xp: 35,
   objetivo: "Sabrás guardar datos en variables con let y const, hacer cuentas y montar frases con plantillas de texto.",
+  glosario: [
+    { termino: "let", tema: "Variables", para: "Una variable que puede cambiar de valor.", ejemplo: "let visitas = 0;\nvisitas = visitas + 1;", buscar: "variable cambiar guardar valor" },
+    { termino: "const", tema: "Variables", para: "Una variable que no se vuelve a asignar (lo normal).", ejemplo: "const clinica = \"Huellas\";", buscar: "constante variable fija" },
+    { termino: "plantillas de texto", tema: "Variables", para: "Un texto con huecos `${…}`, entre comillas invertidas.", ejemplo: "const nombre = \"Lucía\";\nconsole.log(`Hola, ${nombre}`);", buscar: "plantilla comillas invertidas backtick juntar texto" }
+  ],
   pestanas: ["js"],
   pasos: [
     {

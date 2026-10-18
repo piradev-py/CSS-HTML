@@ -19,6 +19,11 @@ CURSO.registrar({
   titulo: "Eventos",
   xp: 45,
   objetivo: "Sabrás hacer que tu página reaccione cuando alguien pulsa un botón o escribe en un campo.",
+  glosario: [
+    { termino: "addEventListener", tema: "Eventos", para: "Hace algo cuando pasa un evento en un elemento.", ejemplo: "boton.addEventListener(\"click\", () => {\n  menu.classList.toggle(\"abierto\");\n});", buscar: "evento escuchar clic pulsar" },
+    { termino: "\"click\" e \"input\"", tema: "Eventos", para: "`click`: al pulsar; `input`: cada vez que se escribe en un campo.", ejemplo: "campo.addEventListener(\"input\", () => {\n  console.log(campo.value);\n});", buscar: "clic escribir campo" },
+    { termino: "campo.value", tema: "Eventos", para: "Lo que hay escrito o elegido en un campo.", ejemplo: "const nombre = document.querySelector(\"#nombre\").value;", buscar: "valor leer campo escrito" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

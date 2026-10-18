@@ -22,6 +22,14 @@ CURSO.registrar({
   titulo: "Validar formularios",
   xp: 50,
   objetivo: "Sabrás comprobar con JavaScript lo que escribe el usuario en un formulario y avisarle con mensajes claros y accesibles.",
+  glosario: [
+    { termino: "\"submit\" y preventDefault()", tema: "Formularios", para: "Al enviar el formulario; `preventDefault()` evita que la página se recargue.", ejemplo: "formulario.addEventListener(\"submit\", (evento) => {\n  evento.preventDefault();\n});", buscar: "enviar formulario recargar" },
+    { termino: ".trim()", tema: "Formularios", para: "Quita los espacios del principio y del final.", ejemplo: "const nombre = campo.value.trim();", buscar: "espacios limpiar" },
+    { termino: ".includes() (texto)", tema: "Formularios", para: "¿El texto contiene esto?", ejemplo: "if (email.includes(\"@\")) {\n  console.log(\"Tiene arroba\");\n}", buscar: "contiene buscar texto" },
+    { termino: ".checked", tema: "Formularios", para: "¿Está marcada la casilla (o el radio)?", ejemplo: "if (!casilla.checked) {\n  error.textContent = \"Acepta la privacidad\";\n}", buscar: "casilla marcada checkbox radio" },
+    { termino: "Number.isNaN()", tema: "Formularios", para: "¿No es un número? Para comprobar que se escribieron cifras.", ejemplo: "const soloCifras = !Number.isNaN(Number(telefono));", buscar: "numero cifras comprobar" },
+    { termino: "bandera todoBien", tema: "Formularios", para: "Una variable que empieza en `true` y pasa a `false` si algún campo falla.", ejemplo: "let todoBien = true;\nif (nombre === \"\") {\n  todoBien = false;\n}", buscar: "bandera varios campos errores" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

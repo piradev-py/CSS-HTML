@@ -17,6 +17,11 @@ CURSO.registrar({
   titulo: "Filtrar listas",
   xp: 45,
   objetivo: "Sabrás quedarte solo con algunos elementos de un array con filter() y enseñar en la página la lista filtrada.",
+  glosario: [
+    { termino: "filter()", tema: "Filtrar", para: "Un array nuevo solo con los elementos que cumplen la condición.", ejemplo: "const paraGatos = servicios.filter((s) => s.mascotas.includes(\"gato\"));", buscar: "filtrar quedarse algunos" },
+    { termino: ".includes() (array)", tema: "Filtrar", para: "¿Está este valor en el array?", ejemplo: "if (mascotas.includes(\"perro\")) {\n  console.log(\"Sí\");\n}", buscar: "esta en la lista contiene" },
+    { termino: "quitar con filter", tema: "Filtrar", para: "Quitar un elemento: quedarse con todos los que no son él.", ejemplo: "citas = citas.filter((otra) => otra !== cita);", buscar: "quitar borrar eliminar uno" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

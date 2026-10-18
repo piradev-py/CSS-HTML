@@ -18,6 +18,11 @@ CURSO.registrar({
   titulo: "Funciones",
   xp: 40,
   objetivo: "Sabrás agrupar instrucciones en funciones reutilizables, darles datos con parámetros y recibir un resultado con return.",
+  glosario: [
+    { termino: "function", tema: "Funciones", para: "Una receta con nombre: se escribe una vez y se usa muchas.", ejemplo: "function saludar(nombre) {\n  return \"Hola, \" + nombre;\n}", buscar: "funcion receta reutilizar" },
+    { termino: "parámetros y return", tema: "Funciones", para: "Lo que recibe la función y lo que devuelve.", ejemplo: "function doble(n) {\n  return n * 2;\n}\nconsole.log(doble(4));", buscar: "parametro devolver resultado" },
+    { termino: "función flecha", tema: "Funciones", para: "La forma corta de escribir una función.", ejemplo: "const doble = (n) => n * 2;", buscar: "flecha arrow corta" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

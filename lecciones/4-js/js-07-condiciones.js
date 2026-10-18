@@ -19,6 +19,13 @@ CURSO.registrar({
   titulo: "Condiciones",
   xp: 40,
   objetivo: "Sabrás hacer que tu código tome decisiones con if, else y comparaciones.",
+  glosario: [
+    { termino: "if / else", tema: "Condiciones", para: "Hace una cosa si se cumple la condición y otra si no.", ejemplo: "if (citas.length === 0) {\n  aviso.textContent = \"Sin citas\";\n} else {\n  aviso.textContent = \"\";\n}", buscar: "si condicion decidir" },
+    { termino: "=== y !==", tema: "Condiciones", para: "¿Es igual? ¿Es distinto?", ejemplo: "if (campo.value !== \"\") {\n  console.log(\"Escrito\");\n}", buscar: "igual distinto comparar" },
+    { termino: "> < >= <=", tema: "Condiciones", para: "Mayor, menor, mayor o igual, menor o igual (también con textos de horas).", ejemplo: "if (hora >= \"09:00\" && hora <= \"20:30\") {\n  console.log(\"Abierto\");\n}", buscar: "mayor menor comparar" },
+    { termino: "&& y ||", tema: "Condiciones", para: "`&&`: se cumplen las dos; `||`: basta con una.", ejemplo: "const valido = email.includes(\"@\") && email.includes(\".\");", buscar: "y o varias condiciones" },
+    { termino: ".length", tema: "Condiciones", para: "Cuántas letras tiene un texto (o cuántos elementos, un array).", ejemplo: "if (telefono.length === 9) {\n  console.log(\"Bien\");\n}", buscar: "longitud letras cuantos" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

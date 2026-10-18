@@ -16,6 +16,12 @@ CURSO.registrar({
   titulo: "Arrays y bucles",
   xp: 45,
   objetivo: "Sabrás guardar listas de datos en un array y recorrerlas con un bucle para hacer algo con cada elemento.",
+  glosario: [
+    { termino: "array", tema: "Arrays", para: "Una lista de valores entre `[ ]`.", ejemplo: "const mascotas = [\"perro\", \"gato\", \"exotico\"];", buscar: "lista array corchetes" },
+    { termino: "push()", tema: "Arrays", para: "Añade un elemento al final del array.", ejemplo: "citas.push(cita);", buscar: "anadir meter final" },
+    { termino: "for…of", tema: "Arrays", para: "Repite algo para cada elemento del array.", ejemplo: "for (const servicio of servicios) {\n  console.log(servicio.nombre);\n}", buscar: "bucle recorrer cada uno" },
+    { termino: "forEach()", tema: "Arrays", para: "Otra forma de recorrer; sirve también con `querySelectorAll`.", ejemplo: "enlaces.forEach((enlace) => {\n  enlace.classList.remove(\"activo\");\n});", buscar: "recorrer cada uno lista" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

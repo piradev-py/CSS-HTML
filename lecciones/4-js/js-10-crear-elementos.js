@@ -18,6 +18,12 @@ CURSO.registrar({
   titulo: "Crear elementos desde JS",
   xp: 45,
   objetivo: "Sabrás fabricar etiquetas nuevas desde JavaScript, colocarlas en la página, pintar una lista a partir de un array y quitar elementos.",
+  glosario: [
+    { termino: "document.createElement()", tema: "Crear elementos", para: "Crea una etiqueta nueva (aún fuera de la página).", ejemplo: "const tarjeta = document.createElement(\"article\");", buscar: "crear etiqueta nueva elemento" },
+    { termino: "append()", tema: "Crear elementos", para: "Mete un elemento dentro de otro, al final.", ejemplo: "lista.append(tarjeta);", buscar: "meter anadir dentro pagina" },
+    { termino: "remove()", tema: "Crear elementos", para: "Quita un elemento de la página.", ejemplo: "aviso.remove();", buscar: "quitar borrar elemento" },
+    { termino: "pintar una lista", tema: "Crear elementos", para: "Vaciar el contenedor y crear un elemento por cada dato.", ejemplo: "lista.textContent = \"\";\nfor (const cita of citas) {\n  const li = document.createElement(\"li\");\n  li.textContent = cita.fecha;\n  lista.append(li);\n}", buscar: "pintar repintar mostrar datos" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

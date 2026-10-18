@@ -18,6 +18,10 @@ CURSO.registrar({
   titulo: "¿Qué es JavaScript?",
   xp: 25,
   objetivo: "Sabrás qué hace JavaScript en una web y escribirás tus primeras instrucciones con console.log.",
+  glosario: [
+    { termino: "console.log()", tema: "Consola", para: "Escribe en la consola: para ver qué vale algo mientras programas.", ejemplo: "console.log(\"Hola, Huellas\");", buscar: "consola mostrar imprimir depurar" },
+    { termino: "// comentario", tema: "Consola", para: "Una nota para personas: el navegador la ignora.", ejemplo: "// Menú del móvil\nconsole.log(\"listo\");", buscar: "comentario nota explicar" }
+  ],
   pestanas: ["js"],
   pasos: [
     {

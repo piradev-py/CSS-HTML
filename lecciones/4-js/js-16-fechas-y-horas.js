@@ -20,6 +20,12 @@ CURSO.registrar({
   titulo: "Fechas y horas",
   xp: 40,
   objetivo: "Sabrás leer la fecha y la hora del ordenador, escribir la fecha de hoy como texto y comparar fechas y horas.",
+  glosario: [
+    { termino: "new Date()", tema: "Fechas", para: "La fecha y la hora de ahora.", ejemplo: "const ahora = new Date();", buscar: "fecha hora ahora reloj" },
+    { termino: "getFullYear()", tema: "Fechas", para: "El año de una fecha (el del pie de la web).", ejemplo: "document.querySelector(\"#anio\").textContent = new Date().getFullYear();", buscar: "ano year pie" },
+    { termino: "toLocaleDateString(\"sv-SE\")", tema: "Fechas", para: "La fecha como texto `AAAA-MM-DD`, igual que la de un campo `date`.", ejemplo: "const hoy = new Date().toLocaleDateString(\"sv-SE\");", buscar: "fecha hoy texto formato" },
+    { termino: "comparar fechas y horas", tema: "Fechas", para: "Como textos con sus ceros, `\"2026-10-21\" >= hoy` funciona.", ejemplo: "if (campoFecha.value >= hoy) {\n  console.log(\"No ha pasado\");\n}", buscar: "comparar fecha pasada futura hora" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

@@ -16,6 +16,11 @@ CURSO.registrar({
   titulo: "Seleccionar elementos (DOM)",
   xp: 35,
   objetivo: "Sabrás encontrar desde JavaScript cualquier elemento de la página con querySelector y leer su texto con textContent.",
+  glosario: [
+    { termino: "document.querySelector()", tema: "DOM", para: "El primer elemento que cumple un selector CSS.", ejemplo: "const menu = document.querySelector(\"nav\");", buscar: "buscar elemento seleccionar dom" },
+    { termino: "document.querySelectorAll()", tema: "DOM", para: "Todos los elementos que cumplen el selector (una lista).", ejemplo: "const enlaces = document.querySelectorAll(\"nav a\");", buscar: "todos lista seleccionar varios" },
+    { termino: "textContent", tema: "DOM", para: "El texto de un elemento: se lee y se cambia.", ejemplo: "document.querySelector(\"#anio\").textContent = \"2026\";", buscar: "texto leer escribir cambiar" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

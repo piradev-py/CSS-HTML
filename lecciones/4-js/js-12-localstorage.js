@@ -23,6 +23,11 @@ CURSO.registrar({
   titulo: "Guardar datos: localStorage",
   xp: 45,
   objetivo: "Sabrás guardar datos en el navegador con localStorage para que tu página los recuerde aunque se recargue.",
+  glosario: [
+    { termino: "localStorage.setItem / getItem", tema: "Guardar datos", para: "Guarda y lee un texto en el navegador: sigue ahí al recargar.", ejemplo: "localStorage.setItem(\"huellas-citas\", texto);\nconst guardado = localStorage.getItem(\"huellas-citas\");", buscar: "guardar recordar navegador recargar" },
+    { termino: "JSON.stringify / JSON.parse", tema: "Guardar datos", para: "Convierte un array u objeto en texto para guardarlo, y al revés.", ejemplo: "localStorage.setItem(\"huellas-citas\", JSON.stringify(citas));\nlet citas = JSON.parse(localStorage.getItem(\"huellas-citas\")) || [];", buscar: "json texto convertir guardar array" },
+    { termino: "removeItem()", tema: "Guardar datos", para: "Borra lo guardado con ese nombre.", ejemplo: "localStorage.removeItem(\"huellas-citas\");", buscar: "borrar olvidar" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

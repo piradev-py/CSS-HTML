@@ -19,6 +19,12 @@ CURSO.registrar({
   titulo: "Cambiar texto, estilos y clases",
   xp: 40,
   objetivo: "Sabrás cambiar desde JavaScript el texto, el estilo y las clases de cualquier elemento de la página.",
+  glosario: [
+    { termino: "classList.add / remove / toggle", tema: "DOM", para: "Pone, quita o alterna una clase (mejor que tocar `style`).", ejemplo: "menu.classList.toggle(\"abierto\");", buscar: "clase poner quitar alternar" },
+    { termino: "classList.contains()", tema: "DOM", para: "¿Tiene esa clase? Da `true` o `false`.", ejemplo: "if (menu.classList.contains(\"abierto\")) {\n  console.log(\"abierto\");\n}", buscar: "tiene clase comprobar" },
+    { termino: "setAttribute()", tema: "DOM", para: "Cambia un atributo, como `aria-expanded`.", ejemplo: "boton.setAttribute(\"aria-expanded\", \"true\");", buscar: "atributo aria expanded accesibilidad" },
+    { termino: "elemento.style", tema: "DOM", para: "Cambia un estilo directamente (para casos sueltos).", ejemplo: "caja.style.color = \"teal\";", buscar: "estilo css desde js" }
+  ],
   pasos: [
     {
       tipo: "explicacion",
