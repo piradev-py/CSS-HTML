@@ -148,7 +148,7 @@ nav a {
 
 .portada-foto img {
   display: block;
-  border-radius: 46% 54% 50% 50% / 55% 45% 55% 45%;
+  border-radius: var(--radio);
 }
 
 .tarjeta-cita,

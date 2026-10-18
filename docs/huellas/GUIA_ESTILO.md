@@ -48,8 +48,9 @@ cada uno con su color; en el formulario y los botones van solos, en el color del
 Elegidas el 18 de octubre de 2026, en `recursos/huellas/web/img/`; autores y licencias en `docs/LICENCIAS.md`
 (Pexels, StockSnap y Rawpixel).
 
-- **Portada** (`portada.jpg` 1200 px 600 px): perro y gato tumbados al sol. No tiene fondo liso
-  para recortar: va **dentro de la forma suave** (esquinas orgánicas), no recortada.
+- **Portada** (`portada.jpg`, 1200 px): perro y gato tumbados al sol, **rectangular** con las esquinas de la guía (20px).
+  En el Mundo 3 (`::after` + `linear-gradient`, hc-01 y hc-03) la foto se ensancha y su lado izquierdo **se funde
+  con el color de fondo** de la portada.
 - **Servicios** (`servicio-*.jpg`, 640×427): cada tarjeta lleva **foto arriba** e icono en su círculo.
 - **Equipo** (`equipo-1…4.jpg`, 480×600, para mostrar a 240×300): cuatro veterinarios mirando a cámara, con el mismo
   encuadre (la cara ocupa un tercio del ancho).
