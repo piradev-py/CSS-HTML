@@ -266,6 +266,11 @@ Funciona como un `reto` (lista de comprobaciones que se marcan en verde, pistas,
   el script se ejecuta siempre al final del `<body>`) y las rutas relativas (`img/…`, `url(img/…)`) salen de `raiz`.
   La hoja enlazada queda en `<style data-archivo="estilos.css">`, para comprobar que se enlazó.
 - `captura` (opcional): imagen de cómo debe quedar, bajo el enunciado (se abre en grande al pulsarla).
+  Se generan con `MUNDO=1 node tests/navegador/cdp.mjs esc-capturas-huellas.mjs` (en `recursos/huellas/capturas/`).
+- `textos` (opcional): los textos del cliente, en texto plano, en una caja «📄 Textos del encargo» con «📋 Copiar».
+  Son el contenido; las etiquetas las pone el alumno.
+- `alternativas` (opcional): `[{ html, css, js }]`, la misma web escrita de otra forma (otras etiquetas de agrupación,
+  otras clases). El verificador exige que **también aprueben**: así se comprueba que se mira el resultado, no el código.
 - En cada comprobación, `repaso: "html-09"` (opcional) muestra mientras falla «📚 Repasa «…»» con un enlace a esa
   lección (en otra pestaña). Hasta 12 comprobaciones por encargo.
 - La lección lleva `huellas: true` en `MUNDOS` (js/curso.js): así se carga antes `lecciones/huellas/versiones.js`, con

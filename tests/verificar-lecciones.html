@@ -120,6 +120,11 @@
           // El motor añade a cada reto «Tu código está bien escrito»: la solución también debe cumplirlo
           const escSol = ESCRITURA.revisar(reto.solucion);
           if (escSol) { solOk = false; detalles.push("La solución del reto no está bien escrita: " + escSol.mensaje); }
+          // Proyecto web: la misma web escrita de otra forma (otras etiquetas de agrupación, otras clases) también aprueba
+          for (const [n, alt] of (reto.alternativas || []).entries()) {
+            const rAlt = await RETOS.evaluar(EDITOR.conBase(alt, reto.cssBase, reto.proyecto), reto.comprobaciones, marco);
+            rAlt.forEach((ok, i) => { if (!ok) { solOk = false; detalles.push("La alternativa " + (n + 1) + " falla: «" + reto.comprobaciones[i].texto + "»"); } });
+          }
           const rIni = await RETOS.evaluar(EDITOR.conBase(reto.inicial || {}, reto.cssBase, reto.proyecto), reto.comprobaciones, marco);
           if (!rIni.some(r => !r)) { iniOk = false; detalles.push("El código inicial ya pasa todas las comprobaciones"); }
         }

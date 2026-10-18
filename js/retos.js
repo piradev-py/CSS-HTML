@@ -91,6 +91,9 @@
         '<div class="reto-enunciado tarjeta"><span class="etiqueta-reto">' + (opciones.etiqueta || "🏆 Reto final") + "</span>" +
         '<p class="enunciado"></p>' +
         (paso.captura ? '<a class="captura-encargo" target="_blank" title="Abrir la captura en grande"><img alt="Captura de cómo debe quedar"></a>' : "") +
+        // Los textos del cliente, para copiar: las etiquetas las pone el alumno
+        (paso.textos ? '<details class="textos-encargo" open><summary>📄 Textos del encargo</summary>' +
+          '<button class="mini-boton" data-copiar-textos>📋 Copiar</button><pre></pre></details>' : "") +
         '<ul class="comprobaciones" aria-live="polite"></ul>' +
         '<div class="pistas-mostradas"></div>' +
         '<div class="reto-botones">' +
@@ -103,6 +106,17 @@
     contenedor.appendChild(raiz);
 
     raiz.querySelector(".enunciado").innerHTML = UI.md(paso.enunciado);
+    if (paso.textos) {
+      const pre = raiz.querySelector(".textos-encargo pre");
+      const copiar = raiz.querySelector("[data-copiar-textos]");
+      pre.textContent = paso.textos;
+      copiar.addEventListener("click", () => {
+        // Sin permiso de portapapeles (algunos navegadores con file://) se selecciona el texto para copiarlo a mano
+        Promise.resolve(navigator.clipboard && navigator.clipboard.writeText(paso.textos))
+          .then(() => { copiar.textContent = "✅ Copiado"; setTimeout(() => { copiar.textContent = "📋 Copiar"; }, 1500); })
+          .catch(() => getSelection().selectAllChildren(pre));
+      });
+    }
     if (paso.captura) {
       raiz.querySelector(".captura-encargo").href = paso.captura;
       raiz.querySelector(".captura-encargo img").src = paso.captura;

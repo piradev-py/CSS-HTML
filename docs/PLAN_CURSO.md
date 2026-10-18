@@ -95,6 +95,11 @@ accesibles (`alt`, `label`, `header`, `main`…) como lo haría un profesional.
 - **Conceptos nuevos:** `<meta name="description">`, `<meta name="viewport">` (se adelanta; hc-05 la repasa), favicon con `<link rel="icon">`, Open Graph (`og:title`, `og:description`, `og:image`, `og:type`, con `property`).
 - **Reto:** completar la cabeza de la web de una pizzería; la tarjeta de vista previa (`vistaPrevia`) enseña cómo la ven un buscador y una red social.
 
+### html-14 · Proyecto web: la clínica Huellas · 120 XP ✅
+- **Objetivo:** construir desde cero, con el encargo del cliente, la web de la clínica veterinaria «Huellas» en HTML.
+- **5 encargos** sobre el mismo `index.html` (empieza vacío): cabeza y cabecera · portada y franja · servicios (3) y equipo (2) · horario y formulario de cita · opiniones y pie, con repaso de toda la página.
+- Cada encargo: captura, textos del cliente para copiar, comprobaciones con «📚 Repasa» y glosario. Soluciones: `HUELLAS["mundo-1"].pasos`.
+
 ---
 
 ## Mundo 2 · CSS 🎨 — «Dale color y estilo a tus páginas»

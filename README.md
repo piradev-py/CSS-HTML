@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img alt="55 lecciones" src="https://img.shields.io/badge/lecciones-55-f26b38?style=for-the-badge">
+  <img alt="56 lecciones" src="https://img.shields.io/badge/lecciones-56-f26b38?style=for-the-badge">
   <img alt="Gratis" src="https://img.shields.io/badge/precio-gratis-22c55e?style=for-the-badge">
   <img alt="En español" src="https://img.shields.io/badge/idioma-español-3b82f6?style=for-the-badge">
   <img alt="Sin instalar nada" src="https://img.shields.io/badge/instalar-nada-8b5cf6?style=for-the-badge">

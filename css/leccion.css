@@ -615,3 +615,7 @@ iframe.resultado {
 .g-ejemplo pre { margin: 0; padding: 8px 10px; padding-right: 90px; border-radius: 8px; background: var(--codigo-fondo); color: var(--codigo-texto); font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: anywhere; }
 .g-ejemplo .mini-boton { position: absolute; top: 4px; right: 4px; padding: 2px 8px; font-size: 0.75rem; }
 .g-leccion { display: inline-block; margin-top: 4px; font-size: 0.8rem; font-weight: 700; }
+.textos-encargo { position: relative; margin: 8px 0; border: 1px solid var(--borde); border-radius: 10px; padding: 6px 10px; background: var(--superficie-2); }
+.textos-encargo summary { cursor: pointer; font-weight: 800; }
+.textos-encargo pre { margin: 6px 0 0; max-height: 260px; overflow: auto; white-space: pre-wrap; font-family: var(--fuente-codigo); font-size: 0.8rem; }
+.textos-encargo [data-copiar-textos] { position: absolute; top: 4px; right: 6px; padding: 2px 8px; font-size: 0.75rem; }

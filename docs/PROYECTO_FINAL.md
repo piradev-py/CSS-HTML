@@ -234,6 +234,7 @@ Todas cerradas (16 de octubre de 2026).
 - [x] **¿Los ejercicios normales de las lecciones también construyen la clínica?** No: siguen siendo independientes y solo las lecciones de proyecto tocan la clínica.
 - [x] **Nombre de la clínica:** «Huellas».
 - [x] **Nombre de las lecciones de proyecto:** «Proyecto web» (el gran final de cada mundo); los retos de html-12 y css-14 dejan de llamarse «jefe final» (18 de octubre de 2026).
+- [x] **Servicios y equipo en el Mundo 1:** el alumno hace 3 servicios y 2 personas del equipo; al empezar el Mundo 2 se le cuenta que el equipo de diseño añadió el resto a petición de la clínica. Los textos del encargo se dan para copiar (como haría el cliente) y el primer encargo empieza con el archivo vacío (18 de octubre de 2026).
 - [x] **`privacidad.html`:** va hecha como material del encargo; el alumno la enlaza desde el pie y desde la casilla del formulario, pero no la escribe (18 de octubre de 2026).
 - [x] **Imágenes:** fotos libres (Unsplash o Pexels) con atribución e iconos SVG propios.
 - [x] **Descarga final:** un `.zip`.
