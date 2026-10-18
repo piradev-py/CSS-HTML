@@ -1,0 +1,26 @@
+[
+  {
+    "autor": "Lucía M.",
+    "mascota": "Copo, bichón maltés",
+    "texto": "Copo entra en la consulta moviendo la cola. Nos explicaron todo con calma y sin prisas.",
+    "estrellas": "★★★★★",
+    "foto": "opinion-perro.jpg",
+    "alt": "Copo, el bichón maltés de Lucía"
+  },
+  {
+    "autor": "Javier R.",
+    "mascota": "Simba, gato",
+    "texto": "Simba odia el transportín, pero aquí lo tratan con tanto mimo que vuelve tranquilo a casa.",
+    "estrellas": "★★★★★",
+    "foto": "opinion-gato.jpg",
+    "alt": "Simba, el gato de Javier"
+  },
+  {
+    "autor": "Marta G.",
+    "mascota": "Canela, conejo",
+    "texto": "Por fin una clínica que sabe de conejos. Le revisaron los dientes y nos dieron muy buenos consejos.",
+    "estrellas": "★★★★★",
+    "foto": "opinion-conejo.jpg",
+    "alt": "Canela, el conejo de Marta"
+  }
+]

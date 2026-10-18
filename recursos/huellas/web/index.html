@@ -22,7 +22,7 @@
       <img src="img/logo.svg" alt="" width="48" height="48">
       <span><strong>Huellas</strong> Clínica veterinaria</span>
     </a>
-    <button class="boton-menu" type="button">☰ Menú</button>
+    <button class="boton-menu" type="button" aria-expanded="false">☰ Menú</button>
     <nav>
       <ul>
         <li><a class="activo" href="#inicio">Inicio</a></li>
@@ -77,55 +77,13 @@
     <section id="servicios">
       <p class="antetitulo">Nuestros servicios</p>
       <h2>Todo lo que necesitan, en un solo lugar</h2>
-      <div class="rejilla">
-        <article class="servicio">
-          <img src="img/servicio-medicina.jpg" alt="" width="320" height="213" loading="lazy">
-          <img src="img/iconos/fonendo.svg" class="icono" alt="" width="52" height="52">
-          <h3>Medicina general</h3>
-          <p>Revisiones, diagnóstico y consejos para prevenir antes que curar.</p>
-          <a href="#cita">Pide cita</a>
-        </article>
-
-        <article class="servicio">
-          <img src="img/servicio-vacunacion.jpg" alt="" width="320" height="213" loading="lazy">
-          <img src="img/iconos/jeringa.svg" class="icono" alt="" width="52" height="52">
-          <h3>Vacunación</h3>
-          <p>El calendario de vacunas y desparasitación adaptado a su edad.</p>
-          <a href="#cita">Pide cita</a>
-        </article>
-
-        <article class="servicio">
-          <img src="img/servicio-cirugia.jpg" alt="" width="320" height="213" loading="lazy">
-          <img src="img/iconos/bisturi.svg" class="icono" alt="" width="52" height="52">
-          <h3>Cirugía</h3>
-          <p>Quirófano propio y anestesia vigilada en todo momento.</p>
-          <a href="#cita">Pide cita</a>
-        </article>
-
-        <article class="servicio">
-          <img src="img/servicio-dental.jpg" alt="" width="320" height="213" loading="lazy">
-          <img src="img/iconos/diente.svg" class="icono" alt="" width="52" height="52">
-          <h3>Salud dental</h3>
-          <p>Limpiezas y revisiones para una boca sana y sin dolor.</p>
-          <a href="#cita">Pide cita</a>
-        </article>
-
-        <article class="servicio">
-          <img src="img/servicio-dermatologia.jpg" alt="" width="320" height="213" loading="lazy">
-          <img src="img/iconos/huella.svg" class="icono" alt="" width="52" height="52">
-          <h3>Dermatología</h3>
-          <p>Alergias, picores y cuidado de la piel y el pelo.</p>
-          <a href="#cita">Pide cita</a>
-        </article>
-
-        <article class="servicio">
-          <img src="img/servicio-diagnostico.jpg" alt="" width="320" height="213" loading="lazy">
-          <img src="img/iconos/corazon.svg" class="icono" alt="" width="52" height="52">
-          <h3>Diagnóstico</h3>
-          <p>Análisis, ecografía y rayos X en la propia clínica.</p>
-          <a href="#cita">Pide cita</a>
-        </article>
+      <div class="filtros">
+        <button type="button" id="filtro-todos" class="activo">Todos</button>
+        <button type="button" id="filtro-perros">Perros</button>
+        <button type="button" id="filtro-gatos">Gatos</button>
+        <button type="button" id="filtro-exoticos">Exóticos</button>
       </div>
+      <div class="rejilla" id="lista-servicios"></div>
     </section>
 
     <section id="equipo">
@@ -176,24 +134,27 @@
       <h2>Reserva en un minuto</h2>
       <p>Rellena el formulario y te confirmamos la cita. Si es una urgencia, llámanos.</p>
 
-      <form id="form-cita">
+      <form id="form-cita" novalidate>
         <fieldset>
           <legend>Datos de la cita</legend>
 
           <label for="mascota">Tipo de mascota</label>
-          <select id="mascota" name="mascota" required>
+          <select id="mascota" name="mascota" required aria-describedby="error-mascota">
             <option value="">Elige una…</option>
             <option value="perro">Perro</option>
             <option value="gato">Gato</option>
             <option value="conejo">Conejo</option>
             <option value="exotico">Otro exótico</option>
           </select>
+          <p class="error" id="error-mascota"></p>
 
           <label for="fecha">Fecha</label>
-          <input type="date" id="fecha" name="fecha" required>
+          <input type="date" id="fecha" name="fecha" required aria-describedby="error-fecha">
+          <p class="error" id="error-fecha"></p>
 
           <label for="hora">Hora</label>
-          <input type="time" id="hora" name="hora" required>
+          <input type="time" id="hora" name="hora" required aria-describedby="error-hora">
+          <p class="error" id="error-hora"></p>
           <p>De 9:00 a 20:30 (sábados, de 10:00 a 14:00)</p>
 
           <label for="motivo">Motivo de la consulta</label>
@@ -212,26 +173,38 @@
           <legend>Tus datos</legend>
 
           <label for="nombre">Tu nombre</label>
-          <input type="text" id="nombre" name="nombre" required>
+          <input type="text" id="nombre" name="nombre" required aria-describedby="error-nombre">
+          <p class="error" id="error-nombre"></p>
 
           <label for="telefono">Teléfono</label>
-          <input type="tel" id="telefono" name="telefono" placeholder="600 000 000" required>
+          <input type="tel" id="telefono" name="telefono" placeholder="600 000 000" required aria-describedby="error-telefono">
+          <p class="error" id="error-telefono"></p>
 
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="email" required aria-describedby="error-email">
+          <p class="error" id="error-email"></p>
 
-          <input type="checkbox" id="privacidad" name="privacidad" required>
+          <input type="checkbox" id="privacidad" name="privacidad" required aria-describedby="error-privacidad">
           <label class="casilla" for="privacidad">He leído y acepto la <a href="privacidad.html">política de privacidad</a></label>
+          <p class="error" id="error-privacidad"></p>
         </fieldset>
 
         <button type="submit">Pedir cita</button>
       </form>
+
+      <p class="confirmacion" id="confirmacion" role="status"></p>
+
+      <div class="mis-citas">
+        <h3>Mis citas</h3>
+        <p id="sin-citas">Todavía no tienes citas. ¡Pide la primera!</p>
+        <ul id="lista-citas"></ul>
+      </div>
     </section>
 
     <section id="opiniones">
       <p class="antetitulo">Opiniones</p>
       <h2>Lo que dicen de nosotros</h2>
-      <div class="rejilla">
+      <div class="rejilla" id="lista-opiniones">
         <article class="opinion">
           <img src="img/opinion-perro.jpg" alt="Copo, el bichón maltés de Lucía" width="120" height="120" loading="lazy">
           <p>Copo entra en la consulta moviendo la cola. Nos explicaron todo con calma y sin prisas.</p>
@@ -278,8 +251,9 @@
         <p><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></p>
       </div>
     </div>
-    <p class="pie-final">© 2026 Huellas · Clínica veterinaria · <a href="privacidad.html">Política de privacidad</a></p>
+    <p class="pie-final">© <span id="anio">2026</span> Huellas · Clínica veterinaria · <a href="privacidad.html">Política de privacidad</a></p>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>

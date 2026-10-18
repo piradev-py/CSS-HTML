@@ -35,7 +35,18 @@
     → **Propuesta cerrada (2026-10-16): la clínica veterinaria «Huellas»**, en `docs/PROYECTO_FINAL.md`
     (una lección de proyecto al final de cada mundo, encargo cerrado de diseño, glosario de consulta, descarga en .zip).
     Referencias visuales en `recursos/` (VidaVet y Patitas).
-  - [ ] Revisión del temario por el profesor frente al proyecto (`docs/revisiones/2026-10-16-profesor-temario-vs-proyecto.md`)
+  - [x] Revisión del temario por el profesor frente al proyecto (`docs/revisiones/2026-10-16-profesor-temario-vs-proyecto.md`)
+  - [x] **Fase 1 · diseño y materiales** (2026-10-18): guía de estilo, fotos, iconos y textos en `docs/huellas/`;
+        web de referencia completa en `recursos/huellas/web/` (Mundo 1 → 4, un commit por mundo). Las instantáneas
+        paso a paso salen de ahí en la fase 2.
+  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1–P8): la web de referencia
+        ya usa `list-style`, `max-width` (P7), `:user-invalid` (P8), `filter`, `Date`, `checked` y `setAttribute` (P1–P4).
+  - [ ] Consejo de `scroll-margin-top` (hc-04 o hc-06): con la cabecera fija, los enlaces del menú dejan el título
+        de la sección tapado.
+  - [ ] Lección del Mundo 4: explicar `novalidate` (el formulario trae `required` del Mundo 1 y el navegador
+        taparía los mensajes propios).
+  - [ ] La comprobación de la hora es solo 9:00–20:30: no mira sábados (10:00–14:00) ni domingos (cerrado).
+        ¿Basta para el curso o se enseña `getDay()`?
   - [ ] Descarga en .zip también en el laboratorio de práctica libre (cuando exista)
   - Los **proyectos finales de cada mundo** y parte de los ejercicios de cada lección van construyendo esa misma web:
     Mundo HTML → su estructura y contenido; Mundo CSS → su aspecto; HTML + CSS → maquetación completa y responsive;
