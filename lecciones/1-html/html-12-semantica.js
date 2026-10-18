@@ -2,7 +2,7 @@
    <CSS-HTML> · Mundo HTML · Lección html-12
    HTML semántico y accesible — header, nav, main, section,
    article, aside, footer y repaso de accesibilidad.
-   Reto = jefe final del Mundo HTML: convertir una página hecha
+   Reto = el gran reto del Mundo HTML antes del proyecto web: convertir una página hecha
    con <div> en una página semántica (y arreglar un alt).
    Las imágenes son locales y no se comprueba que carguen.
    ============================================================ */
@@ -105,7 +105,7 @@ CURSO.registrar({
     },
     {
       tipo: "reto",
-      enunciado: "🐉 **¡Jefe final del Mundo HTML!** Esta web está hecha solo con `<div>`. Conviértela en una página semántica:\n\n1. La cabecera (la del `<h1>`) → `<header>`, y el menú de enlaces → `<nav>`.\n2. El contenido principal → `<main>`.\n3. El pie de página → `<footer>`.\n4. Repaso: a la imagen le falta su texto alternativo. Añádele un `alt` que la describa.\n\nCambia también cada `</div>` por el cierre que le toque.",
+      enunciado: "🐉 **¡El gran reto del Mundo HTML!** Esta web está hecha solo con `<div>`. Conviértela en una página semántica:\n\n1. La cabecera (la del `<h1>`) → `<header>`, y el menú de enlaces → `<nav>`.\n2. El contenido principal → `<main>`.\n3. El pie de página → `<footer>`.\n4. Repaso: a la imagen le falta su texto alternativo. Añádele un `alt` que la describa.\n\nCambia también cada `</div>` por el cierre que le toque.",
       inicial: {
         html: `<!-- Cambia cada <div> por su etiqueta semántica (¡y su cierre también!) -->
 <div class="cabecera">

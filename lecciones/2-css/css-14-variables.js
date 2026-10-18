@@ -2,7 +2,7 @@
    <CSS-HTML> · Mundo CSS · Lección css-14 (última del mundo)
    Variables CSS — propiedades personalizadas --nombre, var(),
    :root («el selector de toda la página») y valor de reserva.
-   Nota: el reto es el «jefe final» del Mundo CSS (variables +
+   Nota: el reto es el gran reto del Mundo CSS antes del proyecto web (variables +
    Flexbox + caja y bordes). Para comprobar que el alumno usa
    var() de verdad, las pruebas cambian la variable en <html>
    con style.setProperty, miden el color y lo dejan como estaba.
@@ -139,7 +139,7 @@ button { background-color: var(--color-boton); color: white; border: none; paddi
     },
     {
       tipo: "reto",
-      enunciado: "🏆 **¡Jefe final del Mundo CSS!** Monta la web de tu equipo de fútbol ⚽ de forma que sus colores salgan de **dos variables**:\n\n1. En `:root`, crea `--color-equipo` (por ejemplo `purple`) y `--color-texto` (por ejemplo `white`).\n2. Cambia los colores fijos por variables: el `background-color` de `.cabecera` y el color del `border` de `.jugador` usan `var(--color-equipo)`; el `color` de `.cabecera` usa `var(--color-texto)`.\n3. Pon la `.cabecera` en fila con Flexbox y centra sus elementos en vertical.\n\nCuando funcione, cambia el valor de `--color-equipo` (prueba `teal`) y ¡mira cómo cambia todo el tema!",
+      enunciado: "🏆 **¡El gran reto del Mundo CSS!** Monta la web de tu equipo de fútbol ⚽ de forma que sus colores salgan de **dos variables**:\n\n1. En `:root`, crea `--color-equipo` (por ejemplo `purple`) y `--color-texto` (por ejemplo `white`).\n2. Cambia los colores fijos por variables: el `background-color` de `.cabecera` y el color del `border` de `.jugador` usan `var(--color-equipo)`; el `color` de `.cabecera` usa `var(--color-texto)`.\n3. Pon la `.cabecera` en fila con Flexbox y centra sus elementos en vertical.\n\nCuando funcione, cambia el valor de `--color-equipo` (prueba `teal`) y ¡mira cómo cambia todo el tema!",
       inicial: {
         html: `<header class="cabecera">
   <span class="escudo">⚽</span>

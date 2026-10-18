@@ -89,7 +89,7 @@ Es **una lección de proyecto nueva al final del mundo** (tras html-13), en **5 
 - Todas las imágenes con `alt`, `width` y `height`, y `loading="lazy"` las que no están en la portada.
 - La tabla de horarios del encargo, con cabecera y los 7 días.
 - Formulario `#form-cita` con `fieldset` y `legend`, cada campo con su `label`: nombre, teléfono (`tel`), email (`email`), tipo de mascota (`select` con las opciones del encargo), fecha (`date`), hora (`time`), motivo (`textarea`), ¿primera visita? (`radio`), aceptar la privacidad (`checkbox`, obligatorio, con enlace a la página de privacidad) y botón de enviar.
-- Pie con los datos de contacto del encargo: enlaces `tel:` y `mailto:`, el enlace al mapa en otra pestaña y el enlace a `privacidad.html`, una segunda página sencilla con el texto legal del encargo.
+- Pie con los datos de contacto del encargo: enlaces `tel:` y `mailto:`, el enlace al mapa en otra pestaña y el enlace a `privacidad.html`, una segunda página con el texto legal que va hecha en los materiales.
 
 **Lo que decide el alumno:** cómo escribe el HTML dentro de lo que pide la ficha: etiquetas de agrupación (`div`, `section`, `article`…), clases propias, el orden interno de cada sección y cómo coloca las imágenes.
 
@@ -233,6 +233,8 @@ Todas cerradas (16 de octubre de 2026).
 - [x] **¿Dónde va el proyecto?** Una sola lección de proyecto al final de cada mundo (4 en total), con su parte de la web dividida en pasos. Sustituye a hc-11, hc-12 y js-14; en los mundos 1 y 2 es una lección nueva tras html-12 y css-14.
 - [x] **¿Los ejercicios normales de las lecciones también construyen la clínica?** No: siguen siendo independientes y solo las lecciones de proyecto tocan la clínica.
 - [x] **Nombre de la clínica:** «Huellas».
+- [x] **Nombre de las lecciones de proyecto:** «Proyecto web» (el gran final de cada mundo); los retos de html-12 y css-14 dejan de llamarse «jefe final» (18 de octubre de 2026).
+- [x] **`privacidad.html`:** va hecha como material del encargo; el alumno la enlaza desde el pie y desde la casilla del formulario, pero no la escribe (18 de octubre de 2026).
 - [x] **Imágenes:** fotos libres (Unsplash o Pexels) con atribución e iconos SVG propios.
 - [x] **Descarga final:** un `.zip`.
 - [x] **¿Puntos extra?** No. El proyecto no es un trabajo aparte, es el fruto del curso: todo lo que pide forma parte de él.

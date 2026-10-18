@@ -88,7 +88,7 @@ accesibles (`alt`, `label`, `header`, `main`…) como lo haría un profesional.
 ### html-12 · HTML semántico y accesible · 50 XP ✅
 - **Objetivo:** usar etiquetas que dicen lo que son para que buscadores y lectores de pantalla entiendan la página.
 - **Conceptos nuevos:** semántica, `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`, repaso de accesibilidad (`alt`, `label`, orden de títulos).
-- **Reto (jefe final del mundo):** transformar una página hecha solo de `div` en una página semántica con `header`, `nav`, `main` y `footer`.
+- **Reto (el gran reto del mundo, antes del proyecto web):** transformar una página hecha solo de `div` en una página semántica con `header`, `nav`, `main` y `footer`.
 
 ### html-13 · La cabeza de la página · 40 XP ✅
 - **Objetivo:** escribir en el `<head>` lo que leen el navegador, los buscadores y las redes, aunque no se vea.
