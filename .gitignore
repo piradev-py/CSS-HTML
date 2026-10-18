@@ -1,3 +1,4 @@
 ﻿.claude/settings.local.json
 tests/navegador/perfil-cdp-*/
 tests/navegador/*.png
+graphify-out/
