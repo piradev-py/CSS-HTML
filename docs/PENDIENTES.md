@@ -39,7 +39,9 @@
   - [x] **Fase 1 · diseño y materiales** (2026-10-18): guía de estilo, fotos, iconos y textos en `docs/huellas/`;
         web de referencia completa en `recursos/huellas/web/` (Mundo 1 → 4, un commit por mundo). Las instantáneas
         paso a paso salen de ahí en la fase 2.
-  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1–P8): la web de referencia
+  - [x] P7 (css-03 contraste, css-04 fuentes web, css-07 max-width, css-09 list-style, css-10 ejercicio sticky) y
+        P8 (hc-06 menú móvil con `abierto`, hc-09 transition: none, hc-10 :user-invalid) — 2026-10-18.
+  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1–P6): la web de referencia
         ya usa `list-style`, `max-width` (P7), `:user-invalid` (P8), `filter`, `Date`, `checked` y `setAttribute` (P1–P4).
   - [ ] Consejo de `scroll-margin-top` (hc-04 o hc-06): con la cabecera fija, los enlaces del menú dejan el título
         de la sección tapado.

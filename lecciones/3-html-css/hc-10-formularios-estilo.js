@@ -173,7 +173,32 @@ input:valid {
   border-color: seagreen;
 }`
       },
-      consejo: "Ojo: un campo con `required` que está vacío también cuenta como `:invalid`… ¡y saldría rojo antes de que escribas nada! Úsalo con cuidado en los campos obligatorios."
+      consejo: "Ojo: un campo con `required` que está vacío también cuenta como `:invalid`… ¡y saldría rojo antes de que escribas nada! En el paso siguiente tienes la solución."
+    },
+    {
+      tipo: "explicacion",
+      titulo: "Rojo solo cuando toca: :user-invalid",
+      texto: "Imagina que abres un formulario y **todos** los campos obligatorios salen ya en rojo, antes de escribir nada. ¡Qué agobio! 😰\n\nPara eso existen `:user-invalid` y `:user-valid`. Funcionan como `:invalid` y `:valid`, pero **esperan a que la persona toque el campo**: se activan cuando escribes algo y sales del campo, o cuando intentas enviar el formulario.\n\nEn el ejemplo, el campo es obligatorio y está vacío, pero sale gris. Escribe algo sin @, haz clic fuera… ¡ahora sí sale rojo!",
+      ejemplo: {
+        html: `<label for="correo">Tu email</label>
+<input type="email" id="correo" name="correo" required>`,
+        css: `body {
+  font-family: sans-serif;
+}
+input {
+  font: inherit;
+  padding: 8px;
+  border: 3px solid silver;
+  border-radius: 8px;
+}
+input:user-invalid {
+  border-color: crimson;
+}
+input:user-valid {
+  border-color: seagreen;
+}`
+      },
+      consejo: "En los formularios de verdad, usa `:user-invalid` para los avisos en rojo: solo molestan cuando de verdad hay algo que corregir."
     },
     {
       tipo: "explicacion",

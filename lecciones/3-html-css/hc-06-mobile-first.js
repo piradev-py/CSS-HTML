@@ -175,6 +175,41 @@ aside {
       consejo: "Usa `order` con cuidado: quien navega con el teclado o un lector de pantalla sigue el orden del **HTML**, no el que se ve. Escribe el HTML en el orden lógico y usa `order` solo para retoques."
     },
     {
+      tipo: "explicacion",
+      titulo: "El menú del móvil",
+      texto: "En un móvil no caben cinco enlaces en fila. La solución de casi todas las webs: **esconder el menú** detrás de un botón (☰).\n\nCon móvil primero se escribe así:\n\n• **Base (móvil):** la lista del menú, escondida con `display: none`; el botón ☰, visible.\n• `nav.abierto ul`: cuando el `nav` tiene la clase **abierto**, la lista se ve. Esa clase la pondrá el **JavaScript** al pulsar el botón (lo aprenderás en el Mundo 4).\n• **Desde 768px:** al revés. El botón se esconde y la lista se ve siempre, en fila.\n\nEn el ejemplo, el `nav` ya trae la clase `abierto`: bórrala en tu cabeza y la lista desaparecería. Ensancha la ventana para ver el menú de escritorio.",
+      ejemplo: {
+        html: `<header>
+  <button class="boton-menu">☰ Menú</button>
+  <nav class="abierto">
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Recetas</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+</header>`,
+        css: `nav ul {
+  display: none;
+  list-style: none;
+  padding: 0;
+}
+nav.abierto ul {
+  display: block;
+}
+@media (min-width: 768px) {
+  .boton-menu {
+    display: none;
+  }
+  nav ul {
+    display: flex;
+    gap: 20px;
+  }
+}`
+      },
+      consejo: "El selector `nav.abierto` (sin espacio) significa «un `nav` que **además** tiene la clase abierto». Con espacio, `nav .abierto`, buscaría algo con esa clase **dentro** del nav."
+    },
+    {
       tipo: "quiz",
       pregunta: "En un CSS mobile first, ¿qué estilos van fuera de cualquier media query?",
       opciones: [

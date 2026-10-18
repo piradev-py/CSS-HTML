@@ -182,7 +182,7 @@ body { background-color: #fff8db; }
     {
       tipo: "explicacion",
       titulo: "Menos movimiento, por favor",
-      texto: "A algunas personas el movimiento en pantalla les **marea** o les distrae mucho. Por eso los sistemas (Windows, Mac, móviles…) tienen una opción llamada **reducir movimiento**.\n\nTu CSS puede preguntar si está activada con un `@media`, como en el responsive. Pero en vez del ancho, pregunta por esa preferencia: `@media (prefers-reduced-motion: reduce)`. Dentro, quitas la animación con `animation: none` (o la haces más lenta y suave).\n\n👀 Si tu ordenador tiene activado «reducir movimiento», en este ejemplo verás el globo **quieto**. ¡No está roto! Es justo lo que queremos para quien lo pide.",
+      texto: "A algunas personas el movimiento en pantalla les **marea** o les distrae mucho. Por eso los sistemas (Windows, Mac, móviles…) tienen una opción llamada **reducir movimiento**.\n\nTu CSS puede preguntar si está activada con un `@media`, como en el responsive. Pero en vez del ancho, pregunta por esa preferencia: `@media (prefers-reduced-motion: reduce)`. Dentro, quitas la animación con `animation: none` (o la haces más lenta y suave). Y si tu página tiene **transiciones** (los botones que suben al pasar el ratón), quítalas también con `transition: none`.\n\n👀 Si tu ordenador tiene activado «reducir movimiento», en este ejemplo verás el globo **quieto**. ¡No está roto! Es justo lo que queremos para quien lo pide.",
       ejemplo: {
         html: `<div class="globo">🎈</div>`,
         css: `@keyframes flotar {
