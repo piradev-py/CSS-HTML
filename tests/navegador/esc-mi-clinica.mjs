@@ -10,7 +10,7 @@ const BASE = new URL("../../", import.meta.url).href;
 const progreso = completadas => `localStorage.setItem('csshtml-progreso-v1', JSON.stringify({ xp: 0, completadas: ${JSON.stringify(completadas)}, insignias: [], racha: { dias: 0, ultimo: null }, ajustes: { sonido: false, tema: 'light', desbloquearTodo: false }, borradores: {} }))`;
 
 // Lee un .zip de archivos guardados sin comprimir (método 0), cabecera local a cabecera local
-function leerZip(bytes) {
+export function leerZip(bytes) {
   const v = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const salida = {};
   let i = 0;

@@ -2,7 +2,7 @@
    <CSS-HTML> · Cambiar la versión del curso
    Uso:  node herramientas/version.mjs 1.2.0
    - Cambia VERSION en js/curso.js (se ve en el pie del mapa y en ⚙️ Ajustes).
-   - Cambia todos los ?v= de index.html, leccion.html y mi-clinica.html. Al ser una dirección
+   - Cambia todos los ?v= de index.html, leccion.html, mi-clinica.html y laboratorio.html. Al ser una dirección
      nueva, el navegador descarga los CSS/JS de nuevo en vez de usar los viejos
      que tenía guardados (GitHub Pages deja guardarlos 10 minutos).
    - Las lecciones se piden con ?v= desde js/leccion.js, con la misma VERSION.
@@ -34,7 +34,7 @@ if (actual === nueva) {
 }
 escribir("js/curso.js", curso.replace(patron, 'const VERSION = "' + nueva + '";'));
 
-for (const pagina of ["index.html", "leccion.html", "mi-clinica.html"]) {
+for (const pagina of ["index.html", "leccion.html", "mi-clinica.html", "laboratorio.html"]) {
   const texto = leer(pagina);
   const cuantos = (texto.match(/\?v=[\w.-]+/g) || []).length;
   escribir(pagina, texto.replace(/\?v=[\w.-]+/g, "?v=" + nueva));

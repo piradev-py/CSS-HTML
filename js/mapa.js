@@ -31,6 +31,7 @@
       acciones.innerHTML = '<p class="texto-suave">🎉 Has completado todas las lecciones disponibles. ¡Pronto habrá más!</p>';
     }
     if (PROGRESO.estaCompletada("js-17")) acciones.insertAdjacentHTML("beforeend", '<a class="boton" href="mi-clinica.html">🏥 Mi clínica</a>');
+    acciones.insertAdjacentHTML("beforeend", '<a class="boton secundario" href="laboratorio.html">🧪 Laboratorio</a>');
     acciones.insertAdjacentHTML("beforeend",
       '<span class="chip">' + n.emoji + " " + n.nombre + " · " + n.xp + " XP</span>");
     cont.prepend(MASCOTA.crear(saludo, "alegre"));

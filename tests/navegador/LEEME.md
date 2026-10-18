@@ -35,6 +35,9 @@ node tests/navegador/cdp.mjs esc-proyecto-m4.mjs
 # Página final «Mi clínica»: cerrada sin js-17; abierta, la web y el .zip, que se descomprime y se abre desde el disco
 node tests/navegador/cdp.mjs esc-mi-clinica.mjs
 
+# Laboratorio de práctica libre: ejemplos, consola, borrar y deshacer, borrador al recargar y el .zip abierto desde el disco
+node tests/navegador/cdp.mjs esc-laboratorio.mjs
+
 # Capturas de las fichas de encargo (recursos/huellas/capturas/), a partir de las versiones oficiales (MUNDO=1, 2 o 3)
 MUNDO=1 node tests/navegador/cdp.mjs esc-capturas-huellas.mjs
 

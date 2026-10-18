@@ -1,0 +1,18 @@
+/* ============================================================
+   <CSS-HTML> · Laboratorio de práctica libre (laboratorio.html)
+   ============================================================ */
+.laboratorio { max-width: 1400px; margin: 0 auto; padding: 16px; display: grid; gap: 16px; }
+.lab-cabecera { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.lab-cabecera h1 { margin: 0 0 4px; font-size: 1.8rem; }
+.lab-cabecera p { margin: 0; max-width: 60ch; }
+.lab-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.lab-ejemplos { font-weight: 700; }
+.lab-ejemplos select { margin-left: 6px; padding: 8px 10px; border: 2px solid var(--borde); border-radius: 10px; font: inherit; background: var(--superficie); color: var(--texto); }
+.lab-deshacer { flex-basis: 100%; margin: 0; font-weight: 700; }
+/* El código y el resultado lado a lado y altos: aquí no hay columna de lección */
+.lab-editor { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; height: 72vh; min-height: 420px; }
+@media (max-width: 800px) {
+  .lab-editor { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); height: 120vh; }
+}
+/* «Borrar todo» ya hace lo de «↺ Reiniciar», y con deshacer */
+.lab-editor [data-reiniciar] { display: none; }

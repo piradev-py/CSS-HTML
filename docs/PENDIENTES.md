@@ -27,9 +27,11 @@
 - [x] Tests pasados (`esc-tests`, `esc-motor`, `esc-motor-js`) y comprobado en publicado (`http://127.0.0.2`) y en `file://`.
 
 ## Ideas nuevas (petición del usuario, 2026-10-15)
-- [ ] **Laboratorio de práctica libre** (al estilo del laboratorio de SQLearning): una página aparte con las **3 pestañas**
+- [x] **Laboratorio de práctica libre** (al estilo del laboratorio de SQLearning): una página aparte con las **3 pestañas**
       (HTML, CSS, JS) y el **observador** (vista previa en vivo + consola) para trastear sin lección ni revisión. Borrador guardado,
       ejemplos para cargar, botón de borrar con deshacer, enlace desde la página de inicio.
+      → `laboratorio.html` (`js/laboratorio.js`), 2026-10-19, con 3 ejemplos y descarga en .zip (`mi-practica/`, la página ya
+      enlaza su hoja y su script). Test: `esc-laboratorio`. Sin glosario (sería para una mejora futura).
 - [ ] **Un único proyecto web que crece a lo largo de los 4 mundos** en lugar de temas sueltos:
   - Elegir **un** negocio de los ejemplos que ya usa el profesor (la pizzería, la veterinaria…; el que mejor encaje).
     → **Propuesta cerrada (2026-10-16): la clínica veterinaria «Huellas»**, en `docs/PROYECTO_FINAL.md`
@@ -60,7 +62,7 @@
         taparía los mensajes propios).
   - [ ] La comprobación de la hora es solo 9:00–20:30: no mira sábados (10:00–14:00) ni domingos (cerrado).
         ¿Basta para el curso o se enseña `getDay()`?
-  - [ ] Descarga en .zip también en el laboratorio de práctica libre (cuando exista)
+  - [x] Descarga en .zip también en el laboratorio de práctica libre (2026-10-19)
   - [~] **Fase 2 · motor del proyecto** (2026-10-18). Hecho: paso `proyecto` (varios archivos enlazados de verdad,
         rutas desde la carpeta de Huellas, borrador compartido, captura del encargo, «📚 Repasa» en lo que falla),
         versiones oficiales por mundo (`herramientas/huellas-versiones.mjs` → `lecciones/huellas/versiones.js`), reloj fijo
@@ -94,8 +96,8 @@
         del alumno a pantalla entera, con el mismo motor que la lección. **⬇️ Descargar mi web (.zip)**: `js/zip.js` (sin
         librerías, sin comprimir) y las imágenes en `lecciones/huellas/imagenes.js` (`node herramientas/huellas-imagenes.mjs`),
         así descarga también con `file://`. Se llega desde la victoria de js-17 y desde el mapa. Test: `esc-mi-clinica`
-        (descomprime el .zip y abre la web desde el disco). Falta: la descarga del laboratorio (el laboratorio no existe aún)
-        y la revisión con QA y alumno novato.
+        (descomprime el .zip y abre la web desde el disco). El laboratorio, con su descarga, también
+        (`laboratorio.html`). Falta: la revisión con QA y alumno novato.
   - Los **proyectos finales de cada mundo** y parte de los ejercicios de cada lección van construyendo esa misma web:
     Mundo HTML → su estructura y contenido; Mundo CSS → su aspecto; HTML + CSS → maquetación completa y responsive;
     JavaScript → interactividad (menú, formulario, carrito o reservas…).
