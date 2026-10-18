@@ -152,9 +152,11 @@
     estrellas: id => (datos.completadas[id] ? datos.completadas[id].estrellas : 0),
     tieneInsignia: id => datos.insignias.includes(id),
 
-    /** Una lección está abierta si es la primera, si la anterior está completada o si se desbloqueó todo. */
+    /** Una lección está abierta si es la primera, si ya está completada, si la anterior lo está o si se desbloqueó todo. */
     estaDesbloqueada(id) {
       if (SOLO_LOCAL && datos.ajustes.desbloquearTodo) return true;
+      // Una lección nueva metida delante no vuelve a cerrar las que el alumno ya hizo
+      if (datos.completadas[id]) return true;
       const anterior = CURSO.anterior(id);
       return !anterior || !!datos.completadas[anterior.id];
     },

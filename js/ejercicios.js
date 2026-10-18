@@ -410,6 +410,7 @@
       pestanaActiva: pestanaInicial(paso),
       cssBase: paso.cssBase,
       dispositivos: paso.dispositivos,
+      vistaPrevia: paso.vistaPrevia,
       inicial: Object.assign({ html: "", css: "", js: "" }, paso.inicial),
       codigo: borrador || undefined,
       alCambiar: codigo => PROGRESO.guardarBorrador(clave, codigo)

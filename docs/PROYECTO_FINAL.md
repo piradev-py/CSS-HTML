@@ -209,7 +209,7 @@ El profesor cruzó el temario con el proyecto (informe en `docs/revisiones/2026-
 
 - **Lecciones cortas:** las nuevas miden lo mismo que las actuales; si una crece, se divide en dos.
 - **La meta a la vista:** al empezar cada mundo, el alumno ve la captura de cómo quedará su parte de «Huellas».
-- **Nadie pierde su progreso:** el curso está publicado, así que al renumerar las lecciones se adapta el progreso guardado (tarea de la fase 2).
+- **Nadie pierde su progreso:** el curso está publicado, así que las lecciones nuevas llevan ids nuevos (el id de una lección no cambia nunca) y una lección ya completada sigue abierta aunque se meta otra delante, así que no hace falta migrar nada.
 
 Las lecciones nuevas y las ampliaciones se hacen en la fase de cada mundo (3 a 6), antes de su lección de proyecto.
 
@@ -219,7 +219,7 @@ Ocho fases, en orden; cada una termina con algo comprobable. **Ninguna toca cód
 
 1. **Fase 0 · Decisiones** (este documento): aprobarlo junto con la guía de estilo y el contrato mínimo de nombres; el profesor revisa que el temario de los 4 mundos enseña todo lo que pide el proyecto. *Hecho cuando:* está aprobado y pasado a `docs/PROYECTO_FINAL.md`.
 2. **Fase 1 · Diseño y materiales:** la guía de estilo de «Huellas», las imágenes e iconos con licencia, todos los textos y la versión completa de la web, guardando su estado al final de cada paso (13 instantáneas). De ahí salen las capturas de las fichas. *Hecho cuando:* las 13 instantáneas cumplen su propio encargo y la versión final pasa una auditoría de accesibilidad y rendimiento.
-3. **Fase 2 · Motor del proyecto:** el nuevo tipo de paso **proyecto** (varios archivos, ficha de encargo, comprobaciones por estructura, estilo calculado, anchos y comportamiento), el arranque de cada lección desde la versión oficial del mundo anterior, el reloj fijo para las fechas el panel del glosario (cada lección existente declara sus términos) y la migración del progreso guardado a la nueva numeración. *Hecho cuando:* una batería de tests aprueba «Huellas» y suspende variantes rotas con el mensaje correcto.
+3. **Fase 2 · Motor del proyecto:** el nuevo tipo de paso **proyecto** (varios archivos, ficha de encargo, comprobaciones por estructura, estilo calculado, anchos y comportamiento), el arranque de cada lección desde la versión oficial del mundo anterior, el reloj fijo para las fechas el panel del glosario (cada lección existente declara sus términos). *Hecho cuando:* una batería de tests aprueba «Huellas» y suspende variantes rotas con el mensaje correcto.
 4. **Fase 3 · Mundo 1:** la lección de proyecto nueva tras html-12. *Hecho cuando:* pasa el verificador y aprueba un HTML escrito de otra forma (otras etiquetas de agrupación, otras clases).
 5. **Fase 4 · Mundo 2:** la lección de proyecto nueva tras css-14. *Hecho cuando:* aprueba una hoja organizada de otra forma con el mismo resultado.
 6. **Fase 5 · Mundo 3:** la lección de proyecto que sustituye a hc-11 y hc-12. *Hecho cuando:* aprueba a 375, 768 y 1200 px, con Flexbox o con Grid, y respeta el movimiento reducido.

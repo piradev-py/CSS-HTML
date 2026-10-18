@@ -21,7 +21,7 @@ CURSO.registrar({
     {
       tipo: "explicacion",
       titulo: "Una web, mil pantallas",
-      texto: "Tu web se verá en móviles, tabletas, portátiles y pantallas enormes. Una web **responsive** (adaptable) se reorganiza sola para verse bien en todas, como el agua que toma la forma del vaso 💧.\n\nPrimer paso: en el `<head>` de tus páginas escribe siempre la etiqueta `<meta name=\"viewport\">` del ejemplo. Sin ella, el móvil finge ser una pantalla de ordenador y te enseña la web en miniatura, con letra de hormiga 🐜. Con ella le dices: «usa tu ancho de verdad» (`width=device-width`) «y sin zoom» (`initial-scale=1`).\n\nEn este curso el resultado ya se ve bien sin ella, pero en tus webs reales no la olvides.",
+      texto: "Tu web se verá en móviles, tabletas, portátiles y pantallas enormes. Una web **responsive** (adaptable) se reorganiza sola para verse bien en todas, como el agua que toma la forma del vaso 💧.\n\nPrimer paso, que ya conoces de «La cabeza de la página»: en el `<head>` escribe siempre la etiqueta `<meta name=\"viewport\">` del ejemplo. Sin ella, el móvil finge ser una pantalla de ordenador y te enseña la web en miniatura, con letra de hormiga 🐜. Con ella le dices: «usa tu ancho de verdad» (`width=device-width`) «y sin zoom» (`initial-scale=1`).\n\nEn este curso el resultado ya se ve bien sin ella, pero en tus webs reales no la olvides.",
       dispositivos: true,
       ejemplo: {
         html: `<!DOCTYPE html>

@@ -90,6 +90,11 @@ accesibles (`alt`, `label`, `header`, `main`…) como lo haría un profesional.
 - **Conceptos nuevos:** semántica, `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`, repaso de accesibilidad (`alt`, `label`, orden de títulos).
 - **Reto (jefe final del mundo):** transformar una página hecha solo de `div` en una página semántica con `header`, `nav`, `main` y `footer`.
 
+### html-13 · La cabeza de la página · 40 XP ✅
+- **Objetivo:** escribir en el `<head>` lo que leen el navegador, los buscadores y las redes, aunque no se vea.
+- **Conceptos nuevos:** `<meta name="description">`, `<meta name="viewport">` (se adelanta; hc-05 la repasa), favicon con `<link rel="icon">`, Open Graph (`og:title`, `og:description`, `og:image`, `og:type`, con `property`).
+- **Reto:** completar la cabeza de la web de una pizzería; la tarjeta de vista previa (`vistaPrevia`) enseña cómo la ven un buscador y una red social.
+
 ---
 
 ## Mundo 2 · CSS 🎨 — «Dale color y estilo a tus páginas»
@@ -204,7 +209,7 @@ formularios con estilo, usar pseudo-clases y pseudo-elementos, hacer webs respon
 
 ### hc-05 · Responsive y media queries · 50 XP ✅
 - **Objetivo:** hacer que una página se adapte al tamaño de la pantalla.
-- **Conceptos nuevos:** responsive, `<meta name="viewport">`, `@media`, `max-width`/`min-width`, puntos de corte, imágenes fluidas (`max-width: 100%`).
+- **Conceptos nuevos:** responsive, `<meta name="viewport">` (repaso de html-13), `@media`, `max-width`/`min-width`, puntos de corte, imágenes fluidas (`max-width: 100%`).
 - **Reto:** galería que pasa de 3 columnas en ordenador a 1 columna en móvil.
 
 ### hc-06 · Mobile first · 45 XP ✅

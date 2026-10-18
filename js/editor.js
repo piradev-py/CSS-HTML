@@ -394,6 +394,48 @@
   }
 
   /**
+   * Tarjeta «así te ven» bajo el resultado (lección de la cabeza): lee del <head> del resultado el title,
+   * la meta description, el favicon y las og:… y las pinta como un buscador y como un enlace compartido.
+   */
+  function anadirVistaPrevia(panel) {
+    const iframe = panel.querySelector("iframe.resultado");
+    const caja = document.createElement("div");
+    caja.className = "vista-previa";
+    iframe.after(caja);
+    const leer = (doc, sel, attr) => (doc.querySelector(sel)?.getAttribute(attr) || "").trim();
+    const url = (doc, valor) => { try { return valor ? new URL(valor, doc.baseURI).href : ""; } catch (e) { return ""; } };
+    function pintar() {
+      const doc = iframe.contentDocument;
+      if (!doc) return;
+      const titulo = (doc.querySelector("title")?.textContent || "").trim();
+      const desc = leer(doc, 'meta[name="description"]', "content");
+      const icono = url(doc, leer(doc, 'link[rel~="icon"]', "href"));
+      const ogTitulo = leer(doc, 'meta[property="og:title"]', "content");
+      const ogDesc = leer(doc, 'meta[property="og:description"]', "content");
+      const ogImagen = url(doc, leer(doc, 'meta[property="og:image"]', "content"));
+      const falta = t => '<span class="vp-falta">' + t + "</span>";
+      caja.innerHTML =
+        '<div class="vp-bloque"><div class="vp-titulo">🔎 Así te ve un buscador</div>' +
+          '<div class="vp-buscador">' +
+            (icono ? '<img class="vp-icono" alt="">' : '<span class="vp-icono vp-sin-icono" title="Sin favicon">🌐</span>') +
+            '<div><div class="vp-enlace">' + (titulo ? UI.escapar(titulo) : falta("Sin <title>")) + "</div>" +
+            '<div class="vp-desc">' + (desc ? UI.escapar(desc) : falta("Sin meta description: el buscador cogerá un trozo cualquiera de tu página")) + "</div></div>" +
+          "</div></div>" +
+        '<div class="vp-bloque"><div class="vp-titulo">💬 Así se ve tu enlace al compartirlo</div>' +
+          '<div class="vp-redes">' +
+            (ogImagen ? '<img class="vp-imagen" alt="">' : '<div class="vp-imagen vp-sin-imagen">' + falta("Sin og:image") + "</div>") +
+            '<div class="vp-redes-texto"><b>' + (ogTitulo ? UI.escapar(ogTitulo) : falta("Sin og:title")) + "</b>" +
+            "<div>" + (ogDesc ? UI.escapar(ogDesc) : falta("Sin og:description")) + "</div></div>" +
+          "</div></div>";
+      // src por propiedad: así una URL con comillas no rompe el HTML de la tarjeta
+      if (icono) caja.querySelector(".vp-icono").src = icono;
+      if (ogImagen) caja.querySelector(".vp-imagen").src = ogImagen;
+    }
+    iframe.addEventListener("load", pintar);
+    pintar();
+  }
+
+  /**
    * Panel de resultado: <iframe> y, si hay JS, consola y botón «Recargar».
    * opciones: { consola, soloConsola (sin HTML: la consola ocupa todo), titulo }
    * Devuelve { panel, iframe, mostrar(codigo), borrarDatos() }.
@@ -515,6 +557,7 @@
       contenedor.appendChild(raiz);
     }
     if (opciones.dispositivos) anadirDispositivos(panelResultado);
+    if (opciones.vistaPrevia) anadirVistaPrevia(panelResultado);
 
     function pintarResaltado() {
       const texto = textarea.value;
@@ -630,5 +673,5 @@
     return { raiz, iframe, obtener, fijar, refrescar, enfocar: () => textarea.focus() };
   }
 
-  window.EDITOR = { crear, crearResultado, construirDocumento, conBase, errorAmigable, anadirDispositivos, protegerBucles };
+  window.EDITOR = { crear, crearResultado, construirDocumento, conBase, errorAmigable, anadirDispositivos, anadirVistaPrevia, protegerBucles };
 })();

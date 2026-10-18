@@ -126,6 +126,7 @@
       pestanaActiva: pestanaReto(paso),
       cssBase: paso.cssBase,
       dispositivos: paso.dispositivos,
+      vistaPrevia: paso.vistaPrevia,
       inicial: paso.inicial,
       codigo: PROGRESO.borrador(leccionId) || undefined,
       alCambiar: codigo => {

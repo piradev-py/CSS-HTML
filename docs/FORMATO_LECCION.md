@@ -21,7 +21,9 @@ Cada mundo tiene una lista `lecciones` con entradas así:
 { id: "html-03", archivo: "html-03-titulos-y-parrafos.js", titulo: "Títulos y párrafos", listo: true }
 ```
 
-- `id`: prefijo del mundo (`html`, `css`, `hc`, `js`) + número de dos cifras. Correlativo, sin huecos.
+- `id`: prefijo del mundo (`html`, `css`, `hc`, `js`) + número de dos cifras. Un id **no se cambia nunca** (el progreso y los borradores guardados van por id): una lección
+  nueva metida entre dos lleva el siguiente número libre de su mundo (`js-15` puede verse como lección 11). El número
+  que ve el alumno sale de la posición en la lista.
 - `listo: false` → el mapa la muestra como "🚧 Próximamente". Ponlo a `true` solo cuando el archivo exista.
 - El `titulo` del índice y el de la lección deben coincidir.
 
@@ -244,6 +246,9 @@ Reglas de las comprobaciones:
   - Ejemplo: `prueba: async (doc) => { const v = await PRUEBA.recargar(doc); v.doc.querySelector("#mas").click(); v.doc.querySelector("#mas").click(); return v.doc.querySelector("#n").textContent === "2"; }`
 - **`dispositivos: true`** (en `ejercicio`, `reto` y `explicacion` con `ejemplo`): añade al resultado los botones
   💻 Libre / 📱 Móvil (375 px) y la medida en px del resultado. Úsalo en las lecciones de responsive.
+- **`vistaPrevia: true`** (en los mismos pasos): bajo el resultado, cómo ven la página un buscador (favicon, `<title>`,
+  meta description) y una red social al compartir el enlace (`og:title`, `og:description`, `og:image`). Lo lee del `<head>`
+  del resultado. Úsalo en html-13.
 - Entre 2 y 4 comprobaciones, escritas como frases que un novato entiende. El motor añade siempre una más al final:
   «Tu código está bien escrito: etiquetas cerradas, `{ }` y `;`» (ver «Bien escrito antes que nada»). No la escribas tú.
 - La `solucion` debe pasar **todas** las comprobaciones y el `inicial` debe fallar **al menos una**

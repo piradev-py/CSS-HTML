@@ -47,7 +47,9 @@
         objetos con `|| []`). Falta: que el **reto** de js-12 guarde un array de objetos.
   - [x] P3 (js-11: casillas y radios con `.checked`, `Number.isNaN`, bandera `todoBien` con un mensaje por campo).
         Falta: que el **reto** de js-11 tenga 2–3 campos con su mensaje cada uno.
-  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1, P2 y P5: las tres lecciones nuevas): la web de referencia
+  - [x] P5 (html-13 «La cabeza de la página», con la tarjeta `vistaPrevia` del motor) — 2026-10-18. Sin renumerar: los ids
+        no cambian nunca (las lecciones nuevas llevan el siguiente número libre) y una lección completada sigue abierta.
+  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1 `js-15` y P2 `js-16`, delante de js-11): la web de referencia
         ya usa `list-style`, `max-width` (P7), `:user-invalid` (P8), `filter`, `Date`, `checked` y `setAttribute` (P1–P4).
   - [ ] Consejo de `scroll-margin-top` (hc-04 o hc-06): con la cabecera fija, los enlaces del menú dejan el título
         de la sección tapado.

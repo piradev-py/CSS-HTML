@@ -185,6 +185,7 @@
           colResultado.appendChild(res.panel);
           res.mostrar(paso.ejemplo);
           if (paso.dispositivos) EDITOR.anadirDispositivos(res.panel);
+          if (paso.vistaPrevia) EDITOR.anadirVistaPrevia(res.panel);
           if (paso.consejo) zona.appendChild(MASCOTA.crear(UI.md(paso.consejo)));
         } else {
           // Sin ejemplo: Tagui ocupa la pizarra con su consejo

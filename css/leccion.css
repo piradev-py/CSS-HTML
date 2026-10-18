@@ -574,3 +574,18 @@ iframe.resultado {
   border-left: 2px solid var(--borde);
   border-right: 2px solid var(--borde);
 }
+
+/* Tarjeta «así te ven» bajo el resultado (vistaPrevia: lección de la cabeza de la página) */
+.vista-previa { flex: none; display: grid; gap: 10px; padding: 10px 12px; border-top: 2px solid var(--borde); background: var(--superficie-2); font-size: 0.85rem; }
+.vp-titulo { font-weight: 800; color: var(--texto-suave); margin-bottom: 4px; }
+/* Siempre en claro, como las tarjetas de verdad que imitan */
+.vp-buscador, .vp-redes { background: #fff; color: #202124; border: 1px solid #dadce0; border-radius: 10px; overflow: hidden; }
+.vp-buscador { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; }
+.vp-icono { width: 20px; height: 20px; flex: none; object-fit: contain; font-size: 16px; line-height: 20px; text-align: center; }
+.vp-enlace { color: #1a4fd6; font-size: 1rem; font-weight: 700; overflow-wrap: anywhere; }
+.vp-desc { color: #4d5156; overflow-wrap: anywhere; }
+.vp-redes { display: flex; }
+.vp-imagen { width: 120px; min-height: 80px; flex: none; object-fit: cover; background: #f1f3f4; }
+.vp-sin-imagen { display: grid; place-items: center; padding: 6px; text-align: center; }
+.vp-redes-texto { padding: 8px 10px; overflow-wrap: anywhere; }
+.vp-falta { color: #70757a; font-style: italic; font-weight: 400; }
