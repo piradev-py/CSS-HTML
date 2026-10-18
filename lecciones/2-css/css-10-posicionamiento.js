@@ -1,8 +1,8 @@
 /* ============================================================
    <CSS-HTML> · Mundo CSS · Lección css-10
-   Posicionamiento — position (static, relative, absolute; fixed y
-   sticky solo se mencionan), top/right/bottom/left, padre con
-   relative y z-index.
+   Posicionamiento — position (static, relative, absolute, sticky
+   con un ejercicio de cabecera; fixed solo se menciona),
+   top/right/bottom/left, padre con relative y z-index.
    Nota: el reto comprueba la position calculada de la tarjeta y de la
    pegatina, y los valores calculados de top y right (10px). En un
    elemento static, top/right calculados valen "auto" (parseFloat → NaN),
@@ -65,7 +65,7 @@ CURSO.registrar({
     {
       tipo: "explicacion",
       titulo: "z-index, fixed y sticky",
-      texto: "Cuando dos cajas posicionadas se **solapan**, `z-index` decide cuál va encima: gana el número **más alto**, como en una pila de cartas. 🃏 Solo funciona en cajas con un `position` distinto de `static`.\n\nY dos valores más de `position` que conviene conocer:\n\n• `fixed` (**fija**): se queda clavada en la pantalla aunque hagas *scroll* (desplazarte por la página), como el botón de chat de muchas webs.\n• `sticky` (**pegajosa**): se mueve normal hasta llegar al borde de la pantalla, y ahí se queda pegada. Ideal para menús.\n\nLos usarás más adelante, en proyectos de verdad.",
+      texto: "Cuando dos cajas posicionadas se **solapan**, `z-index` decide cuál va encima: gana el número **más alto**, como en una pila de cartas. 🃏 Solo funciona en cajas con un `position` distinto de `static`.\n\nY dos valores más de `position` que conviene conocer:\n\n• `fixed` (**fija**): se queda clavada en la pantalla aunque hagas *scroll* (desplazarte por la página), como el botón de chat de muchas webs.\n• `sticky` (**pegajosa**): se mueve normal hasta llegar al borde de la pantalla, y ahí se queda pegada. Ideal para menús.\n\nEnseguida vas a probar `sticky` con una cabecera de verdad.",
       ejemplo: {
         html: `<div class="carta roja">Roja: z-index 2</div>
 <div class="carta azul">Azul: z-index 1</div>`,
@@ -112,6 +112,49 @@ CURSO.registrar({
       pistas: [
         "Una sola regla con el selector .cohete. Sin position: relative, top y left no hacen nada.",
         "Debe quedarte así:\n.cohete {\n  position: relative;\n  top: 20px;\n  left: 50px;\n}"
+      ]
+    },
+    {
+      tipo: "ejercicio",
+      enunciado: "Haz que la cabecera del blog **no se vaya** al bajar por la página 📌. A la clase `.cabecera` ponle:\n\n• un `position` de `sticky`,\n• un `top` de `0` (se pega justo arriba),\n• y un `background-color` de `white`, para que el texto que pasa por debajo no se transparente.\n\nDespués baja por el resultado y mira cómo se queda pegada.",
+      inicial: {
+        html: `<header class="cabecera">🍰 El blog de la pastelería</header>
+<p>Hoy hemos hecho tarta de queso.</p>
+<p>Ayer, galletas de chocolate.</p>
+<p>El lunes, cruasanes recién hechos.</p>
+<p>El domingo, bizcocho de limón.</p>
+<p>El sábado, magdalenas.</p>
+<p>El viernes, rosquillas.</p>
+<p>El jueves, pan de pueblo.</p>
+<p>El miércoles, palmeras de hojaldre.</p>
+<p>El martes, tarta de manzana.</p>
+<p>¡Y mañana, sorpresa!</p>
+`,
+        css: ""
+      },
+      solucion: {
+        html: `<header class="cabecera">🍰 El blog de la pastelería</header>
+<p>Hoy hemos hecho tarta de queso.</p>
+<p>Ayer, galletas de chocolate.</p>
+<p>El lunes, cruasanes recién hechos.</p>
+<p>El domingo, bizcocho de limón.</p>
+<p>El sábado, magdalenas.</p>
+<p>El viernes, rosquillas.</p>
+<p>El jueves, pan de pueblo.</p>
+<p>El miércoles, palmeras de hojaldre.</p>
+<p>El martes, tarta de manzana.</p>
+<p>¡Y mañana, sorpresa!</p>
+`,
+        css: `.cabecera {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+`
+      },
+      pistas: [
+        "Una regla con el selector .cabecera y tres líneas: position, top y background-color.",
+        "Debe quedarte así:\n.cabecera {\n  position: sticky;\n  top: 0;\n  background-color: white;\n}"
       ]
     },
     {

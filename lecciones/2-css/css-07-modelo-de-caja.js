@@ -46,6 +46,21 @@ CURSO.registrar({
     },
     {
       tipo: "explicacion",
+      titulo: "max-width: el contenedor de las webs",
+      texto: "Un `width` fijo tiene un problema: si la pantalla es más estrecha que la caja, la caja **se sale**. 😬\n\n`max-width` (ancho máximo) es más listo: la caja ocupa todo el ancho que pueda, **pero nunca más** de lo que le digas. En una pantalla grande se queda en su tamaño; en una pequeña, se encoge.\n\nJunto con `margin: 0 auto` forma el **contenedor centrado** que usan casi todas las webs: el contenido nunca se estira de punta a punta en una pantalla enorme y queda en el centro.\n\nEn el ejemplo, la caja como mucho mide 300px. Estrecha la ventana y verás cómo se encoge.",
+      ejemplo: {
+        html: `<div class="contenedor">Nunca mido más de 300px y siempre estoy en el centro.</div>`,
+        css: `.contenedor {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: lavender;
+}`
+      },
+      consejo: "Las webs suelen usar un `max-width` de entre 1000px y 1200px para el contenido principal. Así las líneas de texto no se hacen eternas en pantallas grandes."
+    },
+    {
+      tipo: "explicacion",
       titulo: "box-sizing: border-box",
       texto: "Sorpresa: por defecto, `width` mide **solo el contenido**. El relleno y el borde se suman **por fuera**.\n\nUna caja con `width: 200px`, `padding: 20px` y un borde de `5px` mide en realidad 200 + 20 + 20 + 5 + 5 = **250px**. ¡Menudo lío de cuentas! 😵\n\nLa solución es `box-sizing: border-box`. Con ella, `width` mide **la caja entera** (contenido + relleno + borde): si dices 200px, mide 200px, y el contenido se encoge para hacer sitio.\n\nCompara las dos cajas del ejemplo: tienen el mismo CSS, salvo el `box-sizing`.",
       ejemplo: {

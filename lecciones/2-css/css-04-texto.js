@@ -36,6 +36,19 @@ p {
     },
     {
       tipo: "explicacion",
+      titulo: "Fuentes de internet",
+      texto: "¿Y si quieres una fuente que **no tiene** el ordenador de quien visita tu web? Puedes **cargarla de internet**. La forma más usada es **Google Fonts**: una biblioteca gratis con cientos de fuentes.\n\nFunciona en dos pasos:\n\n1. En el `<head>` del HTML, un `<link>` que la descarga (Google Fonts te da la línea ya escrita).\n2. En el CSS, la usas con `font-family` como cualquier otra… ¡con su fuente de reserva al final!\n\nMira el ejemplo: el `<link>` carga la fuente **Pacifico** y el título la usa.",
+      ejemplo: {
+        html: `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+<h1>Heladería Polo Norte</h1>`,
+        css: `h1 {
+  font-family: "Pacifico", cursive;
+}`
+      },
+      consejo: "Sin internet, la fuente no se descarga y el navegador usa la de reserva. Por eso nunca falta el `sans-serif` (o `serif`) al final de la lista."
+    },
+    {
+      tipo: "explicacion",
       titulo: "Negrita, cursiva y adornos",
       texto: "• `font-weight`: el **grosor**. `bold` es negrita y `normal`, la de siempre. También admite números del 100 al 900: `400` es normal y `700`, negrita.\n• `font-style: italic;` pone la letra en **cursiva**.\n• `text-decoration`: rayas. `underline` subraya, `line-through` tacha y `none` quita la raya (por ejemplo, a un enlace).\n• `text-transform`: cambia las **mayúsculas**. `uppercase` lo pone todo en MAYÚSCULAS, `lowercase` en minúsculas y `capitalize` pone En Mayúscula Cada Palabra.",
       ejemplo: {

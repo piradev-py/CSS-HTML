@@ -71,6 +71,22 @@ CURSO.registrar({
       consejo: "`opacity: 0` hace un elemento invisible… ¡pero sigue ahí ocupando su sitio! Es como un fantasma sentado en una silla."
     },
     {
+      tipo: "explicacion",
+      titulo: "Contraste: que se lea",
+      texto: "Un color precioso no sirve de nada si el texto **no se lee**. El **contraste** mide cuánto se distingue el texto de su fondo, con un número: de 1 (iguales, invisible) a 21 (negro sobre blanco).\n\nLa regla que usan las webs profesionales (se llama **AA**):\n\n• Texto normal: contraste de **4,5** o más.\n• Texto grande (títulos): **3** o más.\n\nEn el ejemplo, el gris clarito sobre blanco no llega a 2: mucha gente no lo leería. El gris oscuro pasa de 10. 👓\n\nPara medirlo, abre las **herramientas del navegador** (tecla F12), elige un texto y mira su color: el navegador te dice el contraste y si cumple AA.",
+      ejemplo: {
+        html: `<p class="flojo">Gris clarito: casi no se lee.</p>
+<p class="bueno">Gris oscuro: se lee perfectamente.</p>`,
+        css: `.flojo {
+  color: #cccccc;
+}
+.bueno {
+  color: #444444;
+}`
+      },
+      consejo: "Y una regla de oro: el color **nunca** debe ser la única pista. Si un campo con error se pone en rojo, añade también un mensaje: hay personas que no distinguen el rojo del verde."
+    },
+    {
       tipo: "ejercicio",
       enunciado: "El HTML ya está escrito. Escribe en la pestaña **CSS**:\n\n1. Al `body`, un `background-color` de `#fff3e0` (en hexadecimal).\n2. Al `h1`, un `color` de `rgb(214 51 132)`.\n\n¡Una heladería con mucho estilo! 🍨",
       inicial: {

@@ -99,6 +99,57 @@ CURSO.registrar({
       ]
     },
     {
+      tipo: "explicacion",
+      titulo: "Listas sin viñetas: el truco de los menús",
+      texto: "¿Te has fijado en que los peces aún tenían su **viñeta** (el puntito) y un hueco a la izquierda? Casi todos los menús de las webs son **listas** `<ul>` disfrazadas, y para disfrazarlas hacen falta dos cosas:\n\n• `list-style: none` (estilo de lista: ninguno) quita las viñetas.\n• `padding: 0` quita el hueco que la lista deja a la izquierda para ellas.\n\nY con los `<li>` en `inline-block`, ¡ya tienes un menú en fila! 🧭",
+      ejemplo: {
+        html: `<ul class="menu">
+  <li>Inicio</li>
+  <li>Fotos</li>
+  <li>Contacto</li>
+</ul>`,
+        css: `.menu {
+  list-style: none;
+  padding: 0;
+}
+.menu li {
+  display: inline-block;
+  margin-right: 16px;
+}`
+      },
+      consejo: "La lista sigue siendo una lista: el navegador y los lectores de pantalla saben que son opciones de un menú. Solo le has cambiado el traje."
+    },
+    {
+      tipo: "ejercicio",
+      enunciado: "Convierte esta lista en un menú. A la clase `.menu` ponle:\n\n• un `list-style` de `none`,\n• y un `padding` de `0`.",
+      inicial: {
+        html: `<ul class="menu">
+  <li>Inicio</li>
+  <li>Recetas</li>
+  <li>Contacto</li>
+</ul>
+`,
+        css: ""
+      },
+      solucion: {
+        html: `<ul class="menu">
+  <li>Inicio</li>
+  <li>Recetas</li>
+  <li>Contacto</li>
+</ul>
+`,
+        css: `.menu {
+  list-style: none;
+  padding: 0;
+}
+`
+      },
+      pistas: [
+        "Una regla con el selector .menu y dos líneas dentro: list-style y padding.",
+        "Debe quedarte así:\n.menu {\n  list-style: none;\n  padding: 0;\n}"
+      ]
+    },
+    {
       tipo: "controles",
       instruccion: "Cambia el `display` de las mascotas y mueve los deslizadores. Fíjate: con `inline`, el ancho y el alto no hacen nada; con `inline-block` y `block`, sí. ¿Y qué pasa con `none`? 🙈",
       html: `<p>Mis mascotas:
