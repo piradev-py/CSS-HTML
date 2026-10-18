@@ -200,6 +200,65 @@ document.querySelector("#cerrar").addEventListener("click", () => {
       ]
     },
     {
+      tipo: "explicacion",
+      titulo: "Un botón Quitar en cada elemento",
+      texto: "¿Y si cada elemento de una lista necesita **su propio** botón de borrar, como las tareas o las citas? Al fabricar cada `<li>` en el bucle, fabricas también su botón y le pones **su propio escuchador**:\n\n1. Creas el `li` y el `button`.\n2. Al botón le dices: «cuando te pulsen, quita **tu** `li`» → `li.remove()`.\n3. Metes el botón **dentro** del `li` con `li.append(boton)`, y el `li` en la lista.\n\nCada botón recuerda cuál es su `li`, porque los dos se crearon en la misma vuelta del bucle. 🪄\n\nY un truco para cuando vuelvas a pintar una lista entera: vacíala antes con `lista.textContent = \"\";`, o los elementos se apilarían repetidos.",
+      ejemplo: {
+        html: `<ul id="juguetes"></ul>`,
+        js: `const juguetes = ["Pelota", "Peluche", "Cuerda"];
+const lista = document.querySelector("#juguetes");
+
+for (const juguete of juguetes) {
+  const li = document.createElement("li");
+  li.textContent = juguete + " ";
+
+  const boton = document.createElement("button");
+  boton.textContent = "Quitar";
+  boton.addEventListener("click", () => {
+    li.remove();
+  });
+
+  li.append(boton);
+  lista.append(li);
+}`
+      }
+    },
+    {
+      tipo: "ejercicio",
+      enunciado: "Haz la lista de la compra 🛒. El HTML ya tiene la lista `#compra` vacía. En la pestaña JS:\n\n1. Crea un array `productos` con **Leche**, **Pan** y **Huevos**.\n2. Recórrelo con `for…of` y, por cada producto, crea un `<li>` con su nombre (y un espacio detrás).\n3. Dentro de cada `<li>`, un `<button>` que diga **Quitar** y que, al pulsarlo, quite su `<li>` con `remove()`.\n\nLa revisión pulsará el primer **Quitar**: la leche tiene que desaparecer.",
+      inicial: {
+        html: `<ul id="compra"></ul>
+`,
+        js: ""
+      },
+      solucion: {
+        html: `<ul id="compra"></ul>
+`,
+        js: `const productos = ["Leche", "Pan", "Huevos"];
+const compra = document.querySelector("#compra");
+
+for (const producto of productos) {
+  const li = document.createElement("li");
+  li.textContent = producto + " ";
+
+  const boton = document.createElement("button");
+  boton.textContent = "Quitar";
+  boton.addEventListener("click", () => {
+    li.remove();
+  });
+
+  li.append(boton);
+  compra.append(li);
+}
+`
+      },
+      acciones: [{ clic: "#compra button" }],
+      pistas: [
+        "Es como el ejemplo de los juguetes: dentro del for…of creas el li y el button, al botón le pones un addEventListener que hace li.remove(), y al final li.append(boton) y compra.append(li).",
+        "Debe quedarte así:\nconst productos = [\"Leche\", \"Pan\", \"Huevos\"];\nconst compra = document.querySelector(\"#compra\");\n\nfor (const producto of productos) {\n  const li = document.createElement(\"li\");\n  li.textContent = producto + \" \";\n\n  const boton = document.createElement(\"button\");\n  boton.textContent = \"Quitar\";\n  boton.addEventListener(\"click\", () => {\n    li.remove();\n  });\n\n  li.append(boton);\n  compra.append(li);\n}"
+      ]
+    },
+    {
       tipo: "quiz",
       pregunta: "Has escrito `const li = document.createElement(\"li\");` y `li.textContent = \"Kiwi\";`, pero el Kiwi no aparece en la lista. ¿Qué falta?",
       opciones: [

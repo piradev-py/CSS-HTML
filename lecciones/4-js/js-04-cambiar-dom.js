@@ -113,6 +113,24 @@ tarea3.classList.toggle("hecha");`
       consejo: "Piensa en las clases como trajes ya preparados en el armario (el CSS). JavaScript no cose ropa: solo elige qué traje ponerse."
     },
     {
+      tipo: "explicacion",
+      titulo: "Cambiar atributos: setAttribute",
+      texto: "Los **atributos** del HTML (`src`, `alt`, `href`…) también se pueden leer y cambiar:\n\n• `elemento.getAttribute(\"src\")`: **lee** el valor de un atributo.\n• `elemento.setAttribute(\"src\", \"perro.svg\")`: le **pone** un valor nuevo.\n\nUn uso muy importante: `aria-expanded`. Es un atributo que le cuenta a los **lectores de pantalla** si un menú desplegable está abierto (`\"true\"`) o cerrado (`\"false\"`). Quien no ve la pantalla no sabe si el menú se ha abierto… ¡salvo que se lo digas! 🦻\n\nEn el ejemplo, JavaScript cambia la foto por la de un perro y marca el botón del menú como abierto. Mira la consola.",
+      ejemplo: {
+        html: `<button id="menu" aria-expanded="false">☰ Menú</button>
+<p><img id="foto" src="recursos/img/gato.svg" alt="La cara de un gato naranja" width="160" height="120"></p>`,
+        js: `const foto = document.querySelector("#foto");
+foto.setAttribute("src", "recursos/img/perro.svg");
+foto.setAttribute("alt", "Un perro");
+
+const boton = document.querySelector("#menu");
+console.log("Antes:", boton.getAttribute("aria-expanded"));
+boton.setAttribute("aria-expanded", "true");
+console.log("Después:", boton.getAttribute("aria-expanded"));`
+      },
+      consejo: "Cuando cambies una imagen con `src`, cambia también su `alt`: si no, el lector de pantalla seguiría describiendo la foto anterior."
+    },
+    {
       tipo: "ejercicio",
       enunciado: "Anuncia la oferta del día 🍕. El HTML ya está escrito y el CSS de las clases ya está preparado.\n\n• Busca `#oferta` y ponle con `style` el `color` `crimson`.\n• Busca `#tarjeta` y quítale la clase `oculta` con `classList.remove`.\n• A la misma `#tarjeta`, añádele la clase `destacada` con `classList.add`.",
       cssBase: `body { font-family: sans-serif; }

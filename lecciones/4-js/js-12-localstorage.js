@@ -138,6 +138,21 @@ console.log(recuperado.nombre + " está en el nivel " + recuperado.nivel);`
       consejo: "Regla fácil: **stringify al guardar, parse al leer**. Siempre en pareja, como los calcetines. 🧦"
     },
     {
+      tipo: "explicacion",
+      titulo: "Una lista de objetos que se recuerda",
+      texto: "Lo que más se guarda en las webs es una **lista de cosas**: tareas, citas, productos del carrito… Es decir, un **array de objetos**. La receta tiene tres pasos:\n\n1. **Cargar** al empezar: `JSON.parse(localStorage.getItem(\"citas\")) || []`. La primera vez no hay nada guardado, `getItem` da `null`, y el `|| []` («o, si no, una lista vacía») hace que empieces con un array vacío.\n2. **Cambiar** la lista: `citas.push(nuevaCita)`.\n3. **Guardar** la lista entera otra vez con `JSON.stringify`.\n\nEl ejemplo añade una cita cada vez que se ejecuta. Mira la consola: ¡la lista va creciendo!",
+      ejemplo: {
+        js: `let citas = JSON.parse(localStorage.getItem("citas")) || [];
+
+citas.push({ mascota: "Gato", hora: "10:30" });
+localStorage.setItem("citas", JSON.stringify(citas));
+
+console.log("Tienes " + citas.length + " citas guardadas");
+console.log(citas);`
+      },
+      consejo: "Guarda **siempre** la lista entera después de cambiarla. Si haces `push` y se te olvida el `setItem`, al recargar la cita nueva no estará."
+    },
+    {
       tipo: "ejercicio",
       enunciado: "Guarda la mochila del aventurero 🎒. El HTML ya está escrito y el JS trae el array `cosas`.\n\n1. Guarda `cosas` en localStorage con la clave `mochila`, usando `JSON.stringify`.\n2. Lee la clave `mochila` con `getItem` y muestra ese texto en la consola.\n3. Conviértelo otra vez en array con `JSON.parse` y muestra en la consola cuántas cosas tiene con `.length` (**3**).\n4. Con `for…of` sobre el array recuperado, crea un `<li>` por cada cosa dentro de `#mochila`.",
       cssBase: `body { font-family: sans-serif; padding: 10px; background-color: #f5efe0; }

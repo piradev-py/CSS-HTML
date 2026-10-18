@@ -43,7 +43,9 @@
         P8 (hc-06 menú móvil con `abierto`, hc-09 transition: none, hc-10 :user-invalid) — 2026-10-18.
   - [x] P6 (html-06 `tel:`/`mailto:`/página propia, html-07 `width`+`height`+`loading="lazy"`, html-10 `tel`/`date`/`time`),
         como pasos de explicación. Falta: que el ejercicio de html-07 pida los dos tamaños y el reto use `lazy`.
-  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1–P5): la web de referencia
+  - [x] P4 (js-04 `setAttribute`/`aria-expanded`, js-10 botón «Quitar» en cada elemento con ejercicio, js-12 array de
+        objetos con `|| []`). Falta: que el **reto** de js-12 guarde un array de objetos.
+  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1, P2, P3 y P5): la web de referencia
         ya usa `list-style`, `max-width` (P7), `:user-invalid` (P8), `filter`, `Date`, `checked` y `setAttribute` (P1–P4).
   - [ ] Consejo de `scroll-margin-top` (hc-04 o hc-06): con la cabecera fija, los enlaces del menú dejan el título
         de la sección tapado.
@@ -98,6 +100,6 @@
       `Math.random`/`Math.floor`). → **se deja así** (`Math.random` no se enseña y el reto sería imprevisible).
 - [~] js-14: 10 pasos con 3 ejercicios por etapas antes del jefe final. → **se decide con el proyecto Huellas** (js-14 se sustituye por la agenda de citas).
 - [~] js-12: los ejercicios no pueden comprobar que se use `localStorage` de verdad (solo el reto, que recarga). → **se decide con Huellas** (P4: el reto de js-12 pasa a un array de objetos).
-- [~] js-10: «crear al pulsar un botón» es solo explicación + reto, sin ejercicio propio. → **se decide con Huellas** (P4 añade a js-10 el ejercicio de «Quitar»).
+- [x] js-10: «crear al pulsar un botón» es solo explicación + reto, sin ejercicio propio. → **resuelto con P4**: ejercicio «Un botón Quitar en cada elemento».
 - [x] Motor: protección contra bucles infinitos → **añadida** (un bucle infinito congelaría la pestaña y el borrador
       guardado la volvería a congelar al abrir la lección).
