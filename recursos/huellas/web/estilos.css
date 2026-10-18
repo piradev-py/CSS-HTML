@@ -38,13 +38,13 @@ h1, h2, h3, legend {
 }
 
 h1 {
-  font-size: 3.1rem;
+  font-size: 2.2rem;
   font-weight: 800;
   margin: 12px 0 16px;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 700;
   margin: 8px 0 32px;
 }
@@ -88,11 +88,11 @@ img {
 section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 72px 32px;
+  padding: 48px 20px;
 }
 
 header {
-  padding: 16px 32px;
+  padding: 12px 20px;
   background-color: var(--fondo);
   box-shadow: var(--sombra);
 }
@@ -129,8 +129,8 @@ nav a {
 }
 
 .portada {
-  margin-top: 32px;
-  padding: 48px;
+  margin: 16px;
+  padding: 28px 20px;
   border-radius: var(--radio);
   background-color: var(--crema);
 }
@@ -187,8 +187,8 @@ table {
 .ventajas {
   list-style: none;
   max-width: 1136px;
-  margin: -40px auto 0;
-  padding: 22px 28px;
+  margin: 0 16px;
+  padding: 8px 20px;
 }
 
 .ventajas p {
@@ -257,11 +257,11 @@ table {
 
 table {
   width: 100%;
-  padding: 12px;
+  padding: 8px;
 }
 
 th, td {
-  padding: 12px 20px;
+  padding: 10px 14px;
   text-align: left;
 }
 
@@ -370,7 +370,7 @@ button {
 
 footer {
   margin-top: 40px;
-  padding: 56px 32px 24px;
+  padding: 40px 20px 24px;
   background-color: var(--crema);
 }
 
@@ -392,14 +392,13 @@ footer p {
   color: var(--suave);
 }
 
-/* ---------- 3. Colocación (escritorio) ----------
-   Todo lo que reparte la página en filas y columnas está aquí junto.
-   En el Mundo 3 este bloque pasará a una @media para pantallas grandes. */
+/* ---------- 3. Colocación en el móvil (la base) ---------- */
 header {
   position: sticky;
   top: 0;
   z-index: 10;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
@@ -410,60 +409,346 @@ header {
   gap: 10px;
 }
 
+/* El menú, plegado tras un botón; el JavaScript del Mundo 4 le pone la clase «abierto» */
+.boton-menu {
+  padding: 10px 16px;
+  background-color: var(--crema);
+  color: var(--oscuro);
+  box-shadow: none;
+}
+
+nav {
+  width: 100%;
+}
+
 nav ul {
-  display: flex;
-  gap: 28px;
+  display: none;
+}
+
+nav.abierto ul {
+  display: block;
+  padding: 8px 0;
+}
+
+nav li a {
+  display: block;
+  padding: 10px 0;
 }
 
 header .boton {
-  padding: 10px 20px;
-}
-
-.portada {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr 300px;
-  gap: 32px;
-  align-items: center;
+  display: none;
 }
 
 .portada-foto {
   position: relative;
+  margin: 32px 0 24px;
 }
 
 .portada-foto .nota {
   position: absolute;
-  top: -56px;
-  right: -20px;
-  width: 220px;
-}
-
-.ventajas {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  position: relative;
+  top: -40px;
+  right: 0;
+  width: 180px;
 }
 
 .ventajas li {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin: 12px 0;
 }
 
-.rejilla {
+.rejilla,
+.pie-columnas {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-#equipo .rejilla {
-  grid-template-columns: repeat(4, 1fr);
+/* ---------- 4. Tableta: a partir de 768 px, dos columnas ---------- */
+@media (min-width: 768px) {
+  .portada {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .tarjeta-cita {
+    grid-column: 1 / 3;
+  }
+
+  .ventajas,
+  .rejilla,
+  .pie-columnas {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ventajas {
+    display: grid;
+    gap: 8px 24px;
+  }
 }
 
-.pie-columnas {
-  display: grid;
-  grid-template-columns: 2fr 2fr 1.5fr 1fr;
-  gap: 32px;
-  max-width: 1136px;
-  margin: 0 auto;
+/* ---------- 5. Escritorio: a partir de 1100 px ----------
+   Es el bloque de colocación del Mundo 2, ahora dentro de una @media. */
+@media (min-width: 1100px) {
+  h1 {
+    font-size: 3.1rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  section {
+    padding: 72px 32px;
+  }
+
+  header {
+    padding: 16px 32px;
+  }
+
+  .boton-menu {
+    display: none;
+  }
+
+  nav {
+    width: auto;
+  }
+
+  header .boton {
+    display: inline-block;
+  }
+
+  .tarjeta-cita {
+    grid-column: auto;
+  }
+
+  footer {
+    padding: 56px 32px 24px;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 28px;
+  }
+
+  header .boton {
+    padding: 10px 20px;
+  }
+
+  .portada {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 300px;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .portada-foto {
+    position: relative;
+  }
+
+  .portada-foto .nota {
+    position: absolute;
+    top: -56px;
+    right: -20px;
+    width: 220px;
+  }
+
+  .ventajas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    position: relative;
+  }
+
+  .ventajas li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  #equipo .rejilla {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pie-columnas {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1.5fr 1fr;
+    gap: 32px;
+    max-width: 1136px;
+    margin: 0 auto;
+  }
+
+  /* La portada, más ancha, se funde con el fondo por la izquierda */
+  .portada {
+    margin: 32px auto 0;
+    padding: 48px 48px 88px;
+    grid-template-columns: 1fr 1.3fr 300px;
+  }
+
+  .portada-foto {
+    margin: 0;
+  }
+
+  .portada-foto::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    border-radius: var(--radio) 0 0 var(--radio);
+    background: linear-gradient(to right, var(--crema), rgb(247 250 248 / 0));
+  }
+
+  .portada-foto .nota {
+    z-index: 1;
+  }
+
+  .ventajas {
+    margin: -40px auto 0;
+    padding: 22px 28px;
+  }
+
+  .ventajas li {
+    margin: 0;
+  }
+}
+
+/* ---------- 6. Interacción: ratón y teclado ---------- */
+nav a:hover {
+  color: var(--principal);
+}
+
+nav a.activo {
+  position: relative;
+  color: var(--oscuro);
+  font-weight: 600;
+}
+
+nav a.activo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 24px;
+  height: 2px;
+  background-color: var(--principal);
+}
+
+.antetitulo::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 3px;
+  margin-top: 10px;
+  border-radius: 3px;
+  background-color: var(--principal);
+}
+
+.boton:hover,
+button:hover {
+  background-color: var(--principal-oscuro);
+  transform: translateY(-2px);
+}
+
+.boton-menu:hover {
+  background-color: var(--menta);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--principal);
+}
+
+.servicio:hover,
+#equipo figure:hover,
+.opinion:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgb(18 51 47 / 0.14);
+}
+
+.boton,
+button,
+.servicio,
+#equipo figure,
+.opinion {
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+/* El formulario: foco, error y bien */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--principal);
+  outline: 3px solid rgb(31 122 107 / 0.2);
+}
+
+input:user-invalid,
+select:user-invalid,
+textarea:user-invalid {
+  border-color: #c23a52;
+  background-color: #fdf2f4;
+}
+
+input:user-valid,
+select:user-valid {
+  border-color: var(--principal);
+}
+
+/* ---------- 7. Movimiento: la portada entra al cargar ---------- */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portada-texto,
+.portada-foto,
+.tarjeta-cita {
+  animation: aparecer 0.7s ease-out;
+}
+
+/* Si el ordenador pide menos movimiento, nada se anima */
+@media (prefers-reduced-motion: reduce) {
+  .portada-texto,
+  .portada-foto,
+  .tarjeta-cita {
+    animation: none;
+  }
+
+  .boton,
+  button,
+  .servicio,
+  #equipo figure,
+  .opinion {
+    transition: none;
+  }
 }

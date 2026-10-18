@@ -29,7 +29,8 @@
 - Logo: enlace a `#inicio` con el icono de huella (`alt=""`: el nombre ya va escrito al lado) + **Huellas** + *Clínica veterinaria*.
 - Menú (5 enlaces): **Inicio** `#inicio` · **Servicios** `#servicios` · **Equipo** `#equipo` · **Horario** `#horario` · **Contacto** `#contacto`.
 - Botón: **Pide tu cita** → `#cita`.
-- Botón del menú en móvil (Mundos 3 y 4): texto oculto «Abrir el menú» / «Cerrar el menú».
+- Botón del menú en móvil (Mundos 3 y 4): **☰ Menú** (clase `boton-menu`); al pulsarlo, el `nav` recibe la clase `abierto`.
+- Enlace activo del menú: clase `activo` (en el Mundo 3 va fija en «Inicio»; en el Mundo 4 cambia al pulsar).
 
 ## Portada (`#inicio`)
 
