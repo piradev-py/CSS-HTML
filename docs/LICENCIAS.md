@@ -1,6 +1,6 @@
 # Licencias de los materiales
 
-## Fotos del proyecto «Huellas» (`recursos/huellas/img/`)
+## Fotos del proyecto «Huellas» (`recursos/huellas/web/img/`)
 
 Todas se pueden usar gratis, recortar y redistribuir dentro del curso sin citar al autor. Aun así, damos las gracias a
 sus autores. Están recortadas y reducidas para el curso.
@@ -11,7 +11,7 @@ sus autores. Están recortadas y reducidas para el curso.
 
 | Archivo | Original | Autor | Fuente |
 |---|---|---|---|
-| `portada.jpg`, `portada-movil.jpg` | [Dog and cat on a sunny day](https://www.pexels.com/photo/35711491/) | mkaynarfoto | Pexels |
+| `portada.jpg` | [Dog and cat on a sunny day](https://www.pexels.com/photo/35711491/) | mkaynarfoto | Pexels |
 | `equipo-1.jpg` | [Veterinarian with a dog](https://www.pexels.com/photo/6234616/) | Tima Miroshnichenko | Pexels |
 | `equipo-2.jpg` | [Veterinarian holding a Pomeranian](https://www.pexels.com/photo/6235652/) | Tima Miroshnichenko | Pexels |
 | `equipo-3.jpg` | [Doctor in navy scrubs](https://www.pexels.com/photo/5888184/) | Gustavo Fring | Pexels |

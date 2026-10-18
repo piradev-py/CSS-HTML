@@ -209,7 +209,7 @@
           <p>Medicina veterinaria cercana y profesional, para que tu compañero esté siempre en las mejores manos.</p>
           <a class="btn" href="#vista"><svg class="i"><use href="#i-calendario"/></svg>Pide tu cita <svg class="i"><use href="#i-flecha"/></svg></a>
         </div>
-        <div class="foto" style="background:url(../../recursos/huellas/img/portada.jpg) center/cover;border:0"></div>
+        <div class="foto" style="background:url(../../recursos/huellas/web/img/portada.jpg) center/cover;border:0"></div>
         <span class="nota-mano" data-nota-mano hidden>Salud · Vida · Compañía ♡</span>
         <div class="tarjeta cita">
           <h3>Pide tu cita</h3><p>En pocos pasos</p>
@@ -325,7 +325,7 @@
     document.querySelector("[data-nota-mano]").hidden = el.nota !== "si";
     document.querySelector(".foto").classList.toggle("cuadrada", el.fotos === "B");
     document.querySelector("[data-servicios]").innerHTML = SERVICIOS.map(([n, t, d, c, f]) =>
-      `<article class="tarjeta servicio">${el.fotos === "B" ? `<div class="mini" style="background:url(../../recursos/huellas/img/servicio-${f}.jpg) center/cover"></div>` : ""}${ico(n, c)}<h3>${t}</h3><p>${d}</p><span class="flecha"><svg class="i"><use href="#i-flecha"/></svg></span></article>`).join("");
+      `<article class="tarjeta servicio">${el.fotos === "B" ? `<div class="mini" style="background:url(../../recursos/huellas/web/img/servicio-${f}.jpg) center/cover"></div>` : ""}${ico(n, c)}<h3>${t}</h3><p>${d}</p><span class="flecha"><svg class="i"><use href="#i-flecha"/></svg></span></article>`).join("");
     const lineas = [
       `Paleta: ${PALETAS[el.paleta].nombre}`,
       `Fuentes: ${FUENTES[el.fuentes].nombre}`,

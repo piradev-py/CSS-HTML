@@ -45,10 +45,10 @@ cada uno con su color; en el formulario y los botones van solos, en el color del
 
 ## Fotos (estilo B)
 
-Elegidas el 18 de octubre de 2026, en `recursos/huellas/img/`; autores y licencias en `docs/LICENCIAS.md`
+Elegidas el 18 de octubre de 2026, en `recursos/huellas/web/img/`; autores y licencias en `docs/LICENCIAS.md`
 (Pexels, StockSnap y Rawpixel).
 
-- **Portada** (`portada.jpg` 1200 px, `portada-movil.jpg` 600 px): perro y gato tumbados al sol. No tiene fondo liso
+- **Portada** (`portada.jpg` 1200 px 600 px): perro y gato tumbados al sol. No tiene fondo liso
   para recortar: va **dentro de la forma suave** (esquinas orgánicas), no recortada.
 - **Servicios** (`servicio-*.jpg`, 640×427): cada tarjeta lleva **foto arriba** e icono en su círculo.
 - **Equipo** (`equipo-1…4.jpg`, 480×600, para mostrar a 240×300): cuatro veterinarios mirando a cámara, con el mismo
