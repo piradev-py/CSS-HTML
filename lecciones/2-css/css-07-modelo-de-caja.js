@@ -12,6 +12,14 @@ CURSO.registrar({
   titulo: "El modelo de caja",
   xp: 45,
   objetivo: "Entenderás que todo es una caja y sabrás controlar su contenido, su relleno, su borde y su margen.",
+  glosario: [
+    { termino: "padding", tema: "Cajas", para: "El relleno: espacio entre el contenido y el borde.", ejemplo: ".servicio {\n  padding: 22px;\n}", buscar: "relleno espacio dentro" },
+    { termino: "margin", tema: "Cajas", para: "El margen: espacio fuera del borde, con lo de al lado.", ejemplo: "footer {\n  margin-top: 40px;\n}", buscar: "margen espacio fuera separar" },
+    { termino: "margin: 0 auto", tema: "Cajas", para: "Centra una caja que tiene ancho: arriba y abajo 0, a los lados lo que sobre.", ejemplo: "section {\n  max-width: 1200px;\n  margin: 0 auto;\n}", buscar: "centrar caja horizontal" },
+    { termino: "width y height", tema: "Cajas", para: "El ancho y el alto de una caja.", ejemplo: ".logo {\n  width: 48px;\n  height: 48px;\n}", buscar: "ancho alto tamano" },
+    { termino: "max-width", tema: "Cajas", para: "El ancho máximo: la caja encoge en pantallas pequeñas pero no pasa de ahí.", ejemplo: "img {\n  max-width: 100%;\n}", buscar: "ancho maximo contenedor" },
+    { termino: "box-sizing: border-box", tema: "Cajas", para: "El `width` incluye relleno y borde: las medidas cuadran.", ejemplo: "* {\n  box-sizing: border-box;\n}", buscar: "caja medidas incluye relleno borde" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

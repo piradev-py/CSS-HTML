@@ -10,6 +10,13 @@ CURSO.registrar({
   titulo: "Selectores",
   xp: 35,
   objetivo: "Sabrás apuntar exactamente a los elementos que quieres decorar con etiquetas, clases, ids y combinaciones.",
+  glosario: [
+    { termino: "etiqueta (p, h1…)", tema: "Selectores", para: "Elige todos los elementos de esa etiqueta.", ejemplo: "p {\n  color: gray;\n}", buscar: "selector etiqueta todos" },
+    { termino: ".clase", tema: "Selectores", para: "Elige los elementos con ese `class`; se puede repetir en muchos.", ejemplo: ".servicio {\n  padding: 22px;\n}", buscar: "selector clase class punto" },
+    { termino: "#id", tema: "Selectores", para: "Elige el único elemento con ese `id`.", ejemplo: "#horario {\n  max-width: 800px;\n}", buscar: "selector id almohadilla" },
+    { termino: "a, b (agrupar)", tema: "Selectores", para: "La misma regla para varios selectores, separados por comas.", ejemplo: "h1, h2, h3 {\n  color: darkslategray;\n}", buscar: "agrupar coma varios a la vez" },
+    { termino: "a b (descendiente)", tema: "Selectores", para: "Elige `b` solo si está dentro de `a` (con un espacio entre los dos).", ejemplo: "nav a {\n  text-decoration: none;\n}", buscar: "descendiente dentro de espacio combinador" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

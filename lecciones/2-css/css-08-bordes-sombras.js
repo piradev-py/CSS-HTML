@@ -11,6 +11,13 @@ CURSO.registrar({
   titulo: "Bordes y sombras",
   xp: 35,
   objetivo: "Sabrás decorar cajas con bordes, esquinas redondeadas y sombras.",
+  glosario: [
+    { termino: "border", tema: "Bordes y sombras", para: "El borde en una línea: grosor, estilo y color; `none` lo quita.", ejemplo: "input {\n  border: 1px solid #cfdcd9;\n}", buscar: "borde linea quitar" },
+    { termino: "border-radius", tema: "Bordes y sombras", para: "Redondea las esquinas.", ejemplo: ".servicio {\n  border-radius: 20px;\n}", buscar: "esquinas redondeadas" },
+    { termino: "border-radius: 50%", tema: "Bordes y sombras", para: "Una caja cuadrada se vuelve un círculo.", ejemplo: ".opinion img {\n  border-radius: 50%;\n}", buscar: "circulo redondo avatar" },
+    { termino: "box-shadow", tema: "Bordes y sombras", para: "Sombra de la caja: x, y, desenfoque y color.", ejemplo: ".servicio {\n  box-shadow: 0 10px 30px rgb(18 51 47 / 0.08);\n}", buscar: "sombra caja tarjeta" },
+    { termino: "text-shadow", tema: "Bordes y sombras", para: "Sombra de las letras.", ejemplo: "h1 {\n  text-shadow: 2px 2px 4px gray;\n}", buscar: "sombra texto letras" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

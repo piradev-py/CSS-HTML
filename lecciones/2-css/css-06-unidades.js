@@ -12,6 +12,13 @@ CURSO.registrar({
   titulo: "Unidades de medida",
   xp: 35,
   objetivo: "Sabrás medir con px, %, em, rem, vw y vh, y elegir la unidad adecuada para cada cosa.",
+  glosario: [
+    { termino: "px", tema: "Medidas", para: "Píxeles: una medida fija.", ejemplo: ".tarjeta-cita {\n  padding: 28px;\n}", buscar: "pixeles fijo" },
+    { termino: "%", tema: "Medidas", para: "Un porcentaje del padre.", ejemplo: "table {\n  width: 100%;\n}", buscar: "porcentaje ancho padre" },
+    { termino: "rem", tema: "Medidas", para: "Veces la letra de la página (normalmente 16 px): ideal para textos.", ejemplo: "h1 {\n  font-size: 3.1rem;\n}", buscar: "rem letra raiz" },
+    { termino: "em", tema: "Medidas", para: "Veces la letra del propio elemento.", ejemplo: ".antetitulo {\n  letter-spacing: 0.2em;\n}", buscar: "em letra elemento" },
+    { termino: "vw y vh", tema: "Medidas", para: "Un 1 % del ancho (`vw`) o del alto (`vh`) de la pantalla.", ejemplo: ".portada {\n  height: 100vh;\n}", buscar: "pantalla alto ancho ventana" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

@@ -66,7 +66,8 @@
         versiones oficiales por mundo (`herramientas/huellas-versiones.mjs` → `lecciones/huellas/versiones.js`), reloj fijo
         (`PRUEBA.recargar(doc, { hoy })`) y batería `esc-proyecto` (23 de 23) + `esc-proyecto-ui`.
         Glosario: panel con buscador y «Copiar» (`js/glosario.js`) y términos del Mundo 1 (56).
-        Falta: los términos de los mundos 2, 3 y 4 (cada uno antes de su lección de proyecto, fases 4–6).
+        Términos del Mundo 2 (76, con `letter-spacing` añadido a css-04: la web de referencia lo usa).
+        Falta: los términos de los mundos 3 y 4 (cada uno antes de su lección de proyecto, fases 5–6).
         `privacidad.html` va como material hecho (en la vista previa su enlace abre la página de prueba).
   - [x] **Fase 3 · Proyecto web del Mundo 1** (`html-14`, 2026-10-18): 5 encargos desde el archivo vacío, con captura,
         textos para copiar, comprobaciones con «📚 Repasa» y glosario; aprueba la versión oficial y otra escrita sin clases

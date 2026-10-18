@@ -11,6 +11,14 @@ CURSO.registrar({
   titulo: "Colores",
   xp: 30,
   objetivo: "Sabrás escribir colores de varias formas (nombre, hexadecimal y rgb) y usarlos con transparencia en textos y fondos.",
+  glosario: [
+    { termino: "color", tema: "Colores", para: "El color del texto.", ejemplo: "a {\n  color: #1f7a6b;\n}", buscar: "color letra texto" },
+    { termino: "background-color", tema: "Colores", para: "El color de fondo de una caja.", ejemplo: "footer {\n  background-color: #f7faf8;\n}", buscar: "fondo color" },
+    { termino: "#rrggbb", tema: "Colores", para: "Un color en hexadecimal: rojo, verde y azul, de `00` a `ff`.", ejemplo: "h1 {\n  color: #12332f;\n}", buscar: "hexadecimal codigo color" },
+    { termino: "rgb()", tema: "Colores", para: "Un color mezclando luz roja, verde y azul (de 0 a 255); tras `/`, la transparencia.", ejemplo: ".caja {\n  background-color: rgb(18 51 47 / 0.08);\n}", buscar: "rgb transparencia alfa semitransparente" },
+    { termino: "opacity", tema: "Colores", para: "Hace transparente un elemento entero, con todo lo que tiene dentro (de 0 a 1).", ejemplo: ".nota {\n  opacity: 0.8;\n}", buscar: "transparente opacidad" },
+    { termino: "contraste", tema: "Colores", para: "Texto y fondo bien distintos para que todos lo lean (mínimo 4,5 a 1, nivel AA).", ejemplo: "body {\n  color: #2b3b39;\n  background-color: white;\n}", buscar: "contraste accesibilidad legible aa" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

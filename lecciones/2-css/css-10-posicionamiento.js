@@ -13,6 +13,14 @@ CURSO.registrar({
   titulo: "Posicionamiento",
   xp: 45,
   objetivo: "Sabrás sacar elementos del flujo normal y colocarlos exactamente donde quieras con position.",
+  glosario: [
+    { termino: "position: relative", tema: "Posición", para: "Se mueve un poco desde su sitio y sirve de padre a los `absolute`.", ejemplo: ".portada-foto {\n  position: relative;\n}", buscar: "relativo padre referencia" },
+    { termino: "position: absolute", tema: "Posición", para: "Sale del flujo y se coloca respecto al padre con `relative`.", ejemplo: ".nota {\n  position: absolute;\n  top: -56px;\n  right: -20px;\n}", buscar: "absoluto pegatina esquina encima" },
+    { termino: "top, right, bottom, left", tema: "Posición", para: "Cuánto se separa de cada lado al colocarlo.", ejemplo: ".nota {\n  top: 0;\n  right: 0;\n}", buscar: "arriba derecha abajo izquierda colocar" },
+    { termino: "position: fixed", tema: "Posición", para: "Clavado en la pantalla aunque bajes.", ejemplo: ".aviso {\n  position: fixed;\n  bottom: 16px;\n}", buscar: "fijo pantalla" },
+    { termino: "position: sticky", tema: "Posición", para: "Va en su sitio y, al bajar, se queda pegado (con `top`).", ejemplo: "header {\n  position: sticky;\n  top: 0;\n}", buscar: "pegado cabecera fija al bajar" },
+    { termino: "z-index", tema: "Posición", para: "Quién queda encima cuando se tapan: gana el número mayor.", ejemplo: "header {\n  z-index: 10;\n}", buscar: "encima capas delante" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

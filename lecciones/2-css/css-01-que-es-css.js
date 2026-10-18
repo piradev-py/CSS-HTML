@@ -9,6 +9,11 @@ CURSO.registrar({
   titulo: "¿Qué es CSS?",
   xp: 25,
   objetivo: "Entenderás qué es CSS y escribirás tus primeras reglas para dar color a una página.",
+  glosario: [
+    { termino: "regla CSS", tema: "Reglas", para: "Un selector y, entre `{ }`, las propiedades con su valor; cada una acaba en `;`.", ejemplo: "h1 {\n  color: teal;\n}", buscar: "selector propiedad valor llaves punto y coma" },
+    { termino: "<link rel=\"stylesheet\">", tema: "Reglas", para: "En el `<head>`, enlaza un archivo `.css` aparte con la página.", ejemplo: "<link rel=\"stylesheet\" href=\"estilos.css\">", buscar: "enlazar hoja estilos archivo css", lenguaje: "html" },
+    { termino: "<style>", tema: "Reglas", para: "CSS escrito dentro del propio HTML, en el `<head>`.", ejemplo: "<style>\n  body {\n    background-color: white;\n  }\n</style>", buscar: "estilos dentro del html", lenguaje: "html" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

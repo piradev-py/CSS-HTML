@@ -11,6 +11,13 @@ CURSO.registrar({
   titulo: "Grid",
   xp: 50,
   objetivo: "Sabrás crear cuadrículas de filas y columnas con CSS Grid y hacer que un elemento ocupe varias casillas.",
+  glosario: [
+    { termino: "display: grid", tema: "Grid", para: "El contenedor reparte a sus hijos en una cuadrícula.", ejemplo: ".rejilla {\n  display: grid;\n}", buscar: "cuadricula rejilla grid" },
+    { termino: "grid-template-columns", tema: "Grid", para: "Cuántas columnas hay y cuánto mide cada una.", ejemplo: ".pie-columnas {\n  display: grid;\n  grid-template-columns: 2fr 2fr 1.5fr 1fr;\n}", buscar: "columnas ancho" },
+    { termino: "fr", tema: "Grid", para: "Una parte del espacio libre: `1fr 1fr` son dos columnas iguales.", ejemplo: ".portada {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}", buscar: "fraccion parte" },
+    { termino: "repeat()", tema: "Grid", para: "Repite columnas sin escribirlas todas.", ejemplo: ".rejilla {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 24px;\n}", buscar: "repetir columnas iguales" },
+    { termino: "grid-column: span 2", tema: "Grid", para: "Un hijo ocupa dos columnas.", ejemplo: ".destacada {\n  grid-column: span 2;\n}", buscar: "ocupar varias columnas" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

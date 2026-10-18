@@ -12,6 +12,18 @@ CURSO.registrar({
   titulo: "Texto y fuentes",
   xp: 30,
   objetivo: "Sabrás dar personalidad a tus textos eligiendo la fuente, el tamaño, el grosor, la alineación y el espacio entre líneas.",
+  glosario: [
+    { termino: "font-family", tema: "Texto", para: "La fuente, con otra de reserva al final por si no está.", ejemplo: "body {\n  font-family: \"Inter\", sans-serif;\n}", buscar: "fuente tipografia letra" },
+    { termino: "Fuentes de internet (Google Fonts)", tema: "Texto", para: "Un `<link>` en el `<head>` descarga la fuente; luego se usa con `font-family`.", ejemplo: "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&display=swap\">", buscar: "google fonts descargar fuente link", lenguaje: "html" },
+    { termino: "font-size", tema: "Texto", para: "El tamaño de la letra.", ejemplo: "h2 {\n  font-size: 2rem;\n}", buscar: "tamano letra grande pequeno" },
+    { termino: "font-weight", tema: "Texto", para: "El grosor: `400` normal, `700` negrita (de 100 a 900).", ejemplo: "strong {\n  font-weight: 700;\n}", buscar: "negrita grosor bold" },
+    { termino: "font-style", tema: "Texto", para: "`italic` pone la letra en cursiva; `normal` se la quita.", ejemplo: "em {\n  font-style: normal;\n}", buscar: "cursiva italica" },
+    { termino: "text-decoration", tema: "Texto", para: "Rayas en el texto: `underline`, `line-through` o `none` (quitar el subrayado de un enlace).", ejemplo: "nav a {\n  text-decoration: none;\n}", buscar: "subrayado quitar raya enlace" },
+    { termino: "text-transform", tema: "Texto", para: "`uppercase` lo pone todo en MAYÚSCULAS.", ejemplo: ".antetitulo {\n  text-transform: uppercase;\n}", buscar: "mayusculas minusculas" },
+    { termino: "letter-spacing", tema: "Texto", para: "El espacio entre letras; queda bien en textos cortos en mayúsculas.", ejemplo: ".antetitulo {\n  letter-spacing: 0.2em;\n}", buscar: "espacio entre letras separar" },
+    { termino: "text-align", tema: "Texto", para: "Alinea el texto: `left`, `center`, `right`.", ejemplo: "th {\n  text-align: left;\n}", buscar: "alinear centrar texto" },
+    { termino: "line-height", tema: "Texto", para: "El alto de cada línea: `1.6` deja respirar el texto.", ejemplo: "body {\n  line-height: 1.6;\n}", buscar: "interlineado espacio entre lineas" }
+  ],
   pasos: [
     {
       tipo: "explicacion",
@@ -50,7 +62,7 @@ p {
     {
       tipo: "explicacion",
       titulo: "Negrita, cursiva y adornos",
-      texto: "• `font-weight`: el **grosor**. `bold` es negrita y `normal`, la de siempre. También admite números del 100 al 900: `400` es normal y `700`, negrita.\n• `font-style: italic;` pone la letra en **cursiva**.\n• `text-decoration`: rayas. `underline` subraya, `line-through` tacha y `none` quita la raya (por ejemplo, a un enlace).\n• `text-transform`: cambia las **mayúsculas**. `uppercase` lo pone todo en MAYÚSCULAS, `lowercase` en minúsculas y `capitalize` pone En Mayúscula Cada Palabra.",
+      texto: "• `font-weight`: el **grosor**. `bold` es negrita y `normal`, la de siempre. También admite números del 100 al 900: `400` es normal y `700`, negrita.\n• `font-style: italic;` pone la letra en **cursiva**.\n• `text-decoration`: rayas. `underline` subraya, `line-through` tacha y `none` quita la raya (por ejemplo, a un enlace).\n• `text-transform`: cambia las **mayúsculas**. `uppercase` lo pone todo en MAYÚSCULAS, `lowercase` en minúsculas y `capitalize` pone En Mayúscula Cada Palabra.\n• `letter-spacing`: el **espacio entre letras**. `0.2em` las separa un poco; queda muy bien en textos cortos en mayúsculas.",
       ejemplo: {
         html: `<p class="oferta">Gran oferta</p>
 <p class="antes">Antes: 20 €</p>
@@ -58,6 +70,7 @@ p {
 <p class="nota">Solo hoy, o mañana, quién sabe</p>`,
         css: `.oferta {
   text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 .antes {
   text-decoration: line-through;

@@ -11,6 +11,12 @@ CURSO.registrar({
   titulo: "La cascada: ¿quién gana?",
   xp: 40,
   objetivo: "Entenderás por qué a veces un estilo «no se aplica» y sabrás arreglarlo: orden, especificidad y herencia.",
+  glosario: [
+    { termino: "cascada (gana la última)", tema: "Cascada", para: "Si dos reglas igual de fuertes chocan, gana la que va más abajo.", ejemplo: "p {\n  color: gray;\n}\np {\n  color: black;\n}", buscar: "orden ultima gana conflicto" },
+    { termino: "especificidad", tema: "Cascada", para: "Si chocan, gana el selector más concreto: etiqueta < clase < id.", ejemplo: ".boton {\n  color: white;\n}", buscar: "especificidad quien gana clase id" },
+    { termino: "herencia", tema: "Cascada", para: "Los hijos heredan del padre `color`, `font-family`, `font-size`… (las cajas no).", ejemplo: "body {\n  color: #2b3b39;\n}", buscar: "heredar padre hijos" },
+    { termino: "!important (evítalo)", tema: "Cascada", para: "Gana a todo y luego nadie puede ganarle: mejor arregla el selector.", ejemplo: "p {\n  color: black !important;\n}", buscar: "important forzar" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

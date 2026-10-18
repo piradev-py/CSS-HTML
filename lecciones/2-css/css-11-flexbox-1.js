@@ -11,6 +11,14 @@ CURSO.registrar({
   titulo: "Flexbox (I): en fila y alineados",
   xp: 45,
   objetivo: "Sabrás poner elementos en fila o en columna con Flexbox y alinearlos donde quieras, incluso en el centro exacto.",
+  glosario: [
+    { termino: "display: flex", tema: "Flexbox", para: "El contenedor pone a sus hijos en fila.", ejemplo: "nav ul {\n  display: flex;\n}", buscar: "flex fila contenedor" },
+    { termino: "flex-direction", tema: "Flexbox", para: "`row` en fila (lo normal) o `column` en columna.", ejemplo: ".menu {\n  display: flex;\n  flex-direction: column;\n}", buscar: "fila columna direccion" },
+    { termino: "gap", tema: "Flexbox", para: "El hueco entre los hijos (también en Grid).", ejemplo: "nav ul {\n  display: flex;\n  gap: 28px;\n}", buscar: "hueco separacion espacio entre" },
+    { termino: "justify-content", tema: "Flexbox", para: "Reparte en la dirección de la fila: `center`, `space-between`…", ejemplo: "header {\n  display: flex;\n  justify-content: space-between;\n}", buscar: "repartir extremos centrar horizontal" },
+    { termino: "align-items", tema: "Flexbox", para: "Alinea en la otra dirección: `center` centra en vertical.", ejemplo: "header {\n  display: flex;\n  align-items: center;\n}", buscar: "alinear vertical centrar" },
+    { termino: "centrar con flex", tema: "Flexbox", para: "`justify-content` y `align-items` en `center`: al centro exacto.", ejemplo: ".caja {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}", buscar: "centrar medio exacto" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

@@ -12,6 +12,12 @@ CURSO.registrar({
   titulo: "Variables CSS",
   xp: 40,
   objetivo: "Sabrás guardar colores y medidas en variables con nombre y cambiar el aspecto de toda una página tocando una sola línea.",
+  glosario: [
+    { termino: ":root", tema: "Variables", para: "El selector de toda la página: allí se guardan las variables.", ejemplo: ":root {\n  --principal: #1f7a6b;\n}", buscar: "raiz pagina variables" },
+    { termino: "--nombre", tema: "Variables", para: "Una variable: un valor con nombre para usarlo muchas veces.", ejemplo: ":root {\n  --radio: 20px;\n  --sombra: 0 10px 30px rgb(18 51 47 / 0.08);\n}", buscar: "variable propiedad personalizada guardar" },
+    { termino: "var()", tema: "Variables", para: "Usa el valor de una variable.", ejemplo: ".boton {\n  background-color: var(--principal);\n}", buscar: "usar variable" },
+    { termino: "var(--x, reserva)", tema: "Variables", para: "Si la variable no existe, usa el segundo valor.", ejemplo: "a {\n  color: var(--enlace, teal);\n}", buscar: "reserva plan b por defecto" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

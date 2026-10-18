@@ -10,6 +10,14 @@ CURSO.registrar({
   titulo: "Flexbox (II): repartir el espacio",
   xp: 45,
   objetivo: "Sabrás decidir qué elementos flex crecen, cuáles encogen y cómo saltan de línea cuando no caben.",
+  glosario: [
+    { termino: "flex-wrap", tema: "Flexbox", para: "`wrap`: los hijos saltan de línea cuando no caben.", ejemplo: ".cartas {\n  display: flex;\n  flex-wrap: wrap;\n}", buscar: "saltar linea no caben" },
+    { termino: "flex-grow", tema: "Flexbox", para: "Cuánto crece un hijo para llenar lo que sobra.", ejemplo: ".buscador {\n  flex-grow: 1;\n}", buscar: "crecer ocupar sobra" },
+    { termino: "flex-shrink", tema: "Flexbox", para: "Cuánto encoge si no cabe; `0` para que no encoja.", ejemplo: ".logo {\n  flex-shrink: 0;\n}", buscar: "encoger" },
+    { termino: "flex-basis", tema: "Flexbox", para: "El tamaño de partida de un hijo, antes de crecer o encoger.", ejemplo: ".carta {\n  flex-basis: 200px;\n}", buscar: "tamano base" },
+    { termino: "flex: 1", tema: "Flexbox", para: "Atajo: todos los hijos con `flex: 1` se reparten el espacio a partes iguales.", ejemplo: ".columna {\n  flex: 1;\n}", buscar: "repartir iguales atajo" },
+    { termino: "align-self", tema: "Flexbox", para: "Un hijo se alinea distinto que los demás.", ejemplo: ".boton {\n  align-self: flex-end;\n}", buscar: "alinear uno solo" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

@@ -12,6 +12,13 @@ CURSO.registrar({
   titulo: "Display: bloque y en línea",
   xp: 35,
   objetivo: "Entenderás cómo se colocan los elementos por defecto y sabrás cambiarlo con display.",
+  glosario: [
+    { termino: "display: block", tema: "Display", para: "Ocupa toda la fila y empuja lo siguiente abajo.", ejemplo: ".marca strong {\n  display: block;\n}", buscar: "bloque fila entera" },
+    { termino: "display: inline", tema: "Display", para: "Va en la línea, como una palabra; no admite ancho ni alto.", ejemplo: ".casilla {\n  display: inline;\n}", buscar: "en linea" },
+    { termino: "display: inline-block", tema: "Display", para: "En la línea, pero con ancho, alto y relleno de caja.", ejemplo: ".boton {\n  display: inline-block;\n}", buscar: "boton en linea caja" },
+    { termino: "display: none", tema: "Display", para: "Esconde el elemento, como si no existiera.", ejemplo: ".oculto {\n  display: none;\n}", buscar: "esconder ocultar quitar" },
+    { termino: "list-style: none", tema: "Display", para: "Quita las viñetas de una lista (el truco de los menús).", ejemplo: "nav ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}", buscar: "vinetas lista menu puntos" }
+  ],
   pasos: [
     {
       tipo: "explicacion",
