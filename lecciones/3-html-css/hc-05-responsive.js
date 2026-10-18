@@ -17,6 +17,12 @@ CURSO.registrar({
   titulo: "Responsive y media queries",
   xp: 50,
   objetivo: "Sabrás hacer que una página se adapte a cualquier pantalla, del móvil al ordenador, con imágenes fluidas y media queries.",
+  glosario: [
+    { termino: "@media", tema: "Responsive", para: "CSS que solo se aplica si se cumple una condición, como el ancho de la pantalla.", ejemplo: "@media (max-width: 600px) {\n  h1 {\n    font-size: 2rem;\n  }\n}", buscar: "media query condicion pantalla" },
+    { termino: "min-width y max-width (en @media)", tema: "Responsive", para: "`min-width`: desde ese ancho hacia arriba; `max-width`: hasta ese ancho.", ejemplo: "@media (min-width: 768px) {\n  .rejilla {\n    grid-template-columns: 1fr 1fr;\n  }\n}", buscar: "ancho minimo maximo punto de corte" },
+    { termino: "imágenes fluidas", tema: "Responsive", para: "`max-width: 100%` y `height: auto`: la imagen nunca se sale de su caja.", ejemplo: "img {\n  max-width: 100%;\n  height: auto;\n}", buscar: "imagen fluida no se sale" },
+    { termino: "<meta name=\"viewport\">", tema: "Responsive", para: "Sin ella, el móvil enseña la web en miniatura y las `@media` no funcionan.", ejemplo: "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">", buscar: "movil escala viewport", lenguaje: "html" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

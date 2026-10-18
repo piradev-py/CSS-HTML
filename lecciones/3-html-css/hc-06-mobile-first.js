@@ -17,6 +17,11 @@ CURSO.registrar({
   titulo: "Mobile first",
   xp: 45,
   objetivo: "Sabrás diseñar primero la versión para móvil y ampliarla paso a paso para pantallas más grandes con min-width.",
+  glosario: [
+    { termino: "mobile first", tema: "Responsive", para: "Primero el CSS del móvil (sin `@media`) y después `@media (min-width)` para pantallas más grandes.", ejemplo: ".rejilla {\n  display: grid;\n}\n@media (min-width: 1100px) {\n  .rejilla {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}", buscar: "movil primero estrategia" },
+    { termino: "@media en cascada", tema: "Responsive", para: "Varias `@media (min-width)` de menor a mayor: cada una añade a la anterior.", ejemplo: "@media (min-width: 768px) {\n  .rejilla {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n@media (min-width: 1100px) {\n  .rejilla {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}", buscar: "varias media orden tableta escritorio" },
+    { termino: "menú del móvil (.abierto)", tema: "Responsive", para: "En el móvil el menú se esconde tras un botón; con la clase `abierto` se ve.", ejemplo: "nav ul {\n  display: none;\n}\nnav.abierto ul {\n  display: block;\n}", buscar: "menu movil hamburguesa plegar boton abierto" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

@@ -20,6 +20,12 @@ CURSO.registrar({
   titulo: "Animaciones",
   xp: 50,
   objetivo: "Sabrás crear animaciones que se reproducen solas con @keyframes y animation, y calmarlas para quien prefiere menos movimiento.",
+  glosario: [
+    { termino: "@keyframes", tema: "Animaciones", para: "Los fotogramas de una animación: cómo empieza (`from`) y cómo acaba (`to`).", ejemplo: "@keyframes aparecer {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}", buscar: "fotogramas animacion keyframes" },
+    { termino: "animation", tema: "Animaciones", para: "Pone una animación: nombre, duración y curva (y repeticiones).", ejemplo: ".portada-texto {\n  animation: aparecer 0.7s ease-out;\n}", buscar: "animar reproducir" },
+    { termino: "infinite y alternate", tema: "Animaciones", para: "`infinite` repite sin parar; `alternate` va y vuelve.", ejemplo: ".fantasma {\n  animation: flotar 2s ease-in-out infinite alternate;\n}", buscar: "repetir siempre ir y volver" },
+    { termino: "prefers-reduced-motion", tema: "Animaciones", para: "Si la persona pide menos movimiento, quita animaciones y transiciones.", ejemplo: "@media (prefers-reduced-motion: reduce) {\n  .portada-texto {\n    animation: none;\n  }\n}", buscar: "menos movimiento accesibilidad reducir" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

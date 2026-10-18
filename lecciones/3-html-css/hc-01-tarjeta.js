@@ -13,6 +13,11 @@ CURSO.registrar({
   titulo: "Maqueta una tarjeta",
   xp: 45,
   objetivo: "Sabrás convertir un diseño en cajas y maquetar una tarjeta con una foto bien recortada, un ancho máximo y centrada.",
+  glosario: [
+    { termino: "pensar en cajas", tema: "Tarjetas", para: "Antes de escribir, dibuja el diseño como cajas dentro de cajas: cada caja es un elemento.", ejemplo: "<article class=\"servicio\">\n  <img src=\"img/servicio-medicina.jpg\" alt=\"\">\n  <h3>Medicina general</h3>\n</article>", buscar: "maquetar disenar cajas plan", lenguaje: "html" },
+    { termino: "object-fit: cover", tema: "Tarjetas", para: "La foto rellena su hueco sin deformarse: recorta lo que sobra.", ejemplo: ".servicio img {\n  height: 200px;\n  object-fit: cover;\n}", buscar: "recortar foto rellenar deformar" },
+    { termino: "overflow: hidden", tema: "Tarjetas", para: "Esconde lo que se sale de la caja (por ejemplo, las esquinas de una foto).", ejemplo: ".tarjeta {\n  border-radius: 20px;\n  overflow: hidden;\n}", buscar: "esconder sobresale recortar" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

@@ -19,6 +19,11 @@ CURSO.registrar({
   titulo: "Transiciones",
   xp: 40,
   objetivo: "Sabrás suavizar los cambios de estilo con transition para que tus botones y tarjetas se muevan con elegancia.",
+  glosario: [
+    { termino: "transition", tema: "Transiciones", para: "Que un cambio de estilo (al pasar el ratón…) sea suave: propiedad y duración.", ejemplo: ".boton {\n  transition: background-color 0.2s, transform 0.2s;\n}", buscar: "suave transicion animar cambio duracion" },
+    { termino: "ease, ease-in-out y retardo", tema: "Transiciones", para: "La curva del cambio y cuánto espera antes de empezar.", ejemplo: ".caja {\n  transition: transform 0.3s ease-in-out 0.1s;\n}", buscar: "curva velocidad retardo delay" },
+    { termino: "qué animar", tema: "Transiciones", para: "Mejor `transform` y `opacity`: son suaves y no recolocan la página.", ejemplo: ".tarjeta {\n  transition: transform 0.2s, opacity 0.2s;\n}", buscar: "rendimiento suave que propiedades" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

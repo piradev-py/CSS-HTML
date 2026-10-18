@@ -18,6 +18,11 @@ CURSO.registrar({
   titulo: "Transformaciones",
   xp: 40,
   objetivo: "Sabrás mover, girar y escalar elementos con transform sin descolocar el resto de la página.",
+  glosario: [
+    { termino: "transform: translate()", tema: "Transformaciones", para: "Mueve el elemento sin empujar a los demás.", ejemplo: ".servicio:hover {\n  transform: translateY(-4px);\n}", buscar: "mover desplazar subir" },
+    { termino: "rotate() y scale()", tema: "Transformaciones", para: "Gira (en `deg`) o agranda y encoge (1 es su tamaño).", ejemplo: ".carta:hover {\n  transform: rotate(5deg) scale(1.1);\n}", buscar: "girar rotar escalar agrandar" },
+    { termino: "transform-origin", tema: "Transformaciones", para: "El punto sobre el que gira o crece.", ejemplo: ".carta {\n  transform-origin: bottom center;\n}", buscar: "punto de giro origen" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

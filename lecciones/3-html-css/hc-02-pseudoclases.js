@@ -12,6 +12,13 @@ CURSO.registrar({
   titulo: "Pseudo-clases",
   xp: 45,
   objetivo: "Sabrás cambiar el estilo de un elemento cuando le pasas el ratón, lo pulsas o tiene el foco, y según el puesto que ocupa en una lista.",
+  glosario: [
+    { termino: ":hover", tema: "Pseudo-clases", para: "El estilo cuando el ratón está encima.", ejemplo: ".boton:hover {\n  background-color: #155e53;\n}", buscar: "raton encima pasar" },
+    { termino: ":active", tema: "Pseudo-clases", para: "El estilo mientras se pulsa.", ejemplo: ".boton:active {\n  transform: scale(0.97);\n}", buscar: "pulsar clic presionar" },
+    { termino: ":focus", tema: "Pseudo-clases", para: "El estilo del elemento que tiene el foco (el teclado está en él).", ejemplo: "input:focus {\n  border-color: #1f7a6b;\n}", buscar: "foco teclado tab" },
+    { termino: ":first-child y :last-child", tema: "Pseudo-clases", para: "El primer y el último hijo de su padre.", ejemplo: "li:last-child {\n  border-bottom: none;\n}", buscar: "primero ultimo hijo" },
+    { termino: ":nth-child()", tema: "Pseudo-clases", para: "Por su puesto: `even` (pares), `odd` (impares) o un número.", ejemplo: "tr:nth-child(even) {\n  background-color: #f7faf8;\n}", buscar: "pares impares filas alternas puesto" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

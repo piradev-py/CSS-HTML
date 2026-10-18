@@ -18,6 +18,13 @@ CURSO.registrar({
   titulo: "Formularios con estilo",
   xp: 50,
   objetivo: "Sabrás dar a tus formularios un aspecto moderno y accesible: letra a juego, campos redondeados, foco bien visible y avisos de error.",
+  glosario: [
+    { termino: "font: inherit", tema: "Formularios", para: "Los campos no heredan la letra de la página: así la heredan.", ejemplo: "input, select, textarea, button {\n  font: inherit;\n}", buscar: "heredar fuente campos" },
+    { termino: "outline", tema: "Formularios", para: "Un contorno fuera del borde, ideal para el foco.", ejemplo: "input:focus {\n  outline: 3px solid rgb(31 122 107 / 0.2);\n}", buscar: "contorno foco visible" },
+    { termino: ":invalid y :valid", tema: "Formularios", para: "El campo cumple o no lo que pide (`required`, `type=\"email\"`…).", ejemplo: "input:valid {\n  border-color: #1f7a6b;\n}", buscar: "valido invalido error" },
+    { termino: ":user-invalid y :user-valid", tema: "Formularios", para: "Como `:invalid`/`:valid`, pero solo después de que la persona haya tocado el campo.", ejemplo: "input:user-invalid {\n  border-color: #c23a52;\n  background-color: #fdf2f4;\n}", buscar: "error rojo despues de escribir" },
+    { termino: "accent-color", tema: "Formularios", para: "El color de las casillas y los radios.", ejemplo: "input {\n  accent-color: #1f7a6b;\n}", buscar: "color casilla radio checkbox" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

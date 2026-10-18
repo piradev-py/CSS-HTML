@@ -15,6 +15,12 @@ CURSO.registrar({
   titulo: "Barra de navegación",
   xp: 50,
   objetivo: "Sabrás construir el menú de navegación típico de cualquier web: enlaces en fila, sin viñetas, con el enlace actual resaltado y que reaccionan al ratón y al teclado.",
+  glosario: [
+    { termino: "nav > ul > li > a", tema: "Menús", para: "El esqueleto de todo menú: una lista de enlaces dentro de `nav`.", ejemplo: "<nav>\n  <ul>\n    <li><a href=\"#inicio\">Inicio</a></li>\n  </ul>\n</nav>", buscar: "menu navegacion lista enlaces", lenguaje: "html" },
+    { termino: "a > b (hijo directo)", tema: "Menús", para: "Elige `b` solo si es hijo directo de `a` (no nieto).", ejemplo: "nav > ul > li {\n  display: inline-block;\n}", buscar: "hijo directo combinador mayor que" },
+    { termino: "enlace activo (.activo)", tema: "Menús", para: "Una clase en el enlace de la página o sección actual, para resaltarlo.", ejemplo: "nav a.activo {\n  color: #12332f;\n  font-weight: 600;\n}", buscar: "actual resaltar marcado" },
+    { termino: ":focus-visible", tema: "Menús", para: "El foco solo cuando se navega con el teclado: un contorno que se vea.", ejemplo: "a:focus-visible {\n  outline: 3px solid #1f7a6b;\n}", buscar: "foco teclado contorno accesibilidad outline" }
+  ],
   pasos: [
     {
       tipo: "explicacion",

@@ -16,7 +16,8 @@ CURSO.registrar({
     { termino: "grid-template-columns", tema: "Grid", para: "Cuántas columnas hay y cuánto mide cada una.", ejemplo: ".pie-columnas {\n  display: grid;\n  grid-template-columns: 2fr 2fr 1.5fr 1fr;\n}", buscar: "columnas ancho" },
     { termino: "fr", tema: "Grid", para: "Una parte del espacio libre: `1fr 1fr` son dos columnas iguales.", ejemplo: ".portada {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}", buscar: "fraccion parte" },
     { termino: "repeat()", tema: "Grid", para: "Repite columnas sin escribirlas todas.", ejemplo: ".rejilla {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 24px;\n}", buscar: "repetir columnas iguales" },
-    { termino: "grid-column: span 2", tema: "Grid", para: "Un hijo ocupa dos columnas.", ejemplo: ".destacada {\n  grid-column: span 2;\n}", buscar: "ocupar varias columnas" }
+    { termino: "grid-column: span 2", tema: "Grid", para: "Un hijo ocupa dos columnas.", ejemplo: ".destacada {\n  grid-column: span 2;\n}", buscar: "ocupar varias columnas" },
+    { termino: "grid-column: 1 / 3", tema: "Grid", para: "Un hijo va de la línea 1 a la 3: ocupa las dos primeras columnas.", ejemplo: ".tarjeta-cita {\n  grid-column: 1 / 3;\n}", buscar: "lineas ocupar columnas de a" }
   ],
   pasos: [
     {
@@ -75,7 +76,7 @@ CURSO.registrar({
     {
       tipo: "explicacion",
       titulo: "Ocupar varias casillas: grid-column: span 2",
-      texto: "Por defecto, cada hijo ocupa **una** casilla. Pero puedes hacer que un elemento sea más ancho que los demás con `grid-column: span 2` (abarcar 2): ocupa **dos columnas** seguidas.\n\nEsta propiedad no va en el padre, sino en el **hijo** que quieres agrandar. Los demás se recolocan solos en las casillas que quedan libres.\n\nEs perfecto para destacar algo: la foto principal de una galería, la noticia más importante… 📰",
+      texto: "Por defecto, cada hijo ocupa **una** casilla. Pero puedes hacer que un elemento sea más ancho que los demás con `grid-column: span 2` (abarcar 2): ocupa **dos columnas** seguidas.\n\nEsta propiedad no va en el padre, sino en el **hijo** que quieres agrandar. Los demás se recolocan solos en las casillas que quedan libres.\n\nEs perfecto para destacar algo: la foto principal de una galería, la noticia más importante… 📰\n\nTambién se puede decir **de qué línea a qué línea** va: las columnas están separadas por líneas numeradas desde 1, así que `grid-column: 1 / 3` ocupa de la línea 1 a la 3, es decir, las dos primeras columnas.",
       ejemplo: {
         html: `<div class="rejilla">
   <div class="caja grande">1</div>

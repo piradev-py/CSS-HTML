@@ -17,6 +17,12 @@ CURSO.registrar({
   titulo: "Pseudo-elementos",
   xp: 40,
   objetivo: "Sabrás añadir decoración con CSS sin tocar el HTML: textos delante y detrás de un elemento, letras capitales y el color del texto seleccionado.",
+  glosario: [
+    { termino: "::before y ::after", tema: "Pseudo-elementos", para: "Una caja que crea el CSS al principio o al final del elemento; necesita `content`.", ejemplo: ".antetitulo::after {\n  content: \"\";\n  display: block;\n  width: 36px;\n  height: 3px;\n  background-color: #1f7a6b;\n}", buscar: "antes despues decoracion content raya" },
+    { termino: "content", tema: "Pseudo-elementos", para: "Lo que muestra un `::before` o `::after`: un texto, o `\"\"` para una caja vacía.", ejemplo: ".precio::after {\n  content: \" euros\";\n}", buscar: "contenido texto pseudo" },
+    { termino: "::first-letter", tema: "Pseudo-elementos", para: "La primera letra (letra capital).", ejemplo: "p::first-letter {\n  font-size: 40px;\n}", buscar: "letra capital primera" },
+    { termino: "linear-gradient()", tema: "Pseudo-elementos", para: "Un degradado de un color a otro; va en `background`.", ejemplo: ".capa {\n  background: linear-gradient(to right, white, rgb(255 255 255 / 0));\n}", buscar: "degradado fundir transparente fondo" }
+  ],
   pasos: [
     {
       tipo: "explicacion",
@@ -50,6 +56,31 @@ p::selection {
 }`
       },
       consejo: "Lo que pones con `content` es **decoración**: no se puede seleccionar ni copiar, y algunos lectores de pantalla no lo leen. Lo importante va siempre en el HTML."
+    },
+    {
+      tipo: "explicacion",
+      titulo: "Una capa encima: ::after con un degradado",
+      texto: "Con `content: \"\"` (vacío) el pseudo-elemento no trae texto: es una **caja vacía** que puedes pintar. Si además le das `position: absolute` (y al padre `position: relative`), la colocas **encima** de lo que quieras.\n\nY para pintarla, un **degradado**: `linear-gradient(to right, color1, color2)` pasa poco a poco de un color a otro, de izquierda a derecha. Va en `background`, como si fuera una imagen.\n\nEn el ejemplo, la capa cubre la mitad izquierda de la caja y va del color del fondo a transparente (`/ 0` al final del `rgb()`): la caja parece **fundirse** con la página. 🌫️",
+      ejemplo: {
+        html: `<div class="foto">Foto</div>`,
+        css: `.foto {
+  position: relative;
+  height: 120px;
+  background-color: teal;
+  color: white;
+  text-align: right;
+}
+.foto::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  background: linear-gradient(to right, white, rgb(255 255 255 / 0));
+}`
+      },
+      consejo: "`to right` va de izquierda a derecha; también existen `to left`, `to bottom` y `to top`. Si la capa tapa algo que se debe pulsar, ese algo necesita un `z-index` mayor."
     },
     {
       tipo: "ejercicio",
