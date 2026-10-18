@@ -10,6 +10,10 @@
   <meta property="og:image" content="img/portada.jpg">
   <meta property="og:type" content="website">
   <link rel="icon" href="img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
@@ -53,23 +57,19 @@
     <ul class="ventajas">
       <li>
         <img src="img/iconos/corazon.svg" alt="" width="52" height="52">
-        <strong>Atención cercana</strong>
-        <span>Te escuchamos y te explicamos cada paso.</span>
+        <p><strong>Atención cercana</strong> Te escuchamos y te explicamos cada paso.</p>
       </li>
       <li>
         <img src="img/iconos/escudo.svg" alt="" width="52" height="52">
-        <strong>Instalaciones modernas</strong>
-        <span>Quirófano, rayos X y laboratorio propios.</span>
+        <p><strong>Instalaciones modernas</strong> Quirófano, rayos X y laboratorio propios.</p>
       </li>
       <li>
         <img src="img/iconos/equipo.svg" alt="" width="52" height="52">
-        <strong>Equipo especializado</strong>
-        <span>Veterinarios con formación en cada área.</span>
+        <p><strong>Equipo especializado</strong> Veterinarios con formación en cada área.</p>
       </li>
       <li>
         <img src="img/iconos/huella.svg" alt="" width="52" height="52">
-        <strong>Todas las etapas de su vida</strong>
-        <span>Desde cachorro hasta la edad senior.</span>
+        <p><strong>Todas las etapas de su vida</strong> Desde cachorro hasta la edad senior.</p>
       </li>
     </ul>
 
@@ -220,7 +220,7 @@
           <input type="email" id="email" name="email" required>
 
           <input type="checkbox" id="privacidad" name="privacidad" required>
-          <label for="privacidad">He leído y acepto la <a href="privacidad.html">política de privacidad</a></label>
+          <label class="casilla" for="privacidad">He leído y acepto la <a href="privacidad.html">política de privacidad</a></label>
         </fieldset>
 
         <button type="submit">Pedir cita</button>

@@ -1,0 +1,469 @@
+/* =========================================================
+   Huellas · Clínica veterinaria — estilos.css
+   ========================================================= */
+
+/* ---------- 1. Identidad: la guía de estilo en variables ---------- */
+:root {
+  --principal: #1f7a6b;
+  --principal-oscuro: #155e53;
+  --oscuro: #12332f;
+  --texto: #2b3b39;
+  --suave: #5f706d;
+  --fondo: #ffffff;
+  --crema: #f7faf8;
+  --menta: #dff1ea;
+  --fuente-titulos: "Outfit", sans-serif;
+  --fuente-texto: "Inter", sans-serif;
+  --radio: 20px;
+  --sombra: 0 10px 30px rgb(18 51 47 / 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--texto);
+  background-color: var(--fondo);
+}
+
+h1, h2, h3, legend {
+  font-family: var(--fuente-titulos);
+  color: var(--oscuro);
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: 3.1rem;
+  font-weight: 800;
+  margin: 12px 0 16px;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 8px 0 32px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 16px 0 4px;
+}
+
+a {
+  color: var(--principal);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.antetitulo {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--principal);
+}
+
+.boton {
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: 999px;
+  background-color: var(--principal);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--sombra);
+}
+
+/* ---------- 2. Cajas y tarjetas ---------- */
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 32px;
+}
+
+header {
+  padding: 16px 32px;
+  background-color: var(--fondo);
+  box-shadow: var(--sombra);
+}
+
+.marca {
+  color: var(--suave);
+  text-decoration: none;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.marca strong {
+  display: block;
+  font-family: var(--fuente-titulos);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--oscuro);
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: var(--texto);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.portada {
+  margin-top: 32px;
+  padding: 48px;
+  border-radius: var(--radio);
+  background-color: var(--crema);
+}
+
+.portada h1 em {
+  font-style: normal;
+  color: var(--principal);
+}
+
+/* El texto de la portada, un poco más grande; el antetítulo y el h1 tienen sus propias reglas */
+.portada-texto {
+  font-size: 1.1rem;
+  color: var(--suave);
+}
+
+.portada-foto img {
+  display: block;
+  border-radius: 46% 54% 50% 50% / 55% 45% 55% 45%;
+}
+
+.tarjeta-cita,
+.ventajas,
+.servicio,
+#equipo figure,
+.opinion,
+#form-cita,
+table {
+  background-color: var(--fondo);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.tarjeta-cita {
+  padding: 28px;
+}
+
+.tarjeta-cita p {
+  margin: 0 0 4px;
+  color: var(--suave);
+}
+
+.tarjeta-cita strong {
+  font-family: var(--fuente-titulos);
+  font-size: 1.4rem;
+  color: var(--oscuro);
+}
+
+.tarjeta-cita .boton {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.ventajas {
+  list-style: none;
+  max-width: 1136px;
+  margin: -40px auto 0;
+  padding: 22px 28px;
+}
+
+.ventajas p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--suave);
+}
+
+.ventajas strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--oscuro);
+}
+
+.servicio {
+  padding: 22px;
+}
+
+.servicio img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.servicio .icono {
+  width: 52px;
+  margin: -38px 0 0 12px;
+  border-radius: 50%;
+}
+
+.servicio p {
+  margin: 0 0 12px;
+  color: var(--suave);
+}
+
+.servicio a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#equipo figure {
+  margin: 0;
+  padding: 16px;
+}
+
+#equipo figure img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+}
+
+#equipo figcaption {
+  margin-top: 12px;
+  color: var(--suave);
+}
+
+#equipo figcaption strong {
+  font-family: var(--fuente-titulos);
+  font-size: 1.15rem;
+  color: var(--oscuro);
+}
+
+#horario {
+  max-width: 800px;
+}
+
+table {
+  width: 100%;
+  padding: 12px;
+}
+
+th, td {
+  padding: 12px 20px;
+  text-align: left;
+}
+
+th {
+  font-family: var(--fuente-titulos);
+  color: var(--oscuro);
+  background-color: var(--crema);
+}
+
+#cita {
+  max-width: 800px;
+}
+
+#form-cita {
+  padding: 32px;
+}
+
+fieldset {
+  margin: 0 0 24px;
+  padding: 0;
+  border: none;
+}
+
+legend {
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+label {
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: 500;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cfdcd9;
+  border-radius: 10px;
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  color: var(--texto);
+}
+
+/* Las casillas y los botones de radio, a su tamaño y con la etiqueta al lado */
+fieldset fieldset input,
+fieldset fieldset label,
+#privacidad,
+.casilla {
+  display: inline;
+  width: auto;
+  margin: 8px 6px 0 0;
+}
+
+fieldset fieldset legend {
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+#form-cita p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--suave);
+}
+
+button {
+  padding: 14px 26px;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--principal);
+  color: white;
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--sombra);
+}
+
+.opinion {
+  padding: 24px;
+}
+
+.opinion img {
+  display: block;
+  width: 72px;
+  border-radius: 50%;
+}
+
+.opinion strong {
+  color: var(--oscuro);
+}
+
+/* Página de privacidad: texto de lectura, más estrecho */
+.texto-legal {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 32px;
+}
+
+.texto-legal h2 {
+  margin: 32px 0 8px;
+  font-size: 1.3rem;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 56px 32px 24px;
+  background-color: var(--crema);
+}
+
+footer h2 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+footer p {
+  margin: 0 0 6px;
+}
+
+.pie-final {
+  max-width: 1136px;
+  margin: 32px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--menta);
+  font-size: 0.85rem;
+  color: var(--suave);
+}
+
+/* ---------- 3. Colocación (escritorio) ----------
+   Todo lo que reparte la página en filas y columnas está aquí junto.
+   En el Mundo 3 este bloque pasará a una @media para pantallas grandes. */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+nav ul {
+  display: flex;
+  gap: 28px;
+}
+
+header .boton {
+  padding: 10px 20px;
+}
+
+.portada {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 300px;
+  gap: 32px;
+  align-items: center;
+}
+
+.portada-foto {
+  position: relative;
+}
+
+.portada-foto .nota {
+  position: absolute;
+  top: -56px;
+  right: -20px;
+  width: 220px;
+}
+
+.ventajas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+}
+
+.ventajas li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+#equipo .rejilla {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.pie-columnas {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr 1fr;
+  gap: 32px;
+  max-width: 1136px;
+  margin: 0 auto;
+}
