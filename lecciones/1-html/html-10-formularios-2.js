@@ -39,6 +39,30 @@ CURSO.registrar({
     },
     {
       tipo: "explicacion",
+      titulo: "Teléfonos, fechas y horas",
+      texto: "Tres tipos más que verás en casi cualquier formulario de citas o reservas:\n\n• `type=\"tel\"`: para un **teléfono**. En el móvil saca el teclado de marcar. 📱\n• `type=\"date\"`: para una **fecha**. El navegador muestra un calendario para elegir el día. 📅\n• `type=\"time\"`: para una **hora**. Sale un selector de horas y minutos. ⏰\n\nPruébalos en el ejemplo: haz clic en la fecha y en la hora.",
+      ejemplo: {
+        html: `<form>
+  <p>
+    <label for="telefono">Teléfono</label>
+    <input type="tel" id="telefono" name="telefono">
+  </p>
+  <p>
+    <label for="dia">Día de la reserva</label>
+    <input type="date" id="dia" name="dia">
+  </p>
+  <p>
+    <label for="hora">Hora</label>
+    <input type="time" id="hora" name="hora">
+  </p>
+  <button>Reservar</button>
+</form>`,
+        css: ""
+      },
+      consejo: "Cada navegador dibuja el calendario a su manera, pero el valor que envía es siempre igual: la fecha como `2026-10-20` (año-mes-día) y la hora como `09:30`."
+    },
+    {
+      tipo: "explicacion",
       titulo: "Elegir opciones: radio y checkbox",
       texto: "Cuando hay que **elegir**, no hace falta escribir:\n\n• `type=\"radio\"`: circulitos donde solo puedes marcar **uno** del grupo. Al marcar otro, el anterior se desmarca. El grupo se forma dándoles a todos **el mismo `name`**.\n• `type=\"checkbox\"`: casillas donde marcas **todas las que quieras**.\n\nEl atributo `value` es lo que se envía cuando esa opción está marcada. Fíjate también en que aquí el campo va **antes** de su `<label>`: es lo habitual en circulitos y casillas.",
       ejemplo: {

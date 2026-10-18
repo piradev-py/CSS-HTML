@@ -41,7 +41,9 @@
         paso a paso salen de ahí en la fase 2.
   - [x] P7 (css-03 contraste, css-04 fuentes web, css-07 max-width, css-09 list-style, css-10 ejercicio sticky) y
         P8 (hc-06 menú móvil con `abierto`, hc-09 transition: none, hc-10 :user-invalid) — 2026-10-18.
-  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1–P6): la web de referencia
+  - [x] P6 (html-06 `tel:`/`mailto:`/página propia, html-07 `width`+`height`+`loading="lazy"`, html-10 `tel`/`date`/`time`),
+        como pasos de explicación. Falta: que el ejercicio de html-07 pida los dos tamaños y el reto use `lazy`.
+  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1–P5): la web de referencia
         ya usa `list-style`, `max-width` (P7), `:user-invalid` (P8), `filter`, `Date`, `checked` y `setAttribute` (P1–P4).
   - [ ] Consejo de `scroll-margin-top` (hc-04 o hc-06): con la cabecera fija, los enlaces del menú dejan el título
         de la sección tapado.

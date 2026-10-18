@@ -48,6 +48,18 @@ CURSO.registrar({
       }
     },
     {
+      tipo: "explicacion",
+      titulo: "width y height: que la página no salte",
+      texto: "Las imágenes tardan un poquito en llegar. Si el navegador no sabe cuánto miden, al principio no les guarda sitio… y cuando llegan, **todo el texto salta** hacia abajo. ¡Qué rabia cuando ibas a pulsar un botón! 😤\n\nPor eso en las webs profesionales se ponen **los dos tamaños**, `width` **y** `height`, en la **misma proporción** que la imagen (si no, se deforma): así el navegador reserva el hueco exacto desde el principio.\n\nY otro atributo útil: `loading=\"lazy\"` (carga perezosa). Las imágenes que están **más abajo** en la página no se descargan hasta que te acercas a ellas. La página abre antes y gasta menos datos del móvil. 🦥",
+      ejemplo: {
+        html: `<img src="recursos/img/pizza.svg" alt="Una pizza de pepperoni con hojas de albahaca" width="160" height="120">
+<p>Mucho texto de la carta…</p>
+<img src="recursos/img/gato.svg" alt="La cara de un gato naranja con bigotes, sonriendo" width="160" height="120" loading="lazy">`,
+        css: ""
+      },
+      consejo: "La imagen de arriba del todo (la que se ve nada más entrar) no lleva `loading=\"lazy\"`: esa tiene que salir cuanto antes. Úsalo en las de más abajo."
+    },
+    {
       tipo: "ejercicio",
       enunciado: "¡Pon en la página a Tagui, la mascota del curso! Escribe **una sola** etiqueta `<img>` con estos tres atributos, en este orden:\n\n• `src=\"recursos/img/logo-tagui.svg\"`\n• `alt` con el texto **Tagui, una etiqueta naranja con ojos grandes**\n• `width=\"120\"`\n\nRecuerda: `<img>` es una etiqueta vacía, así que no lleva cierre.",
       pistas: [

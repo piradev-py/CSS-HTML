@@ -54,6 +54,19 @@ CURSO.registrar({
       consejo: "Truco: `href=\"#\"` sin nombre te lleva al principio de la página. ¡Perfecto para un enlace de «Volver arriba»!"
     },
     {
+      tipo: "explicacion",
+      titulo: "Llamar, escribir un email… o ir a otra página tuya",
+      texto: "Un enlace puede llevar a muchos sitios más:\n\n• `href=\"tel:+34912345678\"`: en el móvil, al tocarlo, **llama** a ese número. 📞 Se escribe sin espacios y con el prefijo del país.\n• `href=\"mailto:hola@ejemplo.com\"`: abre el programa de correo para **escribir un email** a esa dirección. ✉️\n• `href=\"privacidad.html\"`: lleva a **otra página de tu propia web**. Si los dos archivos están en la misma carpeta, basta con el nombre del archivo: es una **ruta relativa**, como la de las imágenes.",
+      ejemplo: {
+        html: `<p>Pastelería La Nube</p>
+<p>Teléfono: <a href="tel:+34912345678">912 345 678</a></p>
+<p>Email: <a href="mailto:hola@lanube.example">hola@lanube.example</a></p>
+<p><a href="privacidad.html">Política de privacidad</a></p>`,
+        css: ""
+      },
+      consejo: "El texto del enlace puede ser el número «bonito» (con espacios), pero el `href` va siempre sin espacios: `tel:+34912345678`."
+    },
+    {
       tipo: "ejercicio",
       enunciado: "Escribe un enlace `<a>` sobre los pulpos 🐙 que se abra en una pestaña nueva. Lleva estos tres atributos:\n\n• `href=\"https://es.wikipedia.org/wiki/Octopoda\"`\n• `target=\"_blank\"`\n• `rel=\"noopener\"`\n\nY su texto dice **Los pulpos en la Wikipedia**.\n\nCuando lo tengas, púlsalo: como estás en la web de prácticas, no sales de aquí; verás una página de prueba con la dirección y un enlace para volver.",
       pistas: [
