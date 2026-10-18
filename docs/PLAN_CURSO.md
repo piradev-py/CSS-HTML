@@ -16,8 +16,8 @@ Estado: ✅ escrita · 🚧 pendiente
 | 1 · HTML 🏗️ | 14 | 575 |
 | 2 · CSS 🎨 | 15 | 655 |
 | 3 · HTML + CSS 🧩 | 11 | 595 |
-| 4 · JavaScript ⚡ | 16 | 685 |
-| **Total** | **56** | **2510** |
+| 4 · JavaScript ⚡ | 16 | 775 |
+| **Total** | **56** | **2600** |
 
 ---
 
@@ -343,10 +343,12 @@ completa de lista de tareas.
 - **Conceptos nuevos (además):** `respuesta.ok` y `respuesta.status` (404).
 - **Reto:** pedir una lista de chistes (JSON) y mostrar el siguiente al pulsar un botón (tras el último vuelve al primero), avisando si no se pueden cargar. «Al azar» se descartó para no meter `Math.random` sin enseñarlo.
 
-### js-14 · Proyecto final: lista de tareas · 60 XP ✅
-- **Objetivo:** construir una aplicación completa combinando todo el curso.
-- **Conceptos nuevos:** ninguno nuevo: integración (estado en un array de objetos, pintar, eventos, guardar).
-- **Reto (jefe final del curso):** lista de tareas que permite añadir, marcar como hecha, borrar y que recuerda las tareas al recargar. Se construye por etapas con tres ejercicios (pintar, añadir, marcar y borrar) y acaba con un cierre del curso.
+### js-17 · Proyecto web: la agenda de Huellas · 150 XP ✅
+- **Sustituye a js-14** (la lista de tareas), que sale del mapa: la agenda de citas enseña lo mismo (añadir, mostrar, cancelar, recordar al recargar) con un sentido real. Quien ya hizo js-14 conserva su XP y sus insignias.
+- **Objetivo:** dar vida a la web de «Huellas» escribiendo su `script.js` desde cero; el HTML y el CSS son los oficiales del Mundo 4 (el alumno solo enlaza el script).
+- **6 encargos:** menú del móvil (`abierto` y `aria-expanded`) · enlace activo y año del pie · servicios desde un array de objetos · filtros por mascota · cita validada campo a campo (fecha no pasada con el reloj fijo) · «Mis citas» en `localStorage` con «Cancelar», y opiniones con `fetch`.
+- Se simulan clics, escritura y recargas; los nombres de variables y funciones los elige el alumno. Soluciones: `HUELLAS["mundo-4"].pasos`.
+- El cierre del curso (que tenía js-14) pasa a la página final «Mi clínica» (fase 7).
 
 ---
 

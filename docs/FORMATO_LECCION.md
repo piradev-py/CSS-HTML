@@ -295,7 +295,7 @@ glosario: [
 - `tema` agrupa dentro del mundo (usa los mismos nombres en todo el mundo). `para`: una línea, en lenguaje de novato.
 - `ejemplo`: mínimo y copiable, bien escrito (lo comprueba el verificador). Se resalta como HTML si empieza por `<`,
   como JS en el Mundo JavaScript y si no como CSS; `lenguaje: "html"` lo fuerza.
-- Hoy tienen glosario las lecciones de los mundos 1, 2 y 3; el Mundo 4 lo reciben antes de su lección de proyecto.
+- Todas las lecciones normales tienen glosario; una lección nueva debe traer el suyo.
 - Para `fetch("datos/opiniones.json")` sin internet, la lección declara `datos: HUELLAS["mundo-4"].datos`.
 
 ## 5. Pestañas del editor por mundo

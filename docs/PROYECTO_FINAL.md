@@ -139,7 +139,7 @@ Es **la lección de proyecto del final del mundo** (`hc-13`, en lugar de hc-11 y
 
 **Entrega:** un `script.js` que da vida a la clínica. La pieza central es la **agenda de citas**, que **sustituye a la lista de tareas de js-14**: enseña lo mismo (añadir, mostrar, cancelar y recordar al recargar), pero con un sentido real dentro de la web.
 
-Es **la lección de proyecto del final del curso** (en lugar de js-14), en **6 pasos**, aquí agrupados en 4 bloques:
+Es **la lección de proyecto del final del curso** (`js-17`, en lugar de js-14), en **6 pasos**, aquí agrupados en 4 bloques (el HTML y el CSS de lo nuevo, como los filtros, los huecos de los mensajes y «Mis citas», los trae hechos el equipo de diseño; el alumno escribe `script.js` desde cero):
 
 1. **Menú y detalles** (repasa js-01 a js-06): el botón del menú móvil abre y cierra la navegación (cambiando una clase y `aria-expanded`), el enlace activo se marca al pulsarlo y el año del pie se escribe solo.
 2. **Servicios desde datos** (repasa js-07 a js-10): los servicios salen de un array de objetos (`nombre`, `descripcion`, `icono`, `mascotas`) y se pintan con JavaScript; unos botones los filtran por tipo de mascota (perros, gatos, exóticos, todos).

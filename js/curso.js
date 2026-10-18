@@ -108,7 +108,7 @@
         { id: "js-11", archivo: "js-11-validar-formularios.js", titulo: "Validar formularios", listo: true },
         { id: "js-12", archivo: "js-12-localstorage.js", titulo: "Guardar datos: localStorage", listo: true },
         { id: "js-13", archivo: "js-13-fetch.js", titulo: "Pedir datos con fetch", listo: true },
-        { id: "js-14", archivo: "js-14-proyecto-tareas.js", titulo: "Proyecto final: lista de tareas", listo: true }
+        { id: "js-17", archivo: "js-17-proyecto-web.js", titulo: "Proyecto web: la agenda de Huellas", listo: true, huellas: true }
       ]
     }
   ];

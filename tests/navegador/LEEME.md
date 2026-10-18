@@ -29,6 +29,9 @@ node tests/navegador/cdp.mjs esc-proyecto-m2.mjs
 # Proyecto web del Mundo 3 (hc-13): variantes rotas que deben suspender y recorrido a 375/768/1200 px hasta la victoria
 node tests/navegador/cdp.mjs esc-proyecto-m3.mjs
 
+# Proyecto web del Mundo 4 (js-17): variantes rotas que deben suspender y recorrido de los 6 encargos hasta la victoria
+node tests/navegador/cdp.mjs esc-proyecto-m4.mjs
+
 # Capturas de las fichas de encargo (recursos/huellas/capturas/), a partir de las versiones oficiales (MUNDO=1, 2 o 3)
 MUNDO=1 node tests/navegador/cdp.mjs esc-capturas-huellas.mjs
 

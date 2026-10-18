@@ -21,7 +21,7 @@ export default async function (b) {
       v.MUNDOS[0].lecciones.push({ id: "demo-proyecto", archivo: "../../tests/demo/demo-proyecto.js", titulo: "Demo de proyecto", listo: true, huellas: true });
       this.__c = v; } });` });
   await b.ir(BASE + "index.html");
-  await b.eval(`localStorage.setItem('csshtml-progreso-v1', JSON.stringify({ xp: 0, completadas: { "html-13": { estrellas: 3, fecha: "2026-10-18" } }, insignias: [], racha: { dias: 0, ultimo: null }, ajustes: { sonido: false, tema: 'light', desbloquearTodo: false }, borradores: {} }))`);
+  await b.eval(`localStorage.setItem('csshtml-progreso-v1', JSON.stringify({ xp: 0, completadas: { "html-13": { estrellas: 3, fecha: "2026-10-18" }, "html-14": { estrellas: 3, fecha: "2026-10-18" } }, insignias: [], racha: { dias: 0, ultimo: null }, ajustes: { sonido: false, tema: 'light', desbloquearTodo: false }, borradores: {} }))`);
   await b.ir(BASE + "leccion.html?id=demo-proyecto");
   await b.esperar(2500);
   b.log("Paso 1: " + await b.eval(enPagina(lista)));

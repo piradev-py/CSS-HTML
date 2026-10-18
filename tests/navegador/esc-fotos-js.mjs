@@ -19,7 +19,5 @@ export default async function (b) {
   await b.esperar(600); await b.eval("document.querySelector('[data-recargar]').click()"); await b.esperar(800);
   await b.eval("document.querySelector('.modal-fondo')?.remove()");
   await b.foto("js12-reto");
-  await b.ir(BASE + "leccion.html?id=js-14#reto"); await b.esperar(1200); await b.eval(escribir(await b.eval("CURSO.lecciones['js-14'].pasos.at(-1).solucion")));
-  await b.esperar(3000); await b.eval("document.querySelector('.modal-fondo')?.remove()"); await b.foto("js14-reto");
-  await ir("js-14", 7); await b.foto("js14-cierre");
+  // js-14 (lista de tareas) se sustituyó por js-17, el Proyecto web: sus fotos salen de esc-proyecto-m4
 }

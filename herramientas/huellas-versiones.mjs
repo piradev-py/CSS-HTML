@@ -20,19 +20,30 @@ const COMMITS = {
   "mundo-1": "8866e01",
   "mundo-2": "a9d2bc4",
   "mundo-3": "348d16d",
-  "mundo-4": "10d186f"
+  "mundo-4": "174f321"
 };
 
 // Encargos del Proyecto web de cada mundo: el archivo que escribe el alumno se corta justo antes de cada marca, y cada
 // trozo es la solución de un encargo (el último encargo es el archivo completo). HUELLAS[mundo].pasos = [html1, html2, …]
-// en el Mundo 1 y [css1, css2, …] en los mundos 2 y 3 (allí el HTML es el oficial).
-// En el Mundo 3 la hoja no crece en orden: cada encargo es la hoja completa sin las secciones («---------- N.») que
-// aún no tocan
+// en el Mundo 1, [css1, css2, …] en los mundos 2 y 3 y [js1, js2, …] en el 4 (allí el HTML es el oficial).
+// En los mundos 3 y 4 cada encargo es el archivo completo sin las secciones («---------- N.») que aún no tocan;
+// `retocar[i]`, si existe, cambia además el encargo i
 const CORTES = {
   "mundo-1": { archivo: "html", marcas: ["<main>", '<section id="servicios"', '<section id="horario"', '<section id="opiniones"'] },
   "mundo-2": { archivo: "css", marcas: ["/* ---------- 2.", "#horario {", "/* ---------- 3."] },
-  "mundo-3": { archivo: "css", quitar: [[4, 6, 7], [6, 7], [7]] }
+  "mundo-3": { archivo: "css", quitar: [[4, 6, 7], [6, 7], [7]] },
+  "mundo-4": {
+    archivo: "js",
+    quitar: [[2, 3, 4, 5, 6, 7, 8], [4, 5, 6, 7, 8], [5, 6, 7, 8], [6, 7, 8], [7, 8]],
+    // La cita validada todavía no se guarda: eso llega con «Mis citas»
+    retocar: { 4: js => sinTexto(js, "  citas.push(cita);\n  guardarCitas();\n  pintarCitas();\n") }
+  }
 };
+
+function sinTexto(texto, trozo) {
+  if (!texto.includes(trozo)) throw new Error("No encuentro «" + trozo.trim() + "» en la versión oficial");
+  return texto.replace(trozo, "");
+}
 
 // En el Mundo 1 el alumno hace solo 3 servicios y 2 personas del equipo; el resto lo «añade el equipo de diseño»
 // en la versión oficial con la que empieza el Mundo 2. En los mundos 2 y 3, el estilo de privacidad.html va hecho
@@ -43,10 +54,11 @@ const RECORTES = {
   "mundo-3": sinPrivacidad
 };
 
-// La hoja sin las secciones numeradas de la lista (cada una va de su comentario «---------- N.» al siguiente)
+// El archivo sin las secciones numeradas de la lista (cada una va de su comentario «---------- N.» al siguiente;
+// en CSS el comentario empieza por /*, en JS por //)
 function sinSecciones(css, numeros) {
   return numeros.reduce((hoja, n) => {
-    const r = new RegExp("/\\* ---------- " + n + "\\.[\\s\\S]*?(?=/\\* ---------- |$)");
+    const r = new RegExp("(/\\*|//) ---------- " + n + "\\.[\\s\\S]*?(?=(/\\*|//) ---------- |$)");
     if (!r.test(hoja)) throw new Error("No encuentro la sección " + n + " en la versión oficial");
     return hoja.replace(r, "");
   }, css).replace(/\s+$/, "\n");
@@ -89,11 +101,11 @@ for (const [mundo, commit] of Object.entries(COMMITS)) {
     datos: opiniones ? { "opiniones.json": JSON.parse(opiniones) } : {}
   };
   if (CORTES[mundo]) {
-    const { archivo, marcas, quitar } = CORTES[mundo];
+    const { archivo, marcas, quitar, retocar = {} } = CORTES[mundo];
     const delAlumno = (RECORTES[mundo] || (t => t))(versiones[mundo][archivo]);
     if (RECORTES[mundo] && delAlumno === versiones[mundo][archivo]) throw new Error(mundo + ": el recorte no cambió nada");
     versiones[mundo].pasos = (quitar ? quitar.map(q => sinSecciones(delAlumno, q)) : marcas.map(m => cortar(delAlumno, m, archivo)))
-      .concat(delAlumno);
+      .concat(delAlumno).map((paso, i) => (retocar[i] ? retocar[i](paso) : paso));
   }
   console.log(mundo + " (" + commit + "): " + Object.entries(versiones[mundo])
     .map(([k, v]) => k + " " + (typeof v === "string" ? v.length : Object.keys(v).length)).join(", "));
