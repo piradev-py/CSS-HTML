@@ -314,6 +314,11 @@ completa de lista de tareas.
 - **Conceptos nuevos:** `filter()` con una función flecha que devuelve la condición, el array original no cambia, `includes()`, quitar un dato con `filter(x => x !== dato)` (variable con `let`), una función `pintar(lista)` que vacía y repinta.
 - **Reto:** catálogo de mascotas en adopción con botones Todos / Perros / Gatos.
 
+### js-16 · Fechas y horas · 40 XP ✅ (se ve como la lección 12)
+- **Objetivo:** leer la fecha y la hora del ordenador y comparar fechas y horas.
+- **Conceptos nuevos:** `new Date()`, `getFullYear()` (el año del pie), `getHours()`/`getMinutes()`, la fecha de hoy como `AAAA-MM-DD` con `toLocaleDateString("sv-SE")` (y el aviso de `toISOString`), comparar fechas y horas como textos con sus ceros.
+- **Reto:** comprobador de fechas que dice «Ya pasó», «Es hoy» o «Todavía falta» (sin restar fechas: necesitaría `Math`).
+
 ### js-11 · Validar formularios · 50 XP ✅
 - **Objetivo:** comprobar lo que escribe el usuario antes de enviarlo.
 - **Conceptos nuevos:** evento `submit`, el parámetro `evento`, `preventDefault()`, `.value` (repaso), `.trim()`, `.includes()`, el «no» `!`, mensajes de error accesibles.

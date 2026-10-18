@@ -151,7 +151,7 @@ Reglas para escribir el enunciado:
 
 ### Herramientas del resultado en el Mundo JavaScript (las da el motor, ver `js/editor.js`)
 - **Consola** bajo el resultado, con formato legible: `["pan", 2]`, `{ nombre: "Ana", vida: 100 }`,
-  `<h1 id="t">Hola</h1>`, `NodeList(3) [<li>, <li>, <li>]`, `Promise { … }`. `console.warn` sale en amarillo y
+  `<h1 id="t">Hola</h1>`, `NodeList(3) [<li>, <li>, <li>]`, `Promise { … }`, `Date(18/10/2026, 11:45:21)`. `console.warn` sale en amarillo y
   `console.error` en rojo. Los errores salen traducidos y con la línea: «(línea 3) 🤔 Usas «consola» pero no existe…».
 - Botón **🔄 Recargar**: vuelve a ejecutar el código como si se recargara la página.
 - `alert()`, `confirm()` y `prompt()` no bloquean: se avisan en la consola (`prompt` devuelve `null`). No se enseñan.

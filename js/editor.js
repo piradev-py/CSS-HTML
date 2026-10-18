@@ -38,6 +38,7 @@
       if (v instanceof Error) return v.name + ": " + v.message;
       if (v.__csshtmlRespuesta) return "Response { status: " + v.status + ", ok: " + v.ok + ", url: \"" + v.url + "\" }";
       if (v instanceof Promise) return "Promise { … }";
+      if (v instanceof Date) return "Date(" + v.toLocaleString("es-ES") + ")";
       if (v.nodeType === 1) {
         const atr = (v.id ? ' id="' + v.id + '"' : "") + (v.className && typeof v.className === "string" ? ' class="' + v.className + '"' : "");
         const etq = v.tagName.toLowerCase();
