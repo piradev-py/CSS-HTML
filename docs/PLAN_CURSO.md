@@ -181,6 +181,12 @@ y colocar elementos con `position`, Flexbox y Grid, organizando todo con variabl
 - **Conceptos nuevos:** propiedades personalizadas `--nombre`, `var()`, `:root` (presentado como «el selector de toda la página»), valor de reserva.
 - **Reto:** web de un equipo de fútbol cuyos colores salen de dos variables; cambiar el tema tocando solo las variables.
 
+### css-15 · Proyecto web: la identidad de Huellas · 120 XP ✅
+- **Objetivo:** dar a la web de «Huellas» su identidad visual en un `estilos.css` aparte, siguiendo la guía de estilo.
+- Parte del HTML oficial del Mundo 2 (el equipo de diseño añadió los otros 3 servicios y las otras 2 personas); el alumno le pone los `<link>`.
+- **4 encargos** sobre la misma hoja (empieza vacía): identidad (variables, fuentes, títulos, botones) · cajas y tarjetas · horario, formulario, opiniones y pie · colocación de escritorio, agrupada al final.
+- Se comprueba el estilo calculado. Soluciones: `HUELLAS["mundo-2"].pasos`.
+
 ---
 
 ## Mundo 3 · HTML + CSS 🧩 — «Construye interfaces de verdad»

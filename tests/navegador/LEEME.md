@@ -23,7 +23,10 @@ node tests/navegador/cdp.mjs esc-proyecto-ui.mjs
 # Proyecto web del Mundo 1 (html-14) recorrido como un alumno, encargo a encargo, hasta la victoria
 node tests/navegador/cdp.mjs esc-proyecto-m1.mjs
 
-# Capturas de las fichas de encargo (recursos/huellas/capturas/), a partir de las versiones oficiales
+# Proyecto web del Mundo 2 (css-15): el HTML oficial y cada hoja oficial, encargo a encargo, hasta la victoria
+node tests/navegador/cdp.mjs esc-proyecto-m2.mjs
+
+# Capturas de las fichas de encargo (recursos/huellas/capturas/), a partir de las versiones oficiales (MUNDO=1 o 2)
 MUNDO=1 node tests/navegador/cdp.mjs esc-capturas-huellas.mjs
 
 # Capturas de la lección html-13 con la tarjeta de vista previa

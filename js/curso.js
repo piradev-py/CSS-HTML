@@ -57,7 +57,8 @@
         { id: "css-11", archivo: "css-11-flexbox-1.js", titulo: "Flexbox (I): en fila y alineados", listo: true },
         { id: "css-12", archivo: "css-12-flexbox-2.js", titulo: "Flexbox (II): repartir el espacio", listo: true },
         { id: "css-13", archivo: "css-13-grid.js", titulo: "Grid", listo: true },
-        { id: "css-14", archivo: "css-14-variables.js", titulo: "Variables CSS", listo: true }
+        { id: "css-14", archivo: "css-14-variables.js", titulo: "Variables CSS", listo: true },
+        { id: "css-15", archivo: "css-15-proyecto-web.js", titulo: "Proyecto web: la identidad de Huellas", listo: true, huellas: true }
       ]
     },
     {

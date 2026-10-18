@@ -72,8 +72,11 @@
   - [x] **Fase 3 · Proyecto web del Mundo 1** (`html-14`, 2026-10-18): 5 encargos desde el archivo vacío, con captura,
         textos para copiar, comprobaciones con «📚 Repasa» y glosario; aprueba la versión oficial y otra escrita sin clases
         y con `<article>` (`alternativas`). El alumno hace 3 servicios y 2 personas del equipo.
-  - [ ] Fase 4 (Proyecto web del Mundo 2): la ficha de arranque cuenta que **el equipo de diseño añadió los otros 3
-        servicios y las otras 2 personas del equipo**, a petición de la clínica (la versión oficial del Mundo 2 los trae).
+  - [x] **Fase 4 · Proyecto web del Mundo 2** (`css-15`, 2026-10-18): 4 encargos sobre `estilos.css` vacío (identidad ·
+        cajas y tarjetas · horario, cita, opiniones y pie · colocación), comprobados por estilo calculado; aprueba la
+        versión oficial y otra escrita con otros selectores y valores (`alternativas`). La explicación cuenta que el equipo
+        de diseño añadió los 3 servicios y las 2 personas que faltaban. Test: `esc-proyecto-m2`.
+        Ojo: la vista previa (unos 450 px) aprieta la maqueta de escritorio; la captura de la ficha muestra cómo queda.
   - Los **proyectos finales de cada mundo** y parte de los ejercicios de cada lección van construyendo esa misma web:
     Mundo HTML → su estructura y contenido; Mundo CSS → su aspecto; HTML + CSS → maquetación completa y responsive;
     JavaScript → interactividad (menú, formulario, carrito o reservas…).

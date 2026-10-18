@@ -23,16 +23,19 @@ const COMMITS = {
   "mundo-4": "10d186f"
 };
 
-// Encargos del Proyecto web de cada mundo: la versión oficial se corta justo antes de cada marca, y cada trozo es la
-// solución de un encargo (el último encargo es la versión completa). HUELLAS[mundo].pasos = [html1, html2, …]
+// Encargos del Proyecto web de cada mundo: el archivo que escribe el alumno se corta justo antes de cada marca, y cada
+// trozo es la solución de un encargo (el último encargo es el archivo completo). HUELLAS[mundo].pasos = [html1, html2, …]
+// en el Mundo 1 y [css1, css2, …] en el Mundo 2 (allí el HTML es el oficial)
 const CORTES = {
-  "mundo-1": ["<main>", '<section id="servicios"', '<section id="horario"', '<section id="opiniones"']
+  "mundo-1": { archivo: "html", marcas: ["<main>", '<section id="servicios"', '<section id="horario"', '<section id="opiniones"'] },
+  "mundo-2": { archivo: "css", marcas: ["/* ---------- 2.", "#horario {", "/* ---------- 3."] }
 };
 
 // En el Mundo 1 el alumno hace solo 3 servicios y 2 personas del equipo; el resto lo «añade el equipo de diseño»
-// en la versión oficial con la que empieza el Mundo 2
+// en la versión oficial con la que empieza el Mundo 2. En el Mundo 2, el estilo de privacidad.html va hecho
 const RECORTES = {
-  "mundo-1": html => quedarse(quedarse(html, /\n *<article class="servicio">[\s\S]*?<\/article>/g, 3), /\n *<figure>[\s\S]*?<\/figure>/g, 2)
+  "mundo-1": html => quedarse(quedarse(html, /\n *<article class="servicio">[\s\S]*?<\/article>/g, 3), /\n *<figure>[\s\S]*?<\/figure>/g, 2),
+  "mundo-2": css => css.replace(/\/\* Página de privacidad[\s\S]*?\.texto-legal h2 \{[^}]*\}\n\n/, "")
 };
 
 function quedarse(html, patron, cuantos) {
@@ -40,10 +43,11 @@ function quedarse(html, patron, cuantos) {
   return html.replace(patron, bloque => (++n <= cuantos ? bloque : ""));
 }
 
-function cortar(html, marca) {
+function cortar(html, marca, archivo) {
   const i = html.indexOf(marca);
   if (i < 0) throw new Error("No encuentro «" + marca + "» en la versión oficial");
   const antes = html.slice(0, html.lastIndexOf("\n", i) + 1).replace(/\s+$/, "\n");
+  if (archivo === "css") return antes;
   const cierre = antes.includes("<main>") ? "\n  </main>\n\n</body>\n</html>\n" : "\n</body>\n</html>\n";
   return antes + cierre;
 }
@@ -71,8 +75,10 @@ for (const [mundo, commit] of Object.entries(COMMITS)) {
     datos: opiniones ? { "opiniones.json": JSON.parse(opiniones) } : {}
   };
   if (CORTES[mundo]) {
-    const delAlumno = (RECORTES[mundo] || (h => h))(html);
-    versiones[mundo].pasos = CORTES[mundo].map(m => cortar(delAlumno, m)).concat(delAlumno);
+    const { archivo, marcas } = CORTES[mundo];
+    const delAlumno = (RECORTES[mundo] || (t => t))(versiones[mundo][archivo]);
+    if (RECORTES[mundo] && delAlumno === versiones[mundo][archivo]) throw new Error(mundo + ": el recorte no cambió nada");
+    versiones[mundo].pasos = marcas.map(m => cortar(delAlumno, m, archivo)).concat(delAlumno);
   }
   console.log(mundo + " (" + commit + "): " + Object.entries(versiones[mundo])
     .map(([k, v]) => k + " " + (typeof v === "string" ? v.length : Object.keys(v).length)).join(", "));
