@@ -45,11 +45,13 @@
         como pasos de explicación. Falta: que el ejercicio de html-07 pida los dos tamaños y el reto use `lazy`.
   - [x] P4 (js-04 `setAttribute`/`aria-expanded`, js-10 botón «Quitar» en cada elemento con ejercicio, js-12 array de
         objetos con `|| []`). Falta: que el **reto** de js-12 guarde un array de objetos.
-  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1, P2, P3 y P5): la web de referencia
+  - [x] P3 (js-11: casillas y radios con `.checked`, `Number.isNaN`, bandera `todoBien` con un mensaje por campo).
+        Falta: que el **reto** de js-11 tenga 2–3 campos con su mensaje cada uno.
+  - [ ] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1, P2 y P5: las tres lecciones nuevas): la web de referencia
         ya usa `list-style`, `max-width` (P7), `:user-invalid` (P8), `filter`, `Date`, `checked` y `setAttribute` (P1–P4).
   - [ ] Consejo de `scroll-margin-top` (hc-04 o hc-06): con la cabecera fija, los enlaces del menú dejan el título
         de la sección tapado.
-  - [ ] Lección del Mundo 4: explicar `novalidate` (el formulario trae `required` del Mundo 1 y el navegador
+  - [x] Lección del Mundo 4: explicar `novalidate` → ya lo explica js-11 (el formulario trae `required` del Mundo 1 y el navegador
         taparía los mensajes propios).
   - [ ] La comprobación de la hora es solo 9:00–20:30: no mira sábados (10:00–14:00) ni domingos (cerrado).
         ¿Basta para el curso o se enseña `getDay()`?

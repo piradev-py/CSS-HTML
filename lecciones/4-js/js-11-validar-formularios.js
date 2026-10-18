@@ -260,6 +260,62 @@ formulario.addEventListener("submit", (evento) => {
       ]
     },
     {
+      tipo: "explicacion",
+      titulo: "Muchos campos: casillas, radios y una bandera",
+      texto: "Un formulario de verdad tiene muchos campos, y cada uno necesita **su propio mensaje**. Tres herramientas nuevas:\n\n• **Casillas y radios**: no tienen `value` útil; se mira si están marcados con `.checked`, que vale `true` o `false`. Para un radio, pregunta por el de cada opción: `document.querySelector(\"#primera-si\").checked`.\n• **Solo cifras**: `Number(\"600123456\")` convierte el texto en número; si hay letras o espacios, da `NaN` («no es un número»). `Number.isNaN(…)` te dice si ha pasado eso.\n• **Una bandera**: empieza con `let todoBien = true;`. Cada campo que falle pone `todoBien = false;` y su mensaje. Al final, solo si `todoBien` sigue en `true`, aceptas el formulario. 🚩\n\nPrueba el ejemplo con un teléfono con espacios y sin marcar la casilla.",
+      ejemplo: {
+        html: `<form id="cita" novalidate>
+  <label for="telefono">Teléfono (9 cifras)</label>
+  <input id="telefono" type="tel" aria-describedby="error-telefono">
+  <p id="error-telefono" class="error" role="alert"></p>
+
+  <p>¿Primera visita?
+    <input type="radio" id="primera-si" name="primera"> <label for="primera-si">Sí</label>
+    <input type="radio" id="primera-no" name="primera"> <label for="primera-no">No</label>
+  </p>
+
+  <input type="checkbox" id="normas">
+  <label for="normas">Acepto las normas</label>
+  <p id="error-normas" class="error" role="alert"></p>
+
+  <button>Pedir cita</button>
+</form>`,
+        css: `.error {
+  color: #b00020;
+  font-weight: bold;
+}`,
+        js: `const formulario = document.querySelector("#cita");
+const errorTelefono = document.querySelector("#error-telefono");
+const errorNormas = document.querySelector("#error-normas");
+
+formulario.addEventListener("submit", (evento) => {
+  evento.preventDefault();
+  let todoBien = true;
+
+  const telefono = document.querySelector("#telefono").value.trim();
+  if (telefono.length !== 9 || Number.isNaN(Number(telefono))) {
+    errorTelefono.textContent = "Escribe 9 cifras, sin espacios.";
+    todoBien = false;
+  } else {
+    errorTelefono.textContent = "";
+  }
+
+  if (!document.querySelector("#normas").checked) {
+    errorNormas.textContent = "Tienes que aceptar las normas.";
+    todoBien = false;
+  } else {
+    errorNormas.textContent = "";
+  }
+
+  if (todoBien) {
+    const primera = document.querySelector("#primera-si").checked;
+    console.log("¡Cita pedida! ¿Primera visita? " + primera);
+  }
+});`
+      },
+      consejo: "Comprueba **todos** los campos aunque el primero ya falle: así la persona ve de una vez todo lo que tiene que corregir, y no un error cada vez que pulsa el botón."
+    },
+    {
       tipo: "quiz",
       pregunta: "¿Qué hace `evento.preventDefault()` dentro del evento `submit` de un formulario?",
       opciones: [
