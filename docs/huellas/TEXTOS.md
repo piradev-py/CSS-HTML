@@ -26,7 +26,7 @@
 
 ## Cabecera
 
-- Logo: icono de huella + **Huellas** + *Clínica veterinaria* (`alt` del logo: «Huellas, clínica veterinaria»).
+- Logo: enlace a `#inicio` con el icono de huella (`alt=""`: el nombre ya va escrito al lado) + **Huellas** + *Clínica veterinaria*.
 - Menú (5 enlaces): **Inicio** `#inicio` · **Servicios** `#servicios` · **Equipo** `#equipo` · **Horario** `#horario` · **Contacto** `#contacto`.
 - Botón: **Pide tu cita** → `#cita`.
 - Botón del menú en móvil (Mundos 3 y 4): texto oculto «Abrir el menú» / «Cerrar el menú».

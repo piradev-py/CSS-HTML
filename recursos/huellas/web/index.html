@@ -14,10 +14,10 @@
 <body>
 
   <header>
-    <a href="#inicio">
-      <img src="img/logo.svg" alt="Huellas, clínica veterinaria" width="48" height="48">
+    <a class="marca" href="#inicio">
+      <img src="img/logo.svg" alt="" width="48" height="48">
+      <span><strong>Huellas</strong> Clínica veterinaria</span>
     </a>
-    <p><strong>Huellas</strong> Clínica veterinaria</p>
     <nav>
       <ul>
         <li><a href="#inicio">Inicio</a></li>
@@ -27,121 +27,131 @@
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
-    <a href="#cita">Pide tu cita</a>
+    <a class="boton" href="#cita">Pide tu cita</a>
   </header>
 
   <main>
 
-    <section id="inicio">
-      <p>Cuidamos lo que más quieres</p>
-      <h1>Salud y cariño para <em>toda su vida</em></h1>
-      <p>Medicina veterinaria cercana y profesional, para que tu compañero esté siempre en las mejores manos.</p>
-      <a href="#cita">Pide tu cita</a>
-      <img src="img/portada.jpg" alt="Un perro y un gato tumbados juntos al sol" width="600" height="401">
-      <img src="img/nota.png" alt="" width="304" height="75">
-      <div>
+    <section id="inicio" class="portada">
+      <div class="portada-texto">
+        <p class="antetitulo">Cuidamos lo que más quieres</p>
+        <h1>Salud y cariño para <em>toda su vida</em></h1>
+        <p>Medicina veterinaria cercana y profesional, para que tu compañero esté siempre en las mejores manos.</p>
+        <a class="boton" href="#cita">Pide tu cita</a>
+      </div>
+      <div class="portada-foto">
+        <img src="img/portada.jpg" alt="Un perro y un gato tumbados juntos al sol" width="600" height="401">
+        <img class="nota" src="img/nota.png" alt="" width="304" height="75">
+      </div>
+      <div class="tarjeta-cita">
         <p><strong>Pide tu cita</strong></p>
         <p>En pocos pasos</p>
-        <a href="#cita">Reservar cita</a>
+        <a class="boton" href="#cita">Reservar cita</a>
       </div>
     </section>
 
-    <ul>
+    <ul class="ventajas">
       <li>
         <img src="img/iconos/corazon.svg" alt="" width="52" height="52">
-        <strong>Atención cercana</strong> Te escuchamos y te explicamos cada paso.
+        <strong>Atención cercana</strong>
+        <span>Te escuchamos y te explicamos cada paso.</span>
       </li>
       <li>
         <img src="img/iconos/escudo.svg" alt="" width="52" height="52">
-        <strong>Instalaciones modernas</strong> Quirófano, rayos X y laboratorio propios.
+        <strong>Instalaciones modernas</strong>
+        <span>Quirófano, rayos X y laboratorio propios.</span>
       </li>
       <li>
         <img src="img/iconos/equipo.svg" alt="" width="52" height="52">
-        <strong>Equipo especializado</strong> Veterinarios con formación en cada área.
+        <strong>Equipo especializado</strong>
+        <span>Veterinarios con formación en cada área.</span>
       </li>
       <li>
         <img src="img/iconos/huella.svg" alt="" width="52" height="52">
-        <strong>Todas las etapas de su vida</strong> Desde cachorro hasta la edad senior.
+        <strong>Todas las etapas de su vida</strong>
+        <span>Desde cachorro hasta la edad senior.</span>
       </li>
     </ul>
 
     <section id="servicios">
-      <p>Nuestros servicios</p>
+      <p class="antetitulo">Nuestros servicios</p>
       <h2>Todo lo que necesitan, en un solo lugar</h2>
+      <div class="rejilla">
+        <article class="servicio">
+          <img src="img/servicio-medicina.jpg" alt="" width="320" height="213" loading="lazy">
+          <img src="img/iconos/fonendo.svg" class="icono" alt="" width="52" height="52">
+          <h3>Medicina general</h3>
+          <p>Revisiones, diagnóstico y consejos para prevenir antes que curar.</p>
+          <a href="#cita">Pide cita</a>
+        </article>
 
-      <article class="servicio">
-        <img src="img/servicio-medicina.jpg" alt="" width="320" height="213" loading="lazy">
-        <img src="img/iconos/fonendo.svg" alt="" width="52" height="52">
-        <h3>Medicina general</h3>
-        <p>Revisiones, diagnóstico y consejos para prevenir antes que curar.</p>
-        <a href="#cita">Pide cita</a>
-      </article>
+        <article class="servicio">
+          <img src="img/servicio-vacunacion.jpg" alt="" width="320" height="213" loading="lazy">
+          <img src="img/iconos/jeringa.svg" class="icono" alt="" width="52" height="52">
+          <h3>Vacunación</h3>
+          <p>El calendario de vacunas y desparasitación adaptado a su edad.</p>
+          <a href="#cita">Pide cita</a>
+        </article>
 
-      <article class="servicio">
-        <img src="img/servicio-vacunacion.jpg" alt="" width="320" height="213" loading="lazy">
-        <img src="img/iconos/jeringa.svg" alt="" width="52" height="52">
-        <h3>Vacunación</h3>
-        <p>El calendario de vacunas y desparasitación adaptado a su edad.</p>
-        <a href="#cita">Pide cita</a>
-      </article>
+        <article class="servicio">
+          <img src="img/servicio-cirugia.jpg" alt="" width="320" height="213" loading="lazy">
+          <img src="img/iconos/bisturi.svg" class="icono" alt="" width="52" height="52">
+          <h3>Cirugía</h3>
+          <p>Quirófano propio y anestesia vigilada en todo momento.</p>
+          <a href="#cita">Pide cita</a>
+        </article>
 
-      <article class="servicio">
-        <img src="img/servicio-cirugia.jpg" alt="" width="320" height="213" loading="lazy">
-        <img src="img/iconos/bisturi.svg" alt="" width="52" height="52">
-        <h3>Cirugía</h3>
-        <p>Quirófano propio y anestesia vigilada en todo momento.</p>
-        <a href="#cita">Pide cita</a>
-      </article>
+        <article class="servicio">
+          <img src="img/servicio-dental.jpg" alt="" width="320" height="213" loading="lazy">
+          <img src="img/iconos/diente.svg" class="icono" alt="" width="52" height="52">
+          <h3>Salud dental</h3>
+          <p>Limpiezas y revisiones para una boca sana y sin dolor.</p>
+          <a href="#cita">Pide cita</a>
+        </article>
 
-      <article class="servicio">
-        <img src="img/servicio-dental.jpg" alt="" width="320" height="213" loading="lazy">
-        <img src="img/iconos/diente.svg" alt="" width="52" height="52">
-        <h3>Salud dental</h3>
-        <p>Limpiezas y revisiones para una boca sana y sin dolor.</p>
-        <a href="#cita">Pide cita</a>
-      </article>
+        <article class="servicio">
+          <img src="img/servicio-dermatologia.jpg" alt="" width="320" height="213" loading="lazy">
+          <img src="img/iconos/huella.svg" class="icono" alt="" width="52" height="52">
+          <h3>Dermatología</h3>
+          <p>Alergias, picores y cuidado de la piel y el pelo.</p>
+          <a href="#cita">Pide cita</a>
+        </article>
 
-      <article class="servicio">
-        <img src="img/servicio-dermatologia.jpg" alt="" width="320" height="213" loading="lazy">
-        <img src="img/iconos/huella.svg" alt="" width="52" height="52">
-        <h3>Dermatología</h3>
-        <p>Alergias, picores y cuidado de la piel y el pelo.</p>
-        <a href="#cita">Pide cita</a>
-      </article>
-
-      <article class="servicio">
-        <img src="img/servicio-diagnostico.jpg" alt="" width="320" height="213" loading="lazy">
-        <img src="img/iconos/corazon.svg" alt="" width="52" height="52">
-        <h3>Diagnóstico</h3>
-        <p>Análisis, ecografía y rayos X en la propia clínica.</p>
-        <a href="#cita">Pide cita</a>
-      </article>
+        <article class="servicio">
+          <img src="img/servicio-diagnostico.jpg" alt="" width="320" height="213" loading="lazy">
+          <img src="img/iconos/corazon.svg" class="icono" alt="" width="52" height="52">
+          <h3>Diagnóstico</h3>
+          <p>Análisis, ecografía y rayos X en la propia clínica.</p>
+          <a href="#cita">Pide cita</a>
+        </article>
+      </div>
     </section>
 
     <section id="equipo">
-      <p>Nuestro equipo</p>
+      <p class="antetitulo">Nuestro equipo</p>
       <h2>Personas que quieren a los animales tanto como tú</h2>
-
-      <figure>
-        <img src="img/equipo-1.jpg" alt="Daniel Ortega, veterinario, sonriendo en la consulta" width="240" height="300" loading="lazy">
-        <figcaption><strong>Daniel Ortega</strong><br>Medicina general y urgencias</figcaption>
-      </figure>
-      <figure>
-        <img src="img/equipo-2.jpg" alt="Pablo Ruiz, veterinario, con un pomerania en brazos" width="240" height="300" loading="lazy">
-        <figcaption><strong>Pablo Ruiz</strong><br>Dermatología</figcaption>
-      </figure>
-      <figure>
-        <img src="img/equipo-3.jpg" alt="Samir Haddad, veterinario, con pijama azul marino" width="240" height="300" loading="lazy">
-        <figcaption><strong>Samir Haddad</strong><br>Odontología veterinaria</figcaption>
-      </figure>
-      <figure>
-        <img src="img/equipo-4.jpg" alt="Antonio Lozano, veterinario, con los brazos cruzados" width="240" height="300" loading="lazy">
-        <figcaption><strong>Antonio Lozano</strong><br>Cirugía · Director clínico</figcaption>
-      </figure>
+      <div class="rejilla">
+        <figure>
+          <img src="img/equipo-1.jpg" alt="Daniel Ortega, veterinario, sonriendo en la consulta" width="240" height="300" loading="lazy">
+          <figcaption><strong>Daniel Ortega</strong><br>Medicina general y urgencias</figcaption>
+        </figure>
+        <figure>
+          <img src="img/equipo-2.jpg" alt="Pablo Ruiz, veterinario, con un pomerania en brazos" width="240" height="300" loading="lazy">
+          <figcaption><strong>Pablo Ruiz</strong><br>Dermatología</figcaption>
+        </figure>
+        <figure>
+          <img src="img/equipo-3.jpg" alt="Samir Haddad, veterinario, con pijama azul marino" width="240" height="300" loading="lazy">
+          <figcaption><strong>Samir Haddad</strong><br>Odontología veterinaria</figcaption>
+        </figure>
+        <figure>
+          <img src="img/equipo-4.jpg" alt="Antonio Lozano, veterinario, con los brazos cruzados" width="240" height="300" loading="lazy">
+          <figcaption><strong>Antonio Lozano</strong><br>Cirugía · Director clínico</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="horario">
-      <p>Horario</p>
+      <p class="antetitulo">Horario</p>
       <h2>Cuándo puedes venir</h2>
       <table>
         <thead>
@@ -161,7 +171,7 @@
     </section>
 
     <section id="cita">
-      <p>Pide tu cita</p>
+      <p class="antetitulo">Pide tu cita</p>
       <h2>Reserva en un minuto</h2>
       <p>Rellena el formulario y te confirmamos la cita. Si es una urgencia, llámanos.</p>
 
@@ -218,53 +228,56 @@
     </section>
 
     <section id="opiniones">
-      <p>Opiniones</p>
+      <p class="antetitulo">Opiniones</p>
       <h2>Lo que dicen de nosotros</h2>
-
-      <article>
-        <img src="img/opinion-perro.jpg" alt="Copo, el bichón maltés de Lucía" width="120" height="120" loading="lazy">
-        <p>Copo entra en la consulta moviendo la cola. Nos explicaron todo con calma y sin prisas.</p>
-        <p><strong>Lucía M.</strong> · Copo, bichón maltés · ★★★★★</p>
-      </article>
-      <article>
-        <img src="img/opinion-gato.jpg" alt="Simba, el gato de Javier" width="120" height="120" loading="lazy">
-        <p>Simba odia el transportín, pero aquí lo tratan con tanto mimo que vuelve tranquilo a casa.</p>
-        <p><strong>Javier R.</strong> · Simba, gato · ★★★★★</p>
-      </article>
-      <article>
-        <img src="img/opinion-conejo.jpg" alt="Canela, el conejo de Marta" width="120" height="120" loading="lazy">
-        <p>Por fin una clínica que sabe de conejos. Le revisaron los dientes y nos dieron muy buenos consejos.</p>
-        <p><strong>Marta G.</strong> · Canela, conejo · ★★★★★</p>
-      </article>
+      <div class="rejilla">
+        <article class="opinion">
+          <img src="img/opinion-perro.jpg" alt="Copo, el bichón maltés de Lucía" width="120" height="120" loading="lazy">
+          <p>Copo entra en la consulta moviendo la cola. Nos explicaron todo con calma y sin prisas.</p>
+          <p><strong>Lucía M.</strong> · Copo, bichón maltés · ★★★★★</p>
+        </article>
+        <article class="opinion">
+          <img src="img/opinion-gato.jpg" alt="Simba, el gato de Javier" width="120" height="120" loading="lazy">
+          <p>Simba odia el transportín, pero aquí lo tratan con tanto mimo que vuelve tranquilo a casa.</p>
+          <p><strong>Javier R.</strong> · Simba, gato · ★★★★★</p>
+        </article>
+        <article class="opinion">
+          <img src="img/opinion-conejo.jpg" alt="Canela, el conejo de Marta" width="120" height="120" loading="lazy">
+          <p>Por fin una clínica que sabe de conejos. Le revisaron los dientes y nos dieron muy buenos consejos.</p>
+          <p><strong>Marta G.</strong> · Canela, conejo · ★★★★★</p>
+        </article>
+      </div>
     </section>
 
   </main>
 
   <footer id="contacto">
-    <div>
-      <img src="img/logo.svg" alt="Huellas, clínica veterinaria" width="48" height="48" loading="lazy">
-      <p>Clínica veterinaria cercana en el centro de Madrid.</p>
+    <div class="pie-columnas">
+      <div>
+        <img src="img/logo.svg" alt="Huellas, clínica veterinaria" width="48" height="48" loading="lazy">
+        <p>Clínica veterinaria cercana en el centro de Madrid.</p>
+      </div>
+      <div>
+        <h2>Contacto</h2>
+        <p>Calle de los Almendros, 12 · 28013 Madrid</p>
+        <p>Teléfono: <a href="tel:+34912345678">912 345 678</a></p>
+        <p>Urgencias: <a href="tel:+34600123456">600 123 456</a></p>
+        <p>Email: <a href="mailto:hola@huellas.example">hola@huellas.example</a></p>
+        <p><a href="https://www.openstreetmap.org/search?query=Madrid" target="_blank" rel="noopener">Cómo llegar</a></p>
+      </div>
+      <div>
+        <h2>Horario</h2>
+        <p>Lunes a viernes, 9:00 – 20:30</p>
+        <p>Sábados, 10:00 – 14:00</p>
+        <p>Urgencias 24 horas</p>
+      </div>
+      <div>
+        <h2>Síguenos</h2>
+        <p><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></p>
+        <p><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></p>
+      </div>
     </div>
-    <div>
-      <h2>Contacto</h2>
-      <p>Calle de los Almendros, 12 · 28013 Madrid</p>
-      <p>Teléfono: <a href="tel:+34912345678">912 345 678</a></p>
-      <p>Urgencias: <a href="tel:+34600123456">600 123 456</a></p>
-      <p>Email: <a href="mailto:hola@huellas.example">hola@huellas.example</a></p>
-      <p><a href="https://www.openstreetmap.org/search?query=Madrid" target="_blank" rel="noopener">Cómo llegar</a></p>
-    </div>
-    <div>
-      <h2>Horario</h2>
-      <p>Lunes a viernes, 9:00 – 20:30</p>
-      <p>Sábados, 10:00 – 14:00</p>
-      <p>Urgencias 24 horas</p>
-    </div>
-    <div>
-      <h2>Síguenos</h2>
-      <p><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></p>
-      <p><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></p>
-    </div>
-    <p>© 2026 Huellas · Clínica veterinaria · <a href="privacidad.html">Política de privacidad</a></p>
+    <p class="pie-final">© 2026 Huellas · Clínica veterinaria · <a href="privacidad.html">Política de privacidad</a></p>
   </footer>
 
 </body>
