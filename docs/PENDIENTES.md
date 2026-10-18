@@ -12,29 +12,19 @@
 - [x] **Camino en serpiente**: filas horizontales con curvas en U entre filas y una ola suave dentro de cada fila.
 
 ## Errores por revisar
-- [ ] **js-05 (Funciones), paso 3 «Presenta a tus mascotas»** — captura del usuario (2026-10-15). El alumno escribió
-      ``console.log(`$ Mi mascota se llama ${mascota}`);`` y llamó con `presentar("luna")` / `presentar("Tofu")`.
-      La consola muestra `$ Mi mascota se llama luna` y `$ Mi mascota se llama Tofu`, y el revisor solo dice «La línea 1
-      de la consola no es la que pide el enunciado: debería decir «Mi mascota se llama Luna»». Revisar:
-  - El mensaje no señala **qué** sobra o falta: el `$ ` de más al principio (confusión típica con `${}`) ni la
-    mayúscula de «Luna». Debería decir la diferencia concreta (p. ej. «sobra `$ ` al principio», «Luna va con mayúscula»).
-  - La línea 2 también lleva el `$ ` de más y no se menciona (solo se informa la primera línea mal).
-  - ¿Mayúsculas en la salida de la consola: se exigen o se ignoran como las tildes? Decidirlo y que el mensaje lo diga.
+- [x] **js-05 (Funciones), paso 3 «Presenta a tus mascotas»** — el revisor de consola (`js/ejercicios.js`,
+      `compararConsola`) ahora dice qué sobra o falta («sobra «$» al principio», «falta «Luna» al final»…), avisa de las
+      demás líneas mal y, si sobra un `$`, recuerda que va pegado a la llave de `${…}`.
+      Mayúsculas en la consola → **se ignoran**, como las tildes (ya era así: «luna» estaba bien; solo fallaba el `$`).
 
 ## Antes de la versión final (petición del usuario, 2026-10-15)
-- [ ] **Quitar el modo prueba de la versión publicada** (es solo para el equipo; la gente no debe saltar a lecciones al azar).
-      Hacerlo como en SQLearning (`js/progreso.js` de SQLearning, constante `SOLO_LOCAL`): disponible **solo en local**
-      (`location.hostname` = `localhost`, `127.0.0.1` o `[::1]`), así siguen funcionando el servidor local y los tests.
-  - `js/progreso.js`: `modoPrueba` (≈ línea 44) solo puede ser `true` en local; ignorar `CLAVE_PRUEBA` fuera de local;
-    `entrarPrueba` no hace nada fuera de local; si hay un «desbloquear todo» guardado en el progreso, ignorarlo también.
-    Exponer `PROGRESO.pruebaDisponible()`.
-  - `js/ui.js` (≈ líneas 236–252, ventana de opciones de la cabecera): no pintar los botones `data-entrar-prueba` /
-    `data-salir-prueba` si `!PROGRESO.pruebaDisponible()`. La franja de modo prueba (≈ línea 201) no saldrá nunca fuera de local.
-  - `js/mapa.js` `pintarOpciones()` (≈ líneas 183–203): quitar la tarjeta del modo prueba fuera de local (ver punto siguiente).
-- [ ] **Quitar «🔄 Reiniciar curso» del final del mapa**: ya está en la ventana de **Opciones** de la cabecera (`js/ui.js`,
-      botón `data-reiniciar-curso`). En `js/mapa.js` `pintarOpciones()` sobra el botón `data-reiniciar`; si tras quitar el
-      modo prueba la tarjeta `[data-opciones-curso]` queda vacía, quitarla también de `index.html` (línea ≈ 33) y su CSS.
-- [ ] Después: pasar los tests (que corren en local, así que el modo prueba seguirá disponible para ellos).
+- [x] **Modo prueba y «desbloquear todo» solo en local** (`SOLO_LOCAL` en `js/progreso.js`, como en SQLearning):
+      `localhost`, `127.0.0.1`, `[::1]` **y `file://`** (los tests abren la web como archivo; también quien la descarga en
+      .zip). Fuera de local no salen los botones en ⚙️ Ajustes, ni la franja, ni la tarjeta del mapa, y se ignora un
+      «desbloquear todo» o una prueba guardados. `PROGRESO.pruebaDisponible()`.
+- [x] **Quitado «🔄 Reiniciar curso» del final del mapa** (queda en ⚙️ Ajustes). La tarjeta `[data-opciones-curso]` solo
+      se pinta en local, con el modo prueba; en la web publicada se quita.
+- [x] Tests pasados (`esc-tests`, `esc-motor`, `esc-motor-js`) y comprobado en publicado (`http://127.0.0.2`) y en `file://`.
 
 ## Ideas nuevas (petición del usuario, 2026-10-15)
 - [ ] **Laboratorio de práctica libre** (al estilo del laboratorio de SQLearning): una página aparte con las **3 pestañas**
@@ -74,7 +64,7 @@
 - [x] css-05: el reto «detective» prohíbe `!important` → **se mantiene** (es la gracia del reto).
 
 ### Mundo HTML + CSS (dudas que dejaron las lecciones)
-- [ ] hc-02/hc-03: el CSS decorativo oculto (`cssBase`) usa `list-style: none`, que no se enseña hasta hc-04. ¿Vale así?
+- [x] hc-02/hc-03: el CSS decorativo oculto (`cssBase`) usa `list-style: none`, que no se enseña hasta hc-04. → **se deja** (va en el CSS oculto, el alumno no lo ve).
 - [x] hc-04: combinador hijo `>` → **se enseña en hc-04** con un submenú (explicación + ejercicio).
 - [x] hc-06: `order` se presenta sin exigirlo → **se deja** (al usuario le gustan esas herramientas).
 - [x] hc-07: propiedades sueltas `rotate`/`scale`/`translate` en los controles → **se dejan**.
@@ -86,13 +76,13 @@
 - [x] Ejercicios «a mano»: se compara solo lo **estrictamente necesario** (el resultado). Lo que sí se exige ahora es
       que el código esté **bien escrito** (etiquetas cerradas, `{ }` y `;` en CSS y JS): `js/escritura.js`, en ejercicios
       y como comprobación automática de cada reto.
-- [ ] js-01: el ejercicio de la piña no empieza vacío (trae código para practicar `//`). ¿Vale esta excepción?
-- [ ] js-02: las comillas invertidas se describen como «la tecla a la derecha de la P» (teclado de España).
-      ¿Añadimos una nota para teclados latinoamericanos?
-- [ ] js-13: el reto es «siguiente chiste» (determinista) en vez de «chiste al azar» (necesitaría enseñar
-      `Math.random`/`Math.floor`). ¿Bien así?
-- [ ] js-14: 10 pasos con 3 ejercicios por etapas antes del jefe final. ¿Demasiado larga?
-- [ ] js-12: los ejercicios no pueden comprobar que se use `localStorage` de verdad (solo el reto, que recarga). ¿Vale?
-- [ ] js-10: «crear al pulsar un botón» es solo explicación + reto, sin ejercicio propio. ¿Añadimos uno?
+- [x] js-01: el ejercicio de la piña no empieza vacío (trae código para practicar `//`). → **se deja** (para practicar `//` hace falta código).
+- [x] js-02: las comillas invertidas se describen como «la tecla a la derecha de la P» (teclado de España).
+      → **añadida la nota**: en el latinoamericano, Alt Gr + }.
+- [x] js-13: el reto es «siguiente chiste» (determinista) en vez de «chiste al azar» (necesitaría enseñar
+      `Math.random`/`Math.floor`). → **se deja así** (`Math.random` no se enseña y el reto sería imprevisible).
+- [~] js-14: 10 pasos con 3 ejercicios por etapas antes del jefe final. → **se decide con el proyecto Huellas** (js-14 se sustituye por la agenda de citas).
+- [~] js-12: los ejercicios no pueden comprobar que se use `localStorage` de verdad (solo el reto, que recarga). → **se decide con Huellas** (P4: el reto de js-12 pasa a un array de objetos).
+- [~] js-10: «crear al pulsar un botón» es solo explicación + reto, sin ejercicio propio. → **se decide con Huellas** (P4 añade a js-10 el ejercicio de «Quitar»).
 - [x] Motor: protección contra bucles infinitos → **añadida** (un bucle infinito congelaría la pestaña y el borrador
       guardado la volvería a congelar al abrir la lección).

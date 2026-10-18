@@ -83,7 +83,7 @@ jugador = "Otro"; // ¡Esto da error!`
     {
       tipo: "explicacion",
       titulo: "Plantillas de texto: frases con huecos",
-      texto: "Para mezclar texto y variables puedes pegarlo todo con `+`, pero es fácil liarse con las comillas y los espacios.\n\nHay algo más cómodo: las **plantillas de texto**. Son como una ficha con huecos para rellenar:\n\n1. En vez de comillas normales, usa **comillas invertidas**: en el teclado español, la tecla a la derecha de la **P** (púlsala y luego la barra espaciadora).\n2. Dentro, cada hueco se escribe `${nombreDeLaVariable}` y se rellena solo.\n\nEn un hueco también puedes hacer cuentas: `${edad + 1}`. Compara en el ejemplo la forma con `+` y la de plantilla.",
+      texto: "Para mezclar texto y variables puedes pegarlo todo con `+`, pero es fácil liarse con las comillas y los espacios.\n\nHay algo más cómodo: las **plantillas de texto**. Son como una ficha con huecos para rellenar:\n\n1. En vez de comillas normales, usa **comillas invertidas**: en el teclado español, la tecla a la derecha de la **P**; en el latinoamericano, **Alt Gr** + la tecla de la **}** (púlsala y luego la barra espaciadora).\n2. Dentro, cada hueco se escribe `${nombreDeLaVariable}` y se rellena solo.\n\nEn un hueco también puedes hacer cuentas: `${edad + 1}`. Compara en el ejemplo la forma con `+` y la de plantilla.",
       ejemplo: {
         js: `const nombre = "Luna";
 const edad = 4;
@@ -106,7 +106,7 @@ console.log(\`\${jugador} tiene \${puntos} puntos\`);
 `
       },
       pistas: [
-        "La plantilla va entre comillas invertidas (la tecla a la derecha de la P) y cada variable dentro de ${ }. Para sumar: puntos = puntos + 50;",
+        "La plantilla va entre comillas invertidas (a la derecha de la P; en teclado latinoamericano, Alt Gr + }) y cada variable dentro de ${ }. Para sumar: puntos = puntos + 50;",
         "Son cinco líneas: crea jugador con const y puntos con let; luego console.log con la plantilla (comillas invertidas y dentro: ${jugador} tiene ${puntos} puntos); luego puntos = puntos + 50; y por último el mismo console.log otra vez."
       ]
     },

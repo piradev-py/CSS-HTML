@@ -226,14 +226,16 @@
 
   function abrirAjustes() {
     const prueba = PROGRESO.enPrueba();
+    const equipo = PROGRESO.pruebaDisponible();
     const m = CELEBRAR.modal(
       "<h2>⚙️ Ajustes</h2>" +
       '<div class="lista-ajustes">' +
       '<label>🔊 Sonidos <input type="checkbox" data-ajuste="sonido"></label>' +
-      (prueba ? "" : '<label>🔓 Desbloquear todas las lecciones <input type="checkbox" data-ajuste="desbloquearTodo"></label>') +
+      (prueba || !equipo ? "" : '<label>🔓 Desbloquear todas las lecciones <input type="checkbox" data-ajuste="desbloquearTodo"></label>') +
       "</div>" +
       '<div class="acciones acciones-curso">' +
-      (prueba
+      (!equipo ? ""
+        : prueba
         ? '<button class="boton secundario" data-salir-prueba>🚪 Salir del modo prueba</button>'
         : '<button class="boton morado" data-entrar-prueba>🧪 Probar el curso sin guardar</button>') +
       '<button class="boton secundario" data-reiniciar-curso>🔄 ' + (prueba ? "Empezar la prueba de cero" : "Reiniciar curso") + "</button>" +

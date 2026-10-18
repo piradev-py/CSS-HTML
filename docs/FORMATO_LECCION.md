@@ -107,7 +107,8 @@ Reglas para escribir el enunciado:
     `::first-letter`, `::first-line`, `::placeholder`: compara las propiedades. **No uses `::selection` en ejercicios**
     (no se puede leer de forma fiable); en el reto, compruébalo con `PRUEBA.reglas(doc, "::selection")`.
   - Transiciones: se compara el valor final (y la propiedad `transition` en sí). Animaciones: se comparan las
-    propiedades `animation*` y `@keyframes` no se compara por dentro; las animaciones se paran en su primer fotograma.
+    propiedades `animation*` y el estilo con la animación parada en su primer fotograma y, si hay `@keyframes`,
+    también a mitad del primer ciclo (así se detectan erratas en el `to`). El texto de `@keyframes` no se compara.
   - `prefers-reduced-motion` se evalúa siempre como «movimiento normal» (el ordenador del usuario tiene las
     animaciones reducidas y el resultado no debe depender de eso).
 - Que el selector con estado dependa de un orden concreto (`li:hover` después de `li:nth-child(even)`) se compara

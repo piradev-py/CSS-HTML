@@ -277,8 +277,31 @@
         " y tu código " + logsA.length + ". Mira la consola: debería salir «" + S.win.__logs[logsA.length] + "».";
     }
     if (logsA.length > logsS.length) return "La consola muestra más líneas de las que pide el enunciado (" + logsA.length + " en vez de " + logsS.length + ").";
-    const i = logsA.findIndex((t, k) => t !== logsS[k]);
-    return "La línea " + (i + 1) + " de la consola no es la que pide el enunciado: debería decir «" + S.win.__logs[i] + "».";
+    const mal = logsA.map((t, k) => t !== logsS[k] ? k + 1 : 0).filter(Boolean);
+    const i = mal[0] - 1;
+    const dif = diferenciaLinea(A.win.__logs[i], S.win.__logs[i]);
+    const otras = mal.slice(1);
+    return "La línea " + (i + 1) + " de la consola no es la que pide el enunciado" + (dif ? ": " + dif : "") +
+      ". Debería decir «" + S.win.__logs[i] + "»." +
+      (dif && /^sobra «\$»/.test(dif) ? " ¿Se te ha colado el `$` de `${…}`? Solo va pegado a la llave: `${mascota}`." : "") +
+      (otras.length ? " También " + (otras.length === 1 ? "está mal la línea " : "están mal las líneas ") + otras.join(", ").replace(/, (\d+)$/, " y $1") + "." : "");
+  }
+
+  /** Qué palabras sobran o faltan entre una línea del alumno y la de la solución (mayúsculas y tildes no cuentan). */
+  function diferenciaLinea(a, s) {
+    const palabras = t => String(t).split(/\s+/).filter(normalizarTexto);
+    const igual = (x, y) => normalizarTexto(x) === normalizarTexto(y);
+    const A = palabras(a), S = palabras(s);
+    let p = 0;
+    while (p < A.length && p < S.length && igual(A[p], S[p])) p++;
+    let f = 0;
+    while (f < A.length - p && f < S.length - p && igual(A[A.length - 1 - f], S[S.length - 1 - f])) f++;
+    const sobra = A.slice(p, A.length - f).join(" "), falta = S.slice(p, S.length - f).join(" ");
+    const donde = p === 0 ? " al principio" : f === 0 ? " al final" : "";
+    if (sobra && falta) return "donde pone «" + sobra + "» debería poner «" + falta + "»";
+    if (sobra) return "sobra «" + sobra + "»" + donde;
+    if (falta) return "falta «" + falta + "»" + donde;
+    return null;
   }
 
   /**

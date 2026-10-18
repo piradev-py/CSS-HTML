@@ -40,8 +40,11 @@
     };
   }
 
+  // Modo prueba y «desbloquear todo» son para el equipo: solo en local (servidor local o file://, que usan los tests)
+  const SOLO_LOCAL = location.protocol === "file:" || ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
+
   // Marca en memoria: aunque falle sessionStorage, en modo prueba NUNCA se escribe el progreso real
-  let modoPrueba = (() => {
+  let modoPrueba = SOLO_LOCAL && (() => {
     try { return sessionStorage.getItem(CLAVE_PRUEBA) !== null; } catch (e) { return false; }
   })();
   const enPrueba = () => modoPrueba;
@@ -151,7 +154,7 @@
 
     /** Una lección está abierta si es la primera, si la anterior está completada o si se desbloqueó todo. */
     estaDesbloqueada(id) {
-      if (datos.ajustes.desbloquearTodo) return true;
+      if (SOLO_LOCAL && datos.ajustes.desbloquearTodo) return true;
       const anterior = CURSO.anterior(id);
       return !anterior || !!datos.completadas[anterior.id];
     },
@@ -207,8 +210,9 @@
     },
 
     enPrueba,
+    pruebaDisponible: () => SOLO_LOCAL,
     entrarPrueba() {
-      if (modoPrueba) return;
+      if (!SOLO_LOCAL || modoPrueba) return;
       datos = datosPrueba();
       modoPrueba = true;
       guardar();
