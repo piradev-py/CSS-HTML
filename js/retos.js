@@ -1,7 +1,9 @@
 /* ============================================================
    <CSS-HTML> · Retos
    - RETOS.evaluar(): ejecuta las comprobaciones en un iframe oculto
-   - RETOS.crear(): interfaz del reto (lista, editor, pistas, solución)
+   - RETOS.crear(): interfaz del reto (lista, editor, pistas, solución).
+     También la usan los pasos «proyecto» (opciones etiqueta y
+     claveBorrador, y en el paso: proyecto, captura y repaso).
    ============================================================ */
 (function () {
   let iframeOculto = null;
@@ -77,6 +79,7 @@
 
   function crear(contenedor, paso, opciones) {
     const { leccionId, pestanas, alSuperar } = opciones;
+    const claveBorrador = opciones.claveBorrador || leccionId;
     let pistasVistas = 0;
     let solucionVista = false;
     let superado = false;
@@ -85,8 +88,9 @@
     raiz.className = "reto";
     raiz.innerHTML =
       '<div class="reto-cabeza">' +
-        '<div class="reto-enunciado tarjeta"><span class="etiqueta-reto">🏆 Reto final</span>' +
+        '<div class="reto-enunciado tarjeta"><span class="etiqueta-reto">' + (opciones.etiqueta || "🏆 Reto final") + "</span>" +
         '<p class="enunciado"></p>' +
+        (paso.captura ? '<a class="captura-encargo" target="_blank" title="Abrir la captura en grande"><img alt="Captura de cómo debe quedar"></a>' : "") +
         '<ul class="comprobaciones" aria-live="polite"></ul>' +
         '<div class="pistas-mostradas"></div>' +
         '<div class="reto-botones">' +
@@ -99,10 +103,24 @@
     contenedor.appendChild(raiz);
 
     raiz.querySelector(".enunciado").innerHTML = UI.md(paso.enunciado);
+    if (paso.captura) {
+      raiz.querySelector(".captura-encargo").href = paso.captura;
+      raiz.querySelector(".captura-encargo img").src = paso.captura;
+    }
     const lista = raiz.querySelector(".comprobaciones");
     paso.comprobaciones.forEach(c => {
       const li = document.createElement("li");
       li.innerHTML = '<span class="marca" aria-hidden="true">○</span><span>' + UI.md(c.texto) + "</span>";
+      // repaso: "html-09" → mientras falle, enlace a la lección donde se aprendió (en otra pestaña: el código no se pierde)
+      const repaso = c.repaso && CURSO.buscar(c.repaso);
+      if (repaso) {
+        const a = document.createElement("a");
+        a.className = "repaso";
+        a.href = "leccion.html?id=" + repaso.id;
+        a.target = "_blank";
+        a.textContent = "📚 Repasa «" + repaso.titulo + "»";
+        li.lastChild.appendChild(a);
+      }
       lista.appendChild(li);
     });
     // Comprobación que añade el motor a todos los retos: código bien escrito (js/escritura.js)
@@ -127,10 +145,11 @@
       cssBase: paso.cssBase,
       dispositivos: paso.dispositivos,
       vistaPrevia: paso.vistaPrevia,
+      proyecto: paso.proyecto,
       inicial: paso.inicial,
-      codigo: PROGRESO.borrador(leccionId) || undefined,
+      codigo: PROGRESO.borrador(claveBorrador) || undefined,
       alCambiar: codigo => {
-        PROGRESO.guardarBorrador(leccionId, codigo);
+        PROGRESO.guardarBorrador(claveBorrador, codigo);
         revisar(true);
       }
     });
@@ -138,7 +157,7 @@
     let ultimos = [];
     async function revisar(automatico) {
       const codigo = editor.obtener();
-      const resultados = await evaluar(EDITOR.conBase(codigo, paso.cssBase), paso.comprobaciones);
+      const resultados = await evaluar(EDITOR.conBase(codigo, paso.cssBase, paso.proyecto), paso.comprobaciones);
       if (!resultados) return;
       const escritura = ESCRITURA.revisar(codigo);
       resultados.push(!escritura);

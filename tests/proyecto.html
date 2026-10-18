@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motor de proyecto · &lt;CSS-HTML&gt;</title>
+  <link rel="stylesheet" href="../css/tema.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <style>
+    main { width: min(1000px, 100%); margin: 0 auto; padding: 24px 16px; }
+    .resumen { font-size: 1.3rem; font-weight: 900; margin: 12px 0 20px; }
+    table { width: 100%; border-collapse: collapse; background: var(--superficie); }
+    th, td { padding: 6px 10px; border-bottom: 1px solid var(--borde); text-align: left; font-size: 0.95rem; }
+    .ok { color: var(--exito); font-weight: 900; }
+    .mal { color: var(--error); font-weight: 900; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>🧪 Motor de los pasos de proyecto</h1>
+    <p>Las versiones oficiales de «Huellas» deben aprobar cada tipo de comprobación (estructura, estilo calculado,
+      anchos y comportamiento con el reloj fijo) y las variantes rotas deben suspender justo la que toca.</p>
+    <div class="resumen" data-resumen>Comprobando…</div>
+    <table>
+      <thead><tr><th>Versión</th><th>Comprobación</th><th>Esperado</th><th>Obtenido</th></tr></thead>
+      <tbody data-filas></tbody>
+    </table>
+  </main>
+  <script src="../js/curso.js"></script>
+  <script src="../js/progreso.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/editor.js"></script>
+  <script src="../js/escritura.js"></script>
+  <script src="../js/retos.js"></script>
+  <script src="../js/pruebas.js"></script>
+  <script src="../lecciones/huellas/versiones.js"></script>
+  <script>
+    (async function () {
+      const PROYECTO = { raiz: "recursos/huellas/web/", html: "index.html", css: "estilos.css", js: "script.js" };
+      window.__csshtmlDatos = HUELLAS["mundo-4"].datos;   // fetch("datos/opiniones.json") sin internet
+
+      // Arriba de cada .servicio, para saber en cuántas columnas van
+      const alturas = d => [...d.querySelectorAll(".servicio")].slice(0, 3).map(s => Math.round(s.getBoundingClientRect().top));
+
+      const C = {
+        estructura: {
+          texto: "El menú tiene 5 enlaces y cada uno lleva a una sección que existe",
+          prueba: doc => {
+            const a = [...doc.querySelectorAll("nav a[href^='#']")];
+            return a.length >= 5 && a.every(x => doc.getElementById(x.getAttribute("href").slice(1)));
+          }
+        },
+        imagenes: {
+          texto: "Las imágenes de img/ cargan",
+          prueba: async doc => {
+            const img = doc.querySelector("img[src^='img/']");
+            return !!img && await PRUEBA.esperarA(() => img.complete && img.naturalWidth > 0, 1800);
+          }
+        },
+        estilo: {
+          texto: "La cabecera se queda fija arriba (position: sticky)",
+          prueba: (doc, win) => win.getComputedStyle(doc.querySelector("header")).position === "sticky"
+        },
+        tresColumnas: {
+          texto: "A 1200 px, los servicios van en tres columnas",
+          prueba: async doc => {
+            const v = await PRUEBA.clonar(doc, { ancho: 1200 });
+            const t = alturas(v.doc);
+            return t.length === 3 && t[0] === t[1] && t[1] === t[2];
+          }
+        },
+        movil: {
+          texto: "A 375 px no hay scroll horizontal y los servicios van en una columna",
+          prueba: async doc => {
+            const v = await PRUEBA.clonar(doc, { ancho: 375 });
+            const t = alturas(v.doc);
+            return v.doc.documentElement.scrollWidth <= 375 && t.length === 3 && t[0] < t[1] && t[1] < t[2];
+          }
+        },
+        citas: {
+          texto: "Con hoy parado en el 20/10/2026, una cita para el 19 no se crea y una para el 21 sí",
+          prueba: async doc => {
+            const v = await PRUEBA.recargar(doc, { hoy: "2026-10-20T10:00:00", borrarDatos: true });
+            const d = v.doc;
+            const pedir = fecha => {
+              PRUEBA.escribir(d.querySelector("[name=mascota]"), "perro");
+              PRUEBA.escribir(d.querySelector("[name=fecha]"), fecha);
+              PRUEBA.escribir(d.querySelector("[name=hora]"), "10:00");
+              PRUEBA.escribir(d.querySelector("[name=nombre]"), "Ana");
+              PRUEBA.escribir(d.querySelector("[name=telefono]"), "600111222");
+              PRUEBA.escribir(d.querySelector("[name=email]"), "ana@correo.es");
+              d.querySelector("[name=privacidad]").checked = true;
+              d.querySelector("#form-cita").requestSubmit();
+              return d.querySelectorAll("#lista-citas li").length;
+            };
+            return pedir("2026-10-19") === 0 && pedir("2026-10-21") === 1;
+          }
+        },
+        opiniones: {
+          texto: "Las opiniones llegan con fetch desde datos/opiniones.json",
+          // El HTML trae las 3 opiniones escritas de reserva: se cambia una en el JSON para ver que llega del fetch
+          prueba: async doc => {
+            const datos = window.__csshtmlDatos;
+            const opiniones = datos["opiniones.json"].map((o, i) => i ? o : Object.assign({}, o, { texto: "Opinión de prueba" }));
+            window.__csshtmlDatos = { "opiniones.json": opiniones };
+            try {
+              const v = await PRUEBA.recargar(doc);
+              return await PRUEBA.esperarA(() => v.doc.querySelector("#lista-opiniones").textContent.includes("Opinión de prueba"), 1500);
+            } finally {
+              window.__csshtmlDatos = datos;
+            }
+          }
+        }
+      };
+
+      const v = n => Object.assign({}, HUELLAS[n]);
+      const casos = [
+        { nombre: "Mundo 1 oficial", codigo: v("mundo-1"), esperado: { estructura: true, imagenes: true } },
+        { nombre: "Mundo 1 · una sección sin su id", codigo: Object.assign(v("mundo-1"), { html: HUELLAS["mundo-1"].html.replace('id="equipo"', 'id="nuestro-equipo"') }), esperado: { estructura: false, imagenes: true } },
+        { nombre: "Mundo 2 oficial", codigo: v("mundo-2"), esperado: { estilo: true, tresColumnas: true } },
+        { nombre: "Mundo 2 · sin enlazar estilos.css", codigo: Object.assign(v("mundo-2"), { html: HUELLAS["mundo-2"].html.replace(/<link[^>]*estilos\.css[^>]*>/, "") }), esperado: { estilo: false, tresColumnas: false } },
+        { nombre: "Mundo 3 oficial", codigo: v("mundo-3"), esperado: { movil: true, tresColumnas: true } },
+        { nombre: "Mundo 3 · algo más ancho que el móvil", codigo: Object.assign(v("mundo-3"), { css: HUELLAS["mundo-3"].css + "\nbody { min-width: 900px; }\n" }), esperado: { movil: false, tresColumnas: true } },
+        { nombre: "Mundo 4 oficial", codigo: v("mundo-4"), esperado: { citas: true, opiniones: true, estructura: true } },
+        { nombre: "Mundo 4 · deja pedir citas en días pasados", codigo: Object.assign(v("mundo-4"), { js: HUELLAS["mundo-4"].js.replace('campoFecha.value >= hoy()', "true") }), esperado: { citas: false, opiniones: true } },
+        { nombre: "Mundo 4 · sin enlazar script.js", codigo: Object.assign(v("mundo-4"), { html: HUELLAS["mundo-4"].html.replace(/<script src="script\.js"><\/script>/, "") }), esperado: { citas: false, opiniones: false } }
+      ];
+
+      const filas = document.querySelector("[data-filas]");
+      let bien = 0, total = 0;
+      for (const caso of casos) {
+        const claves = Object.keys(caso.esperado);
+        const res = await RETOS.evaluar(EDITOR.conBase(caso.codigo, "", PROYECTO), claves.map(k => C[k]), PRUEBA.crearMarco(800, 600));
+        // Las versiones oficiales también tienen que estar bien escritas (la comprobación que añade el motor)
+        if (!/·/.test(caso.nombre)) {
+          claves.push("escritura");
+          const e = ESCRITURA.revisar(caso.codigo);
+          res.push(!e);
+          C.escritura = { texto: "Bien escrito" + (e ? ": " + e.mensaje : "") };
+          caso.esperado.escritura = true;
+        }
+        claves.forEach((k, i) => {
+          total++;
+          const ok = res[i] === caso.esperado[k];
+          if (ok) bien++;
+          const tr = document.createElement("tr");
+          tr.innerHTML = "<td>" + caso.nombre + "</td><td>" + UI.escapar(C[k].texto) + "</td><td>" + (caso.esperado[k] ? "aprueba" : "suspende") +
+            '</td><td class="' + (ok ? "ok" : "mal") + '">' + (res[i] ? "aprueba" : "suspende") + (ok ? " ✓" : " ✗") + "</td>";
+          filas.appendChild(tr);
+        });
+      }
+      document.querySelector("[data-resumen]").textContent = (bien === total ? "✅ " : "❌ ") + bien + " de " + total + " resultados como se esperaba";
+    })();
+  </script>
+</body>
+</html>

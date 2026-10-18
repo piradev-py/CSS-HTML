@@ -13,6 +13,16 @@ node tests/navegador/cdp.mjs esc-motor.mjs
 # Pruebas del motor del Mundo JavaScript (consola, errores, localStorage, fetch, acciones)
 node tests/navegador/cdp.mjs esc-motor-js.mjs
 
+# Motor de los pasos de proyecto: las versiones oficiales de «Huellas» aprueban y las variantes rotas suspenden
+# (estructura, estilo calculado, anchos, comportamiento con el reloj fijo; tests/proyecto.html)
+node tests/navegador/cdp.mjs esc-proyecto.mjs
+
+# Interfaz del paso proyecto con una lección de demostración (tests/demo/demo-proyecto.js)
+node tests/navegador/cdp.mjs esc-proyecto-ui.mjs
+
+# Capturas de la lección html-13 con la tarjeta de vista previa
+node tests/navegador/cdp.mjs esc-fotos-cabeza.mjs
+
 # Capturas de varios pasos del Mundo JavaScript (consola, localStorage, proyecto final)
 node tests/navegador/cdp.mjs esc-fotos-js.mjs
 

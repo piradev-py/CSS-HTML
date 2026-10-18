@@ -5,6 +5,8 @@
    ============================================================ */
 (function () {
   const NOMBRES = { html: "HTML", css: "CSS", js: "JS" };
+  // Carpeta raíz del curso (js/..): las rutas de los proyectos (proyecto.raiz) se resuelven desde aquí, abra quien abra
+  const RAIZ_CURSO = new URL("../", document.currentScript.src).href;
   const ICONOS = { html: "🏗️", css: "🎨", js: "⚡" };
 
   /*
@@ -306,11 +308,27 @@
 
   /** Construye el documento completo a partir del código del alumno. */
   function construirDocumento(codigo) {
-    const html = codigo.html || "";
-    const css = codigo.css ? "<style>\n" + codigo.css + "\n</style>" : "";
-    const js = codigo.js ? MARCA_ALUMNO + "\n" + protegerBucles(codigo.js) + "\n<\/script>" : "";
+    let html = codigo.html || "";
+    let css = codigo.css ? "<style>\n" + codigo.css + "\n</style>" : "";
+    let js = codigo.js ? MARCA_ALUMNO + "\n" + protegerBucles(codigo.js) + "\n<\/script>" : "";
+    let base = "";
+    // Proyecto de varios archivos (paso.proyecto = { raiz, css: "estilos.css", js: "script.js" }): como en una web de
+    // verdad, el CSS y el JS solo se aplican si el HTML los enlaza, y las rutas (img/…) salen de la carpeta raiz
+    if (codigo.proyecto) {
+      const p = codigo.proyecto;
+      const literal = n => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const etiquetaCSS = new RegExp("<link\\b[^>]*href\\s*=\\s*[\"']?" + literal(p.css) + "[\"']?[^>]*>", "i");
+      const etiquetaJS = new RegExp("<script\\b[^>]*src\\s*=\\s*[\"']?" + literal(p.js) + "[\"']?[^>]*>\\s*<\\/script>", "i");
+      const hoja = '<style data-archivo="' + p.css + '">\n' + (codigo.css || "") + "\n</style>";
+      html = html.replace(etiquetaCSS, () => hoja);
+      css = "";
+      // shortcut: el script siempre se ejecuta al final del <body> (como con defer), esté donde esté su <script src>
+      if (etiquetaJS.test(html)) html = html.replace(etiquetaJS, "");
+      else js = "";
+      base = '<base href="' + new URL(p.raiz, RAIZ_CURSO).href + '">';
+    }
     // Sin <meta charset>: srcdoc ya es texto Unicode, y así no "regalamos" esa etiqueta en los retos de estructura
-    const cabeza = SCRIPT_AYUDANTE + css;
+    const cabeza = base + SCRIPT_AYUDANTE + css;
     let doc;
 
     // Si el alumno escribió la página completa (<html>…), respetamos su estructura.
@@ -333,9 +351,11 @@
   }
 
   /** Añade un CSS decorativo oculto (cssBase) delante del CSS del alumno: se aplica pero no se ve en el editor. */
-  function conBase(codigo, cssBase) {
-    if (!cssBase) return codigo;
-    return Object.assign({}, codigo, { css: cssBase + "\n" + (codigo.css || "") });
+  function conBase(codigo, cssBase, proyecto) {
+    const salida = Object.assign({}, codigo);
+    if (cssBase) salida.css = cssBase + "\n" + (codigo.css || "");
+    if (proyecto) salida.proyecto = proyecto;
+    return salida;
   }
 
   /** Traduce errores típicos de JavaScript a algo que un novato entiende. */
@@ -528,7 +548,7 @@
           '<div class="pestanas" role="tablist">' +
             pestanas.map(p =>
               '<button role="tab" class="pestana pestana-' + p + '" data-pestana="' + p + '">' +
-              ICONOS[p] + " " + NOMBRES[p] + "</button>").join("") +
+              ICONOS[p] + " " + ((opciones.proyecto || {})[p] || NOMBRES[p]) + "</button>").join("") +
           "</div>" +
           '<button class="mini-boton" data-reiniciar title="Volver al código del principio">↺ Reiniciar</button>' +
         "</div>" +
@@ -590,7 +610,7 @@
     }
 
     function refrescar() {
-      resultado.mostrar(conBase(codigo, opciones.cssBase));
+      resultado.mostrar(conBase(codigo, opciones.cssBase, opciones.proyecto));
     }
 
     function programarRefresco() {

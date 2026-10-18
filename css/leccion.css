@@ -589,3 +589,9 @@ iframe.resultado {
 .vp-sin-imagen { display: grid; place-items: center; padding: 6px; text-align: center; }
 .vp-redes-texto { padding: 8px 10px; overflow-wrap: anywhere; }
 .vp-falta { color: #70757a; font-style: italic; font-weight: 400; }
+
+/* Pasos de proyecto: captura del encargo y enlace para repasar lo que falla */
+.captura-encargo { display: block; margin: 8px 0; border: 1px solid var(--borde); border-radius: 10px; overflow: hidden; }
+.captura-encargo img { display: block; width: 100%; height: auto; }
+.repaso { display: block; font-size: 0.85rem; font-weight: 700; }
+.comprobaciones li.ok .repaso { display: none; }

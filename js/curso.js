@@ -124,6 +124,8 @@
     VERSION,
     MUNDOS,
     lecciones,
+    // Versiones oficiales de «Huellas» (las genera herramientas/huellas-versiones.mjs); las cargan las lecciones con huellas: true
+    RUTA_HUELLAS: "lecciones/huellas/versiones.js",
     registrar(leccion) {
       lecciones[leccion.id] = leccion;
       // Archivos falsos para fetch("datos/…") en el Mundo JavaScript (ver js/editor.js)

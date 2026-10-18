@@ -128,18 +128,32 @@
    * Mundo JavaScript: vuelve a cargar el código ORIGINAL de la página (como pulsar F5) en una copia oculta.
    * Conserva el localStorage de práctica, salvo con { borrarDatos: true }. Devuelve { doc, win }.
    * { sinDatos: ["chistes.json"] }: en esa copia, fetch("datos/chistes.json") da 404 (para probar los errores).
+   * { hoy: "2026-10-20T10:00" }: en esa copia el reloj está parado en ese momento (new Date() y Date.now()),
+   * para que «la fecha no puede ser pasada» se compruebe igual cualquier día.
    * Útil para que cada comprobación empiece de cero o para ver si algo "se recuerda" al recargar.
    */
   async function recargar(doc, opciones = {}) {
     const viejo = doc.defaultView && doc.defaultView.frameElement;
-    const fuente = viejo && viejo.__fuente;
+    let fuente = viejo && viejo.__fuente;
     if (!fuente) throw new Error("PRUEBA.recargar: no sé qué código cargar");
+    if (opciones.hoy) fuente = fuente.replace(/<head[^>]*>/i, m => m + "<script>(" + relojFijo + ")(" + JSON.stringify(opciones.hoy) + ");<\/script>");
     const marco = crearMarco(opciones.ancho || viejo.clientWidth, opciones.alto || viejo.clientHeight);
     copias.push(marco);
     marco.__almacen = opciones.borrarDatos ? {} : viejo.__almacen || {};
     marco.__almacenSesion = {};
     marco.__sinDatos = opciones.sinDatos || [];
     return cargarEn(marco, fuente, { conservarDatos: true, movimiento: opciones.movimiento });
+  }
+
+  /** Se inyecta como texto en la copia: sin argumentos, Date da siempre el mismo momento. */
+  function relojFijo(momento) {
+    const fijo = new Date(momento).getTime();
+    const Original = Date;
+    class Fecha extends Original {
+      constructor(...args) { super(...(args.length ? args : [fijo])); }
+      static now() { return fijo; }
+    }
+    window.Date = Fecha;
   }
 
   /**

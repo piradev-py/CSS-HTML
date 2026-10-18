@@ -27,15 +27,23 @@
   if (!info.listo) return aviso("🚧", "Próximamente", "El profesor todavía está preparando «" + UI.escapar(info.titulo) + "». ¡Vuelve pronto!");
   if (!PROGRESO.estaDesbloqueada(id)) return aviso("🔒", "Lección bloqueada", "Completa antes la lección anterior para desbloquear esta.");
 
-  const script = document.createElement("script");
-  script.src = CURSO.ruta(id) + "?v=" + CURSO.VERSION;  // ?v=: tras publicar, nada de lecciones viejas en caché
-  script.onload = () => {
-    const leccion = CURSO.lecciones[id];
-    if (!leccion) return aviso("😵", "Algo salió mal", "El archivo de la lección no se registró correctamente.");
-    iniciar(leccion);
-  };
-  script.onerror = () => aviso("😵", "No pude cargar la lección", "No encuentro el archivo <code>" + UI.escapar(CURSO.ruta(id)) + "</code>.");
-  document.body.appendChild(script);
+  function cargarScript(ruta, alCargar) {
+    const script = document.createElement("script");
+    script.src = ruta + "?v=" + CURSO.VERSION;  // ?v=: tras publicar, nada de lecciones viejas en caché
+    script.onload = alCargar;
+    script.onerror = () => aviso("😵", "No pude cargar la lección", "No encuentro el archivo <code>" + UI.escapar(ruta) + "</code>.");
+    document.body.appendChild(script);
+  }
+  function cargarLeccion() {
+    cargarScript(CURSO.ruta(id), () => {
+      const leccion = CURSO.lecciones[id];
+      if (!leccion) return aviso("😵", "Algo salió mal", "El archivo de la lección no se registró correctamente.");
+      iniciar(leccion);
+    });
+  }
+  // Las lecciones de proyecto parten de las versiones oficiales de «Huellas» (HUELLAS, ver herramientas/huellas-versiones.mjs)
+  if (info.huellas) cargarScript(CURSO.RUTA_HUELLAS, cargarLeccion);
+  else cargarLeccion();
 
   function iniciar(leccion) {
     const mundo = info.mundo;
@@ -46,6 +54,8 @@
     let maximo = yaCompletada ? leccion.pasos.length - 1 : 0;
     const quizResuelto = {};
     const ejercicioResuelto = {};
+    const proyectoResuelto = {};
+    let estrellasProyecto = 3;   // la lección de proyecto se lleva las estrellas de su peor paso
 
     document.title = leccion.titulo + " · <CSS-HTML>";
     document.body.dataset.mundo = mundo.clave;
@@ -87,7 +97,7 @@
 
     COLUMNAS.activar(espacio);
 
-    const ICONO_PASO = { explicacion: "📖", pruebalo: "✍️", ejercicio: "🧠", controles: "🎛️", quiz: "❓", reto: "🏆" };
+    const ICONO_PASO = { explicacion: "📖", pruebalo: "✍️", ejercicio: "🧠", controles: "🎛️", quiz: "❓", reto: "🏆", proyecto: "📋" };
 
     leccion.pasos.forEach((p, i) => {
       const b = document.createElement("button");
@@ -103,6 +113,7 @@
       const p = leccion.pasos[actual];
       if (p.tipo === "quiz") return !!quizResuelto[actual];
       if (p.tipo === "ejercicio") return yaCompletada || !!ejercicioResuelto[actual];
+      if (p.tipo === "proyecto") return yaCompletada || !!proyectoResuelto[actual];
       return true;
     }
 
@@ -272,6 +283,29 @@
           destinos,
           mascota,
           alSuperar: ({ estrellas }) => victoria(leccion, estrellas)
+        });
+        zona.querySelector(".reto-enunciado").after(mascota);
+      },
+
+      // Un paso de la web del proyecto: como un reto, pero el código se comparte entre todos los pasos de la lección
+      proyecto(paso, i) {
+        const ultimo = i === leccion.pasos.length - 1;
+        const mascota = MASCOTA.crear(ultimo
+          ? "¡Último encargo! Cuando todo esté en verde, la entrega estará lista. 🚀"
+          : "Cumple el encargo: la lista se irá marcando en verde mientras escribes.");
+        RETOS.crear(zona, paso, {
+          leccionId: id,
+          claveBorrador: id + "#proyecto",
+          etiqueta: "📋 Encargo " + (leccion.pasos.slice(0, i + 1).filter(p => p.tipo === "proyecto").length),
+          pestanas: paso.pestanas || pestanas,
+          destinos,
+          mascota,
+          alSuperar: ({ estrellas }) => {
+            proyectoResuelto[i] = true;
+            estrellasProyecto = Math.min(estrellasProyecto, estrellas);
+            if (ultimo) victoria(leccion, estrellasProyecto);
+            else actualizarNavegacion();
+          }
         });
         zona.querySelector(".reto-enunciado").after(mascota);
       }

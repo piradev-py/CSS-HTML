@@ -61,6 +61,12 @@
   - [ ] La comprobación de la hora es solo 9:00–20:30: no mira sábados (10:00–14:00) ni domingos (cerrado).
         ¿Basta para el curso o se enseña `getDay()`?
   - [ ] Descarga en .zip también en el laboratorio de práctica libre (cuando exista)
+  - [~] **Fase 2 · motor del proyecto** (2026-10-18). Hecho: paso `proyecto` (varios archivos enlazados de verdad,
+        rutas desde la carpeta de Huellas, borrador compartido, captura del encargo, «📚 Repasa» en lo que falla),
+        versiones oficiales por mundo (`herramientas/huellas-versiones.mjs` → `lecciones/huellas/versiones.js`), reloj fijo
+        (`PRUEBA.recargar(doc, { hoy })`) y batería `esc-proyecto` (23 de 23) + `esc-proyecto-ui`.
+        Falta: el **glosario** (panel + términos declarados en cada lección). `privacidad.html` va como material hecho
+        (en la vista previa su enlace abre la página de prueba).
   - Los **proyectos finales de cada mundo** y parte de los ejercicios de cada lección van construyendo esa misma web:
     Mundo HTML → su estructura y contenido; Mundo CSS → su aspecto; HTML + CSS → maquetación completa y responsive;
     JavaScript → interactividad (menú, formulario, carrito o reservas…).

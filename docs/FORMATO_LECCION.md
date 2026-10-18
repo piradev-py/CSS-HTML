@@ -254,6 +254,26 @@ Reglas de las comprobaciones:
 - La `solucion` debe pasar **todas** las comprobaciones y el `inicial` debe fallar **al menos una**
   (lo verifica `tests/verificar-lecciones.html`).
 
+### `proyecto` — un encargo de la web de «Huellas» (solo en las lecciones de proyecto)
+Funciona como un `reto` (lista de comprobaciones que se marcan en verde, pistas, solución), con estas diferencias:
+- Una lección de proyecto tiene **varios** pasos `proyecto`, **ningún** `reto`, y acaba con un `proyecto`.
+  Cada encargo superado abre el siguiente; el último completa la lección con las estrellas del **peor** encargo.
+- El código se **comparte** entre todos los encargos de la lección (un solo borrador): cada uno sigue donde lo dejó
+  el anterior. `inicial` solo se usa si no hay borrador y para «↺ Reiniciar»: pon ahí la versión oficial del paso anterior.
+- `proyecto: { raiz: "recursos/huellas/web/", html: "index.html", css: "estilos.css", js: "script.js" }`
+  (obligatorio): las pestañas llevan esos nombres y el resultado funciona como una web de verdad: **el CSS y el JS solo
+  se aplican si el HTML los enlaza** (`<link rel="stylesheet" href="estilos.css">`, `<script src="script.js"></script>`;
+  el script se ejecuta siempre al final del `<body>`) y las rutas relativas (`img/…`, `url(img/…)`) salen de `raiz`.
+  La hoja enlazada queda en `<style data-archivo="estilos.css">`, para comprobar que se enlazó.
+- `captura` (opcional): imagen de cómo debe quedar, bajo el enunciado (se abre en grande al pulsarla).
+- En cada comprobación, `repaso: "html-09"` (opcional) muestra mientras falla «📚 Repasa «…»» con un enlace a esa
+  lección (en otra pestaña). Hasta 12 comprobaciones por encargo.
+- La lección lleva `huellas: true` en `MUNDOS` (js/curso.js): así se carga antes `lecciones/huellas/versiones.js`, con
+  `HUELLAS["mundo-1"]` … `HUELLAS["mundo-4"]` = `{ html, css, js, privacidad, datos }`, la web oficial al final de cada
+  mundo. Se genera con `node herramientas/huellas-versiones.mjs` (sale del historial de git: commits apuntados en el script).
+- Comportamiento con fechas: `PRUEBA.recargar(doc, { hoy: "2026-10-20T10:00" })` para el reloj en ese momento.
+- Para `fetch("datos/opiniones.json")` sin internet, la lección declara `datos: HUELLAS["mundo-4"].datos`.
+
 ## 5. Pestañas del editor por mundo
 
 | Mundo | Pestañas por defecto |

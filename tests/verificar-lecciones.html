@@ -47,9 +47,14 @@
       document.body.appendChild(marco);
 
       function cargar(l) {
+        // Las lecciones de proyecto necesitan antes las versiones oficiales de «Huellas»
+        if (l.huellas && !window.HUELLAS) return cargarRuta("../" + CURSO.RUTA_HUELLAS).then(ok => ok && cargar(l));
+        return cargarRuta(CURSO.ruta(l.id, "../"));
+      }
+      function cargarRuta(ruta) {
         return new Promise(res => {
           const s = document.createElement("script");
-          s.src = CURSO.ruta(l.id, "../");
+          s.src = ruta;
           s.onload = () => res(true);
           s.onerror = () => res(false);
           document.body.appendChild(s);
@@ -63,20 +68,28 @@
         if (!lec.objetivo) errores.push("Falta objetivo");
         if (!Array.isArray(lec.pasos) || !lec.pasos.length) return errores.concat("No tiene pasos");
         const retos = lec.pasos.filter(p => p.tipo === "reto");
-        if (retos.length !== 1) errores.push("Debe tener exactamente 1 reto (tiene " + retos.length + ")");
-        if (lec.pasos[lec.pasos.length - 1].tipo !== "reto") errores.push("El último paso no es el reto");
-        const tipos = ["explicacion", "pruebalo", "ejercicio", "controles", "quiz", "reto"];
+        const proyectos = lec.pasos.filter(p => p.tipo === "proyecto");
+        // Una lección de proyecto acaba con su último encargo y no lleva reto
+        const final = proyectos.length ? "proyecto" : "reto";
+        if (proyectos.length && retos.length) errores.push("Una lección de proyecto no lleva reto (tiene " + retos.length + ")");
+        if (!proyectos.length && retos.length !== 1) errores.push("Debe tener exactamente 1 reto (tiene " + retos.length + ")");
+        if (lec.pasos[lec.pasos.length - 1].tipo !== final) errores.push("El último paso no es el " + final);
+        const tipos = ["explicacion", "pruebalo", "ejercicio", "controles", "quiz", "reto", "proyecto"];
         lec.pasos.forEach((p, i) => {
           if (!tipos.includes(p.tipo)) errores.push("Paso " + (i + 1) + ": tipo desconocido «" + p.tipo + "»");
           if (p.tipo === "quiz" && !(p.correcta >= 0 && p.correcta < (p.opciones || []).length)) errores.push("Paso " + (i + 1) + ": 'correcta' fuera de rango");
           if (p.tipo === "controles" && !(p.controles || []).length) errores.push("Paso " + (i + 1) + ": controles vacíos");
           if (p.tipo === "ejercicio" && (!p.enunciado || !p.solucion)) errores.push("Paso " + (i + 1) + ": ejercicio sin enunciado o sin solución");
         });
-        retos.forEach(r => {
+        retos.concat(proyectos).forEach(r => {
           const n = (r.comprobaciones || []).length;
-          if (n < 1 || n > 5) errores.push("El reto tiene " + n + " comprobaciones");
-          if (!(r.pistas || []).length) errores.push("El reto no tiene pistas");
-          if (!r.solucion) errores.push("El reto no tiene solución");
+          const maximo = r.tipo === "proyecto" ? 12 : 5;
+          if (n < 1 || n > maximo) errores.push("El " + r.tipo + " tiene " + n + " comprobaciones");
+          if (!(r.pistas || []).length) errores.push("El " + r.tipo + " no tiene pistas");
+          if (!r.solucion) errores.push("El " + r.tipo + " no tiene solución");
+          (r.comprobaciones || []).forEach(c => {
+            if (c.repaso && !CURSO.buscar(c.repaso)) errores.push("«" + c.texto + "»: repaso a una lección que no existe (" + c.repaso + ")");
+          });
         });
         return errores;
       }
@@ -86,21 +99,22 @@
         const cargado = await cargar(l);
         const lec = CURSO.lecciones[l.id];
         const errores = cargado ? revisarFormato(l, lec) : ["No se pudo cargar " + CURSO.ruta(l.id)];
-        let solOk = false, iniOk = false;
+        let solOk = true, iniOk = true;
         const detalles = errores.slice();
-        const reto = lec && lec.pasos && lec.pasos.find(p => p.tipo === "reto");
-        if (reto && reto.solucion) {
-          const rSol = await RETOS.evaluar(EDITOR.conBase(reto.solucion, reto.cssBase), reto.comprobaciones, marco);
-          solOk = rSol.every(Boolean);
+        const examenes = (lec && lec.pasos || []).filter(p => p.tipo === "reto" || p.tipo === "proyecto");
+        if (!examenes.length) solOk = iniOk = false;
+        for (const reto of examenes) {
+          if (!reto.solucion) { solOk = iniOk = false; continue; }
+          const rSol = await RETOS.evaluar(EDITOR.conBase(reto.solucion, reto.cssBase, reto.proyecto), reto.comprobaciones, marco);
+          if (!rSol.every(Boolean)) solOk = false;
           rSol.forEach((ok, i) => { if (!ok) detalles.push("La solución falla: «" + reto.comprobaciones[i].texto + "»"); });
           const erroresSol = marco.contentWindow.__errores || [];
           if (erroresSol.length) { solOk = false; detalles.push("La solución del reto tiene errores de JS: " + erroresSol.map(e => e.mensaje).join(" · ")); }
           // El motor añade a cada reto «Tu código está bien escrito»: la solución también debe cumplirlo
           const escSol = ESCRITURA.revisar(reto.solucion);
           if (escSol) { solOk = false; detalles.push("La solución del reto no está bien escrita: " + escSol.mensaje); }
-          const rIni = await RETOS.evaluar(EDITOR.conBase(reto.inicial || {}, reto.cssBase), reto.comprobaciones, marco);
-          iniOk = rIni.some(r => !r);
-          if (!iniOk) detalles.push("El código inicial ya pasa todas las comprobaciones");
+          const rIni = await RETOS.evaluar(EDITOR.conBase(reto.inicial || {}, reto.cssBase, reto.proyecto), reto.comprobaciones, marco);
+          if (!rIni.some(r => !r)) { iniOk = false; detalles.push("El código inicial ya pasa todas las comprobaciones"); }
         }
         // Ejercicios: la solución aprueba y el editor inicial (vacío) suspende
         let ejOk = true;
