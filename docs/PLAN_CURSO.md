@@ -309,6 +309,11 @@ completa de lista de tareas.
 - **Conceptos nuevos:** `document.createElement()`, `append()`, `remove()`, pintar un array de datos en la página.
 - **Reto:** pintar en un `<ul>` la lista de canciones de un array y añadir una canción nueva desde un campo de texto y un botón (sin formulario: llega en js-11).
 
+### js-15 · Filtrar listas · 45 XP ✅ (se ve como la lección 11: los ids no cambian)
+- **Objetivo:** quedarse con algunos elementos de un array y enseñar en la página la lista filtrada.
+- **Conceptos nuevos:** `filter()` con una función flecha que devuelve la condición, el array original no cambia, `includes()`, quitar un dato con `filter(x => x !== dato)` (variable con `let`), una función `pintar(lista)` que vacía y repinta.
+- **Reto:** catálogo de mascotas en adopción con botones Todos / Perros / Gatos.
+
 ### js-11 · Validar formularios · 50 XP ✅
 - **Objetivo:** comprobar lo que escribe el usuario antes de enviarlo.
 - **Conceptos nuevos:** evento `submit`, el parámetro `evento`, `preventDefault()`, `.value` (repaso), `.trim()`, `.includes()`, el «no» `!`, mensajes de error accesibles.

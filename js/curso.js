@@ -101,6 +101,8 @@
         { id: "js-08", archivo: "js-08-arrays-y-bucles.js", titulo: "Arrays y bucles", listo: true },
         { id: "js-09", archivo: "js-09-objetos.js", titulo: "Objetos", listo: true },
         { id: "js-10", archivo: "js-10-crear-elementos.js", titulo: "Crear elementos desde JS", listo: true },
+        // Los ids no cambian nunca: las lecciones nuevas llevan el siguiente número libre aunque vayan en medio
+        { id: "js-15", archivo: "js-15-filtrar-listas.js", titulo: "Filtrar listas", listo: true },
         { id: "js-11", archivo: "js-11-validar-formularios.js", titulo: "Validar formularios", listo: true },
         { id: "js-12", archivo: "js-12-localstorage.js", titulo: "Guardar datos: localStorage", listo: true },
         { id: "js-13", archivo: "js-13-fetch.js", titulo: "Pedir datos con fetch", listo: true },
