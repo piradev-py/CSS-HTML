@@ -13,11 +13,11 @@ Estado: ✅ escrita · 🚧 pendiente
 
 | Mundo | Lecciones | XP base total |
 |---|---|---|
-| 1 · HTML 🏗️ | 12 | 415 |
-| 2 · CSS 🎨 | 14 | 535 |
+| 1 · HTML 🏗️ | 14 | 575 |
+| 2 · CSS 🎨 | 15 | 655 |
 | 3 · HTML + CSS 🧩 | 12 | 575 |
-| 4 · JavaScript ⚡ | 14 | 600 |
-| **Total** | **52** | **2125** |
+| 4 · JavaScript ⚡ | 16 | 685 |
+| **Total** | **57** | **2490** |
 
 ---
 
