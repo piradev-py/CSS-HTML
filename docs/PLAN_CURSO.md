@@ -15,9 +15,9 @@ Estado: ✅ escrita · 🚧 pendiente
 |---|---|---|
 | 1 · HTML 🏗️ | 14 | 575 |
 | 2 · CSS 🎨 | 15 | 655 |
-| 3 · HTML + CSS 🧩 | 12 | 575 |
+| 3 · HTML + CSS 🧩 | 11 | 595 |
 | 4 · JavaScript ⚡ | 16 | 685 |
-| **Total** | **57** | **2490** |
+| **Total** | **56** | **2510** |
 
 ---
 
@@ -173,7 +173,7 @@ y colocar elementos con `position`, Flexbox y Grid, organizando todo con variabl
 
 ### css-13 · Grid · 50 XP ✅
 - **Objetivo:** maquetar en filas y columnas a la vez con CSS Grid.
-- **Conceptos nuevos:** `display: grid`, `grid-template-columns`, unidad `fr`, `repeat()`, `gap`, `grid-column: span 2`.
+- **Conceptos nuevos:** `display: grid`, `grid-template-columns`, unidad `fr`, `repeat()`, `gap`, `grid-column: span 2` (y por líneas: `grid-column: 1 / 3`).
 - **Reto:** tablero de tres en raya de 3×3 y una galería donde la primera foto ocupa dos columnas.
 
 ### css-14 · Variables CSS · 40 XP ✅
@@ -210,7 +210,7 @@ formularios con estilo, usar pseudo-clases y pseudo-elementos, hacer webs respon
 
 ### hc-03 · Pseudo-elementos · 40 XP ✅
 - **Objetivo:** añadir decoración con CSS sin tocar el HTML.
-- **Conceptos nuevos:** pseudo-elemento, `::before`, `::after`, `content`, `::first-letter`, `::selection`.
+- **Conceptos nuevos:** pseudo-elemento, `::before`, `::after`, `content`, `::first-letter`, `::selection`, una capa con `::after` y `linear-gradient()`.
 - **Reto:** añadir un ✓ con `::before` a cada elemento de una lista de logros y una letra capital al primer párrafo.
 
 ### hc-04 · Barra de navegación · 50 XP ✅
@@ -248,15 +248,12 @@ formularios con estilo, usar pseudo-clases y pseudo-elementos, hacer webs respon
 - **Conceptos nuevos:** heredar fuentes en campos (`font: inherit`), estilos de `input` y `button`, `:focus` visible, `:invalid`/`:valid`, `accent-color`.
 - **Reto:** formulario de inscripción a una carrera de karts con campos redondeados, foco bien visible y borde rojo si un email es inválido.
 
-### hc-11 · Proyecto: landing page (I) · 60 XP ✅
-- **Objetivo:** maquetar la estructura y la cabecera de una landing page real.
-- **Conceptos nuevos:** planificar secciones, contenedor central reutilizable, sección *hero*, botón de llamada a la acción.
-- **Reto:** cabecera con navegación y *hero* a pantalla completa de una app ficticia para adoptar mascotas.
-
-### hc-12 · Proyecto: landing page (II) · 60 XP ✅
-- **Objetivo:** completar la landing con secciones de contenido y hacerla responsive.
-- **Conceptos nuevos:** sección de características en Grid, testimonios, pie de página, repaso responsive y de accesibilidad.
-- **Reto:** añadir características, testimonios y footer, y que todo se adapte a móvil.
+### hc-13 · Proyecto web: la maqueta de Huellas · 140 XP ✅
+- **Sustituye a hc-11 y hc-12** (la landing de adopción de mascotas), que salen del mapa; quien ya las hizo conserva su XP y sus insignias.
+- **Objetivo:** convertir la web de «Huellas» en una maqueta profesional: móvil, tableta y ordenador, ratón y teclado, movimiento suave.
+- Parte de la versión oficial del Mundo 2; en el HTML solo se añaden el botón «☰ Menú» y la clase `activo`.
+- **4 encargos:** móvil primero (la base es el móvil, el escritorio en `@media (min-width: 1100px)`, la portada que se funde) · tableta (dos columnas desde 768 px) · ratón, teclado y formulario (`:hover`, `:focus-visible`, `::after`, `transition`, `:user-invalid`) · movimiento (`@keyframes` y `prefers-reduced-motion`).
+- Se mide a 375, 768 y 1200 px por posición y estilo calculado: valen otros puntos de corte y Flexbox en vez de Grid. Soluciones: `HUELLAS["mundo-3"].pasos`.
 
 ---
 

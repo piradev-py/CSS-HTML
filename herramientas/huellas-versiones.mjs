@@ -25,18 +25,32 @@ const COMMITS = {
 
 // Encargos del Proyecto web de cada mundo: el archivo que escribe el alumno se corta justo antes de cada marca, y cada
 // trozo es la solución de un encargo (el último encargo es el archivo completo). HUELLAS[mundo].pasos = [html1, html2, …]
-// en el Mundo 1 y [css1, css2, …] en el Mundo 2 (allí el HTML es el oficial)
+// en el Mundo 1 y [css1, css2, …] en los mundos 2 y 3 (allí el HTML es el oficial).
+// En el Mundo 3 la hoja no crece en orden: cada encargo es la hoja completa sin las secciones («---------- N.») que
+// aún no tocan
 const CORTES = {
   "mundo-1": { archivo: "html", marcas: ["<main>", '<section id="servicios"', '<section id="horario"', '<section id="opiniones"'] },
-  "mundo-2": { archivo: "css", marcas: ["/* ---------- 2.", "#horario {", "/* ---------- 3."] }
+  "mundo-2": { archivo: "css", marcas: ["/* ---------- 2.", "#horario {", "/* ---------- 3."] },
+  "mundo-3": { archivo: "css", quitar: [[4, 6, 7], [6, 7], [7]] }
 };
 
 // En el Mundo 1 el alumno hace solo 3 servicios y 2 personas del equipo; el resto lo «añade el equipo de diseño»
-// en la versión oficial con la que empieza el Mundo 2. En el Mundo 2, el estilo de privacidad.html va hecho
+// en la versión oficial con la que empieza el Mundo 2. En los mundos 2 y 3, el estilo de privacidad.html va hecho
+const sinPrivacidad = css => css.replace(/\/\* Página de privacidad[\s\S]*?\.texto-legal h2 \{[^}]*\}\n\n/, "");
 const RECORTES = {
   "mundo-1": html => quedarse(quedarse(html, /\n *<article class="servicio">[\s\S]*?<\/article>/g, 3), /\n *<figure>[\s\S]*?<\/figure>/g, 2),
-  "mundo-2": css => css.replace(/\/\* Página de privacidad[\s\S]*?\.texto-legal h2 \{[^}]*\}\n\n/, "")
+  "mundo-2": sinPrivacidad,
+  "mundo-3": sinPrivacidad
 };
+
+// La hoja sin las secciones numeradas de la lista (cada una va de su comentario «---------- N.» al siguiente)
+function sinSecciones(css, numeros) {
+  return numeros.reduce((hoja, n) => {
+    const r = new RegExp("/\\* ---------- " + n + "\\.[\\s\\S]*?(?=/\\* ---------- |$)");
+    if (!r.test(hoja)) throw new Error("No encuentro la sección " + n + " en la versión oficial");
+    return hoja.replace(r, "");
+  }, css).replace(/\s+$/, "\n");
+}
 
 function quedarse(html, patron, cuantos) {
   let n = 0;
@@ -75,10 +89,11 @@ for (const [mundo, commit] of Object.entries(COMMITS)) {
     datos: opiniones ? { "opiniones.json": JSON.parse(opiniones) } : {}
   };
   if (CORTES[mundo]) {
-    const { archivo, marcas } = CORTES[mundo];
+    const { archivo, marcas, quitar } = CORTES[mundo];
     const delAlumno = (RECORTES[mundo] || (t => t))(versiones[mundo][archivo]);
     if (RECORTES[mundo] && delAlumno === versiones[mundo][archivo]) throw new Error(mundo + ": el recorte no cambió nada");
-    versiones[mundo].pasos = marcas.map(m => cortar(delAlumno, m, archivo)).concat(delAlumno);
+    versiones[mundo].pasos = (quitar ? quitar.map(q => sinSecciones(delAlumno, q)) : marcas.map(m => cortar(delAlumno, m, archivo)))
+      .concat(delAlumno);
   }
   console.log(mundo + " (" + commit + "): " + Object.entries(versiones[mundo])
     .map(([k, v]) => k + " " + (typeof v === "string" ? v.length : Object.keys(v).length)).join(", "));

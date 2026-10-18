@@ -118,11 +118,12 @@ Es **una lección de proyecto nueva al final del mundo** (tras css-14), en **4 p
 
 **Entrega:** la misma web convertida en una maqueta de nivel profesional, como las dos referencias: se ve bien en móvil, tableta y escritorio, responde al ratón y al teclado, y tiene movimiento suave. **Sustituye al proyecto actual de hc-11 y hc-12** (la web de adopción de mascotas).
 
-Es **la lección de proyecto del final del mundo** (en lugar de hc-11 y hc-12), en **3 pasos**:
+Es **la lección de proyecto del final del mundo** (`hc-13`, en lugar de hc-11 y hc-12), en **4 pasos** (eran 3; el responsive se partió en móvil y tableta para que el salto no fuera tan grande, 18 de octubre de 2026):
 
-1. **Detalles e interacción** (repasa hc-01 a hc-04): tarjetas pulidas, estados `:hover` y `:focus-visible` en botones, enlaces y tarjetas, adornos con `::before` y `::after` (la línea bajo el antetítulo, el subrayado del menú activo), barra de navegación completa.
-2. **Responsive, móvil primero** (repasa hc-05 y hc-06): una columna en móvil, dos en tableta y tres o más en escritorio; la portada apila texto, imagen y tarjeta de cita; el menú se compacta en móvil (el botón que lo abre funcionará en el Mundo 4).
-3. **Movimiento y formulario** (repasa hc-07 a hc-10): las tarjetas suben un poco al pasar el ratón (`transform` + `transition`), la portada entra con una animación (`@keyframes`), y el formulario de cita tiene estilo con estados de foco, error y éxito.
+1. **Móvil primero** (repasa hc-05, hc-06 y hc-03): la base pasa a ser el móvil (una columna, el menú plegado tras el botón «☰ Menú», que funcionará en el Mundo 4) y el bloque de colocación del Mundo 2 va a `@media (min-width: 1100px)`, con la portada que se funde con el fondo (`::after` + `linear-gradient`).
+2. **Tableta** (repasa hc-06 y css-13): dos columnas desde 768 px, con la tarjeta de cita a lo ancho.
+3. **Ratón, teclado y formulario** (repasa hc-02 a hc-04, hc-07, hc-08 y hc-10): `:hover` y `:focus-visible` en enlaces, botones y tarjetas, los adornos con `::after` (la línea bajo el antetítulo, el subrayado del menú activo), `transition`, y los campos con foco, error y éxito.
+4. **Movimiento** (repasa hc-09): la portada entra con `@keyframes` y `prefers-reduced-motion` la calma.
 
 **Mínimos que se comprueban** (la página se mide a 375, 768 y 1200 px):
 
@@ -203,7 +204,7 @@ El profesor cruzó el temario con el proyecto (informe en `docs/revisiones/2026-
 | 3 · HTML + CSS | 2 | 1 | Menú móvil con la clase `abierto` en hc-06; campos con error (`:user-invalid`) en hc-10 |
 | 4 · JavaScript | 8 | 7 | Nueva **«Filtrar listas»** (`filter`, `includes`); nueva **«Fechas y horas»** antes de js-11; js-11 ampliada (casillas, radio marcado, teléfono solo cifras, un mensaje por campo); de js-14 se rescatan «quitar un elemento» (a js-10) y el array de objetos guardado (a js-12); `setAttribute` y `aria-expanded` en js-04 |
 
-**Pasos de las lecciones de proyecto:** Mundo 1 en 5, Mundo 2 en 4, Mundo 3 en 3 y Mundo 4 en 6, para que ningún salto sea demasiado grande. La versión oficial del Mundo 2 deja agrupada la colocación de escritorio, así el paso «móvil primero» del Mundo 3 consiste en envolver ese bloque en una `@media`.
+**Pasos de las lecciones de proyecto:** Mundo 1 en 5, Mundo 2 en 4, Mundo 3 en 4 y Mundo 4 en 6, para que ningún salto sea demasiado grande. La versión oficial del Mundo 2 deja agrupada la colocación de escritorio, así el paso «móvil primero» del Mundo 3 consiste en envolver ese bloque en una `@media`.
 
 **Tres pautas para que la longitud no pese:**
 

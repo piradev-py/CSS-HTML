@@ -49,7 +49,7 @@ Elegidas el 18 de octubre de 2026, en `recursos/huellas/web/img/`; autores y lic
 (Pexels, StockSnap y Rawpixel).
 
 - **Portada** (`portada.jpg`, 1200 px): perro y gato tumbados al sol, **rectangular** con las esquinas de la guía (20px).
-  En el Mundo 3 (`::after` + `linear-gradient`, hc-01 y hc-03) la foto se ensancha y su lado izquierdo **se funde
+  En el Mundo 3 (`::after` + `linear-gradient`, hc-03) la foto se ensancha y su lado izquierdo **se funde
   con el color de fondo** de la portada.
 - **Servicios** (`servicio-*.jpg`, 640×427): cada tarjeta lleva **foto arriba** e icono en su círculo.
 - **Equipo** (`equipo-1…4.jpg`, 480×600, para mostrar a 240×300): cuatro veterinarios mirando a cámara, con el mismo

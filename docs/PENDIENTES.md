@@ -3,7 +3,7 @@
 ## Contenido
 - [x] Mundo HTML (html-01 … html-12)
 - [x] Mundo CSS (css-01 … css-14)
-- [x] Mundo HTML + CSS (hc-01 … hc-12)
+- [x] Mundo HTML + CSS (hc-01 … hc-10 y hc-13, el Proyecto web; hc-11 y hc-12 se quitaron en la fase 5)
 - [x] Mundo JavaScript (js-01 … js-14) — `localStorage` de práctica y `fetch("datos/…")` sin internet en el motor
 
 ## Página de inicio (index)
@@ -67,7 +67,9 @@
         (`PRUEBA.recargar(doc, { hoy })`) y batería `esc-proyecto` (23 de 23) + `esc-proyecto-ui`.
         Glosario: panel con buscador y «Copiar» (`js/glosario.js`) y términos del Mundo 1 (56).
         Términos del Mundo 2 (76, con `letter-spacing` añadido a css-04: la web de referencia lo usa).
-        Falta: los términos de los mundos 3 y 4 (cada uno antes de su lección de proyecto, fases 5–6).
+        Términos del Mundo 3 (38, hc-01 … hc-10), con `linear-gradient` (nuevo paso en hc-03) y `grid-column: 1 / 3`
+        (añadido a css-13): la web de referencia los usa y no se enseñaban.
+        Falta: los términos del Mundo 4 (antes de su lección de proyecto, fase 6).
         `privacidad.html` va como material hecho (en la vista previa su enlace abre la página de prueba).
   - [x] **Fase 3 · Proyecto web del Mundo 1** (`html-14`, 2026-10-18): 5 encargos desde el archivo vacío, con captura,
         textos para copiar, comprobaciones con «📚 Repasa» y glosario; aprueba la versión oficial y otra escrita sin clases
@@ -77,6 +79,10 @@
         versión oficial y otra escrita con otros selectores y valores (`alternativas`). La explicación cuenta que el equipo
         de diseño añadió los 3 servicios y las 2 personas que faltaban. Test: `esc-proyecto-m2`.
         Ojo: la vista previa (unos 450 px) aprieta la maqueta de escritorio; la captura de la ficha muestra cómo queda.
+  - [x] **Fase 5 · Proyecto web del Mundo 3** (`hc-13`, 2026-10-18): sustituye a hc-11 y hc-12 (salen del mapa y se
+        borran; quien las hizo conserva XP e insignias). 4 encargos sobre la hoja oficial del Mundo 2 (móvil primero ·
+        tableta · ratón, teclado y formulario · movimiento), medidos a 375, 768 y 1200 px; aprueba la versión oficial y
+        otra con otros puntos de corte y Flexbox en vez de Grid. Test: `esc-proyecto-m3` (con 4 variantes rotas).
   - Los **proyectos finales de cada mundo** y parte de los ejercicios de cada lección van construyendo esa misma web:
     Mundo HTML → su estructura y contenido; Mundo CSS → su aspecto; HTML + CSS → maquetación completa y responsive;
     JavaScript → interactividad (menú, formulario, carrito o reservas…).

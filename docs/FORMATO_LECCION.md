@@ -266,11 +266,12 @@ Funciona como un `reto` (lista de comprobaciones que se marcan en verde, pistas,
   el script se ejecuta siempre al final del `<body>`) y las rutas relativas (`img/…`, `url(img/…)`) salen de `raiz`.
   La hoja enlazada queda en `<style data-archivo="estilos.css">`, para comprobar que se enlazó.
 - `captura` (opcional): imagen de cómo debe quedar, bajo el enunciado (se abre en grande al pulsarla).
-  Se generan con `MUNDO=1` (o `2`) `node tests/navegador/cdp.mjs esc-capturas-huellas.mjs` (en `recursos/huellas/capturas/`).
+  Se generan con `MUNDO=1` (o `2`, `3`) `node tests/navegador/cdp.mjs esc-capturas-huellas.mjs` (en `recursos/huellas/capturas/`).
 - `textos` (opcional): los textos del cliente, en texto plano, en una caja «📄 Textos del encargo» con «📋 Copiar».
   Son el contenido; las etiquetas las pone el alumno.
 - `alternativas` (opcional): `[{ html, css, js }]`, la misma web escrita de otra forma (otras etiquetas de agrupación,
-  otras clases; en el Mundo 2, otros selectores y otras formas de escribir los valores). El verificador exige que **también aprueben**: así se comprueba que se mira el resultado, no el código.
+  otras clases; en el Mundo 2, otros selectores y otras formas de escribir los valores; en el Mundo 3, otros puntos de corte y Flexbox en
+  vez de Grid). El verificador exige que **también aprueben**: así se comprueba que se mira el resultado, no el código.
 - En cada comprobación, `repaso: "html-09"` (opcional) muestra mientras falla «📚 Repasa «…»» con un enlace a esa
   lección (en otra pestaña). Hasta 12 comprobaciones por encargo.
 - La lección lleva `huellas: true` en `MUNDOS` (js/curso.js): así se carga antes `lecciones/huellas/versiones.js`, con
@@ -294,7 +295,7 @@ glosario: [
 - `tema` agrupa dentro del mundo (usa los mismos nombres en todo el mundo). `para`: una línea, en lenguaje de novato.
 - `ejemplo`: mínimo y copiable, bien escrito (lo comprueba el verificador). Se resalta como HTML si empieza por `<`,
   como JS en el Mundo JavaScript y si no como CSS; `lenguaje: "html"` lo fuerza.
-- Hoy tienen glosario las lecciones de los mundos 1 y 2; los demás lo reciben antes de su lección de proyecto.
+- Hoy tienen glosario las lecciones de los mundos 1, 2 y 3; el Mundo 4 lo reciben antes de su lección de proyecto.
 - Para `fetch("datos/opiniones.json")` sin internet, la lección declara `datos: HUELLAS["mundo-4"].datos`.
 
 ## 5. Pestañas del editor por mundo

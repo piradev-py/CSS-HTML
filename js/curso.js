@@ -80,8 +80,7 @@
         { id: "hc-08", archivo: "hc-08-transiciones.js", titulo: "Transiciones", listo: true },
         { id: "hc-09", archivo: "hc-09-animaciones.js", titulo: "Animaciones", listo: true },
         { id: "hc-10", archivo: "hc-10-formularios-estilo.js", titulo: "Formularios con estilo", listo: true },
-        { id: "hc-11", archivo: "hc-11-landing-1.js", titulo: "Proyecto: landing page (I)", listo: true },
-        { id: "hc-12", archivo: "hc-12-landing-2.js", titulo: "Proyecto: landing page (II)", listo: true }
+        { id: "hc-13", archivo: "hc-13-proyecto-web.js", titulo: "Proyecto web: la maqueta de Huellas", listo: true, huellas: true }
       ]
     },
     {
