@@ -1,0 +1,14 @@
+/* ============================================================
+   <CSS-HTML> · Página final «Mi clínica» (mi-clinica.html)
+   ============================================================ */
+.mi-clinica { max-width: 1240px; margin: 0 auto; padding: 24px 16px 48px; display: grid; gap: 24px; }
+.mi-clinica h1 { margin: 0 0 8px; font-size: 2rem; }
+.mi-clinica p { max-width: 70ch; }
+.mi-clinica .mascota { margin-bottom: 12px; }
+.mi-clinica .acciones { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
+.mi-clinica .seguir { margin-top: 8px; }
+.mi-clinica .seguir summary { cursor: pointer; font-weight: 800; }
+.mi-clinica .seguir li { margin: 4px 0; }
+.mi-clinica-web .texto-suave { margin: 0 0 8px; }
+/* La web a casi toda la pantalla: así se ve como en el ordenador */
+.marco-clinica { display: block; width: 100%; height: 80vh; border: 2px solid var(--borde); border-radius: 16px; background: #fff; }

@@ -57,6 +57,6 @@ export default async function (b) {
       b.log("  → encargo " + (i + 2) + " parte de lo anterior: " + await b.eval(enPagina(estado)));
     }
   }
-  b.log("Victoria: " + await b.eval("!!document.querySelector('.modal-victoria')") + " · completada: " + await b.eval("PROGRESO.estaCompletada('js-17')"));
+  b.log("Victoria: " + await b.eval("!!document.querySelector('.modal-victoria')") + " · lleva a: " + await b.eval("document.querySelector('[data-siguiente-leccion]')?.getAttribute('href')") + " · completada: " + await b.eval("PROGRESO.estaCompletada('js-17')"));
   await b.foto("js17-victoria");
 }

@@ -410,7 +410,9 @@
     });
 
     let botonSiguiente = "";
-    if (sig && sig.listo) botonSiguiente = '<a class="boton grande" data-siguiente-leccion href="leccion.html?id=' + sig.id + '">Siguiente lección →</a>';
+    // El último Proyecto web cierra el curso: lleva a la página final con la web terminada
+    if (leccion.id === "js-17") botonSiguiente = '<a class="boton grande" data-siguiente-leccion href="mi-clinica.html">🏥 Ver mi clínica →</a>';
+    else if (sig && sig.listo) botonSiguiente = '<a class="boton grande" data-siguiente-leccion href="leccion.html?id=' + sig.id + '">Siguiente lección →</a>';
     else if (sig) botonSiguiente = '<span class="texto-suave">🚧 La siguiente lección llegará pronto</span>';
 
     const m = CELEBRAR.modal(
