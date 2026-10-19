@@ -73,9 +73,14 @@ const botonGatos = document.querySelector("#filtro-gatos");
 const botonExoticos = document.querySelector("#filtro-exoticos");
 const botonesFiltro = document.querySelectorAll(".filtros button");
 
+// aria-pressed le dice al lector de pantalla qué filtro está pulsado (el color solo se ve)
 function marcarFiltro(boton) {
-  botonesFiltro.forEach((otro) => otro.classList.remove("activo"));
+  botonesFiltro.forEach((otro) => {
+    otro.classList.remove("activo");
+    otro.setAttribute("aria-pressed", "false");
+  });
   boton.classList.add("activo");
+  boton.setAttribute("aria-pressed", "true");
 }
 
 botonTodos.addEventListener("click", () => {
