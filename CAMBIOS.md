@@ -19,6 +19,28 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.3.0 · 2026-10-19
+
+- **Proyecto web «Huellas»**: al final de cada mundo construyes una parte de la misma web, la de la clínica
+  veterinaria Huellas, a partir de un encargo del cliente (captura, textos para copiar, guía de estilo):
+  - Mundo HTML: **html-14**, la clínica en HTML desde la hoja en blanco (5 encargos).
+  - Mundo CSS: **css-15**, su identidad en `estilos.css` (4 encargos).
+  - Mundo HTML + CSS: **hc-13**, la maqueta para móvil, tableta y ordenador, con estados y movimiento (5 encargos).
+    Sustituye a la landing de adopción (hc-11 y hc-12).
+  - Mundo JavaScript: **js-17**, la web funciona: menú, filtros, cita validada y «Mis citas» (6 encargos).
+    Sustituye a la lista de tareas (js-14).
+  - Se comprueba el resultado, no cómo lo escribes; cada comprobación en rojo enlaza a la lección que repasar.
+  - Quien ya hizo hc-11, hc-12 o js-14 conserva su XP y sus insignias; sus enlaces llevan a la lección nueva.
+- **Glosario** en las lecciones de proyecto: todo lo aprendido hasta ahí, por mundo y por tema, con buscador y «Copiar».
+- **Mi clínica**: al terminar el curso, tu web a pantalla entera y un botón para **descargarla en .zip** y abrirla en
+  tu ordenador.
+- **Laboratorio**: una página para practicar libremente con HTML, CSS y JavaScript, con ejemplos, deshacer y
+  descarga en .zip. Está en la página de inicio.
+- **Lecciones nuevas**: html-13 «La cabeza de la página», js-15 «Filtrar listas» y js-16 «Fechas y horas».
+- Lecciones ampliadas: `letter-spacing` (css-04), `grid-column: 1 / 3` (css-13) y una capa con `::after` y
+  `linear-gradient` (hc-03).
+- «Repetir» en una lección de proyecto empieza de cero.
+
 ## 1.2.0 · 2026-10-18
 
 - **Lecciones ampliadas** (preparan el proyecto final de la clínica «Huellas»):
