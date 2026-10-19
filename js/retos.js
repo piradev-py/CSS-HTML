@@ -49,7 +49,8 @@
           const resultados = [];
           for (const c of comprobaciones) {
             try {
-              resultados.push(!!(await conLimite(Promise.resolve(c.prueba(doc, win)), 2000)));
+              // 4 s: las de los Proyectos web recargan la página (PRUEBA.recargar) y en un ordenador lento 2 s se quedaban cortos
+              resultados.push(!!(await conLimite(Promise.resolve(c.prueba(doc, win)), 4000)));
             } catch (e) {
               resultados.push(false);
             }

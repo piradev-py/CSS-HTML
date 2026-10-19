@@ -8,7 +8,11 @@
    columnas de código y resultado en una "pizarra".
    ============================================================ */
 (function () {
-  const id = new URLSearchParams(location.search).get("id");
+  // Lecciones que salieron del mapa al llegar los Proyectos web: un marcador viejo lleva a la que las sustituye
+  const SUSTITUIDAS = { "hc-11": "hc-13", "hc-12": "hc-13", "js-14": "js-17" };
+  const pedida = new URLSearchParams(location.search).get("id");
+  if (SUSTITUIDAS[pedida]) return location.replace("leccion.html?id=" + SUSTITUIDAS[pedida]);
+  const id = pedida;
   const principal = document.querySelector("main");
   const info = CURSO.buscar(id);
   // Al volver al mapa, se abre directamente el mundo de esta lección (ver js/mapa.js)
@@ -395,6 +399,9 @@
   /* ---------- Pantalla de victoria ---------- */
   function victoria(leccion, estrellas) {
     const r = PROGRESO.completar(leccion.id, estrellas, leccion.xp);
+    const esProyecto = leccion.pasos.some(p => p.tipo === "proyecto");
+    // «Mi clínica» enseña la web tal y como quedó al terminar el último proyecto, aunque luego se repita
+    if (leccion.id === "js-17") PROGRESO.guardarBorrador("mi-clinica", PROGRESO.borrador("js-17#proyecto"));
     const sig = CURSO.siguiente(leccion.id);
     CELEBRAR.confeti();
     CELEBRAR.sonido.victoria();
@@ -428,8 +435,9 @@
     const enlaceSiguiente = m.elemento.querySelector("[data-siguiente-leccion]");
     if (enlaceSiguiente) enlaceSiguiente.focus();
     m.elemento.querySelector("[data-repetir]").addEventListener("click", () => {
-      PROGRESO.borrarBorrador(leccion.id);
-      location.hash = "reto";
+      // Un proyecto se repite desde el primer paso y con su borrador (compartido por los encargos) en blanco
+      PROGRESO.borrarBorrador(esProyecto ? leccion.id + "#proyecto" : leccion.id);
+      location.hash = esProyecto ? "" : "reto";
       location.reload();
     });
     if (r.subioNivel) setTimeout(() => CELEBRAR.sonido.nivel(), 700);

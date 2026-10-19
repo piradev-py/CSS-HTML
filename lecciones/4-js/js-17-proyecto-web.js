@@ -208,11 +208,15 @@
           { texto: "Con el reloj en el 20/10/2026, una cita para el 19 falla solo por la fecha", repaso: "js-16",
             prueba: async doc => { const d = (await nueva(doc)).doc; pedir(d, { fecha: "2026-10-19" }); return soloFalla(d, "fecha"); } },
           { texto: "A las 21:00 falla la hora, y un teléfono de 8 cifras o con espacios falla el teléfono", repaso: "js-11",
-            prueba: async doc => { const a = (await nueva(doc)).doc; pedir(a, { hora: "21:00" }); const b = (await nueva(doc)).doc; pedir(b, { telefono: "60011122" });
-              const c = (await nueva(doc)).doc; pedir(c, { telefono: "600 111 22" }); return soloFalla(a, "hora") && soloFalla(b, "telefono") && soloFalla(c, "telefono"); } },
+            // Una sola página (cada comprobación tiene un tiempo máximo): pedir() vuelve a rellenar todos los campos en cada envío
+            prueba: async doc => { const d = (await nueva(doc)).doc;
+              pedir(d, { hora: "21:00" }); const hora = soloFalla(d, "hora");
+              pedir(d, { telefono: "60011122" }); const corto = soloFalla(d, "telefono");
+              pedir(d, { telefono: "600 111 22" }); return hora && corto && soloFalla(d, "telefono"); } },
           { texto: "Un email sin «@» falla el email, y sin marcar la privacidad falla la privacidad", repaso: "js-11",
-            prueba: async doc => { const a = (await nueva(doc)).doc; pedir(a, { email: "ana.correo.es" }); const b = (await nueva(doc)).doc; pedir(b, { privacidad: false });
-              return soloFalla(a, "email") && soloFalla(b, "privacidad"); } },
+            prueba: async doc => { const d = (await nueva(doc)).doc;
+              pedir(d, { email: "ana.correo.es" }); const email = soloFalla(d, "email");
+              pedir(d, { privacidad: false }); return email && soloFalla(d, "privacidad"); } },
           { texto: "Con todo bien, `#confirmacion` dice «¡Cita reservada! Perro · 2026-10-21 a las 10:00 · a nombre de Ana»", repaso: "js-11",
             prueba: async doc => { const d = (await nueva(doc)).doc; pedir(d);
               return simple(d.querySelector("#confirmacion").textContent) === simple("¡Cita reservada! " + RESUMEN) && Object.keys(MENSAJES).every(n => !error(d, n).trim()); } },

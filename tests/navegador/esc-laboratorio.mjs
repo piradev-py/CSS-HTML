@@ -31,7 +31,7 @@ export default async function (b) {
   await b.eval("document.querySelector('[data-borrar]').click()");
   await b.esperar(800);
   b.log("Borrar todo: textarea vacío " + await b.eval("document.querySelector('.lab-editor textarea').value === ''") +
-    " · aviso: " + await b.eval("document.querySelector('[data-aviso]').hidden ? 'oculto' : document.querySelector('[data-aviso] span').textContent"));
+    " · aviso: " + await b.eval("document.querySelector('[data-aviso]').textContent + (document.querySelector('[data-deshacer]').hidden ? ' (sin botón)' : ' + botón Deshacer')"));
   await b.eval("document.querySelector('[data-deshacer]').click()");
   await b.esperar(1000);
   b.log("Deshacer: vuelve el botón " + await b.eval("!!" + marco + ".querySelector('#boton')"));

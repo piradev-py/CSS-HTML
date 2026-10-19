@@ -41,7 +41,7 @@
         '<button class="boton secundario" type="button" data-borrar>🗑️ Borrar todo</button>' +
         '<button class="boton" type="button" data-descargar>⬇️ Descargar (.zip)</button>' +
       "</div>" +
-      '<p class="lab-deshacer" data-aviso hidden><span></span> <button class="mini-boton" type="button" data-deshacer>↩ Deshacer</button></p>' +
+      '<p class="lab-deshacer"><span data-aviso role="status"></span> <button class="mini-boton" type="button" data-deshacer hidden>↩ Deshacer</button></p>' +
     "</section>" +
     '<section class="lab-editor"><div class="col col-codigo"></div><div class="col col-resultado"></div></section>';
 
@@ -54,25 +54,32 @@
     alCambiar: codigo => PROGRESO.guardarBorrador(CLAVE, codigo)
   });
 
-  // Borrar o cargar un ejemplo sustituye el código: durante un rato se puede volver atrás
+  // Borrar o cargar un ejemplo sustituye el código: durante un rato se puede volver atrás.
+  // El aviso está siempre en la página (role="status"): así el lector de pantalla lee cada cambio
   const aviso = cont.querySelector("[data-aviso]");
+  const bDeshacer = cont.querySelector("[data-deshacer]");
+  function mostrarAviso(texto) {
+    aviso.textContent = texto;
+    bDeshacer.hidden = !texto;
+  }
   let anterior = null;
   let temporizador = null;
   function sustituir(codigo, mensaje) {
     anterior = editor.obtener();
     editor.fijar(Object.assign({}, VACIO, codigo));
     PROGRESO.guardarBorrador(CLAVE, editor.obtener());
-    aviso.querySelector("span").textContent = mensaje;
-    aviso.hidden = false;
+    mostrarAviso(mensaje + " Puedes deshacerlo durante 15 segundos.");
     clearTimeout(temporizador);
-    temporizador = setTimeout(() => { aviso.hidden = true; anterior = null; }, 15000);
+    temporizador = setTimeout(() => { mostrarAviso(""); anterior = null; }, 15000);
   }
-  cont.querySelector("[data-deshacer]").addEventListener("click", () => {
+  bDeshacer.addEventListener("click", () => {
     if (!anterior) return;
     editor.fijar(anterior);
     PROGRESO.guardarBorrador(CLAVE, anterior);
     anterior = null;
-    aviso.hidden = true;
+    mostrarAviso("Hecho: has recuperado el código.");
+    // El botón desaparece: el foco pasa al editor para no quedarse en la nada
+    editor.enfocar();
   });
   cont.querySelector("[data-borrar]").addEventListener("click", () => sustituir(VACIO, "Has borrado el código."));
   const selector = cont.querySelector("[data-ejemplo]");

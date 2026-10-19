@@ -216,7 +216,7 @@ Reglas para escribir el enunciado:
 ```
 
 Reglas de las comprobaciones:
-- `prueba(doc, win)` recibe el `document` y la `window` del resultado. Devuelve `true`/`false` (o una Promesa de booleano, máx. 2 s).
+- `prueba(doc, win)` recibe el `document` y la `window` del resultado. Devuelve `true`/`false` (o una Promesa de booleano, máx. 4 s).
 - Para CSS usa `win.getComputedStyle(el)`. Recuerda que devuelve valores calculados: colores en `rgb(…)`, tamaños en `px`.
 - Para JS se puede simular la interacción: `doc.querySelector("button").click()` y luego comprobar. Los `console.log`
   del alumno quedan en `win.__logs` (array de strings).

@@ -51,7 +51,7 @@
   const sinScroll = (v, ancho) => v.doc.documentElement.scrollWidth <= ancho;
   const LISTAS = [["#servicios .servicio", 6], ["#equipo figure", 4], [".opinion", 3]];
   // La página a ese ancho (una copia que el alumno no ve). Se reutiliza entre comprobaciones de la misma evaluación:
-  // cada una tiene 2 s, y copiar la página cuesta. Quien cambie la copia, que pida una propia con PRUEBA.clonar
+  // cada una tiene un tiempo máximo, y copiar la página cuesta. Quien cambie la copia, que pida una propia con PRUEBA.clonar
   const copias = new WeakMap();
   const a = (doc, ancho) => {
     if (!copias.has(doc)) copias.set(doc, {});
@@ -71,7 +71,7 @@
         tipo: "explicacion",
         titulo: "Huellas, en cualquier pantalla",
         texto: "¡La clínica está encantada con su nueva imagen! 🐾 Hemos integrado tu hoja en la **versión oficial**, y llega el siguiente encargo: **más de la mitad de sus clientes la visitan desde el móvil**, y ahí la web de escritorio se ve diminuta y apretada.\n\nEl equipo de diseño ha preparado cómo debe verse en **tres pantallas**: móvil (375 px), tableta (768 px) y ordenador (1200 px). Tú la conviertes en una maqueta profesional, en 4 encargos:\n\n• **Móvil primero:** la base pasa a ser el móvil, con el menú plegado tras un botón, y lo de escritorio va a una `@media`.\n• **Tableta:** dos columnas a partir de 768 px.\n• **Ratón, teclado y formulario:** estados `:hover` y `:focus-visible`, adornos con `::after` y campos que avisan.\n• **Movimiento:** la portada entra con una animación, y nada se mueve si la persona pide menos movimiento.\n\nLas comprobaciones miran tu página a los tres anchos, como si la abrieras en tres aparatos.",
-        consejo: "La técnica la eliges tú: Grid o Flexbox, y los puntos de corte exactos, siempre que a 375, 768 y 1200 px se vea como en la captura. Para probar, haz la ventana del navegador más estrecha y más ancha."
+        consejo: "La técnica la eliges tú: Grid o Flexbox. Los puntos de corte de la guía (768 y 1100 px) son una propuesta: valen otros, siempre que a 375, 768 y 1200 px se vea como en la captura. Para probar, haz la ventana del navegador más estrecha y más ancha."
       },
       {
         tipo: "proyecto",

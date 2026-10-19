@@ -19,7 +19,8 @@
 
   // La web del alumno: lo que dejó en el Proyecto web del Mundo 4 (y la oficial en lo que falte)
   function web() {
-    const b = PROGRESO.borrador(ULTIMA + "#proyecto") || {};
+    // La copia que se guarda al ganar js-17 (sobrevive a «Repetir»); si no la hay, el borrador del proyecto
+    const b = PROGRESO.borrador("mi-clinica") || PROGRESO.borrador(ULTIMA + "#proyecto") || {};
     return { html: b.html || OFICIAL.html, css: b.css || OFICIAL.css, js: b.js || OFICIAL.js };
   }
 

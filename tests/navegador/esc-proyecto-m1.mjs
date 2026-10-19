@@ -38,4 +38,15 @@ export default async function (b) {
   }
   b.log("Victoria: " + await b.eval("!!document.querySelector('.modal-victoria')") + " · completada: " + await b.eval("PROGRESO.estaCompletada('html-14')"));
   await b.foto("html14-victoria");
+
+  // «Repetir» empieza el proyecto de cero: primer paso y sin el borrador compartido de los encargos
+  await b.eval("document.querySelector('[data-repetir]').click()");
+  await b.esperar(2500);
+  b.log("Repetir: borrador borrado " + await b.eval("!PROGRESO.borrador('html-14#proyecto')") +
+    " · empieza en «" + await b.eval("document.querySelector('.col-leccion h2, .col-leccion h1')?.textContent.trim()") + "»");
+
+  // Un marcador viejo a una lección quitada lleva a la que la sustituye
+  await b.ir(BASE + "leccion.html?id=hc-11");
+  await b.esperar(1500);
+  b.log("leccion.html?id=hc-11 lleva a: " + await b.eval("location.search"));
 }
