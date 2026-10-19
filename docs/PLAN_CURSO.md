@@ -158,7 +158,7 @@ y colocar elementos con `position`, Flexbox y Grid, organizando todo con variabl
 
 ### css-10 · Posicionamiento · 45 XP ✅
 - **Objetivo:** sacar elementos del flujo normal y colocarlos donde quieras.
-- **Conceptos nuevos:** `position` (`static`, `relative`, `absolute`, `fixed`, `sticky`), `top`/`right`/`bottom`/`left`, padre con `relative`, `z-index`.
+- **Conceptos nuevos:** `position` (`static`, `relative`, `absolute`, `fixed`, `sticky`), `top`/`right`/`bottom`/`left`, padre con `relative`, `z-index`; con la cabecera `sticky`, `scroll-margin-top` para no tapar el título al saltar a una sección.
 - **Reto:** poner una pegatina de «¡NUEVO!» en la esquina superior derecha de una tarjeta de producto.
 
 ### css-11 · Flexbox (I): en fila y alineados · 45 XP ✅
@@ -324,7 +324,7 @@ completa de lista de tareas.
 
 ### js-16 · Fechas y horas · 40 XP ✅ (se ve como la lección 12)
 - **Objetivo:** leer la fecha y la hora del ordenador y comparar fechas y horas.
-- **Conceptos nuevos:** `new Date()`, `getFullYear()` (el año del pie), `getHours()`/`getMinutes()`, la fecha de hoy como `AAAA-MM-DD` con `toLocaleDateString("sv-SE")` (y el aviso de `toISOString`), comparar fechas y horas como textos con sus ceros.
+- **Conceptos nuevos:** `new Date()`, `getFullYear()` (el año del pie), `getHours()`/`getMinutes()`, la fecha de hoy como `AAAA-MM-DD` con `toLocaleDateString("sv-SE")` (y el aviso de `toISOString`), comparar fechas y horas como textos con sus ceros; `getDay()` nombrado en un consejo (sin ejercicio).
 - **Reto:** comprobador de fechas que dice «Ya pasó», «Es hoy» o «Todavía falta» (sin restar fechas: necesitaría `Math`).
 
 ### js-11 · Validar formularios · 50 XP ✅

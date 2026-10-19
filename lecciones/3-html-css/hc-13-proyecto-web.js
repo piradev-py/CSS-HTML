@@ -83,13 +83,13 @@
         tipo: "proyecto",
         proyecto: PROYECTO,
         pestana: "css",
-        enunciado: "**Móvil primero.** Hasta ahora la hoja pensaba en el ordenador. Ahora la **base** (lo que va sin `@media`) es el **móvil**, y el ordenador se añade después:\n\n1. En `index.html`, el **botón del menú** dentro del `header`, entre la marca y el `nav`: `<button class=\"boton-menu\" type=\"button\">☰ Menú</button>`.\n2. En la base, los **valores del móvil** de la guía (títulos más pequeños, menos relleno) y la **colocación del móvil**: todo en una columna, el menú plegado (se despliega con la clase `abierto`, que pondrá el JavaScript del Mundo 4) y el botón «Pide tu cita» de la cabecera escondido.\n3. Tu bloque **«Colocación (escritorio)»** del Mundo 2, dentro de `@media (min-width: 1100px)`, con los valores de escritorio.\n\nEl ancho de tableta todavía no se pide: a 768 px puede verse como el móvil. Y la portada que se funde con el fondo llega en el próximo encargo.",
+        enunciado: "**Móvil primero.** Hasta ahora la hoja pensaba en el ordenador. Ahora la **base** (lo que va sin `@media`) es el **móvil**, y el ordenador se añade después:\n\n1. En `index.html`, el **botón del menú** dentro del `header`, entre la marca y el `nav`: `<button class=\"boton-menu\" type=\"button\">☰ Menú</button>`.\n2. En la base, los **valores del móvil** de la guía (títulos más pequeños, menos relleno) y la **colocación del móvil**: todo en una columna, el menú plegado (se despliega con la clase `abierto`, que pondrá el JavaScript del Mundo 4) y el botón «Pide tu cita» de la cabecera escondido. Y, como la cabecera va pegada arriba, que al saltar desde el menú el título de cada sección no quede debajo de ella (`scroll-margin-top`).\n3. Tu bloque **«Colocación (escritorio)»** del Mundo 2, dentro de `@media (min-width: 1100px)`, con los valores de escritorio.\n\nEl ancho de tableta todavía no se pide: a 768 px puede verse como el móvil. Y la portada que se funde con el fondo llega en el próximo encargo.",
         captura: "recursos/huellas/capturas/m3-encargo-1.png",
         textos: "HTML · en el header, entre la marca y el nav\n<button class=\"boton-menu\" type=\"button\">☰ Menú</button>\n\n" + COMO_LEER +
           "LA BASE ES EL MÓVIL · cambia estos valores (sin @media)\nh1\n  font-size: 2.2rem\n\nh2\n  font-size: 1.7rem\n\nsection\n  padding: 48px 20px\n\nheader\n  padding: 12px 20px\n\n" +
           ".portada\n  margin: 16px            ← en lugar del margin-top: 32px\n  padding: 28px 20px\n\n.ventajas\n  margin: 0 16px\n  padding: 8px 20px\n\ntable\n  padding: 8px\n\nth, td\n  padding: 10px 14px\n\nfooter\n  padding: 40px 20px 24px\n\n" +
           RETOS.guiaCSS(seccion(PASOS[0], 3)) + "\n\n" + RETOS.guiaCSS(seccion(PASOS[0], 5)),
-        glosario: ["mobile first", "@media", "min-width y max-width (en @media)", "menú del móvil (.abierto)", "display: none", "flex-wrap", "position: sticky"],
+        glosario: ["mobile first", "@media", "min-width y max-width (en @media)", "menú del móvil (.abierto)", "display: none", "flex-wrap", "position: sticky", "scroll-margin-top"],
         inicial: INICIO,
         comprobaciones: [
           { texto: "En el `header`, el botón «☰ Menú» (`button` con `class=\"boton-menu\"` y `type=\"button\"`), entre la marca y el `nav`", repaso: "hc-06",
@@ -112,6 +112,14 @@
           { texto: "A 375 px, la cabecera sigue pegada arriba (`sticky`) y es flex con salto de línea", repaso: "css-10",
             prueba: async doc => { const s = est((await a(doc, 375)).doc, "header");
               return s.position === "sticky" && cerca(s.top, 0) && s.display === "flex" && s.flexWrap === "wrap" && relleno(s, 12, 20); } },
+          { texto: "Al saltar desde el menú a una sección, su título no queda tapado por la cabecera (`scroll-margin-top`), en el móvil y en el ordenador", repaso: "css-10",
+            // Copias propias: hacen scroll, y las de a() las comparten otras comprobaciones
+            prueba: async doc => { for (const ancho of [375, 1200]) {
+                const v = await PRUEBA.clonar(doc, { ancho, alto: 700 });
+                v.doc.querySelector("#equipo").scrollIntoView();
+                if (v.doc.querySelector("#equipo h2").getBoundingClientRect().top < v.doc.querySelector("header").getBoundingClientRect().bottom - 1) return false;
+              }
+              return true; } },
           { texto: "A 375 px, los valores del móvil: `h1` a 2.2rem, `h2` a 1.7rem, secciones con relleno de 48px y 20px", repaso: "hc-06",
             prueba: async doc => { const d = (await a(doc, 375)).doc;
               return cerca(est(d, "h1").fontSize, 35.2) && cerca(est(d, "h2").fontSize, 27.2) && relleno(est(d, "#servicios"), 48, 20); } },

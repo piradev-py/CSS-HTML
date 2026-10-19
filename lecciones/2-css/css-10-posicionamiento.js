@@ -19,6 +19,7 @@ CURSO.registrar({
     { termino: "top, right, bottom, left", tema: "Posición", para: "Cuánto se separa de cada lado al colocarlo.", ejemplo: ".nota {\n  top: 0;\n  right: 0;\n}", buscar: "arriba derecha abajo izquierda colocar" },
     { termino: "position: fixed", tema: "Posición", para: "Clavado en la pantalla aunque bajes.", ejemplo: ".aviso {\n  position: fixed;\n  bottom: 16px;\n}", buscar: "fijo pantalla" },
     { termino: "position: sticky", tema: "Posición", para: "Va en su sitio y, al bajar, se queda pegado (con `top`).", ejemplo: "header {\n  position: sticky;\n  top: 0;\n}", buscar: "pegado cabecera fija al bajar" },
+    { termino: "scroll-margin-top", tema: "Posición", para: "Con la cabecera `sticky`, el hueco que se deja arriba al saltar a una sección: así su título no queda tapado.", ejemplo: "section {\n  scroll-margin-top: 90px;\n}", buscar: "cabecera tapa titulo saltar ancla enlace menu" },
     { termino: "z-index", tema: "Posición", para: "Quién queda encima cuando se tapan: gana el número mayor.", ejemplo: "header {\n  z-index: 10;\n}", buscar: "encima capas delante" }
   ],
   pasos: [
@@ -73,7 +74,7 @@ CURSO.registrar({
     {
       tipo: "explicacion",
       titulo: "z-index, fixed y sticky",
-      texto: "Cuando dos cajas posicionadas se **solapan**, `z-index` decide cuál va encima: gana el número **más alto**, como en una pila de cartas. 🃏 Solo funciona en cajas con un `position` distinto de `static`.\n\nY dos valores más de `position` que conviene conocer:\n\n• `fixed` (**fija**): se queda clavada en la pantalla aunque hagas *scroll* (desplazarte por la página), como el botón de chat de muchas webs.\n• `sticky` (**pegajosa**): se mueve normal hasta llegar al borde de la pantalla, y ahí se queda pegada. Ideal para menús.\n\nEnseguida vas a probar `sticky` con una cabecera de verdad.",
+      texto: "Cuando dos cajas posicionadas se **solapan**, `z-index` decide cuál va encima: gana el número **más alto**, como en una pila de cartas. 🃏 Solo funciona en cajas con un `position` distinto de `static`.\n\nY dos valores más de `position` que conviene conocer:\n\n• `fixed` (**fija**): se queda clavada en la pantalla aunque hagas *scroll* (desplazarte por la página), como el botón de chat de muchas webs.\n• `sticky` (**pegajosa**): se mueve normal hasta llegar al borde de la pantalla, y ahí se queda pegada. Ideal para menús.\n\nUn detalle de las webs con la cabecera `sticky`: si un enlace del menú salta a una sección (`#servicios`), su título queda **debajo** de la cabecera. Se arregla dándole a las secciones un hueco arriba al saltar, del alto de la cabecera: `section { scroll-margin-top: 90px; }`.\n\nEnseguida vas a probar `sticky` con una cabecera de verdad.",
       ejemplo: {
         html: `<div class="carta roja">Roja: z-index 2</div>
 <div class="carta azul">Azul: z-index 1</div>`,

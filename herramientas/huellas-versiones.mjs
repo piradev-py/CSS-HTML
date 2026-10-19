@@ -20,7 +20,7 @@ const COMMITS = {
   "mundo-1": "8866e01",
   "mundo-2": "a9d2bc4",
   "mundo-3": "348d16d",
-  "mundo-4": "0f1c69d"
+  "mundo-4": "de5635e"
 };
 
 // Encargos del Proyecto web de cada mundo: el archivo que escribe el alumno se corta justo antes de cada marca, y cada
@@ -57,6 +57,14 @@ const RECORTES = {
   "mundo-1": html => quedarse(quedarse(html, /\n *<article class="servicio">[\s\S]*?<\/article>/g, 3), /\n *<figure>[\s\S]*?<\/figure>/g, 2),
   "mundo-2": sinPrivacidad,
   "mundo-3": sinPrivacidad
+};
+
+// Arreglos posteriores a la web de un mundo cuyo commit ya no se puede tocar: la versión oficial sale con ellos.
+// scroll-margin-top llegó a la web de referencia (de5635e) después del commit del Mundo 3
+const SCROLL_MARGIN = "/* Con la cabecera pegada arriba, al saltar desde el menú el título de la sección no queda debajo de ella */\n" +
+  "section,\nfooter {\n  scroll-margin-top: 90px;\n}\n\n";
+const PARCHES = {
+  "mundo-3": css => sinTexto(css, "/* El menú, plegado tras un botón") && css.replace("/* El menú, plegado tras un botón", SCROLL_MARGIN + "/* El menú, plegado tras un botón")
 };
 
 // El archivo sin las secciones numeradas de la lista (cada una va de su comentario «---------- N.» al siguiente;
@@ -100,7 +108,7 @@ for (const [mundo, commit] of Object.entries(COMMITS)) {
   const opiniones = leer(commit, "datos/opiniones.json");
   versiones[mundo] = {
     html,
-    css: leer(commit, "estilos.css"),
+    css: (PARCHES[mundo] || (c => c))(leer(commit, "estilos.css")),
     js: leer(commit, "script.js"),
     privacidad: leer(commit, "privacidad.html"),
     datos: opiniones ? { "opiniones.json": JSON.parse(opiniones) } : {}

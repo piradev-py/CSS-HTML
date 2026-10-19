@@ -21,7 +21,8 @@ const ROTAS = [
   [3, "tableta después del escritorio", "s => { const i = s.indexOf('/* ---------- 4.'), j = s.indexOf('/* ---------- 5.'), k = s.indexOf('/* ---------- 6.'); return s.slice(0, i) + s.slice(j, k) + s.slice(i, j) + s.slice(k); }", "A 1200 px, la portada vuelve"],
   [4, "sin transition", "s => s.replace(/  transition: transform[^;]*;/, '')", "Los botones y las tarjetas cambian"],
   [5, "sin prefers-reduced-motion", "s => s.replace(/@media \\(prefers-reduced-motion[\\s\\S]*$/, '')", "Con menos movimiento (`prefers"],
-  [2, "sin degradado", "s => s.replace(/background: linear-gradient[^;]*;/, '')", "La capa se pinta con un degradado"]
+  [2, "sin degradado", "s => s.replace(/background: linear-gradient[^;]*;/, '')", "La capa se pinta con un degradado"],
+  [1, "sin scroll-margin-top", "s => s.replace('scroll-margin-top: 90px;', '')", "Al saltar desde el menú a una sección"]
 ];
 
 export default async function (b) {

@@ -24,7 +24,8 @@ CURSO.registrar({
     { termino: "new Date()", tema: "Fechas", para: "La fecha y la hora de ahora.", ejemplo: "const ahora = new Date();", buscar: "fecha hora ahora reloj" },
     { termino: "getFullYear()", tema: "Fechas", para: "El año de una fecha (el del pie de la web).", ejemplo: "document.querySelector(\"#anio\").textContent = new Date().getFullYear();", buscar: "ano year pie" },
     { termino: "toLocaleDateString(\"sv-SE\")", tema: "Fechas", para: "La fecha como texto `AAAA-MM-DD`, igual que la de un campo `date`.", ejemplo: "const hoy = new Date().toLocaleDateString(\"sv-SE\");", buscar: "fecha hoy texto formato" },
-    { termino: "comparar fechas y horas", tema: "Fechas", para: "Como textos con sus ceros, `\"2026-10-21\" >= hoy` funciona.", ejemplo: "if (campoFecha.value >= hoy) {\n  console.log(\"No ha pasado\");\n}", buscar: "comparar fecha pasada futura hora" }
+    { termino: "comparar fechas y horas", tema: "Fechas", para: "Como textos con sus ceros, `\"2026-10-21\" >= hoy` funciona.", ejemplo: "if (campoFecha.value >= hoy) {\n  console.log(\"No ha pasado\");\n}", buscar: "comparar fecha pasada futura hora" },
+    { termino: "getDay()", tema: "Fechas", para: "El día de la semana: 0 es domingo, 1 lunes… 6 sábado. Con la fecha de un campo, ponle su hora.", ejemplo: "const dia = new Date(campoFecha.value + \"T00:00\").getDay();\nif (dia === 0) {\n  console.log(\"Domingo: cerrado\");\n}", buscar: "dia semana sabado domingo lunes" }
   ],
   pasos: [
     {
@@ -97,7 +98,8 @@ campo.addEventListener("change", () => {
     respuesta.textContent = "⌛ Ese día ya pasó";
   }
 });`
-      }
+      },
+      consejo: "¿Y el día de la semana? `getDay()` te lo da como número: **0 es domingo**, 1 lunes… y **6 sábado**. Con la fecha de un campo, escríbela con su hora para que no te dé el día anterior: `new Date(campo.value + \"T00:00\").getDay()`."
     },
     {
       tipo: "ejercicio",

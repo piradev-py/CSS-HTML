@@ -56,12 +56,15 @@
         comparar fechas y horas como texto; reto «ya pasó / es hoy / todavía falta») — 2026-10-18.
   - [x] Antes de las lecciones de proyecto, aplicar los cambios aprobados al temario (P1, P2 y P5 hechas): la web de referencia
         ya usa `list-style`, `max-width` (P7), `:user-invalid` (P8), `filter`, `Date`, `checked` y `setAttribute` (P1–P4).
-  - [ ] Consejo de `scroll-margin-top` (hc-04 o hc-06): con la cabecera fija, los enlaces del menú dejan el título
-        de la sección tapado.
+  - [x] Consejo de `scroll-margin-top`: con la cabecera fija, los enlaces del menú dejan el título de la sección tapado.
+        → 2026-10-19: explicado en css-10 (donde se enseña `sticky`) con su ficha del glosario; la web de referencia lo usa
+        desde el Mundo 3 (de5635e; la versión del Mundo 3 lo recibe en `huellas-versiones.mjs`) y hc-13 lo comprueba en
+        el encargo 1 (salta a una sección a 375 y 1200 px y mira que el título no quede bajo la cabecera).
   - [x] Lección del Mundo 4: explicar `novalidate` → ya lo explica js-11 (el formulario trae `required` del Mundo 1 y el navegador
         taparía los mensajes propios).
-  - [ ] La comprobación de la hora es solo 9:00–20:30: no mira sábados (10:00–14:00) ni domingos (cerrado).
-        ¿Basta para el curso o se enseña `getDay()`?
+  - [x] La comprobación de la hora es solo 9:00–20:30: no mira sábados (10:00–14:00) ni domingos (cerrado).
+        → 2026-10-19: basta para el curso. `getDay()` se nombra en un consejo de js-16 (con la trampa de la fecha sin hora)
+        y tiene su ficha del glosario; queda como reto en «¿Y ahora qué?» de «Mi clínica», sin lección ni encargo propios.
   - [x] Descarga en .zip también en el laboratorio de práctica libre (2026-10-19)
   - [~] **Fase 2 · motor del proyecto** (2026-10-18). Hecho: paso `proyecto` (varios archivos enlazados de verdad,
         rutas desde la carpeta de Huellas, borrador compartido, captura del encargo, «📚 Repasa» en lo que falla),
