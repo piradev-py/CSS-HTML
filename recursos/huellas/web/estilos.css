@@ -409,6 +409,12 @@ header {
   gap: 10px;
 }
 
+/* Con la cabecera pegada arriba, al saltar desde el menú el título de la sección no queda debajo de ella */
+section,
+footer {
+  scroll-margin-top: 90px;
+}
+
 /* El menú, plegado tras un botón; el JavaScript del Mundo 4 le pone la clase «abierto» */
 .boton-menu {
   padding: 10px 16px;
