@@ -166,9 +166,9 @@
         tipo: "proyecto",
         proyecto: PROYECTO,
         pestana: "js",
-        enunciado: "**Los filtros.** Encima de los servicios están los botones **Todos**, **Perros**, **Gatos** y **Exóticos**:\n\n1. Al pulsar Perros, Gatos o Exóticos, se repintan **solo** los servicios que atienden a esa mascota (los que la tienen en su lista `mascotas`).\n2. Al pulsar Todos, vuelven los 6.\n3. El botón pulsado lleva la clase `activo`, y solo él.\n\nOjo: si no vacías la rejilla antes de pintar, los servicios se acumulan.",
-        textos: "FILTROS\nBotones: #filtro-todos · #filtro-perros · #filtro-gatos · #filtro-exoticos   (todos dentro de .filtros)\nPerros → los servicios con «perro» en mascotas · Gatos → «gato» · Exóticos → «exotico» · Todos → los 6\nEl botón pulsado: clase «activo» (y los demás, sin ella)",
-        glosario: ["filter()", ".includes() (array)", "función flecha", "addEventListener", "forEach()", "classList.add / remove / toggle", "pintar una lista"],
+        enunciado: "**Los filtros.** Encima de los servicios están los botones **Todos**, **Perros**, **Gatos** y **Exóticos**:\n\n1. Al pulsar Perros, Gatos o Exóticos, se repintan **solo** los servicios que atienden a esa mascota (los que la tienen en su lista `mascotas`).\n2. Al pulsar Todos, vuelven los 6.\n3. El botón pulsado lleva la clase `activo`, y solo él.\n4. Y, como el menú con su `aria-expanded`, cada botón avisa al lector de pantalla de si está pulsado: `aria-pressed` vale `\"true\"` en el pulsado y `\"false\"` en los demás (el color solo se ve).\n\nOjo: si no vacías la rejilla antes de pintar, los servicios se acumulan.",
+        textos: "FILTROS\nBotones: #filtro-todos · #filtro-perros · #filtro-gatos · #filtro-exoticos   (todos dentro de .filtros)\nPerros → los servicios con «perro» en mascotas · Gatos → «gato» · Exóticos → «exotico» · Todos → los 6\nEl botón pulsado: clase «activo» y aria-pressed=\"true\"\nLos demás: sin la clase y con aria-pressed=\"false\"",
+        glosario: ["filter()", ".includes() (array)", "función flecha", "addEventListener", "forEach()", "classList.add / remove / toggle", "setAttribute()", "pintar una lista"],
         inicial: { html: HTML, css: CSS, js: PASOS[2] },
         comprobaciones: [
           { texto: "Al pulsar «Exóticos», quedan solo sus 4 servicios", repaso: "js-15",
@@ -183,6 +183,9 @@
           { texto: "El botón pulsado lleva la clase `activo`, y solo él", repaso: "js-04",
             prueba: async doc => { const v = await nueva(doc); v.doc.querySelector("#filtro-gatos").click();
               const a = [...v.doc.querySelectorAll(".filtros button.activo")]; return a.length === 1 && a[0].id === "filtro-gatos"; } },
+          { texto: "El botón pulsado tiene `aria-pressed=\"true\"` y los demás, `\"false\"`", repaso: "js-04",
+            prueba: async doc => { const v = await nueva(doc); v.doc.querySelector("#filtro-exoticos").click(); v.doc.querySelector("#filtro-gatos").click();
+              return [...v.doc.querySelectorAll(".filtros button")].every(b => b.getAttribute("aria-pressed") === String(b.id === "filtro-gatos")); } },
           { texto: "El script funciona sin errores (mira la consola)", repaso: "js-15",
             prueba: async doc => { const v = await nueva(doc); ["#filtro-perros", "#filtro-gatos", "#filtro-exoticos", "#filtro-todos"].forEach(s => v.doc.querySelector(s).click()); return sinErrores(v); } }
         ],

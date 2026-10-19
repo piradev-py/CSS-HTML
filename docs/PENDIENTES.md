@@ -91,13 +91,17 @@
         oficial y otra con otros nombres y otra clave de `localStorage`. Test: `esc-proyecto-m4` (con 4 variantes rotas).
         El script de referencia se reordenó (174f321) para que cada encargo sea el script sin las secciones pendientes.
         Sin captura en las fichas: lo que cuenta es el comportamiento. Para la fase 7: el cierre del curso que tenía js-14.
-  - [~] **Fase 7 · «Mi clínica» y revisión** (2026-10-19). Hecho: `mi-clinica.html` (`js/mi-clinica.js`): cerrada hasta
+  - [x] **Fase 7 · «Mi clínica» y revisión** (2026-10-19). Hecho: `mi-clinica.html` (`js/mi-clinica.js`): cerrada hasta
         completar js-17; abierta, el cierre del curso (con Tagui, «¿Y ahora qué?» y el servidor como siguiente paso) y la web
         del alumno a pantalla entera, con el mismo motor que la lección. **⬇️ Descargar mi web (.zip)**: `js/zip.js` (sin
         librerías, sin comprimir) y las imágenes en `lecciones/huellas/imagenes.js` (`node herramientas/huellas-imagenes.mjs`),
         así descarga también con `file://`. Se llega desde la victoria de js-17 y desde el mapa. Test: `esc-mi-clinica`
         (descomprime el .zip y abre la web desde el disco). El laboratorio, con su descarga, también
-        (`laboratorio.html`). Falta: la revisión con QA y alumno novato.
+        (`laboratorio.html`). Revisión con un agente de QA y otro de alumno novato (2026-10-19), arreglada (9dbceb6 y
+        siguiente): «Repetir» de los proyectos, marcadores viejos (hc-11/12, js-14), html-14 #5 dice lo que pide, 4 s por
+        comprobación, aviso accesible del laboratorio; hc-13 en 5 encargos (la portada que se funde, aparte); guías de
+        css-15 y hc-13 en pseudo-CSS (`RETOS.guiaCSS`); `aria-pressed` en los filtros (web y js-17). Se deja como está: quien
+        hizo el Mundo 3 antiguo ve el Mundo 4 cerrado hasta hacer hc-13 (la regla de siempre).
   - Los **proyectos finales de cada mundo** y parte de los ejercicios de cada lección van construyendo esa misma web:
     Mundo HTML → su estructura y contenido; Mundo CSS → su aspecto; HTML + CSS → maquetación completa y responsive;
     JavaScript → interactividad (menú, formulario, carrito o reservas…).

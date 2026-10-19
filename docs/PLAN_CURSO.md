@@ -252,7 +252,7 @@ formularios con estilo, usar pseudo-clases y pseudo-elementos, hacer webs respon
 - **Sustituye a hc-11 y hc-12** (la landing de adopción de mascotas), que salen del mapa; quien ya las hizo conserva su XP y sus insignias.
 - **Objetivo:** convertir la web de «Huellas» en una maqueta profesional: móvil, tableta y ordenador, ratón y teclado, movimiento suave.
 - Parte de la versión oficial del Mundo 2; en el HTML solo se añaden el botón «☰ Menú» y la clase `activo`.
-- **4 encargos:** móvil primero (la base es el móvil, el escritorio en `@media (min-width: 1100px)`, la portada que se funde) · tableta (dos columnas desde 768 px) · ratón, teclado y formulario (`:hover`, `:focus-visible`, `::after`, `transition`, `:user-invalid`) · movimiento (`@keyframes` y `prefers-reduced-motion`).
+- **5 encargos:** móvil primero (la base es el móvil, el escritorio en `@media (min-width: 1100px)`) · la portada que se funde (`::after` con degradado) · tableta (dos columnas desde 768 px) · ratón, teclado y formulario (`:hover`, `:focus-visible`, `::after`, `transition`, `:user-invalid`) · movimiento (`@keyframes` y `prefers-reduced-motion`).
 - Se mide a 375, 768 y 1200 px por posición y estilo calculado: valen otros puntos de corte y Flexbox en vez de Grid. Soluciones: `HUELLAS["mundo-3"].pasos`.
 
 ---

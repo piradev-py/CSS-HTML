@@ -18,9 +18,10 @@ function escribir(pestana, codigo) {
 // [paso, nombre, cambio de la hoja oficial de ese paso, comprobación que debe suspender (inicio del texto)]
 const ROTAS = [
   [1, "escritorio sin @media", "s => s.replace('@media (min-width: 1100px) {', '@media (min-width: 100px) {')", "A 375 px, los servicios"],
-  [2, "tableta después del escritorio", "s => { const i = s.indexOf('/* ---------- 4.'), j = s.indexOf('/* ---------- 5.'), k = s.indexOf('/* ---------- 6.'); return s.slice(0, i) + s.slice(j, k) + s.slice(i, j) + s.slice(k); }", "A 1200 px, la portada vuelve"],
-  [3, "sin transition", "s => s.replace(/  transition: transform[^;]*;/, '')", "Los botones y las tarjetas cambian"],
-  [4, "sin prefers-reduced-motion", "s => s.replace(/@media \\(prefers-reduced-motion[\\s\\S]*$/, '')", "Con menos movimiento (`prefers"]
+  [3, "tableta después del escritorio", "s => { const i = s.indexOf('/* ---------- 4.'), j = s.indexOf('/* ---------- 5.'), k = s.indexOf('/* ---------- 6.'); return s.slice(0, i) + s.slice(j, k) + s.slice(i, j) + s.slice(k); }", "A 1200 px, la portada vuelve"],
+  [4, "sin transition", "s => s.replace(/  transition: transform[^;]*;/, '')", "Los botones y las tarjetas cambian"],
+  [5, "sin prefers-reduced-motion", "s => s.replace(/@media \\(prefers-reduced-motion[\\s\\S]*$/, '')", "Con menos movimiento (`prefers"],
+  [2, "sin degradado", "s => s.replace(/background: linear-gradient[^;]*;/, '')", "La capa se pinta con un degradado"]
 ];
 
 export default async function (b) {
@@ -44,13 +45,13 @@ export default async function (b) {
   b.log("Encargo 1 con la hoja del Mundo 2: " + await b.eval(enPagina(estado)));
   const pasos = JSON.parse(await b.eval("JSON.stringify(HUELLAS['mundo-3'].pasos)"));
   const html = await b.eval("HUELLAS['mundo-3'].html.replace(/\\n *<link rel=\"preconnect\"[^>]*>/g, '')");
-  for (let i = 0; i < 4; i++) {
-    await b.eval(enPagina(escribir, "html", i < 2 ? html.replace(' class="activo"', "") : html));
+  for (let i = 0; i < 5; i++) {
+    await b.eval(enPagina(escribir, "html", i < 3 ? html.replace(' class="activo"', "") : html));
     await b.eval(enPagina(escribir, "css", pasos[i]));
     await b.esperar(6000);
     b.log("Encargo " + (i + 1) + " con la versión oficial: " + await b.eval(enPagina(estado)));
     if (i === 0) await b.foto("hc13-encargo1");
-    if (i < 3) {
+    if (i < 4) {
       await b.eval("document.querySelector('.modal-fondo')?.remove(); document.querySelector('[data-siguiente]').click()");
       await b.esperar(2500);
       b.log("  → encargo " + (i + 2) + " parte de lo anterior: " + await b.eval(enPagina(estado)));

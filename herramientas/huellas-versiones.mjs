@@ -20,7 +20,7 @@ const COMMITS = {
   "mundo-1": "8866e01",
   "mundo-2": "a9d2bc4",
   "mundo-3": "348d16d",
-  "mundo-4": "174f321"
+  "mundo-4": "0f1c69d"
 };
 
 // Encargos del Proyecto web de cada mundo: el archivo que escribe el alumno se corta justo antes de cada marca, y cada
@@ -31,7 +31,12 @@ const COMMITS = {
 const CORTES = {
   "mundo-1": { archivo: "html", marcas: ["<main>", '<section id="servicios"', '<section id="horario"', '<section id="opiniones"'] },
   "mundo-2": { archivo: "css", marcas: ["/* ---------- 2.", "#horario {", "/* ---------- 3."] },
-  "mundo-3": { archivo: "css", quitar: [[4, 6, 7], [6, 7], [7]] },
+  "mundo-3": {
+    archivo: "css",
+    quitar: [[4, 6, 7], [4, 6, 7], [6, 7], [7]],
+    // El primer encargo, sin «la portada más ancha» del escritorio (el final de su @media): eso es el segundo
+    retocar: { 0: css => sinTexto(css, css.match(/\n\n {2}\/\* La portada, más ancha[\s\S]*?(?=\n\}\n)/)?.[0] || "falta la portada ancha") }
+  },
   "mundo-4": {
     archivo: "js",
     quitar: [[2, 3, 4, 5, 6, 7, 8], [4, 5, 6, 7, 8], [5, 6, 7, 8], [6, 7, 8], [7, 8]],

@@ -250,5 +250,24 @@
     return { raiz, editor };
   }
 
-  window.RETOS = { evaluar, crear, pestanaReto };
+  /**
+   * Proyecto web: la guía de estilo de un encargo escrita como «pseudo-CSS» a partir del CSS oficial. Cada selector con
+   * sus propiedades debajo, sin llaves, sin «;» y con las variables por su nombre (var(--crema) → crema): se lee como el
+   * código que hay que escribir, pero copiado tal cual no funciona, así que la hoja la sigue escribiendo el alumno.
+   * Los comentarios de sección («---------- 4. Tableta …») pasan a títulos en mayúsculas.
+   */
+  function guiaCSS(css) {
+    return css
+      .replace(/\/\* -{3,} \d+\. ([^*]*?) -{3,}[\s\S]*?\*\//g, (m, t) => t.toUpperCase())
+      .replace(/\/\*[\s\S]*?\*\/\n?/g, "")
+      .replace(/var\(--([\w-]+)\)/g, "$1")
+      .replace(/,\n[ \t]*/g, ", ")
+      .replace(/[ \t]*\{[ \t]*$/gm, "")
+      .replace(/^[ \t]*\}[ \t]*\n?/gm, "")
+      .replace(/;[ \t]*$/gm, "")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+  }
+
+  window.RETOS = { evaluar, crear, pestanaReto, guiaCSS };
 })();

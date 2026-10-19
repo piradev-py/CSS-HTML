@@ -12,7 +12,7 @@ const mundo = process.env.MUNDO || "1";
 const PARTES = {
   "1": [["header", "header"], ["main", "main"], ["#servicios", "#equipo"], ["#horario", "#cita"], ["#opiniones", "footer"]],
   "2": [["header", "#inicio"], ["header", ".ventajas"], ["#horario", "footer"], ["header", "#equipo"]],
-  "3": [["header", "#inicio", 375], ["header", ".ventajas", 768], ["header", ".ventajas", 1200], ["header", ".ventajas", 1200]]
+  "3": [["header", "#inicio", 375], ["header", ".ventajas", 1200], ["header", ".ventajas", 768], ["header", ".ventajas", 1200], ["header", ".ventajas", 1200]]
 };
 // Ancho de la captura: el Mundo 2 se diseña para escritorio (1200 px)
 const ANCHO = { "1": 1000, "2": 1200, "3": 1200 };

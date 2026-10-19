@@ -20,7 +20,8 @@ const ROTAS = [
   [1, "sin aria-expanded", "s => s.replace('botonMenu.setAttribute(\"aria-expanded\", \"true\");', '')", "Al pulsar «☰ Menú»"],
   [4, "sin vaciar antes de pintar", "s => s.replace('listaServicios.textContent = \"\";', '')", "Al pulsar «Todos» después"],
   [5, "acepta fechas pasadas", "s => s.replace('campoFecha.value >= hoy()', 'true')", "Con el reloj en el 20/10/2026"],
-  [6, "no guarda las citas", "s => s.replace('localStorage.setItem(\"huellas-citas\", JSON.stringify(citas));', '')", "Tras recargar la página"]
+  [6, "no guarda las citas", "s => s.replace('localStorage.setItem(\"huellas-citas\", JSON.stringify(citas));', '')", "Tras recargar la página"],
+  [4, "filtros sin aria-pressed", "s => s.replace('boton.setAttribute(\"aria-pressed\", \"true\");', '')", "El botón pulsado tiene `aria-pressed"]
 ];
 
 export default async function (b) {

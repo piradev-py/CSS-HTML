@@ -2,9 +2,9 @@
    <CSS-HTML> · Mundo HTML + CSS · Lección hc-13
    Proyecto web: la maqueta profesional de «Huellas»
    (docs/PROYECTO_FINAL.md). Sustituye a hc-11 y hc-12.
-   4 encargos sobre la hoja oficial del Mundo 2:
-   móvil primero · tableta · ratón, teclado y formulario ·
-   movimiento. En el HTML solo se añaden el botón del menú y la
+   5 encargos sobre la hoja oficial del Mundo 2:
+   móvil primero · la portada que se funde · tableta · ratón,
+   teclado y formulario · movimiento. En el HTML solo se añaden el botón del menú y la
    clase «activo». Las soluciones son HUELLAS["mundo-3"].pasos
    (herramientas/huellas-versiones.mjs).
    Notas:
@@ -25,6 +25,12 @@
   const INICIO = { html: sinPreconnect(HUELLAS["mundo-2"].html), css: HUELLAS["mundo-2"].pasos[3] };
   const HTML = sinPreconnect(HUELLAS["mundo-3"].html);
   const HTML_SIN_ACTIVO = HTML.replace(' class="activo"', "");
+
+  // Las guías de estilo de cada encargo, en pseudo-CSS, salen de la hoja oficial: una sección («---------- N.»)
+  // o, en el encargo 2, el final de la @media de escritorio («La portada, más ancha…»)
+  const seccion = (css, n) => css.match(new RegExp("/\\* -{10} " + n + "\\.[\\s\\S]*?(?=/\\* -{10} |$)"))[0];
+  const PORTADA_ANCHA = PASOS[1].match(/ {2}\/\* La portada, más ancha[\s\S]*?(?=\n\}\n)/)[0];
+  const COMO_LEER = "Cómo leerlo: cada selector con sus propiedades debajo. Tú pones las llaves { }, los ; y var(--…) en las variables (crema → var(--crema)).\n\n";
 
   // La misma maqueta escrita de otra forma: otros puntos de corte y las rejillas con Flexbox en vez de Grid
   const FLEX = "\n/* Las rejillas, con Flexbox */\n.rejilla {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 24px;\n}\n\n.rejilla > * {\n  flex: 1 1 100%;\n}\n\n" +
@@ -77,10 +83,13 @@
         tipo: "proyecto",
         proyecto: PROYECTO,
         pestana: "css",
-        enunciado: "**Móvil primero.** Hasta ahora la hoja pensaba en el ordenador. Ahora la **base** (lo que va sin `@media`) es el **móvil**, y el ordenador se añade después:\n\n1. En `index.html`, el **botón del menú** dentro del `header`, entre la marca y el `nav`: `<button class=\"boton-menu\" type=\"button\">☰ Menú</button>`.\n2. En la base, los **valores del móvil** de la guía (títulos más pequeños, menos relleno) y la **colocación del móvil**: todo en una columna, el menú plegado (se despliega con la clase `abierto`, que pondrá el JavaScript del Mundo 4) y el botón «Pide tu cita» de la cabecera escondido.\n3. El bloque **«Colocación (escritorio)»** del Mundo 2, dentro de `@media (min-width: 1100px)`, con los valores de escritorio y la **portada más ancha**, que se funde con el fondo por la izquierda (`::after` con un degradado).\n\nEl ancho de tableta todavía no se pide: a 768 px puede verse como el móvil.",
+        enunciado: "**Móvil primero.** Hasta ahora la hoja pensaba en el ordenador. Ahora la **base** (lo que va sin `@media`) es el **móvil**, y el ordenador se añade después:\n\n1. En `index.html`, el **botón del menú** dentro del `header`, entre la marca y el `nav`: `<button class=\"boton-menu\" type=\"button\">☰ Menú</button>`.\n2. En la base, los **valores del móvil** de la guía (títulos más pequeños, menos relleno) y la **colocación del móvil**: todo en una columna, el menú plegado (se despliega con la clase `abierto`, que pondrá el JavaScript del Mundo 4) y el botón «Pide tu cita» de la cabecera escondido.\n3. Tu bloque **«Colocación (escritorio)»** del Mundo 2, dentro de `@media (min-width: 1100px)`, con los valores de escritorio.\n\nEl ancho de tableta todavía no se pide: a 768 px puede verse como el móvil. Y la portada que se funde con el fondo llega en el próximo encargo.",
         captura: "recursos/huellas/capturas/m3-encargo-1.png",
-        textos: "HTML: <button class=\"boton-menu\" type=\"button\">☰ Menú</button>  → en el header, después de la marca y antes del nav\n\nLA BASE ES EL MÓVIL (cambia estos valores; sin @media)\nh1: 2.2rem · h2: 1.7rem\nsecciones (section): relleno 48px 20px\ncabecera (header): relleno 12px 20px\nportada (.portada): margen 16px · relleno 28px 20px   (quita el margin-top de 32px)\nfranja (.ventajas): margen 0 16px · relleno 8px 20px\ntabla (table): relleno 8px · celdas (th, td): relleno 10px 14px\npie (footer): relleno 40px 20px 24px\n\nCOLOCACIÓN EN EL MÓVIL (sin @media)\nheader: pegado arriba (sticky, top 0, z-index 10) · flex · que salte de línea (wrap) · space-between · centrado en vertical\n.marca: flex · centrada en vertical · hueco 10px\nbotón del menú (.boton-menu): relleno 10px 16px · fondo crema · texto oscuro · sin sombra\nnav: ancho 100% (baja a su propia línea)\n  menú (nav ul): escondido (display: none)\n  con la clase abierto (nav.abierto ul): en bloque · relleno 8px 0\n  cada enlace (nav li a): en bloque · relleno 10px 0\nbotón de la cabecera (header .boton): escondido\nfoto de la portada (.portada-foto): relative · margen 32px 0 24px\n  nota (.portada-foto .nota): absolute · top -40px · right 0 · ancho 180px\ncada ventaja (.ventajas li): flex · centrada en vertical · hueco 12px · margen 12px 0\ncuadrículas y pie (.rejilla, .pie-columnas): grid · hueco 24px   (una sola columna)\n\nESCRITORIO: @media (min-width: 1100px) { … }\n  h1: 3.1rem · h2: 2rem · section: relleno 72px 32px · header: relleno 16px 32px · footer: relleno 56px 32px 24px\n  .boton-menu: escondido · nav: ancho auto · header .boton: inline-block\n  + todo el bloque «Colocación (escritorio)» del Mundo 2, tal cual\n  + la portada más ancha:\n    .portada: margen 32px auto 0 · relleno 48px 48px 88px · columnas 1fr 1.3fr 300px\n    .portada-foto: margen 0\n    .portada-foto::after: content \"\" · absolute · top 0 · bottom 0 · left 0 · ancho 45%\n      esquinas 20px 0 0 20px (var(--radio) 0 0 var(--radio))\n      fondo: linear-gradient(to right, var(--crema), rgb(247 250 248 / 0))\n    .portada-foto .nota: z-index 1 (por encima del degradado)\n    .ventajas: margen -40px auto 0 · relleno 22px 28px · .ventajas li: margen 0",
-        glosario: ["mobile first", "@media", "min-width y max-width (en @media)", "menú del móvil (.abierto)", "display: none", "flex-wrap", "::before y ::after", "content", "linear-gradient()", "position: absolute"],
+        textos: "HTML · en el header, entre la marca y el nav\n<button class=\"boton-menu\" type=\"button\">☰ Menú</button>\n\n" + COMO_LEER +
+          "LA BASE ES EL MÓVIL · cambia estos valores (sin @media)\nh1\n  font-size: 2.2rem\n\nh2\n  font-size: 1.7rem\n\nsection\n  padding: 48px 20px\n\nheader\n  padding: 12px 20px\n\n" +
+          ".portada\n  margin: 16px            ← en lugar del margin-top: 32px\n  padding: 28px 20px\n\n.ventajas\n  margin: 0 16px\n  padding: 8px 20px\n\ntable\n  padding: 8px\n\nth, td\n  padding: 10px 14px\n\nfooter\n  padding: 40px 20px 24px\n\n" +
+          RETOS.guiaCSS(seccion(PASOS[0], 3)) + "\n\n" + RETOS.guiaCSS(seccion(PASOS[0], 5)),
+        glosario: ["mobile first", "@media", "min-width y max-width (en @media)", "menú del móvil (.abierto)", "display: none", "flex-wrap", "position: sticky"],
         inicial: INICIO,
         comprobaciones: [
           { texto: "En el `header`, el botón «☰ Menú» (`button` con `class=\"boton-menu\"` y `type=\"button\"`), entre la marca y el `nav`", repaso: "hc-06",
@@ -116,11 +125,7 @@
                 && cerca(est(d, "h1").fontSize, 49.6) && cerca(est(d, "h2").fontSize, 32) && relleno(est(d, "#servicios"), 72, 32); } },
           { texto: "A 1200 px, los servicios en 3 columnas, el equipo en 4 y las opiniones en 3, sin scroll horizontal", repaso: "css-13",
             prueba: async doc => { const v = await a(doc, 1200);
-              return sinScroll(v, 1200) && porFila(v.doc, "#servicios .servicio") === 3 && porFila(v.doc, "#equipo figure") === 4 && porFila(v.doc, ".opinion") === 3; } },
-          { texto: "A 1200 px, la portada más ancha (relleno de 88px abajo) y la foto que se funde por la izquierda: `::after` con un degradado", repaso: "hc-03",
-            prueba: async doc => { const d = (await a(doc, 1200)).doc; const p = est(d, ".portada"); const f = est(d, ".portada-foto", "::after");
-              const fotos = [".portada-texto", ".portada-foto", ".tarjeta-cita"].map(s => d.querySelector(s).getBoundingClientRect().width);
-              return cerca(p.paddingBottom, 88) && fotos[1] > fotos[0] && f.position === "absolute" && /linear-gradient/.test(f.backgroundImage) && cerca(f.top, 0); } }
+              return sinScroll(v, 1200) && porFila(v.doc, "#servicios .servicio") === 3 && porFila(v.doc, "#equipo figure") === 4 && porFila(v.doc, ".opinion") === 3; } }
         ],
         pistas: [pista, "Para pasar a escritorio: corta tu bloque «Colocación (escritorio)» y pégalo dentro de @media (min-width: 1100px) { … }. Fuera, en la base, deja la colocación del móvil. Recuerda: la base no lleva @media, y cada @media (min-width) añade o cambia algo para las pantallas más anchas."],
         solucion: { html: HTML_SIN_ACTIVO, css: PASOS[0] },
@@ -130,11 +135,43 @@
         tipo: "proyecto",
         proyecto: PROYECTO,
         pestana: "css",
-        enunciado: "**La tableta.** Entre el móvil y el ordenador hay un hueco: a 768 px todo va en una columna larguísima. Añade una `@media (min-width: 768px)` (antes de la de escritorio, para que la de escritorio gane) con **dos columnas**:\n\n1. La **portada**: el texto y la foto lado a lado, y la tarjeta «Pide tu cita» debajo, ocupando las dos columnas.\n2. La **franja**, los **servicios**, el **equipo**, las **opiniones** y el **pie**, en dos columnas.\n\nY en el escritorio, la tarjeta de cita vuelve a su columna (`grid-column: auto`).",
+        enunciado: "**La portada que se funde.** En el ordenador, la portada se ensancha: la foto ocupa más y su lado izquierdo se funde con el fondo crema, como en la captura. Todo va **al final de la `@media` de escritorio**:\n\n1. La portada, más ancha y con más aire abajo; la foto, sin margen.\n2. Sobre la foto, un `::after`: una capa vacía (`content: \"\"`) colocada con `position: absolute` encima de su lado izquierdo y pintada con un **degradado** del crema a transparente.\n3. La nota manuscrita, por encima del degradado.\n4. La franja vuelve a subir sobre la portada, como en el Mundo 2.\n\nEn el móvil no cambia nada.",
         captura: "recursos/huellas/capturas/m3-encargo-2.png",
-        textos: "TABLETA: @media (min-width: 768px) { … }   → entre la base y la @media de escritorio\n  .portada: grid · 2 columnas iguales (1fr 1fr) · hueco 32px · centrada en vertical\n  .tarjeta-cita: de la línea 1 a la 3 (grid-column: 1 / 3)\n  .ventajas, .rejilla, .pie-columnas: 2 columnas iguales\n  .ventajas: grid · hueco 8px entre filas y 24px entre columnas (gap: 8px 24px)\n\nESCRITORIO (dentro de la @media de 1100px):\n  .tarjeta-cita: grid-column auto (vuelve a su columna)",
-        glosario: ["@media en cascada", "min-width y max-width (en @media)", "display: grid", "grid-template-columns", "fr", "grid-column: 1 / 3", "grid-column: span 2", "gap"],
+        textos: COMO_LEER + "ESCRITORIO · al final de la @media (min-width: 1100px)\n" + RETOS.guiaCSS(PORTADA_ANCHA).replace(/^/gm, "  "),
+        glosario: ["::before y ::after", "content", "linear-gradient()", "position: absolute", "top, right, bottom, left", "z-index", "grid-template-columns", "fr"],
         inicial: { html: HTML_SIN_ACTIVO, css: PASOS[0] },
+        comprobaciones: [
+          { texto: "A 1200 px, la portada más ancha: 32px de margen arriba, relleno de 48px y 88px abajo, y la foto en la columna más ancha", repaso: "css-13",
+            prueba: async doc => { const d = (await a(doc, 1200)).doc; const p = est(d, ".portada");
+              const anchos = [".portada-texto", ".portada-foto", ".tarjeta-cita"].map(s => d.querySelector(s).getBoundingClientRect().width);
+              return cerca(p.marginTop, 32) && relleno(p, 48, 48, 88, 48) && anchos[1] > anchos[0] && cerca(anchos[2], 300) && cerca(est(d, ".portada-foto").marginTop, 0); } },
+          { texto: "Sobre la foto, un `::after` vacío y `absolute`, de arriba abajo en el lado izquierdo (45% de ancho)", repaso: "hc-03",
+            prueba: async doc => { const d = (await a(doc, 1200)).doc; const f = est(d, ".portada-foto", "::after"); const foto = d.querySelector(".portada-foto").getBoundingClientRect();
+              return f.content === '""' && f.position === "absolute" && cerca(f.top, 0) && cerca(f.bottom, 0) && cerca(f.left, 0) && Math.abs(px(f.width) - foto.width * 0.45) < 2; } },
+          { texto: "La capa se pinta con un degradado hacia la derecha, del crema a transparente", repaso: "hc-03",
+            prueba: async doc => { const f = est((await a(doc, 1200)).doc, ".portada-foto", "::after");
+              return /linear-gradient\(to right, rgb\(247, 250, 248\), rgba\(247, 250, 248, 0\)\)/.test(f.backgroundImage); } },
+          { texto: "La nota manuscrita queda por encima del degradado (`z-index` 1)", repaso: "css-10",
+            prueba: async doc => est((await a(doc, 1200)).doc, ".portada-foto .nota").zIndex === "1" },
+          { texto: "A 1200 px, la franja vuelve a subir 40px sobre la portada, con relleno de 22px y 28px", repaso: "css-07",
+            prueba: async doc => { const d = (await a(doc, 1200)).doc; const v = est(d, ".ventajas");
+              return cerca(v.marginTop, -40) && relleno(v, 22, 28) && todos(d, ".ventajas li").every(l => cerca(l.marginTop, 0)); } },
+          { texto: "En el móvil no cambia nada: a 375 px, la portada sigue con 16px de margen y sin la capa", repaso: "hc-06",
+            prueba: async doc => { const d = (await a(doc, 375)).doc; return margen(est(d, ".portada"), 16, 16) && est(d, ".portada-foto", "::after").content === "none"; } }
+        ],
+        pistas: [pista, "La capa: .portada-foto::after { content: \"\"; position: absolute; top: 0; bottom: 0; left: 0; width: 45%; background: linear-gradient(to right, var(--crema), rgb(247 250 248 / 0)); }. La foto ya tiene position: relative, así que la capa se coloca respecto a ella. Va dentro de la @media de escritorio: en el móvil no debe aparecer."],
+        solucion: { html: HTML_SIN_ACTIVO, css: PASOS[1] },
+        alternativas: [{ html: HTML_SIN_ACTIVO, css: otraForma(PASOS[1]) }]
+      },
+      {
+        tipo: "proyecto",
+        proyecto: PROYECTO,
+        pestana: "css",
+        enunciado: "**La tableta.** Entre el móvil y el ordenador hay un hueco: a 768 px todo va en una columna larguísima. Añade una `@media (min-width: 768px)` (antes de la de escritorio, para que la de escritorio gane) con **dos columnas**:\n\n1. La **portada**: el texto y la foto lado a lado, y la tarjeta «Pide tu cita» debajo, ocupando las dos columnas.\n2. La **franja**, los **servicios**, el **equipo**, las **opiniones** y el **pie**, en dos columnas.\n\nY en el escritorio, la tarjeta de cita vuelve a su columna (`grid-column: auto`).",
+        captura: "recursos/huellas/capturas/m3-encargo-3.png",
+        textos: COMO_LEER + RETOS.guiaCSS(seccion(PASOS[2], 4)),
+        glosario: ["@media en cascada", "min-width y max-width (en @media)", "display: grid", "grid-template-columns", "fr", "grid-column: 1 / 3", "grid-column: span 2", "gap"],
+        inicial: { html: HTML_SIN_ACTIVO, css: PASOS[1] },
         comprobaciones: [
           { texto: "A 768 px nada se sale de la pantalla", repaso: "hc-05",
             prueba: async doc => sinScroll(await a(doc, 768), 768) },
@@ -157,18 +194,18 @@
               return c.left >= f.right - 1 && porFila(d, "#servicios .servicio") === 3; } }
         ],
         pistas: [pista, "Una @media (min-width: 768px) { .rejilla { grid-template-columns: 1fr 1fr; } } pone dos columnas desde 768 px. Que vaya ANTES de la de 1100 px: si va después, a 1200 px también se cumple y ganaría ella. Para que la tarjeta ocupe las dos columnas: grid-column: 1 / 3."],
-        solucion: { html: HTML_SIN_ACTIVO, css: PASOS[1] },
-        alternativas: [{ html: HTML_SIN_ACTIVO, css: otraForma(PASOS[1]) }]
+        solucion: { html: HTML_SIN_ACTIVO, css: PASOS[2] },
+        alternativas: [{ html: HTML_SIN_ACTIVO, css: otraForma(PASOS[2]) }]
       },
       {
         tipo: "proyecto",
         proyecto: PROYECTO,
         pestana: "css",
         enunciado: "**Ratón, teclado y formulario.** Una web profesional responde a lo que haces:\n\n1. En `index.html`, el enlace **Inicio** del menú lleva `class=\"activo\"`: es la sección en la que estás (en el Mundo 4, el JavaScript la cambiará al pulsar).\n2. Los **adornos con `::after`**: la rayita bajo el enlace activo y la de debajo de cada antetítulo.\n3. Al pasar el **ratón**: los enlaces del menú cambian de color, los botones se oscurecen y suben 2px, y las tarjetas suben 4px con más sombra. Todo con una **transición** suave.\n4. Con el **teclado**, el foco se ve: un contorno de 3px.\n5. El **formulario**: el campo con el foco se marca, y en rojo el que está mal (después de tocarlo), en verde el que está bien.",
-        captura: "recursos/huellas/capturas/m3-encargo-3.png",
-        textos: "HTML: «Inicio» del menú → <a class=\"activo\" href=\"#inicio\">Inicio</a>\n\n/* ---------- 6. Interacción: ratón y teclado ---------- */   (después de las @media)\nnav a:hover → color principal\nnav a.activo → relative · color oscuro · grosor 600\nnav a.activo::after → content \"\" · absolute · left 0 · bottom -4px · ancho 24px · alto 2px · fondo principal\n.antetitulo::after → content \"\" · en bloque · ancho 36px · alto 3px · margen arriba 10px · esquinas 3px · fondo principal\n.boton:hover y button:hover → fondo --principal-oscuro · sube 2px (transform: translateY(-2px))\n.boton-menu:hover → fondo menta\na:focus-visible y button:focus-visible → contorno (outline) 3px sólido principal\n.servicio, #equipo figure y .opinion, con :hover → suben 4px · sombra 0 16px 36px rgb(18 51 47 / 0.14)\n.boton, button, .servicio, #equipo figure, .opinion → transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s\n\nFORMULARIO\ninput, select y textarea con :focus → borde principal · contorno 3px sólido rgb(31 122 107 / 0.2)\ninput, select y textarea con :user-invalid → borde #c23a52 · fondo #fdf2f4\ninput y select con :user-valid → borde principal",
+        captura: "recursos/huellas/capturas/m3-encargo-4.png",
+        textos: "HTML · «Inicio» del menú\n<a class=\"activo\" href=\"#inicio\">Inicio</a>\n\n" + COMO_LEER + RETOS.guiaCSS(seccion(PASOS[3], 6)),
         glosario: [":hover", ":focus-visible", "enlace activo (.activo)", "::before y ::after", "content", "transform: translate()", "transition", "outline", ":user-invalid y :user-valid", "a, b (agrupar)"],
-        inicial: { html: HTML_SIN_ACTIVO, css: PASOS[1] },
+        inicial: { html: HTML_SIN_ACTIVO, css: PASOS[2] },
         comprobaciones: [
           { texto: "El enlace «Inicio» del menú lleva `class=\"activo\"`", repaso: "hc-04",
             prueba: doc => { const a1 = doc.querySelector('nav a[href="#inicio"]'); return !!a1 && a1.classList.contains("activo") && doc.querySelectorAll("nav a.activo").length === 1; } },
@@ -202,18 +239,18 @@
                 && bien.some(r => /input:user-valid/.test(r.selectorText) && /var\(--principal\)|rgb\(31, 122, 107\)/.test(r.style.borderColor)); } }
         ],
         pistas: [pista, "Una raya con ::after: nav a.activo { position: relative; } y nav a.activo::after { content: \"\"; position: absolute; left: 0; bottom: -4px; width: 24px; height: 2px; background-color: var(--principal); }. Para que el cambio sea suave, la transition va en el estado normal (.servicio { transition: … }), no en el :hover."],
-        solucion: { html: HTML, css: PASOS[2] },
-        alternativas: [{ html: HTML, css: otraForma(PASOS[2]) }]
+        solucion: { html: HTML, css: PASOS[3] },
+        alternativas: [{ html: HTML, css: otraForma(PASOS[3]) }]
       },
       {
         tipo: "proyecto",
         proyecto: PROYECTO,
         pestana: "css",
         enunciado: "**El movimiento.** ¡El último encargo!\n\n1. Una animación `@keyframes` llamada **`aparecer`**: empieza invisible y 24px más abajo, y acaba visible en su sitio.\n2. Que la usen el **texto**, la **foto** y la **tarjeta de cita** de la portada al cargar la página: 0.7s, `ease-out`.\n3. **Menos movimiento, por favor:** si el ordenador de la persona pide menos movimiento, ni la portada se anima ni las tarjetas y botones tienen transición.\n\nAl terminar, la lista repasa la maqueta a los tres anchos.",
-        captura: "recursos/huellas/capturas/m3-encargo-4.png",
-        textos: "/* ---------- 7. Movimiento: la portada entra al cargar ---------- */\n@keyframes aparecer: desde (from) opacidad 0 y 24px más abajo (translateY(24px)) · hasta (to) opacidad 1 y en su sitio (translateY(0))\n.portada-texto, .portada-foto, .tarjeta-cita → animation: aparecer 0.7s ease-out\n\nMENOS MOVIMIENTO: @media (prefers-reduced-motion: reduce) { … }\n  .portada-texto, .portada-foto, .tarjeta-cita → sin animación (none)\n  .boton, button, .servicio, #equipo figure, .opinion → sin transición (none)",
+        captura: "recursos/huellas/capturas/m3-encargo-5.png",
+        textos: COMO_LEER + RETOS.guiaCSS(seccion(PASOS[4], 7)),
         glosario: ["@keyframes", "animation", "prefers-reduced-motion", "transform: translate()", "opacity", "transition"],
-        inicial: { html: HTML, css: PASOS[2] },
+        inicial: { html: HTML, css: PASOS[3] },
         comprobaciones: [
           { texto: "El texto, la foto y la tarjeta de la portada usan la animación `aparecer`, de 0.7s y `ease-out`", repaso: "hc-09",
             prueba: doc => [".portada-texto", ".portada-foto", ".tarjeta-cita"].every(s => { const e = est(doc, s);
@@ -235,8 +272,8 @@
             prueba: async doc => porFila((await a(doc, 375)).doc, ".servicio") === 1 && porFila((await a(doc, 768)).doc, ".servicio") === 2 && porFila((await a(doc, 1200)).doc, ".servicio") === 3 }
         ],
         pistas: [pista, "@keyframes aparecer { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } } y luego .portada-texto { animation: aparecer 0.7s ease-out; }. Lo de menos movimiento va dentro de @media (prefers-reduced-motion: reduce) { … } con animation: none y transition: none."],
-        solucion: { html: HTML, css: PASOS[3] },
-        alternativas: [{ html: HTML, css: otraForma(PASOS[3]) }]
+        solucion: { html: HTML, css: PASOS[4] },
+        alternativas: [{ html: HTML, css: otraForma(PASOS[4]) }]
       }
     ]
   });

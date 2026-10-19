@@ -268,7 +268,9 @@ Funciona como un `reto` (lista de comprobaciones que se marcan en verde, pistas,
 - `captura` (opcional): imagen de cómo debe quedar, bajo el enunciado (se abre en grande al pulsarla).
   Se generan con `MUNDO=1` (o `2`, `3`) `node tests/navegador/cdp.mjs esc-capturas-huellas.mjs` (en `recursos/huellas/capturas/`).
 - `textos` (opcional): los textos del cliente, en texto plano, en una caja «📄 Textos del encargo» con «📋 Copiar».
-  Son el contenido; las etiquetas las pone el alumno.
+  Son el contenido; las etiquetas las pone el alumno. En los encargos de CSS, la guía de estilo se escribe en pseudo-CSS
+  con `RETOS.guiaCSS(css)` a partir de la hoja oficial: cada selector con sus propiedades debajo, sin llaves ni `;` y con
+  las variables por su nombre. Se lee como el código, pero copiado tal cual no funciona, y nunca se desincroniza.
 - `alternativas` (opcional): `[{ html, css, js }]`, la misma web escrita de otra forma (otras etiquetas de agrupación,
   otras clases; en el Mundo 2, otros selectores y otras formas de escribir los valores; en el Mundo 3, otros puntos de corte y Flexbox en
   vez de Grid). El verificador exige que **también aprueben**: así se comprueba que se mira el resultado, no el código.
