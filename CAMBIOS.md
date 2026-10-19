@@ -19,6 +19,13 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.3.1 · 2026-10-19
+
+- css-10: con la cabecera `sticky`, `scroll-margin-top` evita que el título de una sección quede tapado al saltar a
+  ella desde el menú. El Proyecto web del Mundo HTML + CSS (hc-13) lo pide y lo comprueba, y la web de Huellas lo usa.
+- js-16: un consejo sobre `getDay()` (el día de la semana) y la trampa de la fecha sin hora; los dos con su ficha en
+  el glosario.
+
 ## 1.3.0 · 2026-10-19
 
 - **Proyecto web «Huellas»**: al final de cada mundo construyes una parte de la misma web, la de la clínica
