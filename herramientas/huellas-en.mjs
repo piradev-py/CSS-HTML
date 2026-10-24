@@ -24,9 +24,11 @@ vm.runInNewContext(readFileSync(raiz + "lecciones/huellas/versiones.js", "utf8")
 const ES = caja.HUELLAS;
 
 const escapar = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-// Un espacio de la clave vale también por un salto de línea con sangría (los párrafos largos ocupan varias líneas)
+// Un espacio de la clave vale también por un salto de línea con sangría (los párrafos largos ocupan varias líneas),
+// y una clave que empieza o acaba en letra no se cambia dentro de otra palabra («Fecha» no toca campoFecha)
+const borde = (es, lado) => /[\p{L}\p{N}_]/u.test(lado === "ini" ? es[0] : es[es.length - 1]) ? (lado === "ini" ? "(?<![\\p{L}\\p{N}_])" : "(?![\\p{L}\\p{N}_])") : "";
 const textos = Object.entries(TEXTOS).filter(([, en]) => en).sort((a, b) => b[0].length - a[0].length)
-  .map(([es, en]) => [new RegExp(escapar(es).replace(/ +/g, "\\s+"), "g"), en, es]);
+  .map(([es, en]) => [new RegExp(borde(es, "ini") + escapar(es).replace(/ +/g, "\\s+") + borde(es, "fin"), "gu"), en, es]);
 const nombres = Object.entries(NOMBRES).filter(([, en]) => en).sort((a, b) => b[0].length - a[0].length)
   .map(([es, en]) => [new RegExp("(?<![\\w\\-/])" + escapar(es) + "(?![\\w\\-/]|\\.(?:jpe?g|png|svg|html|css|js|json)\\b)", "g"), en, es]);
 const usados = new Set();
@@ -44,9 +46,13 @@ function traducir(s) {
   for (const [re, en, es] of nombres) s = s.replace(re, () => { usados.add("n:" + es); return en; });
   return s;
 }
-const recorrer = v => typeof v === "string" ? traducir(v)
-  : Array.isArray(v) ? v.map(recorrer)
-  : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, recorrer(x)]))
+// En los datos (opiniones.json…) también cambian las claves de cada objeto (autor → author), igual que en el JS que los lee;
+// las claves de HUELLAS (mundo-1, html, css, datos…) y los nombres de archivo no
+const traducirNombre = k => nombres.reduce((s, [re, en, es]) => s.replace(re, () => { usados.add("n:" + es); return en; }), k);
+const recorrer = (v, enDatos) => typeof v === "string" ? traducir(v)
+  : Array.isArray(v) ? v.map(x => recorrer(x, enDatos))
+  : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) =>
+      [enDatos && !/\.\w+$/.test(k) ? traducirNombre(k) : k, recorrer(x, enDatos || k === "datos")]))
   : v;
 
 /* ---------- --pendientes: lo que la tabla aún no cubre ---------- */
@@ -56,8 +62,8 @@ if (process.argv.includes("--pendientes")) {
   const textosNuevos = new Set(), nombresNuevos = new Set();
   const conLetras = t => /[a-záéíóúñ]{2}/i.test(t);
   for (const f of fuentes) {
-    for (const m of f.matchAll(/>([^<>]+)</g)) { const t = m[1].trim(); if (conLetras(t) && !/^[\s{};:#.\w-]+$/.test(t)) textosNuevos.add(t.replace(/\s+/g, " ")); }
-    for (const m of f.matchAll(/\b(?:alt|title|content|placeholder|aria-label)="([^"]+)"/g)) if (conLetras(m[1])) textosNuevos.add(m[1]);
+    for (const m of f.matchAll(/>([^<>]+)</g)) { const t = m[1].trim(); if (conLetras(t) && !/^[\s{};:#.\w-]+$/.test(t) && !/^\$\{[^}]*\}$/.test(t)) textosNuevos.add(t.replace(/\s+/g, " ")); }
+    for (const m of f.matchAll(/\b(?:alt|title|content|placeholder|aria-label)="([^"]+)"/g)) if (conLetras(m[1]) && !/^\$\{[^}]*\}$/.test(m[1])) textosNuevos.add(m[1]);
     for (const m of f.matchAll(/\/\*\s*([\s\S]*?)\s*\*\//g)) if (conLetras(m[1])) textosNuevos.add(m[1]);
     for (const m of f.matchAll(/\/\/ ?(.+)$/gm)) if (conLetras(m[1]) && !/https?:$/.test(f.slice(0, m.index))) textosNuevos.add(m[1].trim());
     for (const m of f.matchAll(/"([^"\n]*[a-záéíóúñ][^"\n]*)"/gi)) if (/\s|[áéíóúñ¿¡]/i.test(m[1]) && !/[<>=]/.test(m[1])) textosNuevos.add(m[1]);
@@ -65,7 +71,7 @@ if (process.argv.includes("--pendientes")) {
     for (const m of f.matchAll(/\b(?:id|for|name|value|data-[a-z-]+)="([^"]+)"/g)) if (/^[\w-]+$/.test(m[1])) nombresNuevos.add(m[1]);
     for (const m of f.matchAll(/--[a-z][\w-]*/g)) nombresNuevos.add(m[0]);
     for (const m of f.matchAll(/\b(?:const|let|var|function)\s+([A-Za-z_]\w*)/g)) nombresNuevos.add(m[1]);
-    for (const m of f.matchAll(/\b([a-z]\w*)\s*:(?!\/)/g)) if (!/^(https?|mailto|tel|hover|focus|root|before|after|active|not|nth|first|last|user)/.test(m[1])) nombresNuevos.add(m[1]);
+    for (const m of f.matchAll(/(?<![\w\-.$])([a-z]\w*)\s*:(?!\/)/g)) if (!/^(https?|mailto|tel|hover|focus|root|before|after|active|not|nth|first|last|user)/.test(m[1])) nombresNuevos.add(m[1]);
     for (const m of f.matchAll(/(?:getItem|setItem|removeItem)\("([^"]+)"/g)) nombresNuevos.add(m[1]);
   }
   const faltan = (lista, tabla) => [...lista].filter(t => !(t in tabla) && todo.includes(t)).sort();

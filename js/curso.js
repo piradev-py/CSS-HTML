@@ -44,8 +44,8 @@
       lema: "Dale color y estilo a tus páginas",
       pestanas: ["html", "css"],
       lecciones: [
-        { id: "css-01", archivo: "css-01-que-es-css.js", titulo: "¿Qué es CSS?", listo: true },
-        { id: "css-02", archivo: "css-02-selectores.js", titulo: "Selectores", listo: true },
+        { id: "css-01", archivo: "css-01-que-es-css.js", titulo: "¿Qué es CSS?", en: "What is CSS?", listo: true },
+        { id: "css-02", archivo: "css-02-selectores.js", titulo: "Selectores", en: "Selectors", listo: true },
         { id: "css-03", archivo: "css-03-colores.js", titulo: "Colores", listo: true },
         { id: "css-04", archivo: "css-04-texto.js", titulo: "Texto y fuentes", listo: true },
         { id: "css-05", archivo: "css-05-cascada.js", titulo: "La cascada: ¿quién gana?", listo: true },

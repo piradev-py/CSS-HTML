@@ -47,7 +47,9 @@ function restos(valor, ruta, salida) {
   else if (valor && typeof valor === "object") for (const [k, v] of Object.entries(valor)) restos(v, ruta + "." + k, salida);
 }
 
+// lecciones-en/huellas/ es la web de «Huellas» en inglés (herramientas/huellas-en.mjs), no lecciones
 const archivos = (existsSync(raiz + "lecciones-en") ? readdirSync(raiz + "lecciones-en") : [])
+  .filter(mundo => mundo !== "huellas")
   .flatMap(mundo => readdirSync(raiz + "lecciones-en/" + mundo).filter(f => f.endsWith(".js")).map(archivo => ({ mundo, archivo })));
 // Los pasos de proyecto citan términos del glosario por su nombre exacto: tienen que existir en el glosario inglés
 const terminosEN = new Set();
