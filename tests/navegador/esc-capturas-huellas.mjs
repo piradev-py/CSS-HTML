@@ -1,8 +1,10 @@
 // Capturas de las fichas de encargo del Proyecto web: cada versión oficial (HUELLAS[mundo].pasos) recortada a lo que
 // añade ese encargo. Uso: MUNDO=1 (o 2, o 3) node tests/navegador/cdp.mjs esc-capturas-huellas.mjs
+// Con IDIOMA=en, las de la web inglesa (lecciones-en/huellas/versiones.js) en recursos/huellas/capturas-en/
 import { writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { NOMBRES } from "../../herramientas/huellas-en-tabla.mjs";
 
 const BASE = new URL("../../", import.meta.url);
 const raiz = fileURLToPath(BASE);
@@ -18,17 +20,21 @@ const PARTES = {
 const ANCHO = { "1": 1000, "2": 1200, "3": 1200 };
 
 globalThis.window = {};
-createRequire(import.meta.url)(raiz + "lecciones/huellas/versiones.js");
+const INGLES = process.env.IDIOMA === "en";
+const CAPTURAS = "recursos/huellas/capturas" + (INGLES ? "-en" : "");
+// En inglés, los #ids y .clases de PARTES con el nombre de la tabla de traducción
+const selector = s => INGLES ? s.replace(/([#.])([\w-]+)/g, (m, signo, nombre) => signo + (NOMBRES[nombre] || nombre)) : s;
+createRequire(import.meta.url)(raiz + (INGLES ? "lecciones-en" : "lecciones") + "/huellas/versiones.js");
 const version = window.HUELLAS["mundo-" + mundo];
 const pasos = version.pasos;
 
 export default async function (b) {
-  mkdirSync(raiz + "recursos/huellas/capturas", { recursive: true });
+  mkdirSync(raiz + CAPTURAS, { recursive: true });
   // Se escribe junto a la web de referencia para que las rutas img/… funcionen
   const temporal = raiz + "recursos/huellas/web/_captura.html";
   const hoja = raiz + "recursos/huellas/web/_captura.css";
   for (let i = 0; i < pasos.length; i++) {
-    const [desde, hasta, anchoPaso] = PARTES[mundo][i];
+    const [desde, hasta, anchoPaso] = PARTES[mundo][i].map((x, k) => k < 2 ? selector(x) : x);
     const ancho = anchoPaso || ANCHO[mundo];
     await b.tam(ancho, 800);
     // Mundo 1: cada paso es el HTML; mundos 2 y 3: cada paso es la hoja, sobre el HTML oficial
@@ -49,7 +55,7 @@ export default async function (b) {
     const { y, alto } = JSON.parse(caja);
     // Las pantallas estrechas, a tamaño real; las anchas, reducidas
     const r = await b.cdp("Page.captureScreenshot", { format: "png", captureBeyondViewport: true, clip: { x: 0, y: Math.max(0, y), width: ancho, height: Math.min(alto, 4200), scale: ancho < 800 ? 1 : 0.6 } });
-    const ruta = "recursos/huellas/capturas/m" + mundo + "-encargo-" + (i + 1) + ".png";
+    const ruta = CAPTURAS + "/m" + mundo + "-encargo-" + (i + 1) + ".png";
     writeFileSync(raiz + ruta, Buffer.from(r.result.data, "base64"));
     b.log("📸 " + ruta + " (" + ancho + " × " + Math.round(alto) + " px)");
   }

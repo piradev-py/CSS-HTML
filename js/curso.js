@@ -151,6 +151,11 @@
       const i = lista.findIndex(l => l.id === id);
       return i > 0 ? lista[i - 1] : null;
     },
+    // Una lección de proyecto ya traducida parte de la web de «Huellas» en inglés (herramientas/huellas-en.mjs)
+    rutaHuellas(id) {
+      const l = this.buscar(id);
+      return IDIOMA.actual === "en" && l && l.en ? "lecciones-en/huellas/versiones.js" : this.RUTA_HUELLAS;
+    },
     ruta(id, base = "") {
       const l = this.buscar(id);
       // Las traducidas viven en lecciones-en/ con el mismo nombre de archivo; las demás salen en español

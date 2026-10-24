@@ -47,7 +47,7 @@
     });
   }
   // Las lecciones de proyecto parten de las versiones oficiales de «Huellas» (HUELLAS, ver herramientas/huellas-versiones.mjs)
-  if (info.huellas) cargarScript(CURSO.RUTA_HUELLAS, cargarLeccion);
+  if (info.huellas) cargarScript(CURSO.rutaHuellas(id), cargarLeccion);
   else cargarLeccion();
 
   function iniciar(leccion) {

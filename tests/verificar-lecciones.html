@@ -48,8 +48,9 @@
       document.body.appendChild(marco);
 
       function cargar(l) {
-        // Las lecciones de proyecto necesitan antes las versiones oficiales de «Huellas»
-        if (l.huellas && !window.HUELLAS) return cargarRuta("../" + CURSO.RUTA_HUELLAS).then(ok => ok && cargar(l));
+        // Las lecciones de proyecto necesitan antes las versiones oficiales de «Huellas», en su idioma (las usan al cargarse)
+        const huellas = CURSO.rutaHuellas(l.id);
+        if (l.huellas && window.__huellas !== huellas) return cargarRuta("../" + huellas).then(ok => { window.__huellas = huellas; return ok && cargar(l); });
         return cargarRuta(CURSO.ruta(l.id, "../"));
       }
       function cargarRuta(ruta) {

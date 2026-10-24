@@ -28,13 +28,12 @@ caja.window = caja;
 vm.runInNewContext(leer("js/curso.js"), caja);
 const indice = caja.CURSO.listaPlana();
 
-// Las lecciones de proyecto usan HUELLAS al cargarse
-const base = { window: {}, console };
-base.window = base;
-vm.runInNewContext(leer("lecciones/huellas/versiones.js"), base);
+// Las lecciones de proyecto usan HUELLAS al cargarse: la española o la inglesa (herramientas/huellas-en.mjs)
+const huellas = ruta => { const c = { window: {}, console }; c.window = c; if (existsSync(raiz + ruta)) vm.runInNewContext(leer(ruta), c); return c; };
+const BASES = { es: huellas("lecciones/huellas/versiones.js"), en: huellas("lecciones-en/huellas/versiones.js") };
 function cargar(ruta) {
   let leccion = null;
-  const ctx = Object.assign({}, base, { CURSO: { registrar: l => { leccion = l; } } });
+  const ctx = Object.assign({}, BASES[ruta.startsWith("lecciones-en/") ? "en" : "es"], { CURSO: { registrar: l => { leccion = l; } } });
   ctx.window = ctx;
   vm.runInNewContext(leer(ruta), ctx);
   return leccion;
