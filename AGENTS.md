@@ -38,8 +38,12 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
 - La lección inglesa es una **copia** con el mismo nombre en `lecciones-en/` (p. ej. `lecciones-en/1-html/html-01-que-es-html.js`).
   El original en `lecciones/` **no se toca**. **No toques `js/curso.js`**: el `en: "…"` de la lección lo añade el revisor
   (trabajáis a la vez y ese archivo no puede llevar lecciones a medias). Usa como `titulo` el inglés que te da la tarea.
-- Igual que el original: `id`, `xp`, número, orden y tipo de pasos, `correcta` de los quiz, selectores, ids, clases,
-  nombres de archivo e imágenes. Cambia solo lo que lee el alumno.
+- Igual que el original: `id` de la lección, `xp`, número, orden y tipo de pasos, `correcta` de los quiz, nombres de
+  archivo y rutas de imágenes.
+- **El código que escribe o lee el alumno va en inglés**: ids, clases, `name`/`for`/`value`, nombres de variables y
+  funciones, claves de `localStorage` y textos (`id="reuniones"` → `id="meetings"`, `.tarjeta` → `.card`,
+  `const saludo` → `const greeting`). Cámbialos **a la vez** en explicaciones, ejemplos, enunciado, pistas, `inicial`,
+  `solucion`, `cssBase` y en los selectores de las comprobaciones. Excepción: las lecciones de proyecto (Huellas).
 - Se traduce: `titulo` (el que da la tarea), `objetivo`, `glosario` (`termino` si es una palabra y no código,
   `tema`, `para`, `buscar` con palabras inglesas), títulos, textos, `consejo`, enunciados, pistas, preguntas, opciones,
   explicaciones, los `texto` de las comprobaciones, y el contenido visible del código de ejemplos, `inicial` y
