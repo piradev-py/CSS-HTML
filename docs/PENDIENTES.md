@@ -121,9 +121,12 @@
   - [x] Fase 0 · infraestructura: `js/textos.js` (`T("texto en español")` → inglés si lo hay; `IDIOMA`, guardado
         aparte del progreso), botón EN/ES en la cabecera, `lecciones-en/` para las traducidas (`en: "título"` en
         `js/curso.js`) y aviso en las que no.
-  - [ ] Fase 1 · interfaz: cada archivo de `js/` con sus textos en `T()` y su inglés en `js/textos.js` (opencode,
-        un archivo por tarea). Y los textos fijos de las 4 páginas HTML.
-  - [ ] Fase 2 · tests en los dos idiomas: `esc-tests` verifica la versión española y la inglesa de cada lección.
+  - [x] Fase 1 · interfaz (2026-10-24): todos los archivos de `js/` con sus textos en `T()` y su inglés en
+        `js/textos.js` (366 entradas; `node herramientas/traducciones.mjs` lo comprueba), los textos fijos de las páginas
+        (`<title>` y `data-t`) y los del iframe del resultado (`AYUDANTE` los recibe ya traducidos).
+        Pendiente menor: el código de los 3 ejemplos del laboratorio sigue en español.
+  - [x] Fase 2 · tests en los dos idiomas: `cdp.mjs` fija el idioma antes de cargar cada página (español por defecto,
+        `IDIOMA=en` para el inglés). Con `IDIOMA=en`, `esc-tests` carga las lecciones de `lecciones-en/` que existan.
   - [ ] Fase 3 · lecciones, mundo a mundo, en `lecciones-en/` (opencode, una lección por tarea): las comprobaciones
         que buscan texto en español se adaptan, no solo se traducen.
   - [ ] Fase 4 · Huellas en inglés: web de referencia, textos para copiar y capturas.
