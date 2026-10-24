@@ -9,24 +9,24 @@
   const CLAVE_PRUEBA = "csshtml-prueba-v1";
 
   const NIVELES = [
-    { min: 0, nombre: "Novato", emoji: "🐣" },
-    { min: 150, nombre: "Aprendiz", emoji: "🌱" },
-    { min: 450, nombre: "Maquetador", emoji: "🧱" },
-    { min: 900, nombre: "Estilista", emoji: "🎨" },
-    { min: 1500, nombre: "Artesano web", emoji: "🛠️" },
-    { min: 2200, nombre: "Frontend Pro", emoji: "🚀" }
+    { min: 0, nombre: T("Novato"), emoji: "🐣" },
+    { min: 150, nombre: T("Aprendiz"), emoji: "🌱" },
+    { min: 450, nombre: T("Maquetador"), emoji: "🧱" },
+    { min: 900, nombre: T("Estilista"), emoji: "🎨" },
+    { min: 1500, nombre: T("Artesano web"), emoji: "🛠️" },
+    { min: 2200, nombre: T("Frontend Pro"), emoji: "🚀" }
   ];
 
   const INSIGNIAS = [
-    { id: "primer-paso", emoji: "👣", nombre: "Primer paso", desc: "Completa tu primera lección" },
-    { id: "sin-pistas", emoji: "🎯", nombre: "¡Sin pistas!", desc: "Consigue 3 estrellas en una lección" },
-    { id: "racha-3", emoji: "🔥", nombre: "En racha", desc: "Practica 3 días seguidos" },
-    { id: "racha-7", emoji: "☄️", nombre: "Imparable", desc: "Practica 7 días seguidos" },
-    { id: "estrellas-30", emoji: "🌟", nombre: "Coleccionista", desc: "Reúne 30 estrellas" },
-    { id: "mundo-1", emoji: "🏗️", nombre: "Arquitecto HTML", desc: "Termina el Mundo HTML" },
-    { id: "mundo-2", emoji: "🎨", nombre: "Artista CSS", desc: "Termina el Mundo CSS" },
-    { id: "mundo-3", emoji: "🧩", nombre: "Maquetador", desc: "Termina el Mundo HTML + CSS" },
-    { id: "mundo-4", emoji: "⚡", nombre: "Mago JavaScript", desc: "Termina el Mundo JavaScript" }
+    { id: "primer-paso", emoji: "👣", nombre: T("Primer paso"), desc: T("Completa tu primera lección") },
+    { id: "sin-pistas", emoji: "🎯", nombre: T("¡Sin pistas!"), desc: T("Consigue 3 estrellas en una lección") },
+    { id: "racha-3", emoji: "🔥", nombre: T("En racha"), desc: T("Practica 3 días seguidos") },
+    { id: "racha-7", emoji: "☄️", nombre: T("Imparable"), desc: T("Practica 7 días seguidos") },
+    { id: "estrellas-30", emoji: "🌟", nombre: T("Coleccionista"), desc: T("Reúne 30 estrellas") },
+    { id: "mundo-1", emoji: "🏗️", nombre: T("Arquitecto HTML"), desc: T("Termina el Mundo HTML") },
+    { id: "mundo-2", emoji: "🎨", nombre: T("Artista CSS"), desc: T("Termina el Mundo CSS") },
+    { id: "mundo-3", emoji: "🧩", nombre: T("Maquetador"), desc: T("Termina el Mundo HTML + CSS") },
+    { id: "mundo-4", emoji: "⚡", nombre: T("Mago JavaScript"), desc: T("Termina el Mundo JavaScript") }
   ];
 
   function vacio() {

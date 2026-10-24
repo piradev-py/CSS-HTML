@@ -71,7 +71,32 @@
     "Empezar la prueba de cero": "Start the test from scratch",
     "Reiniciar curso": "Restart course",
     "Listo": "Done",
-    "Versión {n}": "Version {n}"
+    "Versión {n}": "Version {n}",
+
+    // progreso.js
+    "Novato": "Rookie",
+    "Aprendiz": "Apprentice",
+    "Maquetador": "Builder",
+    "Estilista": "Stylist",
+    "Artesano web": "Web artisan",
+    "Frontend Pro": "Frontend Pro",
+    "Primer paso": "First step",
+    "Completa tu primera lección": "Complete your first lesson",
+    "¡Sin pistas!": "No hints!",
+    "Consigue 3 estrellas en una lección": "Get 3 stars in one lesson",
+    "En racha": "On a streak",
+    "Practica 3 días seguidos": "Practice 3 days in a row",
+    "Imparable": "Unstoppable",
+    "Practica 7 días seguidos": "Practice 7 days in a row",
+    "Coleccionista": "Collector",
+    "Reúne 30 estrellas": "Collect 30 stars",
+    "Arquitecto HTML": "HTML architect",
+    "Termina el Mundo HTML": "Finish the HTML World",
+    "Artista CSS": "CSS artist",
+    "Termina el Mundo CSS": "Finish the CSS World",
+    "Termina el Mundo HTML + CSS": "Finish the HTML + CSS World",
+    "Mago JavaScript": "JavaScript wizard",
+    "Termina el Mundo JavaScript": "Finish the JavaScript World"
   };
 
   function T(texto, datos) {
