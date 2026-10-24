@@ -36,10 +36,11 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
 
 ## Traducir una lección (Español → English)
 - La lección inglesa es una **copia** con el mismo nombre en `lecciones-en/` (p. ej. `lecciones-en/1-html/html-01-que-es-html.js`).
-  El original en `lecciones/` **no se toca**. Y en `js/curso.js`, en la entrada de esa lección, añade `en: "Its English title"`.
+  El original en `lecciones/` **no se toca**. **No toques `js/curso.js`**: el `en: "…"` de la lección lo añade el revisor
+  (trabajáis a la vez y ese archivo no puede llevar lecciones a medias). Usa como `titulo` el inglés que te da la tarea.
 - Igual que el original: `id`, `xp`, número, orden y tipo de pasos, `correcta` de los quiz, selectores, ids, clases,
   nombres de archivo e imágenes. Cambia solo lo que lee el alumno.
-- Se traduce: `titulo` (el mismo que en `en:`), `objetivo`, `glosario` (`termino` si es una palabra y no código,
+- Se traduce: `titulo` (el que da la tarea), `objetivo`, `glosario` (`termino` si es una palabra y no código,
   `tema`, `para`, `buscar` con palabras inglesas), títulos, textos, `consejo`, enunciados, pistas, preguntas, opciones,
   explicaciones, los `texto` de las comprobaciones, y el contenido visible del código de ejemplos, `inicial` y
   `solucion` (textos de la página, comentarios, mensajes de consola): `<p>Mi gato</p>` → `<p>My cat</p>`.
@@ -59,7 +60,12 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
   Filtrar → Filtering · Eventos → Events · Estructura → Structure · Lo básico → The basics · Listas → Lists ·
   Consola → Console
 - El comentario de cabecera del archivo puede quedar en español (es para quien mantiene el curso).
-- Al terminar: `node --check` del archivo nuevo y de `js/curso.js`. Los tests del navegador los pasa el revisor.
+- Un `termino` del glosario que sea código se queda igual salvo lo que cambie de verdad (`<html lang="es">` → `lang="en"`;
+  `<ul> y <li>` → `<ul> and <li>`). Las lecciones de proyecto los citan por ese nombre exacto.
+- Al terminar: `node --check` del archivo nuevo y `node herramientas/lecciones-en.mjs <id> <id>…`
+  (compara con el original lo que no debe cambiar): tiene que salir ✅ salvo «falta en:» (eso es del revisor), y mira
+  a mano cada ⚠️ (restos de español).
+  Los tests del navegador los pasa el revisor.
 
 ## Al terminar
 - Tareas de traducción de la interfaz: `node --check` de cada archivo que tocaste y `node herramientas/traducciones.mjs`.

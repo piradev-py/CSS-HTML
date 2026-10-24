@@ -20,8 +20,8 @@
       pestanas: ["html"],
       lecciones: [
         { id: "html-01", archivo: "html-01-que-es-html.js", titulo: "¿Qué es HTML?", en: "What is HTML?", listo: true },
-        { id: "html-02", archivo: "html-02-estructura.js", titulo: "La estructura de una página", listo: true },
-        { id: "html-03", archivo: "html-03-titulos-y-parrafos.js", titulo: "Títulos y párrafos", listo: true },
+        { id: "html-02", archivo: "html-02-estructura.js", titulo: "La estructura de una página", en: "The structure of a page", listo: true },
+        { id: "html-03", archivo: "html-03-titulos-y-parrafos.js", titulo: "Títulos y párrafos", en: "Headings and paragraphs", listo: true },
         { id: "html-04", archivo: "html-04-enfasis.js", titulo: "Negritas, cursivas y énfasis", listo: true },
         { id: "html-05", archivo: "html-05-listas.js", titulo: "Listas", listo: true },
         { id: "html-06", archivo: "html-06-enlaces.js", titulo: "Enlaces", listo: true },
