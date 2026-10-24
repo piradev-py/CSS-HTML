@@ -18,30 +18,30 @@
   // Al volver al mapa, se abre directamente el mundo de esta lección (ver js/mapa.js)
   const urlMapa = info ? "index.html#mundo-" + info.mundo.numero : "index.html";
 
-  UI.montarCabecera('<a class="boton-icono" href="' + urlMapa + '" aria-label="Volver al mapa">🗺️</a>');
+  UI.montarCabecera('<a class="boton-icono" href="' + urlMapa + '" aria-label="' + T("Volver al mapa") + '">🗺️</a>');
 
   function aviso(emoji, titulo, texto) {
     document.body.classList.remove("con-espacio");
     principal.innerHTML =
       '<div class="aviso-grande tarjeta"><div class="aviso-emoji">' + emoji + "</div><h1>" + titulo + "</h1><p>" + texto + "</p>" +
-      '<a class="boton grande azul" href="' + urlMapa + '">🗺️ Volver al mapa</a></div>';
+      '<a class="boton grande azul" href="' + urlMapa + '">' + T("🗺️ Volver al mapa") + "</a></div>";
   }
 
-  if (!info) return aviso("🧭", "Lección no encontrada", "Parece que esta lección no existe. Vuelve al mapa y elige otra.");
-  if (!info.listo) return aviso("🚧", "Próximamente", "El profesor todavía está preparando «" + UI.escapar(info.titulo) + "». ¡Vuelve pronto!");
-  if (!PROGRESO.estaDesbloqueada(id)) return aviso("🔒", "Lección bloqueada", "Completa antes la lección anterior para desbloquear esta.");
+  if (!info) return aviso("🧭", T("Lección no encontrada"), T("Parece que esta lección no existe. Vuelve al mapa y elige otra."));
+  if (!info.listo) return aviso("🚧", T("Próximamente"), T("El profesor todavía está preparando «{titulo}». ¡Vuelve pronto!", { titulo: UI.escapar(info.titulo) }));
+  if (!PROGRESO.estaDesbloqueada(id)) return aviso("🔒", T("Lección bloqueada"), T("Completa antes la lección anterior para desbloquear esta."));
 
   function cargarScript(ruta, alCargar) {
     const script = document.createElement("script");
     script.src = ruta + "?v=" + CURSO.VERSION;  // ?v=: tras publicar, nada de lecciones viejas en caché
     script.onload = alCargar;
-    script.onerror = () => aviso("😵", "No pude cargar la lección", "No encuentro el archivo <code>" + UI.escapar(ruta) + "</code>.");
+    script.onerror = () => aviso("😵", T("No pude cargar la lección"), T("No encuentro el archivo <code>{ruta}</code>.", { ruta: UI.escapar(ruta) }));
     document.body.appendChild(script);
   }
   function cargarLeccion() {
     cargarScript(CURSO.ruta(id), () => {
       const leccion = CURSO.lecciones[id];
-      if (!leccion) return aviso("😵", "Algo salió mal", "El archivo de la lección no se registró correctamente.");
+      if (!leccion) return aviso("😵", T("Algo salió mal"), T("El archivo de la lección no se registró correctamente."));
       iniciar(leccion);
       if (IDIOMA.actual === "en" && !info.en) CELEBRAR.toast(T("Esta lección aún no está traducida: la ves en español."));
     });
@@ -68,24 +68,24 @@
 
     principal.innerHTML =
       '<div class="espacio-trabajo">' +
-        '<section class="col col-leccion" aria-label="Lección">' +
+        '<section class="col col-leccion" aria-label="' + T("Lección") + '">' +
           '<header class="leccion-cabeza">' +
-            '<div class="miga">' + mundo.emoji + " " + UI.escapar(mundo.nombre) + " · Lección " + numero + "</div>" +
+            '<div class="miga">' + mundo.emoji + " " + UI.escapar(mundo.nombre) + " · " + T("Lección {n}", { n: numero }) + "</div>" +
             '<h1 class="leccion-titulo">' + UI.escapar(leccion.titulo) + "</h1>" +
             '<p class="objetivo" title="' + UI.escapar(leccion.objetivo) + '">🎯 ' + UI.md(leccion.objetivo) + "</p>" +
             '<div class="puntos-pasos" role="list"></div>' +
           "</header>" +
           '<div class="paso-actual" aria-live="polite"></div>' +
           '<nav class="navegacion-pasos">' +
-            '<button class="boton secundario" data-anterior>← Anterior</button>' +
+            '<button class="boton secundario" data-anterior>' + T("← Anterior") + "</button>" +
             '<span class="contador-pasos"></span>' +
-            '<button class="boton" data-siguiente>Siguiente →</button>' +
+            '<button class="boton" data-siguiente>' + T("Siguiente →") + "</button>" +
           "</nav>" +
         "</section>" +
-        '<div class="divisor" data-divisor="0" role="separator" aria-orientation="vertical" tabindex="0" title="Arrastra para cambiar el ancho (doble clic: restablecer)"></div>' +
-        '<section class="col col-codigo" aria-label="Código"></section>' +
-        '<div class="divisor" data-divisor="1" role="separator" aria-orientation="vertical" tabindex="0" title="Arrastra para cambiar el ancho (doble clic: restablecer)"></div>' +
-        '<section class="col col-resultado" aria-label="Resultado"></section>' +
+        '<div class="divisor" data-divisor="0" role="separator" aria-orientation="vertical" tabindex="0" title="' + T("Arrastra para cambiar el ancho (doble clic: restablecer)") + '"></div>' +
+        '<section class="col col-codigo" aria-label="' + T("Código") + '"></section>' +
+        '<div class="divisor" data-divisor="1" role="separator" aria-orientation="vertical" tabindex="0" title="' + T("Arrastra para cambiar el ancho (doble clic: restablecer)") + '"></div>' +
+        '<section class="col col-resultado" aria-label="' + T("Resultado") + '"></section>' +
         '<section class="col col-pizarra"></section>' +
       "</div>";
 
@@ -110,7 +110,7 @@
       const b = document.createElement("button");
       b.className = "punto-paso";
       b.setAttribute("role", "listitem");
-      b.title = "Paso " + (i + 1);
+      b.title = T("Paso {n}", { n: i + 1 });
       b.textContent = ICONO_PASO[p.tipo] || "•";
       b.addEventListener("click", () => { if (i <= maximo) ir(i); });
       puntos.appendChild(b);
@@ -129,7 +129,7 @@
       bAnterior.disabled = actual === 0;
       bSiguiente.classList.toggle("oculto", esUltimo);
       bSiguiente.disabled = !puedeAvanzar();
-      contador.textContent = "Paso " + (actual + 1) + " de " + leccion.pasos.length;
+      contador.textContent = T("Paso {n} de {total}", { n: actual + 1, total: leccion.pasos.length });
       puntos.querySelectorAll(".punto-paso").forEach((b, i) => {
         b.classList.toggle("actual", i === actual);
         b.classList.toggle("visto", i < actual || i <= maximo && i !== actual);
@@ -192,7 +192,7 @@
         tarjetaTexto(paso.titulo, paso.texto);
         if (paso.ejemplo) {
           const bloques = ["html", "css", "js"].filter(k => paso.ejemplo[k]);
-          colCodigo.appendChild(panel("💻 Código del ejemplo",
+          colCodigo.appendChild(panel(T("💻 Código del ejemplo"),
             '<div class="ejemplo-codigo">' +
             bloques.map(k =>
               '<div class="etiqueta-codigo etiqueta-' + k + '">' + k.toUpperCase() + "</div>" +
@@ -209,12 +209,12 @@
           // Sin ejemplo: Tagui ocupa la pizarra con su consejo
           const piz = usarPizarra();
           piz.innerHTML = '<div class="pizarra-tagui"></div>';
-          piz.firstChild.appendChild(MASCOTA.crear(UI.md(paso.consejo || "Lee la explicación con calma. En los siguientes pasos escribirás tu propio código. ✍️")));
+          piz.firstChild.appendChild(MASCOTA.crear(UI.md(paso.consejo || T("Lee la explicación con calma. En los siguientes pasos escribirás tu propio código. ✍️"))));
         }
       },
 
       pruebalo(paso) {
-        tarjetaTexto("✍️ ¡Pruébalo tú!", paso.instruccion);
+        tarjetaTexto(T("✍️ ¡Pruébalo tú!"), paso.instruccion);
         EDITOR.crear(zona, { pestanas: paso.pestanas || pestanas, inicial: paso.inicial, destinos });
       },
 
@@ -232,7 +232,7 @@
       },
 
       controles(paso) {
-        tarjetaTexto("🎛️ Juega con los controles", paso.instruccion);
+        tarjetaTexto(T("🎛️ Juega con los controles"), paso.instruccion);
         CONTROLES.crear(zona, paso, destinos);
       },
 
@@ -240,9 +240,9 @@
         // Pregunta a la izquierda, opciones grandes en la pizarra
         const t = document.createElement("div");
         t.className = "tarjeta quiz";
-        t.innerHTML = "<h2>❓ " + UI.md(paso.pregunta) + '</h2><p class="texto-suave">Elige una respuesta en la pizarra →</p><div class="explicacion-quiz"></div>';
+        t.innerHTML = "<h2>❓ " + UI.md(paso.pregunta) + '</h2><p class="texto-suave">' + T("Elige una respuesta en la pizarra →") + '</p><div class="explicacion-quiz"></div>';
         zona.appendChild(t);
-        const mascota = MASCOTA.crear("Piénsalo con calma. ¡Tú puedes!");
+        const mascota = MASCOTA.crear(T("Piénsalo con calma. ¡Tú puedes!"));
         zona.appendChild(mascota);
         const piz = usarPizarra();
         piz.innerHTML = '<div class="pizarra-quiz"><div class="opciones-quiz"></div></div>';
@@ -282,8 +282,8 @@
 
       reto(paso) {
         const mascota = MASCOTA.crear(yaCompletada
-          ? "Ya superaste este reto. ¿Quieres intentar sacar más estrellas? ⭐"
-          : "Cumple todo lo de la lista. Se irá marcando en verde mientras escribes. ¡Ánimo!");
+          ? T("Ya superaste este reto. ¿Quieres intentar sacar más estrellas? ⭐")
+          : T("Cumple todo lo de la lista. Se irá marcando en verde mientras escribes. ¡Ánimo!"));
         RETOS.crear(zona, paso, {
           leccionId: id,
           pestanas: paso.pestanas || pestanas,
@@ -298,12 +298,12 @@
       proyecto(paso, i) {
         const ultimo = i === leccion.pasos.length - 1;
         const mascota = MASCOTA.crear(ultimo
-          ? "¡Último encargo! Cuando todo esté en verde, la entrega estará lista. 🚀"
-          : "Cumple el encargo: la lista se irá marcando en verde mientras escribes.");
+          ? T("¡Último encargo! Cuando todo esté en verde, la entrega estará lista. 🚀")
+          : T("Cumple el encargo: la lista se irá marcando en verde mientras escribes."));
         RETOS.crear(zona, paso, {
           leccionId: id,
           claveBorrador: id + "#proyecto",
-          etiqueta: "📋 Encargo " + (leccion.pasos.slice(0, i + 1).filter(p => p.tipo === "proyecto").length),
+          etiqueta: T("📋 Encargo {n}", { n: leccion.pasos.slice(0, i + 1).filter(p => p.tipo === "proyecto").length }),
           pestanas: paso.pestanas || pestanas,
           destinos,
           mascota,
@@ -317,8 +317,8 @@
         zona.querySelector(".reto-enunciado").after(mascota);
         const bGlosario = document.createElement("button");
         bGlosario.className = "mini-boton boton-glosario";
-        bGlosario.textContent = "📚 Glosario";
-        bGlosario.title = "Todo lo que has aprendido, con ejemplos para copiar (no pierdes tu código)";
+        bGlosario.textContent = T("📚 Glosario");
+        bGlosario.title = T("Todo lo que has aprendido, con ejemplos para copiar (no pierdes tu código)");
         bGlosario.addEventListener("click", () => glosario.alternar(paso.glosario));
         zona.querySelector(".etiqueta-reto").after(bGlosario);
       }
@@ -408,28 +408,28 @@
     CELEBRAR.sonido.victoria();
     UI.pintarEstado();
 
-    const textoEstrellas = estrellas === 3 ? "¡Perfecto, sin pistas!" : estrellas === 2 ? "¡Muy bien! La próxima, sin pistas 😉" : "¡Superado! Repítelo para conseguir más estrellas.";
+    const textoEstrellas = estrellas === 3 ? T("¡Perfecto, sin pistas!") : estrellas === 2 ? T("¡Muy bien! La próxima, sin pistas 😉") : T("¡Superado! Repítelo para conseguir más estrellas.");
     let extra = "";
-    if (r.xpGanada > 0) extra += '<p class="xp-ganada">+' + r.xpGanada + " XP</p>";
-    else extra += '<p class="texto-suave">Ya tenías estas estrellas: esta vez no sumas XP.</p>';
-    if (r.subioNivel) extra += '<div class="subida-nivel">' + r.subioNivel.emoji + " ¡Subiste a nivel " + r.subioNivel.numero + ": <b>" + r.subioNivel.nombre + "</b>!</div>";
+    if (r.xpGanada > 0) extra += '<p class="xp-ganada">+' + T("{n} XP", { n: r.xpGanada }) + "</p>";
+    else extra += '<p class="texto-suave">' + T("Ya tenías estas estrellas: esta vez no sumas XP.") + "</p>";
+    if (r.subioNivel) extra += '<div class="subida-nivel">' + r.subioNivel.emoji + " " + T("¡Subiste a nivel {n}: <b>{nombre}</b>!", { n: r.subioNivel.numero, nombre: r.subioNivel.nombre }) + "</div>";
     r.nuevasInsignias.forEach(ins => {
-      extra += '<div class="insignia-nueva"><span>' + ins.emoji + "</span><div><b>¡Nueva insignia!</b><br>" + ins.nombre + "</div></div>";
+      extra += '<div class="insignia-nueva"><span>' + ins.emoji + "</span><div><b>" + T("¡Nueva insignia!") + "</b><br>" + ins.nombre + "</div></div>";
     });
 
     let botonSiguiente = "";
     // El último Proyecto web cierra el curso: lleva a la página final con la web terminada
-    if (leccion.id === "js-17") botonSiguiente = '<a class="boton grande" data-siguiente-leccion href="mi-clinica.html">🏥 Ver mi clínica →</a>';
-    else if (sig && sig.listo) botonSiguiente = '<a class="boton grande" data-siguiente-leccion href="leccion.html?id=' + sig.id + '">Siguiente lección →</a>';
-    else if (sig) botonSiguiente = '<span class="texto-suave">🚧 La siguiente lección llegará pronto</span>';
+    if (leccion.id === "js-17") botonSiguiente = '<a class="boton grande" data-siguiente-leccion href="mi-clinica.html">' + T("🏥 Ver mi clínica →") + "</a>";
+    else if (sig && sig.listo) botonSiguiente = '<a class="boton grande" data-siguiente-leccion href="leccion.html?id=' + sig.id + '">' + T("Siguiente lección →") + "</a>";
+    else if (sig) botonSiguiente = '<span class="texto-suave">' + T("🚧 La siguiente lección llegará pronto") + "</span>";
 
     const m = CELEBRAR.modal(
       MASCOTA.svg("alegre") +
-      "<h2>¡Lección completada!</h2>" +
+      "<h2>" + T("¡Lección completada!") + "</h2>" +
       '<div class="estrellas-grandes">' + [1, 2, 3].map(n => '<span class="' + (n <= estrellas ? "ganada" : "") + '" style="animation-delay:' + (n * 0.25) + 's">⭐</span>').join("") + "</div>" +
       '<p class="texto-suave">' + textoEstrellas + "</p>" + extra +
-      '<div class="acciones"><a class="boton secundario" href="' + urlMapa + '">🗺️ Mapa</a>' +
-      '<button class="boton secundario" data-repetir>🔁 Repetir reto</button>' + botonSiguiente + "</div>"
+      '<div class="acciones"><a class="boton secundario" href="' + urlMapa + '">' + T("🗺️ Mapa") + "</a>" +
+      '<button class="boton secundario" data-repetir>' + T("🔁 Repetir reto") + "</button>" + botonSiguiente + "</div>"
     );
     m.elemento.querySelector(".modal").classList.add("modal-victoria");
     // El modal enfoca su primer botón (el mapa); así Enter lleva a la siguiente lección
