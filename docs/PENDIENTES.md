@@ -128,7 +128,9 @@
   - [x] Fase 2 · tests en los dos idiomas: `cdp.mjs` fija el idioma antes de cargar cada página (español por defecto,
         `IDIOMA=en` para el inglés). Con `IDIOMA=en`, `esc-tests` carga las lecciones de `lecciones-en/` que existan.
   - [ ] Fase 3 · lecciones, mundo a mundo, en `lecciones-en/` (opencode, una lección por tarea): las comprobaciones
-        que buscan texto en español se adaptan, no solo se traducen.
+        que buscan texto en español se adaptan, no solo se traducen. Hecha: html-01.
+        **Al terminar el Mundo 1 (html-01 … html-14), `PUBLICADO = true` en `js/textos.js`** y versión nueva: el inglés
+        se ve en la web publicada desde ahí (decidido 2026-10-24).
   - [ ] Fase 4 · Huellas en inglés: web de referencia, textos para copiar y capturas.
 - [x] Publicar la web con GitHub Pages → **https://piradev-py.github.io/CSS-HTML/** (rama `main`, carpeta raíz, con `.nojekyll`).
 
