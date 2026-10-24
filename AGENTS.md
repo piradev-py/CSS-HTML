@@ -18,7 +18,7 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
 - `lecciones/<mundo>/<id>-<nombre>.js` es un script clásico con `CURSO.registrar({ id, titulo, xp, objetivo, terminos, pasos: [...] })`, sin `import`/`export`.
 - Textos en español, tuteando y en tono cercano. Mini-markdown: `**negrita**`, `` `código` ``, `\n`.
 - Un `reto` es el último paso. Sus `comprobaciones` son `{ texto, prueba: (doc) => booleano }` (async en JS, con `PRUEBA.recargar`, `PRUEBA.escribir`…).
-  **La solución tiene que aprobar todas y el código `inicial` no.**
+  **La solución tiene que aprobar todas y el código `inicial` no.** Máximo 5 comprobaciones por reto (lo exige el verificador).
 - En los `ejercicio` la revisión compara con `solucion`: si cambias el enunciado, cambia también `pistas` y `solucion`.
 
 ## Al terminar

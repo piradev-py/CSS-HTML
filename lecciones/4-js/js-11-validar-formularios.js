@@ -336,7 +336,7 @@ formulario.addEventListener("submit", (evento) => {
     },
     {
       tipo: "reto",
-      enunciado: "Haz el registro del **club de exploradores** 🧭. Al **enviar** el formulario `#registro` (frena el envío), lee `#nombre` y `#email` con `trim()` y:\n\n1. Si el nombre está vacío → un mensaje de error en `#error` (por ejemplo, **Escribe tu nombre.**).\n2. Si no, y el email **no** lleva `@` → otro error en `#error` (por ejemplo, **El email debe llevar una @.**).\n3. Si todo está bien → `#error` vacío y, en `#exito`, un mensaje con el nombre: **¡Te damos la bienvenida, Ana!**\n\nOjo: cuando sale un error, borra el éxito, y al revés. ¡Que no se queden mensajes viejos!",
+      enunciado: "Haz el registro del **club de exploradores** 🧭. Al **enviar** el formulario `#registro` (frena el envío), lee `#nombre` y `#email` con `trim()` y mira si la casilla `#normas` está marcada:\n\n1. Nombre vacío → mensaje en `#error-nombre` (por ejemplo, **Escribe tu nombre.**).\n2. Email **sin** `@` → mensaje en `#error-email` (por ejemplo, **El email debe llevar una @.**).\n3. Casilla sin marcar → mensaje en `#error-normas` (por ejemplo, **Tienes que prometerlo.**).\n\nCada error va en **su** párrafo, y se comprueban **todos** los campos aunque el primero ya falle: si los tres están mal, salen los tres mensajes a la vez.\n\nSi todo está bien → los tres errores vacíos y, en `#exito`, un mensaje con el nombre: **¡Te damos la bienvenida, Ana!**\n\nOjo: si algo falla, borra el éxito, y al revés. ¡Que no se queden mensajes viejos!",
       cssBase: `body { font-family: sans-serif; padding: 16px; background-color: #eef6f0; }
 form { display: flex; flex-direction: column; gap: 6px; max-width: 340px; padding: 16px; background-color: white; border-radius: 12px; box-shadow: 0 2px 10px rgb(0 0 0 / 0.1); }
 h2 { margin: 0 0 8px; color: #2f6b45; }
@@ -345,15 +345,23 @@ input, button { font: inherit; padding: 8px; border-radius: 8px; }
 input { border: 2px solid #9cc5a8; }
 button { margin-top: 10px; border: none; background-color: #2f6b45; color: white; }
 .error { margin: 6px 0 0; color: #b00020; font-weight: bold; }
-.exito { font-size: 20px; font-weight: bold; color: #2f6b45; }`,
+.exito { font-size: 20px; font-weight: bold; color: #2f6b45; }
+.fila { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.fila label { margin-top: 0; font-weight: normal; }`,
       inicial: {
         html: `<form id="registro" novalidate>
   <h2>Únete al club de exploradores 🧭</h2>
   <label for="nombre">Nombre</label>
-  <input id="nombre" type="text" aria-describedby="error">
+  <input id="nombre" type="text" aria-describedby="error-nombre">
+  <p id="error-nombre" class="error" role="alert"></p>
   <label for="email">Email</label>
-  <input id="email" type="email" aria-describedby="error">
-  <p id="error" class="error" role="alert"></p>
+  <input id="email" type="email" aria-describedby="error-email">
+  <p id="error-email" class="error" role="alert"></p>
+  <div class="fila">
+    <input type="checkbox" id="normas">
+    <label for="normas">Prometo cuidar la naturaleza</label>
+  </div>
+  <p id="error-normas" class="error" role="alert"></p>
   <button>Registrarme</button>
 </form>
 <p id="exito" class="exito" role="status"></p>
@@ -361,53 +369,79 @@ button { margin-top: 10px; border: none; background-color: #2f6b45; color: white
         js: `const formulario = document.querySelector("#registro");
 const campoNombre = document.querySelector("#nombre");
 const campoEmail = document.querySelector("#email");
-const error = document.querySelector("#error");
+const casillaNormas = document.querySelector("#normas");
+const errorNombre = document.querySelector("#error-nombre");
+const errorEmail = document.querySelector("#error-email");
+const errorNormas = document.querySelector("#error-normas");
 const exito = document.querySelector("#exito");
 
 // 1. Escucha el evento "submit" del formulario y frena el envío
-// 2. Lee el nombre y el email con trim()
-// 3. Nombre vacío → error · email sin @ → error · todo bien → éxito
-//    (y acuérdate de vaciar el mensaje que no toca)
+// 2. Lee el nombre y el email con trim() y mira la casilla con .checked
+// 3. Con una bandera todoBien: el campo que falla escribe SU mensaje en SU párrafo
+//    y pone la bandera a false; el que va bien vacía su párrafo
+// 4. Si todoBien sigue en true → el éxito con el nombre; si no, vacía el éxito
 `
       },
       comprobaciones: [
         {
-          texto: "Si envías el formulario con el nombre vacío (o solo con espacios), sale un error en `#error`",
+          texto: "Si envías el formulario con el nombre vacío (o solo con espacios), sale un error en `#error-nombre`",
           prueba: async (doc) => {
             const v = await PRUEBA.recargar(doc);
             const d = v.doc;
             PRUEBA.escribir(d.querySelector("#nombre"), "   ");
             PRUEBA.escribir(d.querySelector("#email"), "ana@correo.com");
             d.querySelector("#registro")?.requestSubmit();
-            const error = (d.querySelector("#error")?.textContent || "").trim();
+            const errorNombre = (d.querySelector("#error-nombre")?.textContent || "").trim();
             const exito = (d.querySelector("#exito")?.textContent || "").trim();
-            return error !== "" && exito === "";
+            return errorNombre !== "" && exito === "";
           }
         },
         {
-          texto: "Si el email no lleva `@`, sale un error en `#error`",
+          texto: "Si el email no lleva `@`, sale un error en `#error-email`",
           prueba: async (doc) => {
             const v = await PRUEBA.recargar(doc);
             const d = v.doc;
             PRUEBA.escribir(d.querySelector("#nombre"), "Ana");
             PRUEBA.escribir(d.querySelector("#email"), "ana.correo.com");
             d.querySelector("#registro")?.requestSubmit();
-            const error = (d.querySelector("#error")?.textContent || "").trim();
+            const errorEmail = (d.querySelector("#error-email")?.textContent || "").trim();
             const exito = (d.querySelector("#exito")?.textContent || "").trim();
-            return error !== "" && exito === "";
+            return errorEmail !== "" && exito === "";
           }
         },
         {
-          texto: "Si todo está bien, `#error` queda vacío y `#exito` da la bienvenida con el nombre",
+          texto: "La casilla sin marcar da su propio error en `#error-normas`, y si van mal los tres campos salen LOS TRES mensajes a la vez",
           prueba: async (doc) => {
             const v = await PRUEBA.recargar(doc);
             const d = v.doc;
-            PRUEBA.escribir(d.querySelector("#nombre"), "  Ana  ");
+            PRUEBA.escribir(d.querySelector("#nombre"), "Ana");
             PRUEBA.escribir(d.querySelector("#email"), "ana@correo.com");
             d.querySelector("#registro")?.requestSubmit();
-            const error = (d.querySelector("#error")?.textContent || "").trim();
-            const exito = d.querySelector("#exito")?.textContent || "";
-            return error === "" && exito.includes("Ana");
+            const texto = sel => (d.querySelector(sel)?.textContent || "").trim();
+            if (texto("#error-normas") === "" || texto("#exito") !== "") return false;
+            PRUEBA.escribir(d.querySelector("#nombre"), "   ");
+            PRUEBA.escribir(d.querySelector("#email"), "ana.correo.com");
+            d.querySelector("#registro")?.requestSubmit();
+            return texto("#error-nombre") !== "" &&
+                   texto("#error-email") !== "" &&
+                   texto("#error-normas") !== "" &&
+                   texto("#exito") === "";
+          }
+        },
+        {
+          texto: "Si todo está bien, los 3 errores quedan vacíos y `#exito` da la bienvenida con el nombre",
+          prueba: async (doc) => {
+            const v = await PRUEBA.recargar(doc);
+            const d = v.doc;
+            const texto = sel => (d.querySelector(sel)?.textContent || "").trim();
+            PRUEBA.escribir(d.querySelector("#nombre"), "  Ana  ");
+            PRUEBA.escribir(d.querySelector("#email"), "ana@correo.com");
+            d.querySelector("#normas").checked = true;
+            d.querySelector("#registro")?.requestSubmit();
+            return texto("#error-nombre") === "" &&
+                   texto("#error-email") === "" &&
+                   texto("#error-normas") === "" &&
+                   (d.querySelector("#exito")?.textContent || "").includes("Ana");
           }
         },
         {
@@ -418,33 +452,42 @@ const exito = document.querySelector("#exito");
             const form = d.querySelector("#registro");
             const nombre = d.querySelector("#nombre");
             const email = d.querySelector("#email");
+            const normas = d.querySelector("#normas");
             const texto = sel => (d.querySelector(sel)?.textContent || "").trim();
-            if (!form || !nombre || !email) return false;
+            if (!form || !nombre || !email || !normas) return false;
             PRUEBA.escribir(nombre, "");
             PRUEBA.escribir(email, "leo@correo.com");
+            normas.checked = true;
             form.requestSubmit();
-            if (texto("#error") === "") return false;
+            if (texto("#error-nombre") === "") return false;
             PRUEBA.escribir(nombre, "Leo");
             form.requestSubmit();
-            if (texto("#error") !== "" || !texto("#exito").includes("Leo")) return false;
+            if (texto("#error-nombre") !== "" || texto("#error-email") !== "" ||
+                texto("#error-normas") !== "" || !texto("#exito").includes("Leo")) return false;
             PRUEBA.escribir(email, "leo.correo.com");
             form.requestSubmit();
-            return texto("#error") !== "" && texto("#exito") === "";
+            return texto("#error-email") !== "" && texto("#exito") === "";
           }
         }
       ],
       pistas: [
-        "Dentro del submit: preventDefault, dos constantes con los valores ya limpios (trim) y un if / else if / else. En cada rama, escribe los dos mensajes: el que toca, con su texto, y el otro vacío (\"\").",
-        "Te debe quedar así:\nformulario.addEventListener(\"submit\", (evento) => {\n  evento.preventDefault();\n  const nombre = campoNombre.value.trim();\n  const email = campoEmail.value.trim();\n  if (nombre === \"\") {\n    error.textContent = \"Escribe tu nombre.\";\n    exito.textContent = \"\";\n  } else if (!email.includes(\"@\")) {\n    error.textContent = \"El email debe llevar una @.\";\n    exito.textContent = \"\";\n  } else {\n    error.textContent = \"\";\n    exito.textContent = \"¡Te damos la bienvenida, \" + nombre + \"!\";\n  }\n});"
+        "Dentro del submit: preventDefault, la bandera con let todoBien = true; y un if / else por campo, los tres seguidos. El campo que falla escribe SU mensaje en SU párrafo y pone todoBien = false; el que va bien solo vacía su párrafo. Y comprueba SIEMPRE los tres campos, aunque el primero ya vaya mal (sin else if entre campos).",
+        "Te puede quedar así:\nlet todoBien = true;\nconst nombre = campoNombre.value.trim();\nif (nombre === \"\") {\n  errorNombre.textContent = \"Escribe tu nombre.\";\n  todoBien = false;\n} else {\n  errorNombre.textContent = \"\";\n}\nCon el email (con if (!email.includes(\"@\"))) y con la casilla (con if (!casillaNormas.checked)) es igual. Al final:\nif (todoBien) {\n  exito.textContent = \"¡Te damos la bienvenida, \" + nombre + \"!\";\n} else {\n  exito.textContent = \"\";\n}"
       ],
       solucion: {
         html: `<form id="registro" novalidate>
   <h2>Únete al club de exploradores 🧭</h2>
   <label for="nombre">Nombre</label>
-  <input id="nombre" type="text" aria-describedby="error">
+  <input id="nombre" type="text" aria-describedby="error-nombre">
+  <p id="error-nombre" class="error" role="alert"></p>
   <label for="email">Email</label>
-  <input id="email" type="email" aria-describedby="error">
-  <p id="error" class="error" role="alert"></p>
+  <input id="email" type="email" aria-describedby="error-email">
+  <p id="error-email" class="error" role="alert"></p>
+  <div class="fila">
+    <input type="checkbox" id="normas">
+    <label for="normas">Prometo cuidar la naturaleza</label>
+  </div>
+  <p id="error-normas" class="error" role="alert"></p>
   <button>Registrarme</button>
 </form>
 <p id="exito" class="exito" role="status"></p>
@@ -452,23 +495,43 @@ const exito = document.querySelector("#exito");
         js: `const formulario = document.querySelector("#registro");
 const campoNombre = document.querySelector("#nombre");
 const campoEmail = document.querySelector("#email");
-const error = document.querySelector("#error");
+const casillaNormas = document.querySelector("#normas");
+const errorNombre = document.querySelector("#error-nombre");
+const errorEmail = document.querySelector("#error-email");
+const errorNormas = document.querySelector("#error-normas");
 const exito = document.querySelector("#exito");
 
 formulario.addEventListener("submit", (evento) => {
   evento.preventDefault();
-  const nombre = campoNombre.value.trim();
-  const email = campoEmail.value.trim();
+  let todoBien = true;
 
+  const nombre = campoNombre.value.trim();
   if (nombre === "") {
-    error.textContent = "Escribe tu nombre.";
-    exito.textContent = "";
-  } else if (!email.includes("@")) {
-    error.textContent = "El email debe llevar una @.";
-    exito.textContent = "";
+    errorNombre.textContent = "Escribe tu nombre.";
+    todoBien = false;
   } else {
-    error.textContent = "";
+    errorNombre.textContent = "";
+  }
+
+  const email = campoEmail.value.trim();
+  if (!email.includes("@")) {
+    errorEmail.textContent = "El email debe llevar una @.";
+    todoBien = false;
+  } else {
+    errorEmail.textContent = "";
+  }
+
+  if (!casillaNormas.checked) {
+    errorNormas.textContent = "Tienes que prometerlo.";
+    todoBien = false;
+  } else {
+    errorNormas.textContent = "";
+  }
+
+  if (todoBien) {
     exito.textContent = "¡Te damos la bienvenida, " + nombre + "!";
+  } else {
+    exito.textContent = "";
   }
 });
 `

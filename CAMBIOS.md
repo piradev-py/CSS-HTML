@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.3.3 · 2026-10-24
+
+- js-11: el reto del club de exploradores tiene tres campos (nombre, email y una casilla), cada uno con su mensaje
+  en su párrafo, y se resuelve con la bandera `todoBien`: si los tres van mal, salen los tres mensajes a la vez.
+
 ## 1.3.2 · 2026-10-24
 
 - html-07: el ejercicio de Tagui pide `width` **y** `height`, y el reto de la galería pide los dos tamaños en la

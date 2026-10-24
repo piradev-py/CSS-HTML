@@ -48,7 +48,7 @@
   - [x] P4 (js-04 `setAttribute`/`aria-expanded`, js-10 botón «Quitar» en cada elemento con ejercicio, js-12 array de
         objetos con `|| []`). Falta: que el **reto** de js-12 guarde un array de objetos.
   - [x] P3 (js-11: casillas y radios con `.checked`, `Number.isNaN`, bandera `todoBien` con un mensaje por campo).
-        Falta: que el **reto** de js-11 tenga 2–3 campos con su mensaje cada uno.
+        El **reto** de js-11 tiene 3 campos con su mensaje cada uno y la bandera (1.3.3).
   - [x] P5 (html-13 «La cabeza de la página», con la tarjeta `vistaPrevia` del motor) — 2026-10-18. Sin renumerar: los ids
         no cambian nunca (las lecciones nuevas llevan el siguiente número libre) y una lección completada sigue abierta.
   - [x] P1 (`js-15` «Filtrar listas», entre js-10 y js-11: `filter`, `includes`, quitar con `!==`, repintar con botones) — 2026-10-18.
