@@ -35,5 +35,8 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
 - Al terminar, `node herramientas/traducciones.mjs` debe decir ✅ (cada `T()` con su inglés y los mismos `{marcadores}`).
 
 ## Al terminar
-Ejecuta `node tests/navegador/cdp.mjs esc-tests.mjs` (Node 22 + Edge) y pega la salida de la lección que tocaste.
+- Tareas de traducción de la interfaz: `node --check` de cada archivo que tocaste y `node herramientas/traducciones.mjs`.
+  **No lances los tests del navegador** (`tests/navegador/…`): los pasa el revisor (dos Edge a la vez se cuelgan).
+- Tareas de lecciones: `node tests/navegador/cdp.mjs esc-tests.mjs` (Node 22 + Edge), solo si la tarea lo pide, y pega
+  la salida de la lección que tocaste.
 Termina con un resumen de 3–5 líneas: qué archivos cambiaste y qué no pudiste comprobar.

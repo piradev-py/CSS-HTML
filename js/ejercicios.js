@@ -144,7 +144,7 @@
 
     const na = nodosUtiles(a);
     const ns = nodosUtiles(s);
-    const dentro = a.tagName === "BODY" ? "" : " dentro de " + nombre(a);
+    const dentro = a.tagName === "BODY" ? "" : a.tagName === "HEAD" ? " en la cabeza (<head>)" : " dentro de " + nombre(a);
     for (let i = 0; i < ns.length; i++) {
       const x = na[i];
       const y = ns[i];
@@ -281,13 +281,14 @@
     const i = mal[0] - 1;
     const dif = diferenciaLinea(A.win.__logs[i], S.win.__logs[i]);
     const otras = mal.slice(1);
-    return "La línea " + (i + 1) + " de la consola no es la que pide el enunciado" + (dif ? ": " + dif : "") +
+    return "La línea " + (i + 1) + " de la consola no es la que pide el enunciado" + (dif ? ": " + dif.mensaje : "") +
       ". Debería decir «" + S.win.__logs[i] + "»." +
-      (dif && /^sobra «\$»/.test(dif) ? " ¿Se te ha colado el `$` de `${…}`? Solo va pegado a la llave: `${mascota}`." : "") +
+      (dif && dif.sobra === "$" && !dif.falta ? " ¿Se te ha colado el `$` de `${…}`? Solo va pegado a la llave: `${mascota}`." : "") +
       (otras.length ? " También " + (otras.length === 1 ? "está mal la línea " : "están mal las líneas ") + otras.join(", ").replace(/, (\d+)$/, " y $1") + "." : "");
   }
 
-  /** Qué palabras sobran o faltan entre una línea del alumno y la de la solución (mayúsculas y tildes no cuentan). */
+  /** Qué palabras sobran o faltan entre una línea del alumno y la de la solución (mayúsculas y tildes no cuentan).
+      Devuelve { mensaje, sobra, falta } o null: quien llama mira `sobra`, no el texto, que cambia con el idioma. */
   function diferenciaLinea(a, s) {
     const palabras = t => String(t).split(/\s+/).filter(normalizarTexto);
     const igual = (x, y) => normalizarTexto(x) === normalizarTexto(y);
@@ -298,10 +299,11 @@
     while (f < A.length - p && f < S.length - p && igual(A[A.length - 1 - f], S[S.length - 1 - f])) f++;
     const sobra = A.slice(p, A.length - f).join(" "), falta = S.slice(p, S.length - f).join(" ");
     const donde = p === 0 ? " al principio" : f === 0 ? " al final" : "";
-    if (sobra && falta) return "donde pone «" + sobra + "» debería poner «" + falta + "»";
-    if (sobra) return "sobra «" + sobra + "»" + donde;
-    if (falta) return "falta «" + falta + "»" + donde;
-    return null;
+    const mensaje = sobra && falta ? "donde pone «" + sobra + "» debería poner «" + falta + "»"
+      : sobra ? "sobra «" + sobra + "»" + donde
+      : falta ? "falta «" + falta + "»" + donde
+      : null;
+    return mensaje && { mensaje, sobra, falta };
   }
 
   /**
@@ -337,7 +339,7 @@
         const difHtml = compararAtributos(A.doc.documentElement, S.doc.documentElement);
         if (difHtml) return { ok: false, mensaje: difHtml };
         const difHead = compararElementos(A.doc.head, S.doc.head, ctx);
-        if (difHead) return { ok: false, mensaje: difHead.replace("dentro de <head>", "en la cabeza (<head>)") };
+        if (difHead) return { ok: false, mensaje: difHead };
       }
       const dif = compararElementos(A.doc.body, S.doc.body, ctx);
       if (dif) return { ok: false, mensaje: pasada.prefijo ? pasada.prefijo + dif.charAt(0).toLowerCase() + dif.slice(1) : dif };

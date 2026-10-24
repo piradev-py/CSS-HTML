@@ -58,6 +58,11 @@ function enviar(method, params = {}) {
 
 await enviar("Page.enable");
 await enviar("Runtime.enable");
+// Las pruebas van en español (la referencia) salvo con IDIOMA=en; se fija antes de que cargue cada página (ver js/textos.js)
+const IDIOMA = process.env.IDIOMA || "es";
+await enviar("Page.addScriptToEvaluateOnNewDocument", {
+  source: "try { localStorage.setItem('csshtml-idioma', " + JSON.stringify(IDIOMA) + "); } catch (e) {}"
+});
 
 const api = {
   esperar,

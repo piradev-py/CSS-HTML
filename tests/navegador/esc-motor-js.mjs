@@ -125,6 +125,16 @@ async function pruebas() {
   ok("consola: se ignoran mayúsculas y signos", (await rev({ js: 'console.log("hola!");\nconsole.log("me gusta la PIZZA");' }, solL)).ok);
   const faltaL = await rev({ js: 'console.log("Hola");' }, solL);
   ok("consola: falta una línea (" + faltaL.mensaje + ")", !faltaL.ok && /Me gusta la pizza/.test(faltaL.mensaje));
+  // El consejo del $ sale cuando solo sobra el $ de ${…}, y no cuando sobra otra cosa
+  const solD = { js: 'const m = "Luna";\nconsole.log(`Hola ${m}`);' };
+  const dolar = await rev({ js: 'const m = "Luna";\nconsole.log(`$ Hola ${m}`);' }, solD);
+  ok("consola: sobra el $ → consejo de ${…} (" + dolar.mensaje + ")", !dolar.ok && /\$\{mascota\}/.test(dolar.mensaje));
+  const otraCosa = await rev({ js: 'const m = "Luna";\nconsole.log(`Ay Hola ${m}`);' }, solD);
+  ok("consola: sobra otra palabra → sin consejo del $", !otraCosa.ok && !/\$\{mascota\}/.test(otraCosa.mensaje));
+  // Una diferencia en la cabeza se nombra como «la cabeza (<head>)», no «dentro de <head>»
+  const pag = t => '<!DOCTYPE html>\n<html lang="es">\n<head>\n  <meta charset="utf-8">\n  <title>' + t + '</title>\n</head>\n<body>\n  <p>Hola</p>\n</body>\n</html>';
+  const cabeza = await rev({ html: pag("Mi web").replace(/  <title>.*\n/, "") }, { html: pag("Mi web") });
+  ok("cabeza: falta <title> → «cabeza (<head>)» (" + cabeza.mensaje + ")", !cabeza.ok && /<title>/.test(cabeza.mensaje) && /\(<head>\)/.test(cabeza.mensaje));
 
   // 14. Bucles infinitos: se cortan con un aviso y la página sigue viva
   const t0 = performance.now();
