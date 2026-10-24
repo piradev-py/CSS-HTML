@@ -28,6 +28,7 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
 - No traduzcas: código, nombres de etiquetas/propiedades, clases, ids, claves de `localStorage`, rutas, emojis sueltos.
 - Si un texto lleva HTML (`<b>…</b>`), tradúcelo entero con su HTML dentro.
 - Inglés claro y cercano, para principiantes (tutea: «you»), como el español del curso.
+- Al terminar, `node herramientas/traducciones.mjs` debe decir ✅ (cada `T()` con su inglés y los mismos `{marcadores}`).
 
 ## Al terminar
 Ejecuta `node tests/navegador/cdp.mjs esc-tests.mjs` (Node 22 + Edge) y pega la salida de la lección que tocaste.

@@ -14,24 +14,23 @@
     const empezado = Object.keys(PROGRESO.datos.completadas).length > 0;
     const saludo = empezado
       ? MASCOTA.azar(MASCOTA.FRASES.bienvenida.slice(1))
-      : "¡Hola! Soy <b>Tagui</b> 👋 Aquí aprenderás a crear páginas web desde cero. ¡Sin prisa y jugando!";
+      : T("¡Hola! Soy <b>Tagui</b> 👋 Aquí aprenderás a crear páginas web desde cero. ¡Sin prisa y jugando!");
     cont.innerHTML =
       '<div class="bienvenida-texto">' +
-        "<h1>Aprende a crear páginas web <span class=\"resaltado\">jugando</span></h1>" +
-        "<p>Empieza por <b>HTML</b>, dale estilo con <b>CSS</b>, combínalos y termina dando vida a tus páginas con <b>JavaScript</b>. " +
-        "Cada lección es cortita y acaba con un reto.</p>" +
+        "<h1>" + T("Aprende a crear páginas web <span class=\"resaltado\">jugando</span>") + "</h1>" +
+        "<p>" + T("Empieza por <b>HTML</b>, dale estilo con <b>CSS</b>, combínalos y termina dando vida a tus páginas con <b>JavaScript</b>. Cada lección es cortita y acaba con un reto.") + "</p>" +
         '<div class="bienvenida-acciones"></div>' +
       "</div>";
     const acciones = cont.querySelector(".bienvenida-acciones");
     if (actual) {
       acciones.innerHTML =
         '<a class="boton grande" href="leccion.html?id=' + actual.id + '">' +
-        (empezado ? "▶ Continuar: " : "🚀 Empezar: ") + UI.escapar(actual.titulo) + "</a>";
+        (empezado ? T("▶ Continuar: ") : T("🚀 Empezar: ")) + UI.escapar(actual.titulo) + "</a>";
     } else {
-      acciones.innerHTML = '<p class="texto-suave">🎉 Has completado todas las lecciones disponibles. ¡Pronto habrá más!</p>';
+      acciones.innerHTML = '<p class="texto-suave">' + T("🎉 Has completado todas las lecciones disponibles. ¡Pronto habrá más!") + "</p>";
     }
-    if (PROGRESO.estaCompletada("js-17")) acciones.insertAdjacentHTML("beforeend", '<a class="boton" href="mi-clinica.html">🏥 Mi clínica</a>');
-    acciones.insertAdjacentHTML("beforeend", '<a class="boton secundario" href="laboratorio.html">🧪 Laboratorio</a>');
+    if (PROGRESO.estaCompletada("js-17")) acciones.insertAdjacentHTML("beforeend", '<a class="boton" href="mi-clinica.html">' + T("🏥 Mi clínica") + "</a>");
+    acciones.insertAdjacentHTML("beforeend", '<a class="boton secundario" href="laboratorio.html">' + T("🧪 Laboratorio") + "</a>");
     acciones.insertAdjacentHTML("beforeend",
       '<span class="chip">' + n.emoji + " " + n.nombre + " · " + n.xp + " XP</span>");
     cont.prepend(MASCOTA.crear(saludo, "alegre"));
@@ -60,11 +59,11 @@
       sec.innerHTML =
         '<summary class="mundo-cabecera">' +
           '<div class="mundo-emoji" aria-hidden="true">' + (abierto ? m.emoji : "🔒") + "</div>" +
-          "<div><div class=\"mundo-num\">Mundo " + m.numero + "</div>" +
+          "<div><div class=\"mundo-num\">" + T("Mundo {n}", { n: m.numero }) + "</div>" +
           "<h2>" + UI.escapar(m.nombre) + "</h2><p>" + UI.escapar(m.lema) + "</p></div>" +
           '<div class="mundo-progreso"><b>' + hechas + "/" + m.lecciones.length + "</b>" +
           '<div class="mini-barra"><div style="width:' + Math.round((hechas / m.lecciones.length) * 100) + '%"></div></div>' +
-          (listas < m.lecciones.length ? '<small>' + listas + " disponibles</small>" : "") +
+          (listas < m.lecciones.length ? "<small>" + T("{n} disponibles", { n: listas }) + "</small>" : "") +
           "</div>" +
           '<span class="mundo-flecha" aria-hidden="true">▾</span>' +
         "</summary>" +
@@ -83,14 +82,14 @@
           proximamente: "🚧"
         }[estado];
         const etiqueta = l.titulo + " — " + {
-          completada: "completada con " + estrellas + " estrellas",
-          disponible: "disponible",
-          bloqueada: "bloqueada",
-          proximamente: "próximamente"
+          completada: T("completada con {n} estrellas", { n: estrellas }),
+          disponible: T("disponible"),
+          bloqueada: T("bloqueada"),
+          proximamente: T("próximamente")
         }[estado];
         const etiquetaNodo = estado === "disponible" || estado === "completada" ? "a" : "span";
         li.innerHTML =
-          (esActual ? '<div class="globo-actual">¡Empieza aquí!</div>' : "") +
+          (esActual ? '<div class="globo-actual">' + T("¡Empieza aquí!") + "</div>" : "") +
           "<" + etiquetaNodo + ' class="nodo ' + estado + (esActual ? " actual" : "") + '"' +
           (etiquetaNodo === "a" ? ' href="leccion.html?id=' + l.id + '"' : "") +
           ' aria-label="' + UI.escapar(etiqueta) + '">' + icono + "</" + etiquetaNodo + ">" +
@@ -187,15 +186,14 @@
     const cont = document.querySelector("[data-opciones-curso]");
     if (!PROGRESO.pruebaDisponible()) { cont.remove(); return; }
     cont.innerHTML = PROGRESO.enPrueba()
-      ? "<h2>🧪 Estás en modo prueba</h2>" +
-        "<p>Todo está desbloqueado. Lo que hagas aquí no cambia tu progreso real y se borra al cerrar la pestaña.</p>" +
+      ? "<h2>" + T("🧪 Estás en modo prueba") + "</h2>" +
+        "<p>" + T("Todo está desbloqueado. Lo que hagas aquí no cambia tu progreso real y se borra al cerrar la pestaña.") + "</p>" +
         '<div class="opciones-botones">' +
-        '<button class="boton" data-salir>🚪 Salir y volver a mi progreso</button></div>'
-      : "<h2>🛠️ Modo prueba (solo en local)</h2>" +
-        "<p>¿Quieres echar un vistazo a cualquier lección sin que cuente? Usa el <b>modo prueba</b>: " +
-        "todo desbloqueado y tu progreso real queda intacto.</p>" +
+        '<button class="boton" data-salir>' + T("🚪 Salir y volver a mi progreso") + "</button></div>"
+      : "<h2>" + T("🛠️ Modo prueba (solo en local)") + "</h2>" +
+        "<p>" + T("¿Quieres echar un vistazo a cualquier lección sin que cuente? Usa el <b>modo prueba</b>: todo desbloqueado y tu progreso real queda intacto.") + "</p>" +
         '<div class="opciones-botones">' +
-        '<button class="boton morado" data-entrar>🧪 Probar el curso sin guardar</button></div>';
+        '<button class="boton morado" data-entrar>' + T("🧪 Probar el curso sin guardar") + "</button></div>";
     const accion = (sel, fn) => { const b = cont.querySelector(sel); if (b) b.addEventListener("click", fn); };
     accion("[data-entrar]", UI.entrarPrueba);
     accion("[data-salir]", UI.salirPrueba);
