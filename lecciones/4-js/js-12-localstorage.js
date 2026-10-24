@@ -210,124 +210,170 @@ for (const cosa of recuperadas) {
     },
     {
       tipo: "reto",
-      enunciado: "Haz una página que **se acuerde de ti** 👋. El HTML ya está escrito.\n\n1. Al **enviar** el formulario `#formulario` (frena el envío), guarda el nombre de `#nombre` (con `trim()`) en localStorage con la clave `nombre` y pon en `#saludo`: **¡Hola, Ana!**\n2. **Al empezar**, si hay un nombre guardado, pon en `#saludo`: **¡Hola de nuevo, Ana!**\n3. Al pulsar `#olvidar` («No soy yo»), borra la clave `nombre` con `removeItem` y vuelve a poner **¡Hola! ¿Cómo te llamas?**\n\nPruébalo de verdad: escribe tu nombre, guárdalo y pulsa **🔄 Recargar**.",
+      enunciado: "Haz tu **cuaderno de avistamientos de aves** 🐦: apuntes que se guardan aunque se recargue la página. El HTML ya está escrito.\n\n1. Al **empezar**, carga la clave `avistamientos` con `JSON.parse(...) || []` y pinta cada objeto en `#lista` como `<li>Gorrión: 3</li>` (con `createElement`, como en js-10).\n2. Al **enviar** el formulario `#formulario` (frena el envío): crea un objeto `{ especie, cantidad }` con la especie con `trim()` y la cantidad con `Number()`, hazle `push` al array, guarda la lista entera con `JSON.stringify` y vuelve a pintar `#lista`.\n3. Al pulsar `#borrar` («Borrar el cuaderno»): borra la clave con `removeItem(\"avistamientos\")`, vacía el array y deja `#lista` vacía.\n\nPruébalo de verdad: apunta algún avistamiento y pulsa **🔄 Recargar**. La página se acuerda. 🧠",
       cssBase: `body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 20px; background-color: #e8f4fd; }
 .tarjeta { width: 320px; padding: 20px; background-color: white; border-radius: 16px; box-shadow: 0 2px 10px rgb(0 0 0 / 0.1); text-align: center; }
-#saludo { color: #1c5d99; }
+h2 { margin: 0 0 12px; color: #1c5d99; }
 form { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 label { width: 100%; font-weight: bold; }
 input, button { font: inherit; padding: 8px; border-radius: 8px; }
 input { border: 2px solid #8cc0eb; }
 button { border: none; background-color: #1c5d99; color: white; }
-#olvidar { margin-top: 16px; background-color: transparent; color: #1c5d99; text-decoration: underline; }`,
+#lista { text-align: left; padding-left: 24px; margin: 14px 0; }
+#lista li { margin: 4px 0; }
+#borrar { margin-top: 16px; background-color: transparent; color: #1c5d99; text-decoration: underline; }`,
       inicial: {
         html: `<div class="tarjeta">
-  <h2 id="saludo">¡Hola! ¿Cómo te llamas?</h2>
+  <h2>Tu cuaderno de avistamientos 🐦</h2>
   <form id="formulario" novalidate>
-    <label for="nombre">Tu nombre</label>
-    <input id="nombre" type="text">
-    <button>Guardar</button>
+    <label for="especie">Especie</label>
+    <input id="especie" type="text">
+    <label for="cantidad">Cantidad</label>
+    <input id="cantidad" type="number">
+    <button>Apuntar</button>
   </form>
-  <button id="olvidar" type="button">No soy yo</button>
+  <ul id="lista"></ul>
+  <button id="borrar" type="button">Borrar el cuaderno</button>
 </div>
 `,
-        js: `const saludo = document.querySelector("#saludo");
-const formulario = document.querySelector("#formulario");
-const campo = document.querySelector("#nombre");
-const olvidar = document.querySelector("#olvidar");
+        js: `const formulario = document.querySelector("#formulario");
+const campoEspecie = document.querySelector("#especie");
+const campoCantidad = document.querySelector("#cantidad");
+const lista = document.querySelector("#lista");
+const borrar = document.querySelector("#borrar");
 
-// 1. Al empezar: lee la clave "nombre". Si no es null, saluda «de nuevo»
+// 1. Al empezar: carga la clave "avistamientos" con JSON.parse(...) || []
+//    y pinta cada objeto en #lista con createElement (como en js-10)
 
-// 2. Al enviar el formulario: frena el envío, guarda el nombre y saluda
+// 2. Al enviar el formulario: frena el envío, crea { especie: ..., cantidad: ... }
+//    (especie con trim(), cantidad con Number()), haz push, guarda con JSON.stringify y vuelve a pintar la lista
 
-// 3. Al pulsar «No soy yo»: borra la clave y vuelve a la pregunta
+// 3. Al pulsar «Borrar el cuaderno»: removeItem("avistamientos"), vacía el array y deja la lista vacía
 `
       },
       comprobaciones: [
         {
-          texto: "Al enviar el formulario con tu nombre, `#saludo` te saluda por tu nombre",
+          texto: "Al apuntar «Gorrión» y 3, en `#lista` aparece un `<li>` que dice «Gorrión» y «3»",
           prueba: async (doc) => {
             const v = await PRUEBA.recargar(doc, { borrarDatos: true });
-            PRUEBA.escribir(v.doc.querySelector("#nombre"), "Ana");
+            PRUEBA.escribir(v.doc.querySelector("#especie"), "Gorrión");
+            PRUEBA.escribir(v.doc.querySelector("#cantidad"), "3");
             v.doc.querySelector("#formulario")?.requestSubmit();
-            return (v.doc.querySelector("#saludo")?.textContent || "").includes("Ana");
+            const lis = Array.from(v.doc.querySelectorAll("#lista li"));
+            return lis.some(li => li.textContent.includes("Gorrión") && li.textContent.includes("3"));
           }
         },
         {
-          texto: "El nombre se guarda en localStorage con la clave `nombre` y sin espacios de más",
+          texto: "El apunte se guarda en la clave `avistamientos` como un array con 1 objeto (su especie es Gorrión y su cantidad, 3)",
           prueba: async (doc) => {
             const v = await PRUEBA.recargar(doc, { borrarDatos: true });
-            PRUEBA.escribir(v.doc.querySelector("#nombre"), "  Leo  ");
+            PRUEBA.escribir(v.doc.querySelector("#especie"), "Gorrión");
+            PRUEBA.escribir(v.doc.querySelector("#cantidad"), "3");
             v.doc.querySelector("#formulario")?.requestSubmit();
-            return v.win.localStorage?.getItem("nombre") === "Leo";
+            const datos = JSON.parse(v.win.localStorage?.getItem("avistamientos") || "null");
+            return Array.isArray(datos) && datos.length === 1 &&
+                   datos[0].especie === "Gorrión" && Number(datos[0].cantidad) === 3;
           }
         },
         {
-          texto: "Al recargar la página se acuerda de ti: **¡Hola de nuevo, Ana!**",
+          texto: "Dos apuntes quedan en orden y la especie se limpia con `trim()`: al recargar siguen los 2",
           prueba: async (doc) => {
             const v = await PRUEBA.recargar(doc, { borrarDatos: true });
-            PRUEBA.escribir(v.doc.querySelector("#nombre"), "Ana");
+            PRUEBA.escribir(v.doc.querySelector("#especie"), "Gorrión");
+            PRUEBA.escribir(v.doc.querySelector("#cantidad"), "3");
+            v.doc.querySelector("#formulario")?.requestSubmit();
+            PRUEBA.escribir(v.doc.querySelector("#especie"), "  Mirlo  ");
+            PRUEBA.escribir(v.doc.querySelector("#cantidad"), "1");
             v.doc.querySelector("#formulario")?.requestSubmit();
             const v2 = await PRUEBA.recargar(v.doc);
-            const texto = (v2.doc.querySelector("#saludo")?.textContent || "").toLowerCase();
-            return texto.includes("de nuevo") && texto.includes("ana");
+            const textos = Array.from(v2.doc.querySelectorAll("#lista li")).map(li => li.textContent);
+            return textos.length === 2 &&
+                   textos[0].includes("Gorrión") && textos[0].includes("3") &&
+                   textos[1].includes("Mirlo") && textos[1].includes("1");
           }
         },
         {
-          texto: "Al pulsar «No soy yo» te olvida: vuelve la pregunta, también al recargar",
+          texto: "Empezar de cero no da errores y la lista arranca vacía; tras apuntar uno y recargar, hay 1 `<li>`",
           prueba: async (doc) => {
             const v = await PRUEBA.recargar(doc, { borrarDatos: true });
-            PRUEBA.escribir(v.doc.querySelector("#nombre"), "Ana");
+            if (v.doc.querySelectorAll("#lista li").length !== 0) return false;
+            if ((v.win.__errores || []).length > 0) return false;
+            PRUEBA.escribir(v.doc.querySelector("#especie"), "Gorrión");
+            PRUEBA.escribir(v.doc.querySelector("#cantidad"), "3");
             v.doc.querySelector("#formulario")?.requestSubmit();
-            if (v.win.localStorage?.getItem("nombre") === null) return false;
-            v.doc.querySelector("#olvidar")?.click();
-            if ((v.doc.querySelector("#saludo")?.textContent || "").includes("Ana")) return false;
             const v2 = await PRUEBA.recargar(v.doc);
-            return !(v2.doc.querySelector("#saludo")?.textContent || "").includes("Ana") &&
-              v2.win.localStorage?.getItem("nombre") === null;
+            return v2.doc.querySelectorAll("#lista li").length === 1;
+          }
+        },
+        {
+          texto: "«Borrar el cuaderno» lo vacía todo: la clave `avistamientos` desaparece y `#lista` queda vacía, también al recargar",
+          prueba: async (doc) => {
+            const v = await PRUEBA.recargar(doc, { borrarDatos: true });
+            PRUEBA.escribir(v.doc.querySelector("#especie"), "Gorrión");
+            PRUEBA.escribir(v.doc.querySelector("#cantidad"), "3");
+            v.doc.querySelector("#formulario")?.requestSubmit();
+            v.doc.querySelector("#borrar")?.click();
+            if (v.win.localStorage?.getItem("avistamientos") !== null) return false;
+            if (v.doc.querySelectorAll("#lista li").length !== 0) return false;
+            const v2 = await PRUEBA.recargar(v.doc);
+            return v2.win.localStorage?.getItem("avistamientos") === null &&
+                   v2.doc.querySelectorAll("#lista li").length === 0;
           }
         }
       ],
       pistas: [
-        "Tres bloques: un if (guardado !== null) arriba, para el saludo «de nuevo»; un addEventListener(\"submit\", …) con preventDefault, trim, setItem y el saludo; y un addEventListener(\"click\", …) en olvidar con removeItem y el texto de la pregunta.",
-        "Te debe quedar así:\nconst guardado = localStorage.getItem(\"nombre\");\nif (guardado !== null) {\n  saludo.textContent = \"¡Hola de nuevo, \" + guardado + \"!\";\n}\n\nformulario.addEventListener(\"submit\", (evento) => {\n  evento.preventDefault();\n  const nombre = campo.value.trim();\n  localStorage.setItem(\"nombre\", nombre);\n  saludo.textContent = \"¡Hola, \" + nombre + \"!\";\n});\n\nolvidar.addEventListener(\"click\", () => {\n  localStorage.removeItem(\"nombre\");\n  saludo.textContent = \"¡Hola! ¿Cómo te llamas?\";\n});"
+        "Tres bloques: arriba, la carga con let avistamientos = JSON.parse(localStorage.getItem(\"avistamientos\")) || []; y una función pintar() que vacía #lista y le añade un <li> por cada objeto (createElement, textContent con especie + \": \" + cantidad, y append). Después, el addEventListener(\"submit\", …) con preventDefault, push, setItem y pintar(). Y el addEventListener(\"click\", …) en borrar con removeItem, la lista a [] y #lista vacía.",
+        "Te debe quedar así:\nlet avistamientos = JSON.parse(localStorage.getItem(\"avistamientos\")) || [];\n\nfunction pintar() {\n  lista.textContent = \"\";\n  for (const a of avistamientos) {\n    const li = document.createElement(\"li\");\n    li.textContent = a.especie + \": \" + a.cantidad;\n    lista.append(li);\n  }\n}\npintar();\n\nformulario.addEventListener(\"submit\", (evento) => {\n  evento.preventDefault();\n  avistamientos.push({ especie: campoEspecie.value.trim(), cantidad: Number(campoCantidad.value) });\n  localStorage.setItem(\"avistamientos\", JSON.stringify(avistamientos));\n  pintar();\n});\n\nborrar.addEventListener(\"click\", () => {\n  localStorage.removeItem(\"avistamientos\");\n  avistamientos = [];\n  lista.textContent = \"\";\n});"
       ],
       solucion: {
         html: `<div class="tarjeta">
-  <h2 id="saludo">¡Hola! ¿Cómo te llamas?</h2>
+  <h2>Tu cuaderno de avistamientos 🐦</h2>
   <form id="formulario" novalidate>
-    <label for="nombre">Tu nombre</label>
-    <input id="nombre" type="text">
-    <button>Guardar</button>
+    <label for="especie">Especie</label>
+    <input id="especie" type="text">
+    <label for="cantidad">Cantidad</label>
+    <input id="cantidad" type="number">
+    <button>Apuntar</button>
   </form>
-  <button id="olvidar" type="button">No soy yo</button>
+  <ul id="lista"></ul>
+  <button id="borrar" type="button">Borrar el cuaderno</button>
 </div>
 `,
-        js: `const saludo = document.querySelector("#saludo");
-const formulario = document.querySelector("#formulario");
-const campo = document.querySelector("#nombre");
-const olvidar = document.querySelector("#olvidar");
+        js: `const formulario = document.querySelector("#formulario");
+const campoEspecie = document.querySelector("#especie");
+const campoCantidad = document.querySelector("#cantidad");
+const lista = document.querySelector("#lista");
+const borrar = document.querySelector("#borrar");
 
-// 1. Al empezar: ¿hay un nombre guardado?
-const guardado = localStorage.getItem("nombre");
-if (guardado !== null) {
-  saludo.textContent = "¡Hola de nuevo, " + guardado + "!";
+// 1. Al empezar: cargar la lista guardada (o una vacía) y pintarla
+let avistamientos = JSON.parse(localStorage.getItem("avistamientos")) || [];
+
+function pintar() {
+  lista.textContent = "";
+  for (const avistamiento of avistamientos) {
+    const li = document.createElement("li");
+    li.textContent = avistamiento.especie + ": " + avistamiento.cantidad;
+    lista.append(li);
+  }
 }
+pintar();
 
-// 2. Al enviar: guardar el nombre y saludar
+// 2. Al enviar: añadir el apunte, guardar la lista entera y volver a pintar
 formulario.addEventListener("submit", (evento) => {
   evento.preventDefault();
-  const nombre = campo.value.trim();
-  if (nombre !== "") {
-    localStorage.setItem("nombre", nombre);
-    saludo.textContent = "¡Hola, " + nombre + "!";
-  }
+  avistamientos.push({
+    especie: campoEspecie.value.trim(),
+    cantidad: Number(campoCantidad.value)
+  });
+  localStorage.setItem("avistamientos", JSON.stringify(avistamientos));
+  pintar();
 });
 
-// 3. «No soy yo»: olvidar el nombre
-olvidar.addEventListener("click", () => {
-  localStorage.removeItem("nombre");
-  saludo.textContent = "¡Hola! ¿Cómo te llamas?";
+// 3. «Borrar el cuaderno»: olvidar todos los apuntes
+borrar.addEventListener("click", () => {
+  localStorage.removeItem("avistamientos");
+  avistamientos = [];
+  lista.textContent = "";
 });
 `
       }

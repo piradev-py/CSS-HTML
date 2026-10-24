@@ -19,6 +19,13 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.3.4 · 2026-10-24
+
+- js-12: el reto es ahora «Tu cuaderno de avistamientos»: guarda una lista de objetos (`{ especie, cantidad }`) con
+  `JSON.stringify`, la carga con `JSON.parse(…) || []` al empezar y la pinta con `createElement`; se puede borrar
+  entera. Las comprobaciones recargan la página para ver que se acuerda.
+- html-07: la nota de la cabecera nombra los atributos que comprueba ahora (`height` y `loading`).
+
 ## 1.3.3 · 2026-10-24
 
 - js-11: el reto del club de exploradores tiene tres campos (nombre, email y una casilla), cada uno con su mensaje

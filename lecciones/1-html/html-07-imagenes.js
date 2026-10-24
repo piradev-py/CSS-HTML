@@ -3,7 +3,7 @@
    Imágenes — <img>, src, alt, width/height, <figure>, <figcaption>.
    Nota: la web debe funcionar sin internet, así que solo se usan
    las imágenes locales de recursos/img/. Las comprobaciones miran
-   atributos (src, alt, width) y nunca si la imagen llegó a cargar.
+   atributos (src, alt, width, height, loading) y nunca si la imagen llegó a cargar.
    ============================================================ */
 CURSO.registrar({
   id: "html-07",
