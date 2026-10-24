@@ -21,7 +21,7 @@
    *   las lecciones (CURSO.registrar({ datos })), sin internet.
    * Debe ser autosuficiente: se convierte en texto con toString().
    */
-  function AYUDANTE() {
+  function AYUDANTE(TX) {
     let marco = null;
     try { marco = window.frameElement; } catch (e) { /* sin acceso al marco */ }
     const enviar = (tipo, texto, extra) => {
@@ -35,7 +35,7 @@
     function formatear(v, dentro, vistos) {
       if (typeof v === "string") return dentro ? '"' + v + '"' : v;
       if (v === null || v === undefined || typeof v === "number" || typeof v === "boolean") return String(v);
-      if (typeof v === "function") return "ƒ " + (v.name || "anónima") + "()";
+      if (typeof v === "function") return "ƒ " + (v.name || TX.anonima) + "()";
       if (typeof v !== "object") return String(v);
       if (v instanceof Error) return v.name + ": " + v.message;
       if (v.__csshtmlRespuesta) return "Response { status: " + v.status + ", ok: " + v.ok + ", url: \"" + v.url + "\" }";
@@ -112,8 +112,8 @@
 
     /* ---- Ventanas que bloquearían la página ---- */
     window.alert = m => enviar("aviso", "🔔 alert: " + (m === undefined ? "" : formatear(m, false)));
-    window.confirm = m => { enviar("aviso", "🔔 confirm: " + (m === undefined ? "" : m) + " (en las prácticas responde «Aceptar»)"); return true; };
-    window.prompt = m => { enviar("aviso", "🔔 prompt: " + (m === undefined ? "" : m) + " (en las prácticas no se puede escribir: devuelve null)"); return null; };
+    window.confirm = m => { enviar("aviso", "🔔 confirm: " + (m === undefined ? "" : m) + TX.confirm); return true; };
+    window.prompt = m => { enviar("aviso", "🔔 prompt: " + (m === undefined ? "" : m) + TX.prompt); return null; };
 
     /* ---- localStorage / sessionStorage de práctica ---- */
     function crearAlmacen(clave, avisar) {
@@ -161,7 +161,7 @@
         status: existe ? 200 : 404,
         statusText: existe ? "OK" : "Not Found",
         url,
-        json: () => { try { return Promise.resolve(JSON.parse(texto)); } catch (e) { return Promise.reject(new SyntaxError("El contenido de " + url + " no es JSON válido")); } },
+        json: () => { try { return Promise.resolve(JSON.parse(texto)); } catch (e) { return Promise.reject(new SyntaxError(TX.json.replace("{url}", url))); } },
         text: () => Promise.resolve(texto)
       };
       // Un pequeño retraso para que se note que "pedir y esperar" lleva tiempo
@@ -198,10 +198,9 @@
         '<div class="pagina">' +
           '<div class="direccion">🔗 <span></span></div>' +
           '<div class="icono">🧪</div>' +
-          "<h1>Esta es una página de prueba</h1>" +
-          "<p>En las prácticas los enlaces no salen de aquí. En una web de verdad, el navegador te habría llevado a esa dirección" +
-          (pestanaNueva ? " en una pestaña nueva." : ".") + "</p>" +
-          '<a href="#">← Volver al ejemplo</a>' +
+          "<h1>" + TX.pruebaTitulo + "</h1>" +
+          "<p>" + (pestanaNueva ? TX.pruebaNueva : TX.prueba) + "</p>" +
+          '<a href="#">' + TX.volver + "</a>" +
         "</div>";
       sombra.querySelector(".direccion span").textContent = direccion;
       sombra.querySelector("a").addEventListener("click", e => { e.preventDefault(); host.remove(); });
@@ -303,7 +302,19 @@
     return salida;
   }
 
-  const SCRIPT_AYUDANTE = '<script data-csshtml="ayudante">(' + AYUDANTE.toString() + ")();<\/script>";
+  // AYUDANTE corre dentro del <iframe>, donde no hay T(): sus textos le llegan ya traducidos
+  const TEXTOS_AYUDANTE = {
+    anonima: T("anónima"),
+    confirm: T(" (en las prácticas responde «Aceptar»)"),
+    prompt: T(" (en las prácticas no se puede escribir: devuelve null)"),
+    json: T("El contenido de {url} no es JSON válido"),
+    pruebaTitulo: T("Esta es una página de prueba"),
+    prueba: T("En las prácticas los enlaces no salen de aquí. En una web de verdad, el navegador te habría llevado a esa dirección."),
+    pruebaNueva: T("En las prácticas los enlaces no salen de aquí. En una web de verdad, el navegador te habría llevado a esa dirección en una pestaña nueva."),
+    volver: T("← Volver al ejemplo")
+  };
+  const SCRIPT_AYUDANTE = '<script data-csshtml="ayudante">(' + AYUDANTE.toString() + ")(" +
+    JSON.stringify(TEXTOS_AYUDANTE).replace(/</g, "\\u003c") + ");<\/script>";
   const MARCA_ALUMNO = '<script data-csshtml="alumno">';
 
   /** Construye el documento completo a partir del código del alumno. */

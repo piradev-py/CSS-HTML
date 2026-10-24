@@ -408,6 +408,14 @@
     "↺ Reiniciar": "↺ Reset",
     "Volver al código del principio": "Go back to the original code",
     "Editor de código": "Code editor",
+    "anónima": "anonymous",
+    " (en las prácticas responde «Aceptar»)": " (in the exercises it answers “OK”)",
+    " (en las prácticas no se puede escribir: devuelve null)": " (in the exercises you can't type here: it returns null)",
+    "El contenido de {url} no es JSON válido": "The content of {url} isn't valid JSON",
+    "Esta es una página de prueba": "This is a test page",
+    "En las prácticas los enlaces no salen de aquí. En una web de verdad, el navegador te habría llevado a esa dirección.": "In the exercises, links don't leave this page. On a real website, the browser would have taken you to that address.",
+    "En las prácticas los enlaces no salen de aquí. En una web de verdad, el navegador te habría llevado a esa dirección en una pestaña nueva.": "In the exercises, links don't leave this page. On a real website, the browser would have taken you to that address in a new tab.",
+    "← Volver al ejemplo": "← Back to the example",
     "¿Volver al código del principio? Perderás lo que has escrito aquí.": "Go back to the original code? You'll lose what you've written here."
   };
 
