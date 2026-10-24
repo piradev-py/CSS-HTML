@@ -116,6 +116,17 @@
 ## Para el final
 - [ ] **Selector de idioma Español / English** para hacer el curso en cualquiera de los dos idiomas
       (textos de la interfaz, lecciones, enunciados, pistas, mensajes del revisor y de Tagui).
+      Decidido (2026-10-24): **inglés por defecto**, botón EN/ES siempre visible en la cabecera, lección sin traducir →
+      en español con un aviso, y Huellas traducido entero. Será la **2.0.0**.
+  - [x] Fase 0 · infraestructura: `js/textos.js` (`T("texto en español")` → inglés si lo hay; `IDIOMA`, guardado
+        aparte del progreso), botón EN/ES en la cabecera, `lecciones-en/` para las traducidas (`en: "título"` en
+        `js/curso.js`) y aviso en las que no.
+  - [ ] Fase 1 · interfaz: cada archivo de `js/` con sus textos en `T()` y su inglés en `js/textos.js` (opencode,
+        un archivo por tarea). Y los textos fijos de las 4 páginas HTML.
+  - [ ] Fase 2 · tests en los dos idiomas: `esc-tests` verifica la versión española y la inglesa de cada lección.
+  - [ ] Fase 3 · lecciones, mundo a mundo, en `lecciones-en/` (opencode, una lección por tarea): las comprobaciones
+        que buscan texto en español se adaptan, no solo se traducen.
+  - [ ] Fase 4 · Huellas en inglés: web de referencia, textos para copiar y capturas.
 - [x] Publicar la web con GitHub Pages → **https://piradev-py.github.io/CSS-HTML/** (rama `main`, carpeta raíz, con `.nojekyll`).
 
 ## Decisiones por tomar

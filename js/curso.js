@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.3.4";
+  const VERSION = "1.3.5";
 
   const MUNDOS = [
     {
@@ -121,6 +121,13 @@
     return lista;
   }
 
+  // En inglés: nombres de los mundos por T() y, en las lecciones ya traducidas (`en`: su título inglés), ese título
+  if (IDIOMA.actual === "en") MUNDOS.forEach(m => {
+    m.nombre = T(m.nombre);
+    m.lema = T(m.lema);
+    m.lecciones.forEach(l => { if (l.en) l.titulo = l.en; });
+  });
+
   window.CURSO = {
     VERSION,
     MUNDOS,
@@ -146,7 +153,9 @@
     },
     ruta(id, base = "") {
       const l = this.buscar(id);
-      return l ? base + "lecciones/" + l.mundo.carpeta + "/" + l.archivo : null;
+      // Las traducidas viven en lecciones-en/ con el mismo nombre de archivo; las demás salen en español
+      const carpeta = IDIOMA.actual === "en" && l && l.en ? "lecciones-en/" : "lecciones/";
+      return l ? base + carpeta + l.mundo.carpeta + "/" + l.archivo : null;
     }
   };
 })();

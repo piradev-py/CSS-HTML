@@ -19,6 +19,12 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.3.5 · 2026-10-24
+
+- Preparación del curso en inglés (aún no visible en la web publicada): `js/textos.js` con `T()` para traducir la
+  interfaz, botón EN/ES en la cabecera y carpeta `lecciones-en/` para las lecciones traducidas. Se activa con
+  `PUBLICADO` en `js/textos.js` cuando la interfaz esté traducida.
+
 ## 1.3.4 · 2026-10-24
 
 - js-12: el reto es ahora «Tu cuaderno de avistamientos»: guarda una lista de objetos (`{ especie, cantidad }`) con

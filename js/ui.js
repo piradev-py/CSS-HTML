@@ -162,6 +162,10 @@
       extraIzquierda + LOGO +
       '<span class="espacio"></span>' +
       '<div class="estado-jugador" data-estado-jugador></div>' +
+      (!IDIOMA.disponible ? ""
+        : IDIOMA.actual === "en"
+        ? '<button class="boton-icono" data-accion="idioma" lang="es" aria-label="Cambiar a español" title="Cambiar a español">ES</button>'
+        : '<button class="boton-icono" data-accion="idioma" lang="en" aria-label="Switch to English" title="Switch to English">EN</button>') +
       '<button class="boton-icono ocultar-movil" data-accion="sonido" aria-label="Activar o silenciar sonido"></button>' +
       '<button class="boton-icono" data-accion="tema" aria-label="Cambiar modo claro u oscuro"></button>' +
       '<button class="boton-icono" data-accion="sugerencias" aria-label="Enviar una sugerencia o avisar de un error" title="Sugerencias y errores">💬</button>' +
@@ -182,6 +186,7 @@
       aplicarTema();
       refrescar();
     });
+    cab.querySelector('[data-accion="idioma"]')?.addEventListener("click", () => IDIOMA.cambiar(IDIOMA.actual === "en" ? "es" : "en"));
     cab.querySelector('[data-accion="ajustes"]').addEventListener("click", abrirAjustes);
     cab.querySelector('[data-accion="sugerencias"]').addEventListener("click", () => SUGERENCIAS.abrir());
     refrescar();

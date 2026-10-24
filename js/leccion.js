@@ -43,6 +43,7 @@
       const leccion = CURSO.lecciones[id];
       if (!leccion) return aviso("😵", "Algo salió mal", "El archivo de la lección no se registró correctamente.");
       iniciar(leccion);
+      if (IDIOMA.actual === "en" && !info.en) CELEBRAR.toast(T("Esta lección aún no está traducida: la ves en español."));
     });
   }
   // Las lecciones de proyecto parten de las versiones oficiales de «Huellas» (HUELLAS, ver herramientas/huellas-versiones.mjs)
