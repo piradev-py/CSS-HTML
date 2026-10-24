@@ -39,15 +39,15 @@
     art.innerHTML =
       '<code class="g-termino"></code><p class="g-para">' + UI.md(t.para) + "</p>" +
       (t.ejemplo ? '<div class="g-ejemplo"><pre class="codigo">' + UI.resaltar(t.ejemplo, lenguaje(t)) + "</pre>" +
-        '<button class="mini-boton" data-copiar title="Copiar el ejemplo">📋 Copiar</button></div>' : "") +
-      '<a class="g-leccion" target="_blank" href="leccion.html?id=' + t.leccion.id + '">📖 Lección ' + numero + " · " + UI.escapar(t.leccion.titulo) + "</a>";
+        '<button class="mini-boton" data-copiar title="' + T("Copiar el ejemplo") + '">' + T("📋 Copiar") + "</button></div>" : "") +
+      '<a class="g-leccion" target="_blank" href="leccion.html?id=' + t.leccion.id + '">' + T("📖 Lección {n} · {titulo}", { n: numero, titulo: UI.escapar(t.leccion.titulo) }) + "</a>";
     art.querySelector(".g-termino").textContent = t.termino;
     const copiar = art.querySelector("[data-copiar]");
     if (copiar) copiar.addEventListener("click", () => {
       // Sin permiso de portapapeles (algunos navegadores con file://) se selecciona el texto para copiarlo a mano
       const pre = art.querySelector("pre");
       Promise.resolve(navigator.clipboard && navigator.clipboard.writeText(t.ejemplo))
-        .then(() => { copiar.textContent = "✅ Copiado"; setTimeout(() => { copiar.textContent = "📋 Copiar"; }, 1500); })
+        .then(() => { copiar.textContent = T("✅ Copiado"); setTimeout(() => { copiar.textContent = T("📋 Copiar"); }, 1500); })
         .catch(() => getSelection().selectAllChildren(pre));
     });
     art.dataset.busca = simple([t.termino, t.para, t.tema, t.buscar, t.ejemplo].join(" "));
@@ -58,11 +58,11 @@
     const panel = document.createElement("aside");
     panel.className = "glosario";
     panel.hidden = true;
-    panel.setAttribute("aria-label", "Glosario");
+    panel.setAttribute("aria-label", T("Glosario"));
     panel.innerHTML =
-      '<div class="g-cabeza"><h2>📚 Glosario</h2><button class="mini-boton" data-cerrar>✖ Cerrar</button></div>' +
-      '<input type="search" class="g-buscar" placeholder="Busca una etiqueta o lo que quieres hacer (centrar, enlace…)" aria-label="Buscar en el glosario">' +
-      '<div class="g-cuerpo"><p class="texto-suave">Cargando…</p></div>';
+      '<div class="g-cabeza"><h2>' + T("📚 Glosario") + '</h2><button class="mini-boton" data-cerrar>' + T("✖ Cerrar") + "</button></div>" +
+      '<input type="search" class="g-buscar" placeholder="' + T("Busca una etiqueta o lo que quieres hacer (centrar, enlace…)") + '" aria-label="' + T("Buscar en el glosario") + '">' +
+      '<div class="g-cuerpo"><p class="texto-suave">' + T("Cargando…") + "</p></div>";
     columna.appendChild(panel);
     const cuerpo = panel.querySelector(".g-cuerpo");
     const buscador = panel.querySelector(".g-buscar");
@@ -74,7 +74,7 @@
       cuerpo.innerHTML = "";
       const elegidos = terminos.filter(t => destacados.includes(t.termino));
       const grupos = [];
-      if (elegidos.length) grupos.push({ titulo: "⭐ Para este encargo", temas: [{ tema: "", lista: elegidos }] });
+      if (elegidos.length) grupos.push({ titulo: T("⭐ Para este encargo"), temas: [{ tema: "", lista: elegidos }] });
       CURSO.MUNDOS.forEach(m => {
         const deEste = terminos.filter(t => t.leccion.mundo === m);
         if (!deEste.length) return;
@@ -96,7 +96,7 @@
         });
         cuerpo.appendChild(sec);
       });
-      if (!terminos.length) cuerpo.innerHTML = '<p class="texto-suave">Todavía no hay términos.</p>';
+      if (!terminos.length) cuerpo.innerHTML = '<p class="texto-suave">' + T("Todavía no hay términos.") + "</p>";
       filtrar();
     }
 

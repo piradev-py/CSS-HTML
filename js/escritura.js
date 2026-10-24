@@ -31,13 +31,13 @@
       if (lt < 0) break;
       if (h.startsWith("<!--", lt)) {
         const fin = h.indexOf("-->", lt + 4);
-        if (fin < 0) return { linea: lineaDe(h, lt), mensaje: "el comentario `<!--` de la línea " + lineaDe(h, lt) + " no está cerrado: falta `-->`." };
+        if (fin < 0) return { linea: lineaDe(h, lt), mensaje: T("el comentario `<!--` de la línea {n} no está cerrado: falta `-->`.", { n: lineaDe(h, lt) }) };
         i = fin + 3;
         continue;
       }
       if (h[lt + 1] === "!") {
         const fin = h.indexOf(">", lt);
-        if (fin < 0) return { linea: lineaDe(h, lt), mensaje: "a `<!DOCTYPE html` de la línea " + lineaDe(h, lt) + " le falta el `>` del final." };
+        if (fin < 0) return { linea: lineaDe(h, lt), mensaje: T("a `<!DOCTYPE html` de la línea {n} le falta el `>` del final.", { n: lineaDe(h, lt) }) };
         i = fin + 1;
         continue;
       }
@@ -55,9 +55,9 @@
         if ((c === '"' || c === "'") && /=\s*$/.test(h.slice(Math.max(lt, j - 20), j))) { comilla = c; continue; }
         if (c === ">" || c === "<") break;
       }
-      if (comilla) return { linea, mensaje: "en la etiqueta `<" + nombre + ">` de la línea " + linea + " falta cerrar unas comillas `" + comilla + "`." };
+      if (comilla) return { linea, mensaje: T("en la etiqueta `<{etiqueta}>` de la línea {n} falta cerrar unas comillas `{comilla}`.", { etiqueta: nombre, n: linea, comilla }) };
       if (j >= h.length || h[j] === "<") {
-        return { linea, mensaje: "a la etiqueta `<" + (cierre ? "/" : "") + nombre + "` de la línea " + linea + " le falta el `>` del final." };
+        return { linea, mensaje: T("a la etiqueta `<{etiqueta}` de la línea {n} le falta el `>` del final.", { etiqueta: (cierre ? "/" : "") + nombre, n: linea }) };
       }
       const autocierre = h[j - 1] === "/";
       i = j + 1;
@@ -66,14 +66,14 @@
         const arriba = pila[pila.length - 1];
         if (arriba && arriba.nombre === nombre) { pila.pop(); continue; }
         if (pila.some(p => p.nombre === nombre)) {
-          return { linea: arriba.linea, mensaje: "falta cerrar `<" + arriba.nombre + ">` (línea " + arriba.linea + ") antes de `</" + nombre + ">` (línea " + linea + "): escribe `</" + arriba.nombre + ">`." };
+          return { linea: arriba.linea, mensaje: T("falta cerrar `<{abierta}>` (línea {n}) antes de `</{etiqueta}>` (línea {n2}): escribe `</{abierta}>`.", { abierta: arriba.nombre, n: arriba.linea, etiqueta: nombre, n2: linea }) };
         }
-        return { linea, mensaje: "sobra `</" + nombre + ">` en la línea " + linea + ": no hay ningún `<" + nombre + ">` abierto." };
+        return { linea, mensaje: T("sobra `</{etiqueta}>` en la línea {n}: no hay ningún `<{etiqueta}>` abierto.", { etiqueta: nombre, n: linea }) };
       }
       if (VACIAS.has(nombre) || autocierre) continue;
       if (TEXTO_CRUDO.has(nombre)) {
         const mm = new RegExp("</" + nombre + "\\s*>", "i").exec(h.slice(i));
-        if (!mm) return { linea, mensaje: "falta cerrar `<" + nombre + ">` (línea " + linea + "): escribe `</" + nombre + ">`." };
+        if (!mm) return { linea, mensaje: T("falta cerrar `<{etiqueta}>` (línea {n}): escribe `</{etiqueta}>`.", { etiqueta: nombre, n: linea }) };
         i += mm.index + mm[0].length;
         continue;
       }
@@ -81,7 +81,7 @@
     }
     if (pila.length) {
       const p = pila[pila.length - 1];
-      return { linea: p.linea, mensaje: "falta cerrar `<" + p.nombre + ">` de la línea " + p.linea + ": escribe `</" + p.nombre + ">`." };
+      return { linea: p.linea, mensaje: T("falta cerrar `<{etiqueta}>` de la línea {n}: escribe `</{etiqueta}>`.", { etiqueta: p.nombre, n: p.linea }) };
     }
     return null;
   }
@@ -97,13 +97,13 @@
       const c = css[i];
       if (c === "/" && css[i + 1] === "*") {
         const fin = css.indexOf("*/", i + 2);
-        if (fin < 0) return { error: { linea: lineaDe(css, i), mensaje: "el comentario `/*` de la línea " + lineaDe(css, i) + " no está cerrado: falta `*/`." } };
+        if (fin < 0) return { error: { linea: lineaDe(css, i), mensaje: T("el comentario `/*` de la línea {n} no está cerrado: falta `*/`.", { n: lineaDe(css, i) }) } };
         s += css.slice(i, fin + 2).replace(/[^\n]/g, " ");
         i = fin + 1;
       } else if (c === '"' || c === "'") {
         let j = i + 1;
         while (j < css.length && css[j] !== c && css[j] !== "\n") j += css[j] === "\\" ? 2 : 1;
-        if (css[j] !== c) return { error: { linea: lineaDe(css, i), mensaje: "falta cerrar las comillas `" + c + "` de la línea " + lineaDe(css, i) + "." } };
+        if (css[j] !== c) return { error: { linea: lineaDe(css, i), mensaje: T("falta cerrar las comillas `{comilla}` de la línea {n}.", { comilla: c, n: lineaDe(css, i) }) } };
         s += c + " ".repeat(j - i - 1) + c;
         i = j;
       } else s += c;
@@ -125,15 +125,15 @@
       let k = inicios[1] - 1;
       while (k > desde && /\s/.test(t[k])) k--;
       const n = lineaDe(original, k);
-      return { linea: n, mensaje: "falta el `;` al final de la línea " + n + " (`" + recortar(original.split("\n")[n - 1]) + "`)." };
+      return { linea: n, mensaje: T("falta el `;` al final de la línea {n} (`{codigo}`).", { n, codigo: recortar(original.split("\n")[n - 1]) }) };
     }
     const texto = original.slice(desde, hasta);
     const n = lineaDe(original, desde + seg.search(/\S/));
     if (!seg.includes(":")) {
-      return { linea: n, mensaje: "a «" + recortar(texto) + "» (línea " + n + ") le faltan los dos puntos `:` entre la propiedad y el valor." };
+      return { linea: n, mensaje: T("a «{codigo}» (línea {n}) le faltan los dos puntos `:` entre la propiedad y el valor.", { codigo: recortar(texto), n }) };
     }
     if (alCerrar) {
-      return { linea: n, mensaje: "falta el `;` al final de `" + recortar(texto) + "` (línea " + n + ")." };
+      return { linea: n, mensaje: T("falta el `;` al final de `{codigo}` (línea {n}).", { codigo: recortar(texto), n }) };
     }
     return revisarValor(seg, texto, n);
   }
@@ -153,12 +153,12 @@
     // seg y texto tienen las mismas posiciones (limpiarCSS solo cambia comentarios y comillas por espacios)
     const original = texto.slice(dos + 1).replace(/ /g, "␣").trim();
     if (original.includes("␣")) {
-      return { linea: n, mensaje: "en la línea " + n + " hay un espacio «raro» (␣) en `" + recortar(original) + "`, quizá de copiar y pegar: bórralo y escribe un espacio normal." };
+      return { linea: n, mensaje: T("en la línea {n} hay un espacio «raro» (␣) en `{codigo}`, quizá de copiar y pegar: bórralo y escribe un espacio normal.", { n, codigo: recortar(original) }) };
     }
     if (!CSS.supports(prop, "inherit")) {
-      return { linea: n, mensaje: "la propiedad `" + prop + "` de la línea " + n + " no existe: revisa cómo está escrita." };
+      return { linea: n, mensaje: T("la propiedad `{propiedad}` de la línea {n} no existe: revisa cómo está escrita.", { propiedad: prop, n }) };
     }
-    return { linea: n, mensaje: "el navegador no entiende el valor `" + recortar(original) + "` de `" + prop + "` (línea " + n + "). Revisa cómo está escrito: una letra, un guion, una unidad como `px`…" };
+    return { linea: n, mensaje: T("el navegador no entiende el valor `{valor}` de `{propiedad}` (línea {n}). Revisa cómo está escrito: una letra, un guion, una unidad como `px`…", { valor: recortar(original), propiedad: prop, n }) };
   }
 
   function revisarCSS(css) {
@@ -174,21 +174,21 @@
         const arriba = pila[pila.length - 1];
         const linea = lineaDe(css, i);
         if (arriba && arriba.tipo === "declaraciones") {
-          return { linea: arriba.linea, mensaje: "falta cerrar con `}` la regla `" + recortar(arriba.selector) + "` (línea " + arriba.linea + ") antes de empezar `" + recortar(preludio || "{") + " {` (línea " + linea + ")." };
+          return { linea: arriba.linea, mensaje: T("falta cerrar con `}` la regla `{selector}` (línea {n}) antes de empezar `{preludio} {` (línea {n2}).", { selector: recortar(arriba.selector), n: arriba.linea, preludio: recortar(preludio || "{"), n2: linea }) };
         }
-        if (!preludio) return { linea, mensaje: "en la línea " + linea + " hay una `{` sin selector delante." };
+        if (!preludio) return { linea, mensaje: T("en la línea {n} hay una `{` sin selector delante.", { n: linea }) };
         pila.push({ tipo: GRUPOS_CSS.test(preludio) ? "grupo" : "declaraciones", linea, selector: preludio });
         inicio = i + 1;
       } else if (c === "}") {
         const linea = lineaDe(css, i);
-        if (!pila.length) return { linea, mensaje: "sobra una `}` en la línea " + linea + ": no cierra ninguna regla." };
+        if (!pila.length) return { linea, mensaje: T("sobra una `}` en la línea {n}: no cierra ninguna regla.", { n: linea }) };
         const bloque = pila.pop();
         if (bloque.tipo === "declaraciones") {
           const r = revisarDeclaraciones(css, t, inicio, i, true);
           if (r) return r;
         } else if (t.slice(inicio, i).trim()) {
           const n = lineaDe(css, inicio + t.slice(inicio, i).search(/\S/));
-          return { linea: n, mensaje: "dentro de `" + recortar(bloque.selector) + "` hay algo sin selector ni `{ }` (línea " + n + "): «" + recortar(css.slice(inicio, i)) + "»." };
+          return { linea: n, mensaje: T("dentro de `{selector}` hay algo sin selector ni `{ }` (línea {n}): «{codigo}».", { selector: recortar(bloque.selector), n, codigo: recortar(css.slice(inicio, i)) }) };
         }
         inicio = i + 1;
       } else if (c === ";") {
@@ -198,19 +198,19 @@
           if (r) return r;
         } else if (!/^\s*@/.test(t.slice(inicio, i))) {
           const n = lineaDe(css, inicio + t.slice(inicio, i).search(/\S/));
-          return { linea: n, mensaje: "«" + recortar(css.slice(inicio, i)) + "» (línea " + n + ") está fuera de una regla: le faltan el selector y las `{ }`." };
+          return { linea: n, mensaje: T("«{codigo}» (línea {n}) está fuera de una regla: le faltan el selector y las `{ }`.", { codigo: recortar(css.slice(inicio, i)), n }) };
         }
         inicio = i + 1;
       }
     }
     if (pila.length) {
       const b = pila[pila.length - 1];
-      return { linea: b.linea, mensaje: "falta cerrar con `}` la regla `" + recortar(b.selector) + "` de la línea " + b.linea + "." };
+      return { linea: b.linea, mensaje: T("falta cerrar con `}` la regla `{selector}` de la línea {n}.", { selector: recortar(b.selector), n: b.linea }) };
     }
     const resto = t.slice(inicio);
     if (resto.trim()) {
       const n = lineaDe(css, inicio + resto.search(/\S/));
-      return { linea: n, mensaje: "«" + recortar(css.slice(inicio)) + "» (línea " + n + ") está suelto: le faltan las `{ }` o el `;`." };
+      return { linea: n, mensaje: T("«{codigo}» (línea {n}) está suelto: le faltan las `{ }` o el `;`.", { codigo: recortar(css.slice(inicio)), n }) };
     }
     return null;
   }
@@ -269,7 +269,7 @@
       }
       if (c === "/" && js[i + 1] === "*") {
         const fin = js.indexOf("*/", i + 2);
-        if (fin < 0) return error(i, "el comentario `/*` de la línea " + lineaDe(js, i) + " no está cerrado: falta `*/`.");
+        if (fin < 0) return error(i, T("el comentario `/*` de la línea {n} no está cerrado: falta `*/`.", { n: lineaDe(js, i) }));
         for (let k = i; k < fin + 2; k++) {
           if (js[k] === "\n") { limpio += "\n"; finLinea(true); } else limpio += " ";
         }
@@ -279,7 +279,7 @@
       if (c === '"' || c === "'") {
         let j = i + 1;
         while (j < n && js[j] !== c && js[j] !== "\n") j += js[j] === "\\" ? 2 : 1;
-        if (js[j] !== c) return error(i, "falta cerrar las comillas `" + c + "` de la línea " + lineaDe(js, i) + ".");
+        if (js[j] !== c) return error(i, T("falta cerrar las comillas `{comilla}` de la línea {n}.", { comilla: c, n: lineaDe(js, i) }));
         limpio += c + " ".repeat(j - i - 1) + c;
         i = j;
         previo2 = previo; previo = "cadena";
@@ -299,9 +299,9 @@
       }
       if (c === ")" || c === "]" || c === "}") {
         const arriba = pila.pop();
-        if (!arriba) return error(i, "sobra un `" + c + "` en la línea " + linea + ": no cierra nada.");
+        if (!arriba) return error(i, T("sobra un `{signo}` en la línea {n}: no cierra nada.", { signo: c, n: linea }));
         if (PAREJA[arriba.c] !== c) {
-          return error(arriba.i, "falta cerrar el `" + arriba.c + "` de la línea " + arriba.linea + " (con `" + PAREJA[arriba.c] + "`) antes del `" + c + "` de la línea " + linea + ".");
+          return error(arriba.i, T("falta cerrar el `{abierto}` de la línea {n} (con `{pareja}`) antes del `{signo}` de la línea {n2}.", { abierto: arriba.c, n: arriba.linea, pareja: PAREJA[arriba.c], signo: c, n2: linea }));
         }
         limpio += c;
         if (arriba.c === "${") { enPlantilla = true; continue; }
@@ -331,11 +331,11 @@
       limpio += c;
       if (!/\s/.test(c)) { previo2 = previo; previo = c; ultimoCierre = null; }
     }
-    if (enPlantilla) return error(n - 1, "falta cerrar las comillas invertidas `` ` `` de una plantilla de texto.");
+    if (enPlantilla) return error(n - 1, T("falta cerrar las comillas invertidas `` ` `` de una plantilla de texto."));
     finLinea(false);
     if (pila.length) {
       const p = pila[pila.length - 1];
-      return error(p.i, "falta cerrar el `" + p.c + "` que abriste en la línea " + p.linea + ": escribe `" + PAREJA[p.c] + "`.");
+      return error(p.i, T("falta cerrar el `{abierto}` que abriste en la línea {n}: escribe `{pareja}`.", { abierto: p.c, n: p.linea, pareja: PAREJA[p.c] }));
     }
     return { limpio, lineas };
   }
@@ -366,7 +366,7 @@
         const palabra = t.match(/[\w$]+$/)[0];
         if (PALABRAS_QUE_SIGUEN.has(palabra)) continue;
       }
-      return { linea: num, mensaje: "falta el `;` al final de la línea " + num + " (`" + recortar(originales[k]) + "`)." };
+      return { linea: num, mensaje: T("falta el `;` al final de la línea {n} (`{codigo}`).", { n: num, codigo: recortar(originales[k]) }) };
     }
     return null;
   }
@@ -381,7 +381,7 @@
       if (!texto.trim()) continue;
       const r = REVISORES[k](texto);
       if (r) {
-        return { lenguaje: k, linea: r.linea, mensaje: "En tu " + NOMBRES[k] + ", " + r.mensaje };
+        return { lenguaje: k, linea: r.linea, mensaje: T("En tu {lenguaje}, {mensaje}", { lenguaje: NOMBRES[k], mensaje: r.mensaje }) };
       }
     }
     return null;

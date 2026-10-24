@@ -89,18 +89,18 @@
     raiz.className = "reto";
     raiz.innerHTML =
       '<div class="reto-cabeza">' +
-        '<div class="reto-enunciado tarjeta"><span class="etiqueta-reto">' + (opciones.etiqueta || "🏆 Reto final") + "</span>" +
+        '<div class="reto-enunciado tarjeta"><span class="etiqueta-reto">' + (opciones.etiqueta || T("🏆 Reto final")) + "</span>" +
         '<p class="enunciado"></p>' +
-        (paso.captura ? '<a class="captura-encargo" target="_blank" title="Abrir la captura en grande"><img alt="Captura de cómo debe quedar"></a>' : "") +
+        (paso.captura ? '<a class="captura-encargo" target="_blank" title="' + T("Abrir la captura en grande") + '"><img alt="' + T("Captura de cómo debe quedar") + '"></a>' : "") +
         // Los textos del cliente, para copiar: las etiquetas las pone el alumno
-        (paso.textos ? '<details class="textos-encargo" open><summary>📄 Textos del encargo</summary>' +
-          '<button class="mini-boton" data-copiar-textos>📋 Copiar</button><pre></pre></details>' : "") +
+        (paso.textos ? '<details class="textos-encargo" open><summary>' + T("📄 Textos del encargo") + "</summary>" +
+          '<button class="mini-boton" data-copiar-textos>' + T("📋 Copiar") + "</button><pre></pre></details>" : "") +
         '<ul class="comprobaciones" aria-live="polite"></ul>' +
         '<div class="pistas-mostradas"></div>' +
         '<div class="reto-botones">' +
-          '<button class="boton grande" data-comprobar>✅ Comprobar</button>' +
-          '<button class="boton secundario" data-pista>💡 Pista</button>' +
-          '<button class="boton secundario" data-solucion disabled title="Mira antes las pistas">👀 Ver solución</button>' +
+          '<button class="boton grande" data-comprobar>' + T("✅ Comprobar") + "</button>" +
+          '<button class="boton secundario" data-pista>' + T("💡 Pista") + "</button>" +
+          '<button class="boton secundario" data-solucion disabled title="' + T("Mira antes las pistas") + '">' + T("👀 Ver solución") + "</button>" +
         "</div></div>" +
       "</div>" +
       '<div class="reto-editor"></div>';
@@ -114,7 +114,7 @@
       copiar.addEventListener("click", () => {
         // Sin permiso de portapapeles (algunos navegadores con file://) se selecciona el texto para copiarlo a mano
         Promise.resolve(navigator.clipboard && navigator.clipboard.writeText(paso.textos))
-          .then(() => { copiar.textContent = "✅ Copiado"; setTimeout(() => { copiar.textContent = "📋 Copiar"; }, 1500); })
+          .then(() => { copiar.textContent = T("✅ Copiado"); setTimeout(() => { copiar.textContent = T("📋 Copiar"); }, 1500); })
           .catch(() => getSelection().selectAllChildren(pre));
       });
     }
@@ -133,7 +133,7 @@
         a.className = "repaso";
         a.href = "leccion.html?id=" + repaso.id;
         a.target = "_blank";
-        a.textContent = "📚 Repasa «" + repaso.titulo + "»";
+        a.textContent = T("📚 Repasa «{titulo}»", { titulo: repaso.titulo });
         li.lastChild.appendChild(a);
       }
       lista.appendChild(li);
@@ -142,7 +142,7 @@
     const liEscritura = document.createElement("li");
     liEscritura.className = "comprobacion-escritura";
     liEscritura.innerHTML = '<span class="marca" aria-hidden="true">○</span><span>' +
-      UI.md("Tu código está bien escrito: etiquetas cerradas, `{ }` y `;`") +
+      UI.md(T("Tu código está bien escrito: etiquetas cerradas, `{ }` y `;`")) +
       '<small class="detalle-escritura"></small></span>';
     lista.appendChild(liEscritura);
     const detalleEscritura = liEscritura.querySelector(".detalle-escritura");
@@ -199,7 +199,7 @@
     function terminar() {
       superado = true;
       const estrellas = solucionVista ? 1 : pistasVistas > 0 ? 2 : 3;
-      if (mascota) MASCOTA.decir(mascota, "¡LO CONSEGUISTE! 🎉 Eres una máquina.", "alegre");
+      if (mascota) MASCOTA.decir(mascota, T("¡LO CONSEGUISTE! 🎉 Eres una máquina."), "alegre");
       alSuperar({ estrellas });
     }
 
@@ -219,7 +219,7 @@
         });
         const faltan = resultados.filter(r => !r).length;
         if (mascota) MASCOTA.decir(mascota,
-          MASCOTA.azar(MASCOTA.FRASES.animo) + " Te " + (faltan === 1 ? "falta 1 cosa" : "faltan " + faltan + " cosas") + ".", "triste");
+          MASCOTA.azar(MASCOTA.FRASES.animo) + " " + (faltan === 1 ? T("Te falta 1 cosa.") : T("Te faltan {n} cosas.", { n: faltan })), "triste");
       }
     });
 
@@ -227,7 +227,7 @@
       if (pistasVistas >= paso.pistas.length) return;
       const p = document.createElement("div");
       p.className = "pista-mostrada";
-      p.innerHTML = "<b>💡 Pista " + (pistasVistas + 1) + ":</b> " + UI.md(paso.pistas[pistasVistas]);
+      p.innerHTML = "<b>" + T("💡 Pista {n}:", { n: pistasVistas + 1 }) + "</b> " + UI.md(paso.pistas[pistasVistas]);
       pistasCont.appendChild(p);
       pistasVistas++;
       CELEBRAR.sonido.click();
@@ -239,7 +239,7 @@
     });
 
     bSolucion.addEventListener("click", () => {
-      if (!confirm("¿Ver la solución? Podrás estudiarla, pero esta lección te dará solo 1 ⭐.")) return;
+      if (!confirm(T("¿Ver la solución? Podrás estudiarla, pero esta lección te dará solo 1 ⭐."))) return;
       solucionVista = true;
       editor.fijar(paso.solucion);
     });
