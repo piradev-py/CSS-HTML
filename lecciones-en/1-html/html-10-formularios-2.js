@@ -110,7 +110,7 @@ CURSO.registrar({
 </form>`,
         css: ""
       },
-      consejo: "The grey frame that shows up is the style the browser applies. In the HTML + CSS World you will learn to decorate it however you want."
+      consejo: "The gray frame that shows up is the style the browser applies. In the HTML + CSS World you will learn to decorate it however you want."
     },
     {
       tipo: "ejercicio",

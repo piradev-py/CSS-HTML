@@ -52,6 +52,7 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
   texto inglés de la solución. La regla de oro sigue: la solución aprueba todas y el código `inicial` ninguna.
 - Si el enunciado pide escribir un texto exacto («¡Hola, mundo!»), la solución y las pistas usan el mismo texto inglés.
 - En el texto inglés, comillas “ ” donde el español usa « ».
+- Inglés de EE. UU., como las palabras clave de CSS: color, center, gray, favorite, neighborhood, organize.
 - El `tema` del glosario agrupa términos de **todas** las lecciones: usa SIEMPRE esta traducción, exacta:
   Formularios → Forms · Texto → Text · Flexbox → Flexbox · Cajas → Boxes · Variables → Variables ·
   Semántica → Semantics · Responsive → Responsive · Posición → Positioning · DOM → DOM · La cabeza → The head ·

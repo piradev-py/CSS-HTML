@@ -30,8 +30,8 @@
         { id: "html-09", archivo: "html-09-formularios.js", titulo: "Formularios: campos y etiquetas", en: "Forms: fields and labels", listo: true },
         { id: "html-10", archivo: "html-10-formularios-2.js", titulo: "Formularios: más tipos de campo", en: "Forms: more field types", listo: true },
         { id: "html-11", archivo: "html-11-div-y-span.js", titulo: "Cajas genéricas: div y span", en: "Generic boxes: div and span", listo: true },
-        { id: "html-12", archivo: "html-12-semantica.js", titulo: "HTML semántico y accesible", listo: true },
-        { id: "html-13", archivo: "html-13-cabeza.js", titulo: "La cabeza de la página", listo: true },
+        { id: "html-12", archivo: "html-12-semantica.js", titulo: "HTML semántico y accesible", en: "Semantic and accessible HTML", listo: true },
+        { id: "html-13", archivo: "html-13-cabeza.js", titulo: "La cabeza de la página", en: "The head of the page", listo: true },
         { id: "html-14", archivo: "html-14-proyecto-web.js", titulo: "Proyecto web: la clínica Huellas", listo: true, huellas: true }
       ]
     },

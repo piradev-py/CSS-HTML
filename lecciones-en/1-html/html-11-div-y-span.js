@@ -63,19 +63,19 @@ CURSO.registrar({
     },
     {
       tipo: "ejercicio",
-      enunciado: "Write a `<p>` paragraph saying **My favourite band is The Odd Socks**. 🎸\n\nInside that paragraph, wrap **only** the band's name (**The Odd Socks**) in a `<span>` with `class=\"band\"`.\n\nDo not add any other attribute or tag. Notice that, in the result, the sentence is still on one single line: the span does not break it.",
+      enunciado: "Write a `<p>` paragraph saying **My favorite band is The Odd Socks**. 🎸\n\nInside that paragraph, wrap **only** the band's name (**The Odd Socks**) in a `<span>` with `class=\"band\"`.\n\nDo not add any other attribute or tag. Notice that, in the result, the sentence is still on one single line: the span does not break it.",
       solucion: {
-        html: `<p>My favourite band is <span class="band">The Odd Socks</span></p>`,
+        html: `<p>My favorite band is <span class="band">The Odd Socks</span></p>`,
         css: ""
       },
       pistas: [
         "First write the whole paragraph with <p>…</p>. Then put <span class=\"band\"> right before “The” and </span> right after “Socks”.",
-        "It should end up like this:\n<p>My favourite band is <span class=\"band\">The Odd Socks</span></p>"
+        "It should end up like this:\n<p>My favorite band is <span class=\"band\">The Odd Socks</span></p>"
       ]
     },
     {
       tipo: "quiz",
-      pregunta: "In the sentence “The ice cream costs 2 €” you want to wrap just the price to colour it later. Which box do you use?",
+      pregunta: "In the sentence “The ice cream costs 2 €” you want to wrap just the price to color it later. Which box do you use?",
       opciones: ["<div>, because it is a box", "<span>, because it goes inside the sentence", "<h2>, so it is easier to see"],
       correcta: 1,
       explicacion: "The <span> is an inline box: it wraps the price without taking it out of the sentence. A <div> would put it on a separate line, and an <h2> is a heading, not a price."
