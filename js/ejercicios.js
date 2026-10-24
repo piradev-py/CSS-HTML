@@ -72,9 +72,9 @@
     for (const attr of atributos(s)) {
       const n = attr.name;
       if (!a.hasAttribute(n) || !a.getAttribute(n).trim() && (n === "class" || n === "style")) {
-        if (n === "class") return "A " + nombre(a) + " le falta la clase `" + attr.value.trim() + "`.";
-        if (n === "style") return "A " + nombre(a) + " le falta el estilo en línea (`style`) que pide el enunciado.";
-        return "A " + nombre(a) + " le falta el atributo `" + n + "`.";
+        if (n === "class") return T("A {el} le falta la clase `{clase}`.", { el: nombre(a), clase: attr.value.trim() });
+        if (n === "style") return T("A {el} le falta el estilo en línea (`style`) que pide el enunciado.", { el: nombre(a) });
+        return T("A {el} le falta el atributo `{atributo}`.", { el: nombre(a), atributo: n });
       }
       const va = a.getAttribute(n).trim();
       const vs = attr.value.trim();
@@ -85,23 +85,28 @@
       else if (n === "style") igual = mismoEstiloEnLinea(a, s);
       else igual = va === vs;
       if (!igual) {
-        if (n === "class") return "Las clases de " + nombre(a) + " no son las que pide el enunciado: deberían ser `" + vs + "`.";
-        if (n === "style") return "El estilo en línea (`style`) de " + nombre(a) + " no es el que pide el enunciado.";
-        return "El atributo `" + n + "` de " + nombre(a) + " no tiene el valor que pide el enunciado" +
-          (ATRIBUTOS_TEXTO.has(n) ? "." : " (aquí mayúsculas y minúsculas cuentan).");
+        if (n === "class") return T("Las clases de {el} no son las que pide el enunciado: deberían ser `{clases}`.", { el: nombre(a), clases: vs });
+        if (n === "style") return T("El estilo en línea (`style`) de {el} no es el que pide el enunciado.", { el: nombre(a) });
+        return ATRIBUTOS_TEXTO.has(n)
+          ? T("El atributo `{atributo}` de {el} no tiene el valor que pide el enunciado.", { el: nombre(a), atributo: n })
+          : T("El atributo `{atributo}` de {el} no tiene el valor que pide el enunciado (aquí mayúsculas y minúsculas cuentan).", { el: nombre(a), atributo: n });
       }
     }
     for (const attr of atributos(a)) {
       if (!s.hasAttribute(attr.name) || !s.getAttribute(attr.name).trim() && (attr.name === "class" || attr.name === "style")) {
-        if (attr.name === "class") return nombre(a) + " tiene una clase que el enunciado no pide.";
-        if (attr.name === "style") return nombre(a) + " tiene un estilo en línea (`style`) que el enunciado no pide.";
-        return nombre(a) + " lleva un atributo `" + attr.name + "` que el enunciado no pide.";
+        if (attr.name === "class") return T("{el} tiene una clase que el enunciado no pide.", { el: nombre(a) });
+        if (attr.name === "style") return T("{el} tiene un estilo en línea (`style`) que el enunciado no pide.", { el: nombre(a) });
+        return T("{el} lleva un atributo `{atributo}` que el enunciado no pide.", { el: nombre(a), atributo: attr.name });
       }
     }
     // Campos de formulario: lo escrito o marcado (puede cambiarlo el JS)
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) {
-      if (a.value !== s.value) return "El campo " + nombre(a) + " no tiene el valor esperado" + (s.value ? ": debería ser «" + s.value + "»." : ": debería estar vacío.");
-      if (a.checked !== s.checked) return "El campo " + nombre(a) + (s.checked ? " debería estar marcado." : " no debería estar marcado.");
+      if (a.value !== s.value) return s.value
+        ? T("El campo {el} no tiene el valor esperado: debería ser «{valor}».", { el: nombre(a), valor: s.value })
+        : T("El campo {el} no tiene el valor esperado: debería estar vacío.", { el: nombre(a) });
+      if (a.checked !== s.checked) return s.checked
+        ? T("El campo {el} debería estar marcado.", { el: nombre(a) })
+        : T("El campo {el} no debería estar marcado.", { el: nombre(a) });
     }
     return null;
   }
@@ -114,8 +119,8 @@
     const normalizar = (p, v) => p.startsWith("--") ? v.trim().toLowerCase().replace(/\s+/g, " ") : v;
     for (const p of propiedades) {
       if (normalizar(p, ca.getPropertyValue(p)) !== normalizar(p, cs.getPropertyValue(p))) {
-        if (p.startsWith("--")) return "La variable `" + p + "` no existe o no tiene el valor que pide el enunciado.";
-        return "El estilo de " + nombre(a) + " no coincide en `" + p + "`.";
+        if (p.startsWith("--")) return T("La variable `{variable}` no existe o no tiene el valor que pide el enunciado.", { variable: p });
+        return T("El estilo de {el} no coincide en `{propiedad}`.", { el: nombre(a), propiedad: p });
       }
     }
     // Pseudo-elementos que usa la solución (::before, ::after…): se comparan también su contenido y sus estilos
@@ -125,7 +130,7 @@
       for (const p of ["content"].concat(propiedades)) {
         if (p === "content" && !/::(before|after|marker)/.test(ps)) continue;
         if (pa.getPropertyValue(p) !== pss.getPropertyValue(p)) {
-          return "El pseudo-elemento `" + ps + "` de " + nombre(a) + " no coincide en `" + p + "`.";
+          return T("El pseudo-elemento `{pseudoclase}` de {el} no coincide en `{propiedad}`.", { pseudoclase: ps, el: nombre(a), propiedad: p });
         }
       }
     }
@@ -135,7 +140,7 @@
   /** Compara recursivamente dos elementos. Devuelve null si son equivalentes o un mensaje con la primera diferencia. */
   function compararElementos(a, s, ctx) {
     if (a.tagName !== s.tagName) {
-      return "Donde esperaba " + nombre(s) + " has escrito " + nombre(a) + ".";
+      return T("Donde esperaba {esperado} has escrito {escrito}.", { esperado: nombre(s), escrito: nombre(a) });
     }
     const difAttr = compararAtributos(a, s);
     if (difAttr) return difAttr;
@@ -144,23 +149,23 @@
 
     const na = nodosUtiles(a);
     const ns = nodosUtiles(s);
-    const dentro = a.tagName === "BODY" ? "" : a.tagName === "HEAD" ? " en la cabeza (<head>)" : " dentro de " + nombre(a);
+    const dentro = a.tagName === "BODY" ? "" : a.tagName === "HEAD" ? T(" en la cabeza (<head>)") : T(" dentro de {el}", { el: nombre(a) });
     for (let i = 0; i < ns.length; i++) {
       const x = na[i];
       const y = ns[i];
       if (!x) {
         return y.tipo === "texto"
-          ? "Falta el texto «" + y.valor.trim() + "»" + dentro + "."
-          : "Falta " + nombre(y.el) + dentro + (i > 0 && ns[i - 1].tipo === "elemento" ? ", después de " + nombre(ns[i - 1].el) : "") + ".";
+          ? T("Falta el texto «{texto}»{dentro}.", { texto: y.valor.trim(), dentro })
+          : T("Falta {el}{dentro}{despues}.", { el: nombre(y.el), dentro, despues: i > 0 && ns[i - 1].tipo === "elemento" ? T(", después de {el}", { el: nombre(ns[i - 1].el) }) : "" });
       }
       if (x.tipo !== y.tipo) {
         return y.tipo === "texto"
-          ? "Esperaba el texto «" + y.valor.trim() + "»" + dentro + ", pero encontré " + nombre(x.el) + "."
-          : "Esperaba " + nombre(y.el) + dentro + ", pero encontré el texto «" + x.valor.trim() + "».";
+          ? T("Esperaba el texto «{texto}»{dentro}, pero encontré {el}.", { texto: y.valor.trim(), dentro, el: nombre(x.el) })
+          : T("Esperaba {el}{dentro}, pero encontré el texto «{texto}».", { el: nombre(y.el), dentro, texto: x.valor.trim() });
       }
       if (y.tipo === "texto") {
         if (normalizarTexto(x.valor) !== normalizarTexto(y.valor)) {
-          return "El texto" + dentro + " no es el que pide el enunciado: debería decir «" + y.valor.trim() + "».";
+          return T("El texto{dentro} no es el que pide el enunciado: debería decir «{texto}».", { dentro, texto: y.valor.trim() });
         }
       } else {
         const dif = compararElementos(x.el, y.el, ctx);
@@ -170,8 +175,8 @@
     if (na.length > ns.length) {
       const sobra = na[ns.length];
       return sobra.tipo === "texto"
-        ? "Te sobra el texto «" + sobra.valor.trim() + "»" + dentro + "."
-        : "Te sobra " + nombre(sobra.el) + dentro + ": el enunciado no lo pide.";
+        ? T("Te sobra el texto «{texto}»{dentro}.", { texto: sobra.valor.trim(), dentro })
+        : T("Te sobra {el}{dentro}: el enunciado no lo pide.", { el: nombre(sobra.el), dentro });
     }
     return null;
   }
@@ -197,15 +202,15 @@
   function pasadas(css) {
     const lista = [{ prefijo: "" }];
     const limpio = String(css || "").replace(/\/\*[\s\S]*?\*\//g, "");
-    if (/:hover\b/.test(limpio)) lista.push({ estado: "hover", prefijo: "Al pasar el ratón (`:hover`): " });
-    if (/:focus/.test(limpio)) lista.push({ estado: "focus", prefijo: "Con el foco puesto (`:focus`): " });
-    if (/:active\b/.test(limpio)) lista.push({ estado: "active", prefijo: "Mientras se pulsa (`:active`): " });
+    if (/:hover\b/.test(limpio)) lista.push({ estado: "hover", prefijo: T("Al pasar el ratón (`:hover`): ") });
+    if (/:focus/.test(limpio)) lista.push({ estado: "focus", prefijo: T("Con el foco puesto (`:focus`): ") });
+    if (/:active\b/.test(limpio)) lista.push({ estado: "active", prefijo: T("Mientras se pulsa (`:active`): ") });
     if (/@media[^{]*(min|max)-width/.test(limpio)) {
-      lista.push({ ancho: 375, prefijo: "En una pantalla estrecha (375 px): " });
-      lista.push({ ancho: 1280, prefijo: "En una pantalla ancha (1280 px): " });
+      lista.push({ ancho: 375, prefijo: T("En una pantalla estrecha (375 px): ") });
+      lista.push({ ancho: 1280, prefijo: T("En una pantalla ancha (1280 px): ") });
     }
     // Con la animación parada al principio no se ve si el "to" está bien escrito: se mira también a mitad
-    if (/@keyframes\b/.test(limpio)) lista.push({ fotograma: "mitad", prefijo: "A mitad de la animación: " });
+    if (/@keyframes\b/.test(limpio)) lista.push({ fotograma: "mitad", prefijo: T("A mitad de la animación: ") });
     return lista;
   }
 
@@ -233,11 +238,11 @@
 
   /** Selector de la acción y descripción para los mensajes («Al pulsar `#boton`: …»). */
   function describirAccion(acc) {
-    if (acc.clic) return { selector: acc.clic, texto: "Al pulsar `" + acc.clic + "`" };
-    if (acc.escribir) return { selector: acc.escribir, texto: "Al escribir «" + acc.texto + "» en `" + acc.escribir + "`" };
-    if (acc.elegir) return { selector: acc.elegir, texto: "Al elegir «" + acc.valor + "» en `" + acc.elegir + "`" };
-    if (acc.enviar) return { selector: acc.enviar, texto: "Al enviar el formulario `" + acc.enviar + "`" };
-    return { selector: null, texto: "Acción desconocida" };
+    if (acc.clic) return { selector: acc.clic, texto: T("Al pulsar `{selector}`", { selector: acc.clic }) };
+    if (acc.escribir) return { selector: acc.escribir, texto: T("Al escribir «{texto}» en `{selector}`", { texto: acc.texto, selector: acc.escribir }) };
+    if (acc.elegir) return { selector: acc.elegir, texto: T("Al elegir «{valor}» en `{selector}`", { valor: acc.valor, selector: acc.elegir }) };
+    if (acc.enviar) return { selector: acc.enviar, texto: T("Al enviar el formulario `{selector}`", { selector: acc.enviar }) };
+    return { selector: null, texto: T("Acción desconocida") };
   }
 
   /** Hace la acción en una página. Devuelve false si no encuentra el elemento. */
@@ -261,7 +266,7 @@
     const es = S.win.__errores || [];
     if (ea.length > es.length) {
       const e = ea[es.length];
-      return "Tu código JavaScript tiene un error" + (e.linea ? " en la línea " + e.linea : "") + ": " + EDITOR.errorAmigable(e.mensaje);
+      return T("Tu código JavaScript tiene un error{linea}: {error}", { linea: e.linea ? T(" en la línea {n}", { n: e.linea }) : "", error: EDITOR.errorAmigable(e.mensaje) });
     }
     return null;
   }
@@ -273,18 +278,18 @@
     const logsA = (A.win.__logs || []).map(normalizarTexto);
     if (logsA.join("\n") === logsS.join("\n")) return null;
     if (logsA.length < logsS.length) {
-      return "A la consola le faltan mensajes: la solución muestra " + logsS.length + (logsS.length === 1 ? " línea" : " líneas") +
-        " y tu código " + logsA.length + ". Mira la consola: debería salir «" + S.win.__logs[logsA.length] + "».";
+      return logsS.length === 1
+        ? T("A la consola le faltan mensajes: la solución muestra 1 línea y tu código {n}. Mira la consola: debería salir «{texto}».", { n: logsA.length, texto: S.win.__logs[logsA.length] })
+        : T("A la consola le faltan mensajes: la solución muestra {total} líneas y tu código {n}. Mira la consola: debería salir «{texto}».", { total: logsS.length, n: logsA.length, texto: S.win.__logs[logsA.length] });
     }
-    if (logsA.length > logsS.length) return "La consola muestra más líneas de las que pide el enunciado (" + logsA.length + " en vez de " + logsS.length + ").";
+    if (logsA.length > logsS.length) return T("La consola muestra más líneas de las que pide el enunciado ({n} en vez de {total}).", { n: logsA.length, total: logsS.length });
     const mal = logsA.map((t, k) => t !== logsS[k] ? k + 1 : 0).filter(Boolean);
     const i = mal[0] - 1;
     const dif = diferenciaLinea(A.win.__logs[i], S.win.__logs[i]);
     const otras = mal.slice(1);
-    return "La línea " + (i + 1) + " de la consola no es la que pide el enunciado" + (dif ? ": " + dif.mensaje : "") +
-      ". Debería decir «" + S.win.__logs[i] + "»." +
-      (dif && dif.sobra === "$" && !dif.falta ? " ¿Se te ha colado el `$` de `${…}`? Solo va pegado a la llave: `${mascota}`." : "") +
-      (otras.length ? " También " + (otras.length === 1 ? "está mal la línea " : "están mal las líneas ") + otras.join(", ").replace(/, (\d+)$/, " y $1") + "." : "");
+    return T("La línea {n} de la consola no es la que pide el enunciado{dif}. Debería decir «{texto}».", { n: i + 1, dif: dif ? ": " + dif.mensaje : "", texto: S.win.__logs[i] }) +
+      (dif && dif.sobra === "$" && !dif.falta ? T(" ¿Se te ha colado el `$` de `${…}`? Solo va pegado a la llave: `${mascota}`.") : "") +
+      (otras.length ? otras.length === 1 ? T(" También está mal la línea {n}.", { n: otras[0] }) : T(" También están mal las líneas {lista}.", { lista: otras.join(", ").replace(/, (\d+)$/, T(" y ") + "$1") }) : "");
   }
 
   /** Qué palabras sobran o faltan entre una línea del alumno y la de la solución (mayúsculas y tildes no cuentan).
@@ -298,10 +303,10 @@
     let f = 0;
     while (f < A.length - p && f < S.length - p && igual(A[A.length - 1 - f], S[S.length - 1 - f])) f++;
     const sobra = A.slice(p, A.length - f).join(" "), falta = S.slice(p, S.length - f).join(" ");
-    const donde = p === 0 ? " al principio" : f === 0 ? " al final" : "";
-    const mensaje = sobra && falta ? "donde pone «" + sobra + "» debería poner «" + falta + "»"
-      : sobra ? "sobra «" + sobra + "»" + donde
-      : falta ? "falta «" + falta + "»" + donde
+    const donde = p === 0 ? T(" al principio") : f === 0 ? T(" al final") : "";
+    const mensaje = sobra && falta ? T("donde pone «{sobra}» debería poner «{falta}»", { sobra, falta })
+      : sobra ? T("sobra «{sobra}»{donde}", { sobra, donde })
+      : falta ? T("falta «{falta}»{donde}", { falta, donde })
       : null;
     return mensaje && { mensaje, sobra, falta };
   }
@@ -314,7 +319,7 @@
    */
   async function revisar(codigoAlumno, solucion, iframes, cssBase, acciones) {
     const vacio = !["html", "css", "js"].some(k => (codigoAlumno[k] || "").trim());
-    if (vacio) return { ok: false, mensaje: "El editor está vacío. ¡Escribe tu código y vuelve a revisar!" };
+    if (vacio) return { ok: false, mensaje: T("El editor está vacío. ¡Escribe tu código y vuelve a revisar!") };
     // Bien escrito antes que nada: aunque el navegador perdone una } o un ; que falta, aquí no se aprueba
     const escritura = ESCRITURA.revisar(codigoAlumno);
     if (escritura) return { ok: false, mensaje: "✏️ " + escritura.mensaje };
@@ -357,8 +362,8 @@
     // Acciones del usuario simuladas: después de cada una se comparan otra vez la página y la consola
     for (const acc of acciones || []) {
       const { texto } = describirAccion(acc);
-      if (!aplicarAccion(S.doc, acc)) return { ok: false, mensaje: "(Error de la lección: la solución no tiene `" + describirAccion(acc).selector + "`.)" };
-      if (!aplicarAccion(A.doc, acc)) return { ok: false, mensaje: texto + ": no encuentro ese elemento en tu página. ¿Has cambiado el HTML?" };
+      if (!aplicarAccion(S.doc, acc)) return { ok: false, mensaje: T("(Error de la lección: la solución no tiene `{selector}`.)", { selector: describirAccion(acc).selector }) };
+      if (!aplicarAccion(A.doc, acc)) return { ok: false, mensaje: texto + ": " + T("no encuentro ese elemento en tu página. ¿Has cambiado el HTML?") };
       await Promise.all([PRUEBA.esperarCalma(A.win), PRUEBA.esperarCalma(S.win)]);
       const ctx = Object.assign({ winA: A.win, winS: S.win }, base);
       const dif = errorJS(A, S) || compararElementos(A.doc.body, S.doc.body, ctx) || compararConsola(A, S);
@@ -393,16 +398,16 @@
       '<div class="pistas-mostradas"></div>' +
       '<div class="resultado-revision" aria-live="polite"></div>' +
       '<div class="reto-botones">' +
-        '<button class="boton grande azul" data-revisar>🔍 Revisar</button>' +
-        (paso.pistas && paso.pistas.length ? '<button class="boton secundario" data-pista>💡 Pista</button>' : "") +
-        '<button class="boton secundario" data-solucion' + (paso.pistas && paso.pistas.length ? ' disabled title="Mira antes las pistas"' : "") + ">👀 Ver solución</button>" +
+        '<button class="boton grande azul" data-revisar>' + T("🔍 Revisar") + "</button>" +
+        (paso.pistas && paso.pistas.length ? '<button class="boton secundario" data-pista>' + T("💡 Pista") + "</button>" : "") +
+        '<button class="boton secundario" data-solucion' + (paso.pistas && paso.pistas.length ? ' disabled title="' + T("Mira antes las pistas") + '"' : "") + ">" + T("👀 Ver solución") + "</button>" +
       "</div>";
     contenedor.appendChild(tarjeta);
     tarjeta.querySelector(".enunciado").innerHTML = UI.md(paso.enunciado);
 
     const mascota = MASCOTA.crear(resuelto
-      ? "¡Este ya lo resolviste! Puedes repasarlo o seguir adelante."
-      : "Lee bien el enunciado y escríbelo tú desde cero. ¡Pensar es la mejor parte!");
+      ? T("¡Este ya lo resolviste! Puedes repasarlo o seguir adelante.")
+      : T("Lee bien el enunciado y escríbelo tú desde cero. ¡Pensar es la mejor parte!"));
     contenedor.appendChild(mascota);
 
     const borrador = PROGRESO.borrador(clave);
@@ -427,13 +432,13 @@
     bRevisar.addEventListener("click", async () => {
       bRevisar.disabled = true;
       salida.className = "resultado-revision revisando";
-      salida.textContent = "Revisando…";
+      salida.textContent = T("Revisando…");
       const r = await revisar(editor.obtener(), paso.solucion, null, paso.cssBase, paso.acciones);
       bRevisar.disabled = false;
       if (r.ok) {
         salida.className = "resultado-revision correcto";
-        salida.innerHTML = "✅ <b>¡Correcto!</b> " + MASCOTA.azar(MASCOTA.FRASES.acierto);
-        MASCOTA.decir(mascota, "¡Lo has resuelto tú solo! Ya puedes pasar al siguiente paso. 🎉", "alegre");
+        salida.innerHTML = T("✅ <b>¡Correcto!</b> ") + MASCOTA.azar(MASCOTA.FRASES.acierto);
+        MASCOTA.decir(mascota, T("¡Lo has resuelto tú solo! Ya puedes pasar al siguiente paso. 🎉"), "alegre");
         CELEBRAR.sonido.acierto();
         if (!resuelto) { resuelto = true; alResolver(); }
       } else {
@@ -447,7 +452,7 @@
     if (bPista) bPista.addEventListener("click", () => {
       const p = document.createElement("div");
       p.className = "pista-mostrada";
-      p.innerHTML = "<b>💡 Pista " + (pistasVistas + 1) + ":</b> " + UI.md(paso.pistas[pistasVistas]);
+      p.innerHTML = "<b>" + T("💡 Pista {n}:", { n: pistasVistas + 1 }) + "</b> " + UI.md(paso.pistas[pistasVistas]);
       pistasCont.appendChild(p);
       pistasVistas++;
       CELEBRAR.sonido.click();
@@ -459,7 +464,7 @@
     });
 
     bSolucion.addEventListener("click", () => {
-      if (!confirm("¿Ver la solución? Se escribirá en el editor. Estúdiala y pulsa «Revisar» para continuar.")) return;
+      if (!confirm(T("¿Ver la solución? Se escribirá en el editor. Estúdiala y pulsa «Revisar» para continuar."))) return;
       editor.fijar(paso.solucion);
     });
 

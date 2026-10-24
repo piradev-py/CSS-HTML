@@ -54,53 +54,49 @@
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    CELEBRAR.toast("📦 Descargando huellas.zip");
+    CELEBRAR.toast(T("📦 Descargando huellas.zip"));
   }
 
   function pintarPendiente() {
     const abierta = PROGRESO.estaDesbloqueada(ULTIMA);
     cont.innerHTML =
       '<section class="tarjeta mi-clinica-pendiente">' +
-        "<h1>🏥 Mi clínica</h1>" +
-        "<p>Aquí verás la web de la clínica <b>Huellas</b> terminada, hecha por ti, y podrás descargarla para abrirla en tu ordenador.</p>" +
-        "<p>Aparece cuando completas el <b>Proyecto web del Mundo JavaScript</b>, el último del curso.</p>" +
+        "<h1>" + T("🏥 Mi clínica") + "</h1>" +
+        "<p>" + T("Aquí verás la web de la clínica <b>Huellas</b> terminada, hecha por ti, y podrás descargarla para abrirla en tu ordenador.") + "</p>" +
+        "<p>" + T("Aparece cuando completas el <b>Proyecto web del Mundo JavaScript</b>, el último del curso.") + "</p>" +
         '<div class="acciones">' +
-          (abierta ? '<a class="boton grande" href="leccion.html?id=' + ULTIMA + '">▶ Ir al Proyecto web</a>' : "") +
-          '<a class="boton secundario" href="index.html">🗺️ Volver al mapa</a>' +
+          (abierta ? '<a class="boton grande" href="leccion.html?id=' + ULTIMA + '">' + T("▶ Ir al Proyecto web") + "</a>" : "") +
+          '<a class="boton secundario" href="index.html">' + T("🗺️ Volver al mapa") + "</a>" +
         "</div>" +
       "</section>";
-    cont.querySelector(".mi-clinica-pendiente").prepend(MASCOTA.crear("¡Ya queda menos! Termina los cuatro mundos y aquí estará tu clínica. 🐾", "alegre"));
+    cont.querySelector(".mi-clinica-pendiente").prepend(MASCOTA.crear(T("¡Ya queda menos! Termina los cuatro mundos y aquí estará tu clínica. 🐾"), "alegre"));
   }
 
   function pintarClinica() {
     cont.innerHTML =
       '<section class="tarjeta mi-clinica-cierre">' +
-        "<h1>¡Tu clínica está en marcha! 🐾</h1>" +
-        "<p>Para un momento y mira atrás. 🌄 Empezaste sin saber qué era una etiqueta. Construiste la web de <b>Huellas</b> con <b>HTML</b>, " +
-        "le diste su identidad con <b>CSS</b>, la convertiste en una maqueta que se ve bien en el móvil, la tableta y el ordenador… " +
-        "y ahora <b>funciona</b> con <b>JavaScript</b>: el menú, los filtros, la cita que se comprueba y las citas que se recuerdan.</p>" +
-        "<p>Esta web es tuya. Descárgala, ábrela en tu ordenador con doble clic en <code>index.html</code> y enséñasela a quien quieras.</p>" +
+        "<h1>" + T("¡Tu clínica está en marcha! 🐾") + "</h1>" +
+        "<p>" + T("Para un momento y mira atrás. 🌄 Empezaste sin saber qué era una etiqueta. Construiste la web de <b>Huellas</b> con <b>HTML</b>, le diste su identidad con <b>CSS</b>, la convertiste en una maqueta que se ve bien en el móvil, la tableta y el ordenador… y ahora <b>funciona</b> con <b>JavaScript</b>: el menú, los filtros, la cita que se comprueba y las citas que se recuerdan.") + "</p>" +
+        "<p>" + T("Esta web es tuya. Descárgala, ábrela en tu ordenador con doble clic en <code>index.html</code> y enséñasela a quien quieras.") + "</p>" +
         '<div class="acciones">' +
-          '<button class="boton grande" type="button" data-descargar>⬇️ Descargar mi web (.zip)</button>' +
-          '<a class="boton secundario" href="index.html">🗺️ Volver al mapa</a>' +
+          '<button class="boton grande" type="button" data-descargar>' + T("⬇️ Descargar mi web (.zip)") + "</button>" +
+          '<a class="boton secundario" href="index.html">' + T("🗺️ Volver al mapa") + "</a>" +
         "</div>" +
-        "<details class=\"seguir\"><summary>🚀 ¿Y ahora qué?</summary>" +
-          "<p>Lo mejor para no olvidar es seguir trasteando con tu propia web:</p>" +
+        "<details class=\"seguir\"><summary>" + T("🚀 ¿Y ahora qué?") + "</summary>" +
+          "<p>" + T("Lo mejor para no olvidar es seguir trasteando con tu propia web:") + "</p>" +
           "<ul>" +
-            "<li>Cambia la paleta en <code>:root</code> y mira cómo cambia toda la clínica de un plumazo.</li>" +
-            "<li>Añade un servicio nuevo al array <code>servicios</code>: sale solo, y el filtro ya lo tiene en cuenta.</li>" +
-            "<li>Haz que la hora de la cita tenga en cuenta el sábado (de 10:00 a 14:00) y el domingo (cerrado).</li>" +
+            "<li>" + T("Cambia la paleta en <code>:root</code> y mira cómo cambia toda la clínica de un plumazo.") + "</li>" +
+            "<li>" + T("Añade un servicio nuevo al array <code>servicios</code>: sale solo, y el filtro ya lo tiene en cuenta.") + "</li>" +
+            "<li>" + T("Haz que la hora de la cita tenga en cuenta el sábado (de 10:00 a 14:00) y el domingo (cerrado).") + "</li>" +
           "</ul>" +
-          "<p>Una clínica de verdad añadiría una cosa más: un <b>servidor</b> que reciba las citas, para que lleguen a la clínica y no solo se " +
-          "guarden en tu navegador. Eso ya es programar «por detrás» (el <i>backend</i>), el siguiente paso cuando quieras seguir aprendiendo.</p>" +
+          "<p>" + T("Una clínica de verdad añadiría una cosa más: un <b>servidor</b> que reciba las citas, para que lleguen a la clínica y no solo se guarden en tu navegador. Eso ya es programar «por detrás» (el <i>backend</i>), el siguiente paso cuando quieras seguir aprendiendo.") + "</p>" +
         "</details>" +
       "</section>" +
       '<section class="mi-clinica-web">' +
-        '<p class="texto-suave">Así queda tu web. Aquí dentro los enlaces a otras páginas abren una página de prueba; en la web descargada funcionan de verdad.</p>' +
-        '<iframe class="marco-clinica" title="La web de la clínica Huellas"></iframe>' +
+        '<p class="texto-suave">' + T("Así queda tu web. Aquí dentro los enlaces a otras páginas abren una página de prueba; en la web descargada funcionan de verdad.") + "</p>" +
+        '<iframe class="marco-clinica" title="' + T("La web de la clínica Huellas") + '"></iframe>' +
       "</section>";
-    cont.querySelector(".mi-clinica-cierre").prepend(MASCOTA.crear("Cuando empezamos, yo era solo una etiqueta con ojos. Ahora soy una etiqueta con ojos <b>muy orgullosa</b> de ti. " +
-      "Programar no va de saberlo todo, sino de no rendirse. ¡Y tú no te has rendido! 🥹", "alegre"));
+    cont.querySelector(".mi-clinica-cierre").prepend(MASCOTA.crear(T("Cuando empezamos, yo era solo una etiqueta con ojos. Ahora soy una etiqueta con ojos <b>muy orgullosa</b> de ti. Programar no va de saberlo todo, sino de no rendirse. ¡Y tú no te has rendido! 🥹"), "alegre"));
     cont.querySelector("[data-descargar]").addEventListener("click", descargar);
     cont.querySelector(".marco-clinica").srcdoc = EDITOR.construirDocumento(Object.assign({ proyecto: PROYECTO }, web()));
   }

@@ -34,6 +34,33 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
 - Inglés claro y cercano, para principiantes (tutea: «you»), como el español del curso.
 - Al terminar, `node herramientas/traducciones.mjs` debe decir ✅ (cada `T()` con su inglés y los mismos `{marcadores}`).
 
+## Traducir una lección (Español → English)
+- La lección inglesa es una **copia** con el mismo nombre en `lecciones-en/` (p. ej. `lecciones-en/1-html/html-01-que-es-html.js`).
+  El original en `lecciones/` **no se toca**. Y en `js/curso.js`, en la entrada de esa lección, añade `en: "Its English title"`.
+- Igual que el original: `id`, `xp`, número, orden y tipo de pasos, `correcta` de los quiz, selectores, ids, clases,
+  nombres de archivo e imágenes. Cambia solo lo que lee el alumno.
+- Se traduce: `titulo` (el mismo que en `en:`), `objetivo`, `glosario` (`termino` si es una palabra y no código,
+  `tema`, `para`, `buscar` con palabras inglesas), títulos, textos, `consejo`, enunciados, pistas, preguntas, opciones,
+  explicaciones, los `texto` de las comprobaciones, y el contenido visible del código de ejemplos, `inicial` y
+  `solucion` (textos de la página, comentarios, mensajes de consola): `<p>Mi gato</p>` → `<p>My cat</p>`.
+- **Las comprobaciones que buscan texto** (`includes("Ana")`, `includes("de nuevo")`, mensajes de consola…) se adaptan al
+  texto inglés de la solución. La regla de oro sigue: la solución aprueba todas y el código `inicial` ninguna.
+- Si el enunciado pide escribir un texto exacto («¡Hola, mundo!»), la solución y las pistas usan el mismo texto inglés.
+- En el texto inglés, comillas “ ” donde el español usa « ».
+- El `tema` del glosario agrupa términos de **todas** las lecciones: usa SIEMPRE esta traducción, exacta:
+  Formularios → Forms · Texto → Text · Flexbox → Flexbox · Cajas → Boxes · Variables → Variables ·
+  Semántica → Semantics · Responsive → Responsive · Posición → Positioning · DOM → DOM · La cabeza → The head ·
+  Grid → Grid · Colores → Colors · Selectores → Selectors · Pseudo-clases → Pseudo-classes · Medidas → Units ·
+  Imágenes → Images · Fechas → Dates · Enlaces → Links · Display → Display · Condiciones → Conditions ·
+  Bordes y sombras → Borders and shadows · Tablas → Tables · Pseudo-elementos → Pseudo-elements · Menús → Menus ·
+  Datos de internet → Data from the internet · Crear elementos → Creating elements · Cascada → Cascade ·
+  Arrays → Arrays · Animaciones → Animations · Transiciones → Transitions · Transformaciones → Transforms ·
+  Tarjetas → Cards · Reglas → Rules · Objetos → Objects · Guardar datos → Saving data · Funciones → Functions ·
+  Filtrar → Filtering · Eventos → Events · Estructura → Structure · Lo básico → The basics · Listas → Lists ·
+  Consola → Console
+- El comentario de cabecera del archivo puede quedar en español (es para quien mantiene el curso).
+- Al terminar: `node --check` del archivo nuevo y de `js/curso.js`. Los tests del navegador los pasa el revisor.
+
 ## Al terminar
 - Tareas de traducción de la interfaz: `node --check` de cada archivo que tocaste y `node herramientas/traducciones.mjs`.
   **No lances los tests del navegador** (`tests/navegador/…`): los pasa el revisor (dos Edge a la vez se cuelgan).

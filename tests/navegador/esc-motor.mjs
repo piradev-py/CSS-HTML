@@ -20,7 +20,7 @@ export default async function (b) {
     const solH = { html, css: "li { color: black; }\\nli:hover { color: red; }" };
     ok("hover: la solución se aprueba", (await rev(solH, solH)).ok);
     const malH = await rev({ html, css: "li { color: black; }\\nli:hover { color: blue; }" }, solH);
-    ok("hover: color distinto suspende (" + malH.mensaje + ")", !malH.ok && /ratón/.test(malH.mensaje));
+    ok("hover: color distinto suspende (" + malH.mensaje + ")", !malH.ok && /ratón|hovering/.test(malH.mensaje));
     ok("hover: sin :hover suspende", !(await rev({ html, css: "li { color: black; }" }, solH)).ok);
 
     // 2. Especificidad: :nth-child y :hover empatan, gana el último
@@ -32,7 +32,7 @@ export default async function (b) {
     const solM = { html, css: "ul { display: grid; grid-template-columns: 1fr 1fr 1fr; }\\n@media (max-width: 600px) { ul { grid-template-columns: 1fr; } }" };
     ok("media: la solución se aprueba", (await rev(solM, solM)).ok);
     const malM = await rev({ html, css: "ul { display: grid; grid-template-columns: 1fr 1fr 1fr; }" }, solM);
-    ok("media: sin @media suspende (" + malM.mensaje + ")", !malM.ok && /estrecha/.test(malM.mensaje));
+    ok("media: sin @media suspende (" + malM.mensaje + ")", !malM.ok && /estrecha|narrow/.test(malM.mensaje));
 
     // 4. Pseudo-elementos
     const solP = { html, css: "li::before { content: '✓ '; color: green; }" };

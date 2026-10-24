@@ -27,7 +27,7 @@ async function pruebas() {
   ok("error: línea 3 (" + JSON.stringify(v.win.__errores) + ")", v.win.__errores[0]?.linea === 3 && /noExiste/.test(v.win.__errores[0].mensaje));
   v = await cargar({ html: "<p>x</p>", js: "let a = 1;\nlet b = ;" });
   ok("error de escritura: línea 2 (" + JSON.stringify(v.win.__errores) + ")", v.win.__errores[0]?.linea === 2);
-  ok("errorAmigable traduce", /no existe/.test(EDITOR.errorAmigable("Uncaught ReferenceError: x is not defined", 4)) && /línea 4/.test(EDITOR.errorAmigable("x is not defined", 4)));
+  ok("errorAmigable traduce", /no existe|doesn't exist/.test(EDITOR.errorAmigable("Uncaught ReferenceError: x is not defined", 4)) && /línea 4|line 4/.test(EDITOR.errorAmigable("x is not defined", 4)));
 
   // 3. alert/prompt no bloquean
   v = await cargar({ js: 'alert("hola"); const r = prompt("¿Nombre?"); console.log(r);' });
@@ -90,7 +90,7 @@ async function pruebas() {
   const acc = [{ clic: "#mas" }, { clic: "#mas" }];
   ok("acciones: la solución se aprueba", (await rev(solC, solC, acc)).ok);
   const vacioC = await rev({ html: htmlC, js: "" }, solC, acc);
-  ok("acciones: sin JS suspende (" + vacioC.mensaje + ")", !vacioC.ok && /Al pulsar/.test(vacioC.mensaje));
+  ok("acciones: sin JS suspende (" + vacioC.mensaje + ")", !vacioC.ok && /Al pulsar|When clicking/.test(vacioC.mensaje));
   const dobleC = await rev({ html: htmlC, js: solC.js.replace("n + 1", "n + 2") }, solC, acc);
   ok("acciones: sumar 2 suspende", !dobleC.ok);
 
@@ -118,7 +118,7 @@ async function pruebas() {
 
   // 11. Error de JS en un ejercicio: mensaje claro con la línea
   const malErr = await rev({ html: htmlT, js: 'const t = document.querySelector("h1");\nt.textContnt = "Adiós";\nconsola.log(t);' }, { html: "<h1>Adiós</h1>", js: "" });
-  ok("error en ejercicio: línea y explicación (" + malErr.mensaje + ")", !malErr.ok && /línea 3/.test(malErr.mensaje));
+  ok("error en ejercicio: línea y explicación (" + malErr.mensaje + ")", !malErr.ok && /línea 3|line 3/.test(malErr.mensaje));
 
   // 12. Mensajes de la consola en ejercicios
   const solL = { js: 'console.log("Hola");\nconsole.log("Me gusta la pizza");' };
@@ -140,7 +140,7 @@ async function pruebas() {
   const t0 = performance.now();
   v = await cargar({ html: "<p>x</p>", js: 'const lista = [1];\nfor (const x of lista) {\n  lista.push(x);\n}\nconsole.log("sigo vivo");' });
   ok("bucle infinito cortado en " + Math.round(performance.now() - t0) + " ms (" + JSON.stringify(v.win.__errores) + ")",
-    v.win.__errores[0]?.linea === 2 && /bucle no termina/.test(EDITOR.errorAmigable(v.win.__errores[0].mensaje)));
+    v.win.__errores[0]?.linea === 2 && /bucle no termina|loop never ends/.test(EDITOR.errorAmigable(v.win.__errores[0].mensaje)));
   v = await cargar({ js: "let i = 0;\nwhile (true) i++;" });
   ok("while (true) sin llaves también se corta", v.win.__errores.length === 1);
   v = await cargar({ js: 'let s = 0;\nfor (const n of [1, 2, 3]) {\n  s = s + n;\n}\nconsole.log(s);' });

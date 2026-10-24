@@ -361,21 +361,21 @@
   /** Traduce errores típicos de JavaScript a algo que un novato entiende. */
   function errorAmigable(msg, linea) {
     msg = String(msg || "").replace(/^Uncaught /, "");
-    const donde = linea ? "(línea " + linea + ") " : "";
+    const donde = linea ? T("(línea {n}) ", { n: linea }) : "";
     let m;
     let t;
-    if (/__BUCLE__/.test(msg)) t = "🔁 Este bucle no termina nunca y lo he parado para que la página no se congele. Revisa su condición: ¿llega a cumplirse alguna vez el final? Ojo: si añades elementos a la misma lista que estás recorriendo, no acaba nunca.";
-    else if ((m = msg.match(/(\w+) is not defined/))) t = "🤔 Usas «" + m[1] + "» pero no existe. ¿Está bien escrito? Recuerda que mayúsculas y minúsculas cuentan.";
-    else if (/Cannot (read|set) propert(y|ies) of (null|undefined)/.test(msg)) t = "🔍 Intentas usar un elemento que no se encontró. Revisa el selector de querySelector.";
-    else if (/is not a function/.test(msg)) t = "🧩 Algo que llamas con () no es una función. ¿Está bien escrito su nombre?";
-    else if (/is not iterable/.test(msg)) t = "🔁 Intentas recorrer con for…of algo que no es una lista (array).";
-    else if (/has already been declared/.test(msg)) t = "♻️ Ya creaste una variable con ese nombre. Créala una sola vez (con let o const) y después úsala sin repetir let.";
-    else if (/before initialization/.test(msg)) t = "⏳ Usas una variable antes de crearla. Pon la línea con let o const más arriba.";
-    else if (/Assignment to constant/.test(msg)) t = "🔒 No puedes cambiar una variable creada con const. Usa let si va a cambiar.";
-    else if (/JSON/.test(msg)) t = "📦 Lo que intentas leer no es JSON válido. " + msg;
-    else if (/Failed to fetch|NetworkError/.test(msg)) t = "🌐 No se pudo conectar con esa dirección. ¿Está bien escrita? ¿Tienes internet?";
-    else if (/await is only valid/.test(msg)) t = "⏳ Solo puedes usar await dentro de una función async.";
-    else if (/Unexpected (token|end|identifier|string|number)|missing|Invalid or unexpected|Unterminated/.test(msg)) t = "✏️ Hay un error de escritura: falta o sobra un paréntesis, una llave, una coma o unas comillas.";
+    if (/__BUCLE__/.test(msg)) t = T("🔁 Este bucle no termina nunca y lo he parado para que la página no se congele. Revisa su condición: ¿llega a cumplirse alguna vez el final? Ojo: si añades elementos a la misma lista que estás recorriendo, no acaba nunca.");
+    else if ((m = msg.match(/(\w+) is not defined/))) t = T("🤔 Usas «{nombre}» pero no existe. ¿Está bien escrito? Recuerda que mayúsculas y minúsculas cuentan.", { nombre: m[1] });
+    else if (/Cannot (read|set) propert(y|ies) of (null|undefined)/.test(msg)) t = T("🔍 Intentas usar un elemento que no se encontró. Revisa el selector de querySelector.");
+    else if (/is not a function/.test(msg)) t = T("🧩 Algo que llamas con () no es una función. ¿Está bien escrito su nombre?");
+    else if (/is not iterable/.test(msg)) t = T("🔁 Intentas recorrer con for…of algo que no es una lista (array).");
+    else if (/has already been declared/.test(msg)) t = T("♻️ Ya creaste una variable con ese nombre. Créala una sola vez (con let o const) y después úsala sin repetir let.");
+    else if (/before initialization/.test(msg)) t = T("⏳ Usas una variable antes de crearla. Pon la línea con let o const más arriba.");
+    else if (/Assignment to constant/.test(msg)) t = T("🔒 No puedes cambiar una variable creada con const. Usa let si va a cambiar.");
+    else if (/JSON/.test(msg)) t = T("📦 Lo que intentas leer no es JSON válido. ") + msg;
+    else if (/Failed to fetch|NetworkError/.test(msg)) t = T("🌐 No se pudo conectar con esa dirección. ¿Está bien escrita? ¿Tienes internet?");
+    else if (/await is only valid/.test(msg)) t = T("⏳ Solo puedes usar await dentro de una función async.");
+    else if (/Unexpected (token|end|identifier|string|number)|missing|Invalid or unexpected|Unterminated/.test(msg)) t = T("✏️ Hay un error de escritura: falta o sobra un paréntesis, una llave, una coma o unas comillas.");
     else t = "⚠️ " + msg;
     return donde + t;
   }
@@ -399,9 +399,9 @@
     const caja = document.createElement("span");
     caja.className = "dispositivos";
     caja.innerHTML =
-      '<span class="medida-resultado" title="Ancho del resultado"></span>' +
-      '<button class="mini-boton activo" data-movil="0" title="Usar todo el ancho del panel (arrastra los separadores para cambiarlo)">💻 Libre</button>' +
-      '<button class="mini-boton" data-movil="1" title="Ver el resultado con el ancho de un móvil (375 px)">📱 Móvil</button>';
+      '<span class="medida-resultado" title="' + T("Ancho del resultado") + '"></span>' +
+      '<button class="mini-boton activo" data-movil="0" title="' + T("Usar todo el ancho del panel (arrastra los separadores para cambiarlo)") + '">' + T("💻 Libre") + "</button>" +
+      '<button class="mini-boton" data-movil="1" title="' + T("Ver el resultado con el ancho de un móvil (375 px)") + '">' + T("📱 Móvil") + "</button>";
     barra.appendChild(caja);
     const medida = caja.querySelector(".medida-resultado");
     const medir = () => { medida.textContent = Math.round(iframe.getBoundingClientRect().width) + " px"; };
@@ -434,19 +434,19 @@
       const ogTitulo = leer(doc, 'meta[property="og:title"]', "content");
       const ogDesc = leer(doc, 'meta[property="og:description"]', "content");
       const ogImagen = url(doc, leer(doc, 'meta[property="og:image"]', "content"));
-      const falta = t => '<span class="vp-falta">' + t + "</span>";
+      const falta = t => '<span class="vp-falta">' + UI.escapar(t) + "</span>";
       caja.innerHTML =
-        '<div class="vp-bloque"><div class="vp-titulo">🔎 Así te ve un buscador</div>' +
+        '<div class="vp-bloque"><div class="vp-titulo">' + T("🔎 Así te ve un buscador") + "</div>" +
           '<div class="vp-buscador">' +
-            (icono ? '<img class="vp-icono" alt="">' : '<span class="vp-icono vp-sin-icono" title="Sin favicon">🌐</span>') +
-            '<div><div class="vp-enlace">' + (titulo ? UI.escapar(titulo) : falta("Sin <title>")) + "</div>" +
-            '<div class="vp-desc">' + (desc ? UI.escapar(desc) : falta("Sin meta description: el buscador cogerá un trozo cualquiera de tu página")) + "</div></div>" +
+            (icono ? '<img class="vp-icono" alt="">' : '<span class="vp-icono vp-sin-icono" title="' + T("Sin favicon") + '">🌐</span>') +
+            '<div><div class="vp-enlace">' + (titulo ? UI.escapar(titulo) : falta(T("Sin <title>"))) + "</div>" +
+            '<div class="vp-desc">' + (desc ? UI.escapar(desc) : falta(T("Sin meta description: el buscador cogerá un trozo cualquiera de tu página"))) + "</div></div>" +
           "</div></div>" +
-        '<div class="vp-bloque"><div class="vp-titulo">💬 Así se ve tu enlace al compartirlo</div>' +
+        '<div class="vp-bloque"><div class="vp-titulo">' + T("💬 Así se ve tu enlace al compartirlo") + "</div>" +
           '<div class="vp-redes">' +
-            (ogImagen ? '<img class="vp-imagen" alt="">' : '<div class="vp-imagen vp-sin-imagen">' + falta("Sin og:image") + "</div>") +
-            '<div class="vp-redes-texto"><b>' + (ogTitulo ? UI.escapar(ogTitulo) : falta("Sin og:title")) + "</b>" +
-            "<div>" + (ogDesc ? UI.escapar(ogDesc) : falta("Sin og:description")) + "</div></div>" +
+            (ogImagen ? '<img class="vp-imagen" alt="">' : '<div class="vp-imagen vp-sin-imagen">' + falta(T("Sin og:image")) + "</div>") +
+            '<div class="vp-redes-texto"><b>' + (ogTitulo ? UI.escapar(ogTitulo) : falta(T("Sin og:title"))) + "</b>" +
+            "<div>" + (ogDesc ? UI.escapar(ogDesc) : falta(T("Sin og:description"))) + "</div></div>" +
           "</div></div>";
       // src por propiedad: así una URL con comillas no rompe el HTML de la tarjeta
       if (icono) caja.querySelector(".vp-icono").src = icono;
@@ -466,16 +466,16 @@
     const panel = document.createElement("div");
     panel.className = "panel panel-resultado" + (opciones.soloConsola ? " solo-consola" : "");
     panel.innerHTML =
-      '<div class="barra-panel"><span class="titulo-panel">' + (opciones.titulo || "👀 Resultado") + "</span>" +
+      '<div class="barra-panel"><span class="titulo-panel">' + (opciones.titulo || T("👀 Resultado")) + "</span>" +
       '<span class="aviso-resultado" aria-live="polite"></span>' +
-      (conConsola ? '<button class="mini-boton" data-recargar title="Vuelve a ejecutar tu código, como si recargaras la página">🔄 Recargar</button>' : "") +
+      (conConsola ? '<button class="mini-boton" data-recargar title="' + T("Vuelve a ejecutar tu código, como si recargaras la página") + '">' + T("🔄 Recargar") + "</button>" : "") +
       "</div>" +
-      '<iframe class="resultado" title="Resultado de tu código"></iframe>' +
+      '<iframe class="resultado" title="' + T("Resultado de tu código") + '"></iframe>' +
       (conConsola
-        ? '<div class="consola"><div class="consola-titulo"><span>🖥️ Consola</span>' +
-          '<span class="consola-almacen" hidden title="Datos guardados con localStorage en esta práctica">💾 <b></b> ' +
-          '<button class="mini-boton" data-borrar-datos>Borrar</button></span></div>' +
-          '<div class="consola-lineas" aria-live="polite" data-vacia="Aquí aparecerá lo que muestres con console.log()"></div></div>'
+        ? '<div class="consola"><div class="consola-titulo"><span>' + T("🖥️ Consola") + "</span>" +
+          '<span class="consola-almacen" hidden title="' + T("Datos guardados con localStorage en esta práctica") + '">💾 <b></b> ' +
+          '<button class="mini-boton" data-borrar-datos>' + T("Borrar") + "</button></span></div>" +
+          '<div class="consola-lineas" aria-live="polite" data-vacia="' + T("Aquí aparecerá lo que muestres con console.log()") + '"></div></div>'
         : "");
     const iframe = panel.querySelector("iframe");
     const aviso = panel.querySelector(".aviso-resultado");
@@ -490,8 +490,8 @@
       // y las animaciones que quita no se mueven: se avisa para que no parezca un fallo
       const reducido = /prefers-reduced-motion\s*:\s*reduce/.test(codigo.css || "") &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      aviso.textContent = reducido ? "🐢 Tu ordenador reduce el movimiento" : "";
-      aviso.title = reducido ? "Tienes activado «reducir movimiento» en tu sistema, así que se cumple tu @media (prefers-reduced-motion: reduce) y lo que quita no se mueve. Para verlo moverse, quita ese @media un momento o desactiva la opción." : "";
+      aviso.textContent = reducido ? T("🐢 Tu ordenador reduce el movimiento") : "";
+      aviso.title = reducido ? T("Tienes activado «reducir movimiento» en tu sistema, así que se cumple tu @media (prefers-reduced-motion: reduce) y lo que quita no se mueve. Para verlo moverse, quita ese @media un momento o desactiva la opción.") : "";
       iframe.srcdoc = construirDocumento(codigo);
     }
 
@@ -513,12 +513,12 @@
       if (e.source !== iframe.contentWindow || !e.data || !e.data.csshtml) return;
       const d = e.data;
       if (d.csshtml === "formulario") {
-        aviso.textContent = "📨 ¡Formulario enviado! (en las prácticas no se envía a ningún sitio)";
+        aviso.textContent = T("📨 ¡Formulario enviado! (en las prácticas no se envía a ningún sitio)");
       } else if (d.csshtml === "almacen") {
         if (!almacen) return;
         const n = Number(d.texto) || 0;
         almacen.hidden = n === 0;
-        almacen.querySelector("b").textContent = n === 1 ? "1 dato guardado" : n + " datos guardados";
+        almacen.querySelector("b").textContent = n === 1 ? T("1 dato guardado") : T("{n} datos guardados", { n });
       } else if (d.csshtml === "limpiar") {
         if (consola) consola.innerHTML = "";
       } else if (consola) {
@@ -550,12 +550,12 @@
               '<button role="tab" class="pestana pestana-' + p + '" data-pestana="' + p + '">' +
               ICONOS[p] + " " + ((opciones.proyecto || {})[p] || NOMBRES[p]) + "</button>").join("") +
           "</div>" +
-          '<button class="mini-boton" data-reiniciar title="Volver al código del principio">↺ Reiniciar</button>' +
+          '<button class="mini-boton" data-reiniciar title="' + T("Volver al código del principio") + '">' + T("↺ Reiniciar") + "</button>" +
         "</div>" +
         '<div class="area-codigo">' +
           '<div class="numeros" aria-hidden="true"></div>' +
           '<pre class="capa-resaltado" aria-hidden="true"><code></code></pre>' +
-          '<textarea spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Editor de código"></textarea>' +
+          '<textarea spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="' + T("Editor de código") + '"></textarea>' +
         "</div>" +
       "</div>";
     const resultado = crearResultado({ consola: pestanas.includes("js"), soloConsola: !pestanas.includes("html") });
@@ -683,7 +683,7 @@
       b.addEventListener("click", () => cambiarPestana(b.dataset.pestana)));
 
     bReiniciar.addEventListener("click", () => {
-      if (!confirm("¿Volver al código del principio? Perderás lo que has escrito aquí.")) return;
+      if (!confirm(T("¿Volver al código del principio? Perderás lo que has escrito aquí."))) return;
       resultado.borrarDatos();
       fijar(inicial);
     });

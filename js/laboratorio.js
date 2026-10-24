@@ -15,15 +15,15 @@
   const CLAVE = "laboratorio";
   const VACIO = { html: "", css: "", js: "" };
   const EJEMPLOS = [
-    { nombre: "Una tarjeta", codigo: {
+    { nombre: T("Una tarjeta"), codigo: {
       html: "<article class=\"tarjeta\">\n  <h1>Luna</h1>\n  <p>Gata de 3 años. Le encanta dormir al sol.</p>\n  <button>Adoptar</button>\n</article>",
       css: "body {\n  font-family: sans-serif;\n  background-color: #f7faf8;\n}\n\n.tarjeta {\n  max-width: 280px;\n  margin: 40px auto;\n  padding: 24px;\n  border-radius: 20px;\n  background-color: white;\n  box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);\n}\n\nbutton {\n  padding: 10px 20px;\n  border: none;\n  border-radius: 999px;\n  background-color: #1f7a6b;\n  color: white;\n}",
       js: "" } },
-    { nombre: "Un botón que cuenta", codigo: {
+    { nombre: T("Un botón que cuenta"), codigo: {
       html: "<p>Has pulsado <strong id=\"cuenta\">0</strong> veces.</p>\n<button id=\"boton\">¡Púlsame!</button>",
       css: "body {\n  font-family: sans-serif;\n  text-align: center;\n  padding-top: 40px;\n}\n\nbutton {\n  padding: 12px 24px;\n  font-size: 1.1rem;\n}",
       js: "let veces = 0;\nconst boton = document.querySelector(\"#boton\");\nconst cuenta = document.querySelector(\"#cuenta\");\n\nboton.addEventListener(\"click\", () => {\n  veces++;\n  cuenta.textContent = veces;\n  console.log(\"Clic número \" + veces);\n});" } },
-    { nombre: "Una lista que crece", codigo: {
+    { nombre: T("Una lista que crece"), codigo: {
       html: "<input id=\"texto\" placeholder=\"Escribe algo\">\n<button id=\"anadir\">Añadir</button>\n<ul id=\"lista\"></ul>",
       css: "body {\n  font-family: sans-serif;\n  padding: 24px;\n}\n\nli {\n  margin: 6px 0;\n}",
       js: "const texto = document.querySelector(\"#texto\");\nconst lista = document.querySelector(\"#lista\");\n\ndocument.querySelector(\"#anadir\").addEventListener(\"click\", () => {\n  if (texto.value.trim() === \"\") {\n    return;\n  }\n  const li = document.createElement(\"li\");\n  li.textContent = texto.value;\n  lista.append(li);\n  texto.value = \"\";\n});" } }
@@ -32,16 +32,16 @@
   const cont = document.querySelector("[data-laboratorio]");
   cont.innerHTML =
     '<section class="tarjeta lab-cabecera">' +
-      "<div><h1>🧪 Laboratorio</h1>" +
-      "<p class=\"texto-suave\">Tu sitio para trastear: escribe HTML, CSS y JavaScript y mira el resultado al momento. Aquí no hay retos ni revisión, y tu código se guarda solo.</p></div>" +
+      "<div><h1>" + T("🧪 Laboratorio") + "</h1>" +
+      "<p class=\"texto-suave\">" + T("Tu sitio para trastear: escribe HTML, CSS y JavaScript y mira el resultado al momento. Aquí no hay retos ni revisión, y tu código se guarda solo.") + "</p></div>" +
       '<div class="lab-acciones">' +
-        '<label class="lab-ejemplos">Cargar un ejemplo: <select data-ejemplo><option value="">Elige uno…</option>' +
+        '<label class="lab-ejemplos">' + T("Cargar un ejemplo: ") + '<select data-ejemplo><option value="">' + T("Elige uno…") + "</option>" +
           EJEMPLOS.map((e, i) => '<option value="' + i + '">' + UI.escapar(e.nombre) + "</option>").join("") +
         "</select></label>" +
-        '<button class="boton secundario" type="button" data-borrar>🗑️ Borrar todo</button>' +
-        '<button class="boton" type="button" data-descargar>⬇️ Descargar (.zip)</button>' +
+        '<button class="boton secundario" type="button" data-borrar>' + T("🗑️ Borrar todo") + "</button>" +
+        '<button class="boton" type="button" data-descargar>' + T("⬇️ Descargar (.zip)") + "</button>" +
       "</div>" +
-      '<p class="lab-deshacer"><span data-aviso role="status"></span> <button class="mini-boton" type="button" data-deshacer hidden>↩ Deshacer</button></p>' +
+      '<p class="lab-deshacer"><span data-aviso role="status"></span> <button class="mini-boton" type="button" data-deshacer hidden>' + T("↩ Deshacer") + "</button></p>" +
     "</section>" +
     '<section class="lab-editor"><div class="col col-codigo"></div><div class="col col-resultado"></div></section>';
 
@@ -68,7 +68,7 @@
     anterior = editor.obtener();
     editor.fijar(Object.assign({}, VACIO, codigo));
     PROGRESO.guardarBorrador(CLAVE, editor.obtener());
-    mostrarAviso(mensaje + " Puedes deshacerlo durante 15 segundos.");
+    mostrarAviso(mensaje + T(" Puedes deshacerlo durante 15 segundos."));
     clearTimeout(temporizador);
     temporizador = setTimeout(() => { mostrarAviso(""); anterior = null; }, 15000);
   }
@@ -77,15 +77,15 @@
     editor.fijar(anterior);
     PROGRESO.guardarBorrador(CLAVE, anterior);
     anterior = null;
-    mostrarAviso("Hecho: has recuperado el código.");
+    mostrarAviso(T("Hecho: has recuperado el código."));
     // El botón desaparece: el foco pasa al editor para no quedarse en la nada
     editor.enfocar();
   });
-  cont.querySelector("[data-borrar]").addEventListener("click", () => sustituir(VACIO, "Has borrado el código."));
+  cont.querySelector("[data-borrar]").addEventListener("click", () => sustituir(VACIO, T("Has borrado el código.")));
   const selector = cont.querySelector("[data-ejemplo]");
   selector.addEventListener("change", () => {
     const e = EJEMPLOS[selector.value];
-    if (e) sustituir(e.codigo, "Has cargado «" + e.nombre + "».");
+    if (e) sustituir(e.codigo, T("Has cargado «{nombre}».", { nombre: e.nombre }));
     selector.value = "";
   });
 
@@ -96,8 +96,8 @@
     const enlaceCSS = '<link rel="stylesheet" href="estilos.css">';
     const enlaceJS = '<script src="script.js"></script>';
     if (!/<html[\s>]/i.test(html)) {
-      html = "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
-        "  <title>Mi práctica</title>\n  " + enlaceCSS + "\n</head>\n<body>\n" + html + "\n\n  " + enlaceJS + "\n</body>\n</html>\n";
+      html = "<!DOCTYPE html>\n<html lang=\"" + IDIOMA.actual + "\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
+        "  <title>" + T("Mi práctica") + "</title>\n  " + enlaceCSS + "\n</head>\n<body>\n" + html + "\n\n  " + enlaceJS + "\n</body>\n</html>\n";
     } else {
       // Si ya es una página completa, solo se le añaden los enlaces que falten
       if (!/estilos\.css/.test(html)) html = /<\/head>/i.test(html) ? html.replace(/<\/head>/i, "  " + enlaceCSS + "\n</head>") : enlaceCSS + "\n" + html;
@@ -119,7 +119,7 @@
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    CELEBRAR.toast("📦 Descargando mi-practica.zip");
+    CELEBRAR.toast(T("📦 Descargando mi-practica.zip"));
   });
 
   window.LABORATORIO = { archivos, editor };

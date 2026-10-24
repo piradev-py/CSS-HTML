@@ -19,7 +19,7 @@
       lema: "Los ladrillos de toda página web",
       pestanas: ["html"],
       lecciones: [
-        { id: "html-01", archivo: "html-01-que-es-html.js", titulo: "¿Qué es HTML?", listo: true },
+        { id: "html-01", archivo: "html-01-que-es-html.js", titulo: "¿Qué es HTML?", en: "What is HTML?", listo: true },
         { id: "html-02", archivo: "html-02-estructura.js", titulo: "La estructura de una página", listo: true },
         { id: "html-03", archivo: "html-03-titulos-y-parrafos.js", titulo: "Títulos y párrafos", listo: true },
         { id: "html-04", archivo: "html-04-enfasis.js", titulo: "Negritas, cursivas y énfasis", listo: true },
