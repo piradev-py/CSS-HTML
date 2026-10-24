@@ -32,7 +32,7 @@
       ejemplos para cargar, botón de borrar con deshacer, enlace desde la página de inicio.
       → `laboratorio.html` (`js/laboratorio.js`), 2026-10-19, con 3 ejemplos y descarga en .zip (`mi-practica/`, la página ya
       enlaza su hoja y su script). Test: `esc-laboratorio`. Sin glosario (sería para una mejora futura).
-- [ ] **Un único proyecto web que crece a lo largo de los 4 mundos** en lugar de temas sueltos:
+- [x] **Un único proyecto web que crece a lo largo de los 4 mundos** en lugar de temas sueltos:
   - Elegir **un** negocio de los ejemplos que ya usa el profesor (la pizzería, la veterinaria…; el que mejor encaje).
     → **Propuesta cerrada (2026-10-16): la clínica veterinaria «Huellas»**, en `docs/PROYECTO_FINAL.md`
     (una lección de proyecto al final de cada mundo, encargo cerrado de diseño, glosario de consulta, descarga en .zip).
@@ -46,7 +46,7 @@
   - [x] P6 (html-06 `tel:`/`mailto:`/página propia, html-07 `width`+`height`+`loading="lazy"`, html-10 `tel`/`date`/`time`),
         como pasos de explicación. El ejercicio de html-07 pide los dos tamaños y el reto, la proporción y `lazy` (1.3.2).
   - [x] P4 (js-04 `setAttribute`/`aria-expanded`, js-10 botón «Quitar» en cada elemento con ejercicio, js-12 array de
-        objetos con `|| []`). Falta: que el **reto** de js-12 guarde un array de objetos.
+        objetos con `|| []`). El **reto** de js-12 guarda un array de objetos: el cuaderno de avistamientos (1.3.4).
   - [x] P3 (js-11: casillas y radios con `.checked`, `Number.isNaN`, bandera `todoBien` con un mensaje por campo).
         El **reto** de js-11 tiene 3 campos con su mensaje cada uno y la bandera (1.3.3).
   - [x] P5 (html-13 «La cabeza de la página», con la tarjeta `vistaPrevia` del motor) — 2026-10-18. Sin renumerar: los ids
@@ -66,7 +66,7 @@
         → 2026-10-19: basta para el curso. `getDay()` se nombra en un consejo de js-16 (con la trampa de la fecha sin hora)
         y tiene su ficha del glosario; queda como reto en «¿Y ahora qué?» de «Mi clínica», sin lección ni encargo propios.
   - [x] Descarga en .zip también en el laboratorio de práctica libre (2026-10-19)
-  - [~] **Fase 2 · motor del proyecto** (2026-10-18). Hecho: paso `proyecto` (varios archivos enlazados de verdad,
+  - [x] **Fase 2 · motor del proyecto** (2026-10-18). Hecho: paso `proyecto` (varios archivos enlazados de verdad,
         rutas desde la carpeta de Huellas, borrador compartido, captura del encargo, «📚 Repasa» en lo que falla),
         versiones oficiales por mundo (`herramientas/huellas-versiones.mjs` → `lecciones/huellas/versiones.js`), reloj fijo
         (`PRUEBA.recargar(doc, { hoy })`) y batería `esc-proyecto` (23 de 23) + `esc-proyecto-ui`.
@@ -150,7 +150,7 @@
 - [x] js-13: el reto es «siguiente chiste» (determinista) en vez de «chiste al azar» (necesitaría enseñar
       `Math.random`/`Math.floor`). → **se deja así** (`Math.random` no se enseña y el reto sería imprevisible).
 - [x] js-14: 10 pasos con 3 ejercicios por etapas antes del jefe final. → **sustituida por js-17**, la agenda de citas de Huellas (fase 6).
-- [~] js-12: los ejercicios no pueden comprobar que se use `localStorage` de verdad (solo el reto, que recarga). → **se decide con Huellas** (P4: el reto de js-12 pasa a un array de objetos).
+- [x] js-12: los ejercicios no pueden comprobar que se use `localStorage` de verdad (solo el reto, que recarga). → **resuelto con P4**: el reto guarda un array de objetos y lo comprueba recargando (1.3.4).
 - [x] js-10: «crear al pulsar un botón» es solo explicación + reto, sin ejercicio propio. → **resuelto con P4**: ejercicio «Un botón Quitar en cada elemento».
 - [x] Motor: protección contra bucles infinitos → **añadida** (un bucle infinito congelaría la pestaña y el borrador
       guardado la volvería a congelar al abrir la lección).
