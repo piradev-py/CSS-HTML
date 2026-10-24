@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.3.5";
+  const VERSION = "1.4.0";
 
   const MUNDOS = [
     {
@@ -32,7 +32,7 @@
         { id: "html-11", archivo: "html-11-div-y-span.js", titulo: "Cajas genéricas: div y span", en: "Generic boxes: div and span", listo: true },
         { id: "html-12", archivo: "html-12-semantica.js", titulo: "HTML semántico y accesible", en: "Semantic and accessible HTML", listo: true },
         { id: "html-13", archivo: "html-13-cabeza.js", titulo: "La cabeza de la página", en: "The head of the page", listo: true },
-        { id: "html-14", archivo: "html-14-proyecto-web.js", titulo: "Proyecto web: la clínica Huellas", listo: true, huellas: true }
+        { id: "html-14", archivo: "html-14-proyecto-web.js", titulo: "Proyecto web: la clínica Huellas", en: "Web project: the Huellas clinic", listo: true, huellas: true }
       ]
     },
     {

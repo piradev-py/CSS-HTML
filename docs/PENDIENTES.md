@@ -128,10 +128,14 @@
   - [x] Fase 2 · tests en los dos idiomas: `cdp.mjs` fija el idioma antes de cargar cada página (español por defecto,
         `IDIOMA=en` para el inglés). Con `IDIOMA=en`, `esc-tests` carga las lecciones de `lecciones-en/` que existan.
   - [ ] Fase 3 · lecciones, mundo a mundo, en `lecciones-en/` (opencode, una lección por tarea): las comprobaciones
-        que buscan texto en español se adaptan, no solo se traducen. Hecha: html-01.
-        **Al terminar el Mundo 1 (html-01 … html-14), `PUBLICADO = true` en `js/textos.js`** y versión nueva: el inglés
-        se ve en la web publicada desde ahí (decidido 2026-10-24).
-  - [ ] Fase 4 · Huellas en inglés: web de referencia, textos para copiar y capturas.
+        que buscan texto en español se adaptan, no solo se traducen. `node herramientas/lecciones-en.mjs` las compara
+        con el original. Hechas: **Mundo 1 entero** (html-01 … html-14) y css-01, css-02.
+        Mundo 1 terminado → `PUBLICADO = true` y 1.4.0: el inglés ya se ve en la web publicada (2026-10-24).
+        Siguientes: css-03 … css-15, hc-01 … hc-13, js-01 … js-17.
+  - [~] Fase 4 · Huellas en inglés. Hecho: la web inglesa sale de la española con `herramientas/huellas-en.mjs` y su
+        tabla (`huellas-en-tabla.mjs`), `esc-huellas-en` la prueba en los 4 mundos, `nota-en.png` (Caveat) y las capturas
+        del Mundo 1 (`IDIOMA=en MUNDO=1 … esc-capturas-huellas.mjs`). Falta: capturas de los mundos 2 y 3 al traducir
+        css-15 y hc-13, y Mi clínica en inglés (carga las versiones españolas; `imagenes.js` sin `nota-en.png`).
 - [x] Publicar la web con GitHub Pages → **https://piradev-py.github.io/CSS-HTML/** (rama `main`, carpeta raíz, con `.nojekyll`).
 
 ## Decisiones por tomar

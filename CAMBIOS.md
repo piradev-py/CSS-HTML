@@ -19,6 +19,14 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.0 · 2026-10-24
+
+- **El curso, en inglés.** Se abre en inglés y el botón **ES** de la cabecera lo pasa a español (y **EN** al revés).
+  Toda la interfaz está traducida: mapa, lecciones, revisor, editor, laboratorio y Mi clínica.
+- El **Mundo HTML** está entero en inglés, incluido su Proyecto web con la clínica Huellas en inglés. Las lecciones de
+  los demás mundos salen todavía en español, con un aviso, hasta que se traduzcan.
+- La vista previa del buscador de html-13 ya muestra completo el aviso «Sin `<title>`» (antes solo se leía «Sin»).
+
 ## 1.3.5 · 2026-10-24
 
 - Preparación del curso en inglés (aún no visible en la web publicada): `js/textos.js` con `T()` para traducir la

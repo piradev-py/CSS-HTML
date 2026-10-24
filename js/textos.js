@@ -11,7 +11,7 @@
    ============================================================ */
 (function () {
   // false mientras se traduce la interfaz: la web publicada sigue en español y sin botón; en local ya se prueba el inglés
-  const PUBLICADO = false;
+  const PUBLICADO = true;
   const LOCAL = location.protocol === "file:" || ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
   const disponible = PUBLICADO || LOCAL;
   const CLAVE = "csshtml-idioma";
