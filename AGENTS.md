@@ -1,0 +1,26 @@
+# Reglas para agentes (opencode)
+
+Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qué líneas. Un revisor mira tu diff después.
+
+## No explores el proyecto
+- Lee **solo** los archivos que nombra la tarea. No hagas `ls`/`glob` del proyecto ni abras archivos «por si acaso».
+- Si la tarea da números de línea, lee ese rango (con unas 30 líneas de margen), no el archivo entero.
+- Si necesitas el formato de un paso de lección, lee **solo su sección** de `docs/FORMATO_LECCION.md`:
+  `explicacion` L50 · `ejercicio` L59–171 (JS desde L127) · `quiz` L192 · `reto` L201–256 · `proyecto` L257 · `glosario` L287.
+- Si te falta algo para terminar, **para y pregunta**. No lo busques por todo el repositorio.
+
+## Qué no hacer
+- No hagas commit ni push. No toques `CAMBIOS.md`, `docs/PENDIENTES.md` ni `herramientas/version.mjs`: eso lo hace el revisor.
+- No cambies archivos que la tarea no nombre. No cambies nunca el `id` de una lección.
+- No reformatees ni reordenes código que no forma parte de la tarea.
+
+## Cómo son las lecciones (lo justo)
+- `lecciones/<mundo>/<id>-<nombre>.js` es un script clásico con `CURSO.registrar({ id, titulo, xp, objetivo, terminos, pasos: [...] })`, sin `import`/`export`.
+- Textos en español, tuteando y en tono cercano. Mini-markdown: `**negrita**`, `` `código` ``, `\n`.
+- Un `reto` es el último paso. Sus `comprobaciones` son `{ texto, prueba: (doc) => booleano }` (async en JS, con `PRUEBA.recargar`, `PRUEBA.escribir`…).
+  **La solución tiene que aprobar todas y el código `inicial` no.**
+- En los `ejercicio` la revisión compara con `solucion`: si cambias el enunciado, cambia también `pistas` y `solucion`.
+
+## Al terminar
+Ejecuta `node tests/navegador/cdp.mjs esc-tests.mjs` (Node 22 + Edge) y pega la salida de la lección que tocaste.
+Termina con un resumen de 3–5 líneas: qué archivos cambiaste y qué no pudiste comprobar.

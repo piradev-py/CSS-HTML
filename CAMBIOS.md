@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.3.2 · 2026-10-24
+
+- html-07: el ejercicio de Tagui pide `width` **y** `height`, y el reto de la galería pide los dos tamaños en la
+  proporción de la imagen y `loading="lazy"` en la foto de más abajo (la explicación ya los enseñaba).
+
 ## 1.3.1 · 2026-10-19
 
 - css-10: con la cabecera `sticky`, `scroll-margin-top` evita que el título de una sección quede tapado al saltar a

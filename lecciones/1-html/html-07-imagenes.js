@@ -69,13 +69,13 @@ CURSO.registrar({
     },
     {
       tipo: "ejercicio",
-      enunciado: "¡Pon en la página a Tagui, la mascota del curso! Escribe **una sola** etiqueta `<img>` con estos tres atributos, en este orden:\n\n• `src=\"recursos/img/logo-tagui.svg\"`\n• `alt` con el texto **Tagui, una etiqueta naranja con ojos grandes**\n• `width=\"120\"`\n\nRecuerda: `<img>` es una etiqueta vacía, así que no lleva cierre.",
+      enunciado: "¡Pon en la página a Tagui, la mascota del curso! Escribe **una sola** etiqueta `<img>` con estos cuatro atributos, en este orden:\n\n• `src=\"recursos/img/logo-tagui.svg\"`\n• `alt` con el texto **Tagui, una etiqueta naranja con ojos grandes**\n• `width=\"120\"`\n• `height=\"120\"` (la imagen es cuadrada)\n\nRecuerda: `<img>` es una etiqueta vacía, así que no lleva cierre.",
       pistas: [
-        "Todo va dentro de una sola etiqueta: <img …>. Escribe los tres atributos uno detrás de otro, separados por espacios y con la forma nombre=\"valor\".",
-        "Empieza así:\n<img src=\"recursos/img/logo-tagui.svg\" alt=\"…\" …>\nRellena el alt con el texto del enunciado y añade el width=\"120\"."
+        "Todo va dentro de una sola etiqueta: <img …>. Escribe los cuatro atributos uno detrás de otro, separados por espacios y con la forma nombre=\"valor\".",
+        "Empieza así:\n<img src=\"recursos/img/logo-tagui.svg\" alt=\"…\" …>\nRellena el alt con el texto del enunciado, añade el width=\"120\" y, como la imagen es cuadrada, el height=\"120\"."
       ],
       solucion: {
-        html: `<img src="recursos/img/logo-tagui.svg" alt="Tagui, una etiqueta naranja con ojos grandes" width="120">
+        html: `<img src="recursos/img/logo-tagui.svg" alt="Tagui, una etiqueta naranja con ojos grandes" width="120" height="120">
 `,
         css: ""
       }
@@ -93,11 +93,11 @@ CURSO.registrar({
     },
     {
       tipo: "reto",
-      enunciado: "Monta la galería de tus mascotas 🐾:\n\n1. Mete la imagen del gato en un `<figure>`, dale un `alt` que la describa y añade un `<figcaption>` con un comentario.\n2. Haz lo mismo con el perro, cuya imagen está en `recursos/img/perro.svg`.\n3. Ponles a las dos un `width` (por ejemplo `150`) para que quepan bien.",
+      enunciado: "Monta la galería de tus mascotas 🐾:\n\n1. Mete la imagen del gato en un `<figure>`, dale un `alt` que la describa y añade un `<figcaption>` con un comentario.\n2. Haz lo mismo con el perro, cuya imagen está en `recursos/img/perro.svg`.\n3. Ponles a las dos `width` **y** `height` en la misma proporción que la imagen (por ejemplo `160` y `120`), para que el navegador les reserve el hueco exacto y la página no salte.\n4. A la imagen del perro (está más abajo) añádele `loading=\"lazy\"`, para que no se cargue hasta que se vea.",
       inicial: {
         html: `<h1>Mis mascotas</h1>
 
-<!-- 1. Mete esta imagen en un <figure>, ponle un alt descriptivo, un width y un <figcaption> -->
+<!-- 1. Mete esta imagen en un <figure>, ponle un alt descriptivo, un width y un height, y un <figcaption> -->
 <img src="recursos/img/gato.svg">
 
 <!-- 2. Haz lo mismo con el perro: recursos/img/perro.svg -->
@@ -130,28 +130,41 @@ CURSO.registrar({
           }
         },
         {
-          texto: "Las dos imágenes tienen un ancho (width)",
+          texto: "Las dos imágenes tienen width y height en la proporción de la imagen (miden 400×300, por ejemplo 160 y 120)",
           prueba: (doc) => {
             const imgs = Array.from(doc.querySelectorAll("figure img"));
             return imgs.length >= 2 &&
-                   imgs.every(i => (parseInt(i.getAttribute("width") || "", 10) || 0) > 0);
+                   imgs.every(i => {
+                     const w = parseInt(i.getAttribute("width") || "", 10) || 0;
+                     const h = parseInt(i.getAttribute("height") || "", 10) || 0;
+                     if (w <= 0 || h <= 0) return false;
+                     const r = w / h;
+                     return r >= 1.25 && r <= 1.42;
+                   });
+          }
+        },
+        {
+          texto: "La imagen del perro lleva loading=\"lazy\"",
+          prueba: (doc) => {
+            const perro = doc.querySelector('img[src*="perro.svg"]');
+            return !!perro && perro.getAttribute("loading") === "lazy";
           }
         }
       ],
       pistas: [
-        "Cada mascota va en su propia caja: <figure> … </figure>. Dentro, primero la <img> con sus atributos src, alt y width, y debajo el <figcaption>.",
-        "Para el gato quedaría así:\n<figure>\n  <img src=\"recursos/img/gato.svg\" alt=\"Gato naranja sonriendo\" width=\"150\">\n  <figcaption>Michi, rey del sofá.</figcaption>\n</figure>\nCopia la caja y cambia gato por perro."
+        "Cada mascota va en su propia caja: <figure> … </figure>. Dentro, primero la <img> con sus atributos src, alt, width y height, y debajo el <figcaption>.",
+        "Las imágenes miden 400×300, así que el ancho es 4/3 del alto. Por ejemplo: width=\"160\" height=\"120\". Si los dos números no guardan esa proporción, la imagen se deforma.\nPara el gato quedaría así:\n<figure>\n  <img src=\"recursos/img/gato.svg\" alt=\"Gato naranja sonriendo\" width=\"160\" height=\"120\">\n  <figcaption>Michi, rey del sofá.</figcaption>\n</figure>\nCopia la caja y cambia gato por perro. Al img del perro, que está más abajo, añádele loading=\"lazy\"."
       ],
       solucion: {
         html: `<h1>Mis mascotas</h1>
 
 <figure>
-  <img src="recursos/img/gato.svg" alt="Gato naranja con bigotes sonriendo bajo el sol" width="150">
+  <img src="recursos/img/gato.svg" alt="Gato naranja con bigotes sonriendo bajo el sol" width="160" height="120">
   <figcaption>Michi, rey del sofá y ladrón de calcetines.</figcaption>
 </figure>
 
 <figure>
-  <img src="recursos/img/perro.svg" alt="Perro marrón de orejas largas sacando la lengua sobre la hierba" width="150">
+  <img src="recursos/img/perro.svg" alt="Perro marrón de orejas largas sacando la lengua sobre la hierba" width="160" height="120" loading="lazy">
   <figcaption>Bruno, campeón mundial de perseguir su cola.</figcaption>
 </figure>
 `,

@@ -44,7 +44,7 @@
   - [x] P7 (css-03 contraste, css-04 fuentes web, css-07 max-width, css-09 list-style, css-10 ejercicio sticky) y
         P8 (hc-06 menú móvil con `abierto`, hc-09 transition: none, hc-10 :user-invalid) — 2026-10-18.
   - [x] P6 (html-06 `tel:`/`mailto:`/página propia, html-07 `width`+`height`+`loading="lazy"`, html-10 `tel`/`date`/`time`),
-        como pasos de explicación. Falta: que el ejercicio de html-07 pida los dos tamaños y el reto use `lazy`.
+        como pasos de explicación. El ejercicio de html-07 pide los dos tamaños y el reto, la proporción y `lazy` (1.3.2).
   - [x] P4 (js-04 `setAttribute`/`aria-expanded`, js-10 botón «Quitar» en cada elemento con ejercicio, js-12 array de
         objetos con `|| []`). Falta: que el **reto** de js-12 guarde un array de objetos.
   - [x] P3 (js-11: casillas y radios con `.checked`, `Number.isNaN`, bandera `todoBien` con un mensaje por campo).
