@@ -44,7 +44,34 @@
     "🚪 Salir y volver a mi progreso": "🚪 Exit and go back to my progress",
     "🛠️ Modo prueba (solo en local)": "🛠️ Test mode (local only)",
     "¿Quieres echar un vistazo a cualquier lección sin que cuente? Usa el <b>modo prueba</b>: todo desbloqueado y tu progreso real queda intacto.": "Want a peek at any lesson without it counting? Use <b>test mode</b>: everything unlocked, and your real progress stays untouched.",
-    "🧪 Probar el curso sin guardar": "🧪 Try the course without saving"
+    "🧪 Probar el curso sin guardar": "🧪 Try the course without saving",
+
+    // ui.js
+    "&lt;CSS-HTML&gt;, ir al inicio": "&lt;CSS-HTML&gt;, go to the home page",
+    "Días seguidos practicando": "Days in a row practicing",
+    "Estrellas conseguidas": "Stars earned",
+    "{n} XP": "{n} XP",
+    " · siguiente nivel a {n} XP": " · next level at {n} XP",
+    "Nv {n}": "Lvl {n}",
+    "Experiencia": "Experience",
+    "Activar o silenciar sonido": "Turn sound on or off",
+    "Cambiar modo claro u oscuro": "Switch between light and dark mode",
+    "Enviar una sugerencia o avisar de un error": "Send a suggestion or report a bug",
+    "Sugerencias y errores": "Suggestions and bugs",
+    "Ajustes": "Settings",
+    "🧪 <b>Modo prueba</b>: todo está desbloqueado y nada se guarda en tu progreso real.": "🧪 <b>Test mode</b>: everything is unlocked and nothing is saved to your real progress.",
+    "↺ Empezar la prueba de cero": "↺ Start the test from scratch",
+    "Salir de la prueba": "Exit the test",
+    "¿Empezar la prueba de cero? Solo se borra lo que has hecho en el modo prueba.": "Start the test from scratch? Only what you've done in test mode will be erased.",
+    "¿Reiniciar el curso? Perderás tu XP, estrellas, insignias y racha. Esto no se puede deshacer.": "Restart the course? You'll lose your XP, stars, badges and streak. This can't be undone.",
+    "⚙️ Ajustes": "⚙️ Settings",
+    "🔊 Sonidos": "🔊 Sounds",
+    "🔓 Desbloquear todas las lecciones": "🔓 Unlock all lessons",
+    "🚪 Salir del modo prueba": "🚪 Exit test mode",
+    "Empezar la prueba de cero": "Start the test from scratch",
+    "Reiniciar curso": "Restart course",
+    "Listo": "Done",
+    "Versión {n}": "Version {n}"
   };
 
   function T(texto, datos) {

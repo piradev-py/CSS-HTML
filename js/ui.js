@@ -128,7 +128,7 @@
 
   /* ---------- Cabecera ---------- */
   const LOGO =
-    '<a class="logo" href="index.html" aria-label="&lt;CSS-HTML&gt;, ir al inicio">' +
+    '<a class="logo" href="index.html" aria-label="' + T("&lt;CSS-HTML&gt;, ir al inicio") + '">' +
     '<img class="logo-tagui" src="recursos/marca/tagui-logo-160.png" alt="" width="52" height="52">' +
     '<span class="ang">&lt;</span><span class="css">CSS</span><span class="guion">-</span>' +
     '<span class="html">HTML</span><span class="ang">&gt;</span></a>';
@@ -139,11 +139,11 @@
     const n = PROGRESO.nivel();
     const r = PROGRESO.racha();
     cont.innerHTML =
-      '<span class="chip racha' + (r.activaHoy ? "" : " apagada") + '" title="Días seguidos practicando">🔥 ' + r.dias + "</span>" +
-      '<span class="chip ocultar-movil" title="Estrellas conseguidas">⭐ ' + PROGRESO.totalEstrellas() + "</span>" +
-      '<div class="barra-xp" title="' + n.xp + " XP" + (n.siguiente ? " · siguiente nivel a " + n.siguiente.min + " XP" : "") + '">' +
-      '<span class="nivel">' + n.emoji + " Nv " + n.numero + " · " + n.nombre + "</span>" +
-      '<div class="pista" role="progressbar" aria-label="Experiencia" aria-valuenow="' + n.porcentaje + '" aria-valuemin="0" aria-valuemax="100">' +
+      '<span class="chip racha' + (r.activaHoy ? "" : " apagada") + '" title="' + T("Días seguidos practicando") + '">🔥 ' + r.dias + "</span>" +
+      '<span class="chip ocultar-movil" title="' + T("Estrellas conseguidas") + '">⭐ ' + PROGRESO.totalEstrellas() + "</span>" +
+      '<div class="barra-xp" title="' + T("{n} XP", { n: n.xp }) + (n.siguiente ? T(" · siguiente nivel a {n} XP", { n: n.siguiente.min }) : "") + '">' +
+      '<span class="nivel">' + n.emoji + " " + T("Nv {n}", { n: n.numero }) + " · " + n.nombre + "</span>" +
+      '<div class="pista" role="progressbar" aria-label="' + T("Experiencia") + '" aria-valuenow="' + n.porcentaje + '" aria-valuemin="0" aria-valuemax="100">' +
       '<div class="relleno"></div></div></div>';
     requestAnimationFrame(() => {
       const relleno = cont.querySelector(".relleno");
@@ -166,10 +166,10 @@
         : IDIOMA.actual === "en"
         ? '<button class="boton-icono" data-accion="idioma" lang="es" aria-label="Cambiar a español" title="Cambiar a español">ES</button>'
         : '<button class="boton-icono" data-accion="idioma" lang="en" aria-label="Switch to English" title="Switch to English">EN</button>') +
-      '<button class="boton-icono ocultar-movil" data-accion="sonido" aria-label="Activar o silenciar sonido"></button>' +
-      '<button class="boton-icono" data-accion="tema" aria-label="Cambiar modo claro u oscuro"></button>' +
-      '<button class="boton-icono" data-accion="sugerencias" aria-label="Enviar una sugerencia o avisar de un error" title="Sugerencias y errores">💬</button>' +
-      '<button class="boton-icono" data-accion="ajustes" aria-label="Ajustes">⚙️</button>';
+      '<button class="boton-icono ocultar-movil" data-accion="sonido" aria-label="' + T("Activar o silenciar sonido") + '"></button>' +
+      '<button class="boton-icono" data-accion="tema" aria-label="' + T("Cambiar modo claro u oscuro") + '"></button>' +
+      '<button class="boton-icono" data-accion="sugerencias" aria-label="' + T("Enviar una sugerencia o avisar de un error") + '" title="' + T("Sugerencias y errores") + '">💬</button>' +
+      '<button class="boton-icono" data-accion="ajustes" aria-label="' + T("Ajustes") + '">⚙️</button>';
     const bSonido = cab.querySelector('[data-accion="sonido"]');
     const bTema = cab.querySelector('[data-accion="tema"]');
     const refrescar = () => {
@@ -201,10 +201,10 @@
     franja.className = "franja-prueba";
     franja.setAttribute("role", "status");
     franja.innerHTML =
-      '<span>🧪 <b>Modo prueba</b>: todo está desbloqueado y nada se guarda en tu progreso real.</span>' +
+      '<span>' + T("🧪 <b>Modo prueba</b>: todo está desbloqueado y nada se guarda en tu progreso real.") + '</span>' +
       '<span class="franja-botones">' +
-      '<button class="mini-boton" data-prueba-reiniciar>↺ Empezar la prueba de cero</button>' +
-      '<button class="mini-boton" data-prueba-salir>Salir de la prueba</button></span>';
+      '<button class="mini-boton" data-prueba-reiniciar>' + T("↺ Empezar la prueba de cero") + '</button>' +
+      '<button class="mini-boton" data-prueba-salir>' + T("Salir de la prueba") + '</button></span>';
     cab.after(franja);
     franja.querySelector("[data-prueba-reiniciar]").addEventListener("click", reiniciarCurso);
     franja.querySelector("[data-prueba-salir]").addEventListener("click", salirPrueba);
@@ -222,8 +222,8 @@
 
   function reiniciarCurso() {
     const pregunta = PROGRESO.enPrueba()
-      ? "¿Empezar la prueba de cero? Solo se borra lo que has hecho en el modo prueba."
-      : "¿Reiniciar el curso? Perderás tu XP, estrellas, insignias y racha. Esto no se puede deshacer.";
+      ? T("¿Empezar la prueba de cero? Solo se borra lo que has hecho en el modo prueba.")
+      : T("¿Reiniciar el curso? Perderás tu XP, estrellas, insignias y racha. Esto no se puede deshacer.");
     if (!confirm(pregunta)) return;
     PROGRESO.reiniciar();
     location.href = "index.html";
@@ -233,20 +233,20 @@
     const prueba = PROGRESO.enPrueba();
     const equipo = PROGRESO.pruebaDisponible();
     const m = CELEBRAR.modal(
-      "<h2>⚙️ Ajustes</h2>" +
+      '<h2>' + T("⚙️ Ajustes") + '</h2>' +
       '<div class="lista-ajustes">' +
-      '<label>🔊 Sonidos <input type="checkbox" data-ajuste="sonido"></label>' +
-      (prueba || !equipo ? "" : '<label>🔓 Desbloquear todas las lecciones <input type="checkbox" data-ajuste="desbloquearTodo"></label>') +
+      '<label>' + T("🔊 Sonidos") + ' <input type="checkbox" data-ajuste="sonido"></label>' +
+      (prueba || !equipo ? "" : '<label>' + T("🔓 Desbloquear todas las lecciones") + ' <input type="checkbox" data-ajuste="desbloquearTodo"></label>') +
       "</div>" +
       '<div class="acciones acciones-curso">' +
       (!equipo ? ""
         : prueba
-        ? '<button class="boton secundario" data-salir-prueba>🚪 Salir del modo prueba</button>'
-        : '<button class="boton morado" data-entrar-prueba>🧪 Probar el curso sin guardar</button>') +
-      '<button class="boton secundario" data-reiniciar-curso>🔄 ' + (prueba ? "Empezar la prueba de cero" : "Reiniciar curso") + "</button>" +
+        ? '<button class="boton secundario" data-salir-prueba>' + T("🚪 Salir del modo prueba") + '</button>'
+        : '<button class="boton morado" data-entrar-prueba>' + T("🧪 Probar el curso sin guardar") + '</button>') +
+      '<button class="boton secundario" data-reiniciar-curso>🔄 ' + (prueba ? T("Empezar la prueba de cero") : T("Reiniciar curso")) + "</button>" +
       "</div>" +
-      '<div class="acciones"><button class="boton" data-cerrar>Listo</button></div>' +
-      '<p class="version-curso">Versión ' + CURSO.VERSION + "</p>",
+      '<div class="acciones"><button class="boton" data-cerrar>' + T("Listo") + '</button></div>' +
+      '<p class="version-curso">' + T("Versión {n}", { n: CURSO.VERSION }) + '</p>',
       { alCerrar: () => location.reload() }
     );
     m.elemento.querySelectorAll("[data-ajuste]").forEach(chk => {
