@@ -17,10 +17,10 @@
   };
   // El valor de cada opción tiene que coincidir con el texto de la opción en el formulario
   const TIPOS = [
-    { valor: "Error", emoji: "🐞", texto: "Algo falla" },
-    { valor: "Sugerencia", emoji: "💡", texto: "Una idea" },
-    { valor: "Duda", emoji: "❓", texto: "Una duda" },
-    { valor: "Otro", emoji: "💬", texto: "Otra cosa" }
+    { valor: "Error", emoji: "🐞", texto: T("Algo falla") },
+    { valor: "Sugerencia", emoji: "💡", texto: T("Una idea") },
+    { valor: "Duda", emoji: "❓", texto: T("Una duda") },
+    { valor: "Otro", emoji: "💬", texto: T("Otra cosa") }
   ];
 
   /** Dónde está el alumno: «html-06 · Enlaces · Paso 3 de 6», o «Mapa». */
@@ -42,25 +42,25 @@
   function abrir() {
     const donde = contexto();
     const m = CELEBRAR.modal(
-      "<h2>💬 Buzón de sugerencias</h2>" +
-      '<p class="sugerencia-intro">¿Algo no funciona, no se entiende o se te ocurre una mejora? ¡Cuéntamelo!</p>' +
+      "<h2>💬 " + T("Buzón de sugerencias") + "</h2>" +
+      '<p class="sugerencia-intro">' + T("¿Algo no funciona, no se entiende o se te ocurre una mejora? ¡Cuéntamelo!") + "</p>" +
       '<form class="form-sugerencia">' +
-        '<fieldset class="tipos-sugerencia"><legend>¿Qué es?</legend>' +
+        '<fieldset class="tipos-sugerencia"><legend>' + T("¿Qué es?") + "</legend>" +
         TIPOS.map((t, i) =>
           '<label><input type="radio" name="tipo" value="' + t.valor + '"' + (i === 0 ? " checked" : "") + ">" +
           "<span>" + t.emoji + " " + t.texto + "</span></label>").join("") +
         "</fieldset>" +
-        '<label class="campo-sugerencia">Tu mensaje' +
-          '<textarea name="mensaje" rows="5" maxlength="2000" required placeholder="Por ejemplo: en el paso 3, el botón Siguiente no se activa…"></textarea>' +
+        '<label class="campo-sugerencia">' + T("Tu mensaje") +
+          '<textarea name="mensaje" rows="5" maxlength="2000" required placeholder="' + T("Por ejemplo: en el paso 3, el botón Siguiente no se activa…") + '"></textarea>' +
         "</label>" +
-        '<label class="campo-sugerencia"><span>Tu correo <small>(opcional, por si quieres respuesta)</small></span>' +
+        '<label class="campo-sugerencia"><span>' + T("Tu correo") + ' <small>(' + T("opcional, por si quieres respuesta") + ")</small></span>" +
           '<input type="email" name="contacto" maxlength="200" autocomplete="email">' +
         "</label>" +
-        '<p class="sugerencia-donde">📍 Se enviará también dónde estás: <b>' + UI.escapar(donde) + "</b> (versión " + CURSO.VERSION + ")</p>" +
+        '<p class="sugerencia-donde">📍 ' + T("Se enviará también dónde estás:") + " <b>" + UI.escapar(donde) + "</b> (" + T("versión {n}", { n: CURSO.VERSION }) + ")</p>" +
         '<p class="sugerencia-estado" aria-live="polite"></p>' +
         '<div class="acciones">' +
-          '<button type="button" class="boton secundario" data-cerrar>Cancelar</button>' +
-          '<button type="submit" class="boton">📨 Enviar</button>' +
+          '<button type="button" class="boton secundario" data-cerrar>' + T("Cancelar") + "</button>" +
+          '<button type="submit" class="boton">📨 ' + T("Enviar") + "</button>" +
         "</div>" +
       "</form>"
     );
@@ -73,11 +73,11 @@
       e.preventDefault();
       const mensaje = form.mensaje.value.trim();
       if (mensaje.length < 5) {
-        estado.textContent = "✏️ Escribe un poco más para que pueda entenderlo.";
+        estado.textContent = T("✏️ Escribe un poco más para que pueda entenderlo.");
         return;
       }
       bEnviar.disabled = true;
-      estado.textContent = "📨 Enviando…";
+      estado.textContent = T("📨 Enviando…");
       enviar({
         tipo: form.tipo.value,
         mensaje,
@@ -87,15 +87,15 @@
       }).then(() => {
         m.elemento.querySelector(".modal").innerHTML =
           MASCOTA.svg("alegre") +
-          "<h2>¡Gracias! 🧡</h2>" +
-          '<p class="sugerencia-intro">Tu mensaje ha llegado. Lo leeré con calma para mejorar el curso.</p>' +
-          '<div class="acciones"><button class="boton" data-listo>Seguir aprendiendo</button></div>';
+          "<h2>" + T("¡Gracias! 🧡") + "</h2>" +
+          '<p class="sugerencia-intro">' + T("Tu mensaje ha llegado. Lo leeré con calma para mejorar el curso.") + "</p>" +
+          '<div class="acciones"><button class="boton" data-listo>' + T("Seguir aprendiendo") + "</button></div>";
         const listo = m.elemento.querySelector("[data-listo]");
         listo.addEventListener("click", m.cerrar);
         listo.focus();
       }).catch(() => {
         bEnviar.disabled = false;
-        estado.textContent = "😵 No se pudo enviar. ¿Tienes internet? Inténtalo otra vez.";
+        estado.textContent = T("😵 No se pudo enviar. ¿Tienes internet? Inténtalo otra vez.");
       });
     });
   }

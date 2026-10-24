@@ -48,17 +48,17 @@
 
   const FRASES = {
     bienvenida: [
-      "¡Hola! Soy <b>Tagui</b> 👋 Te acompañaré en esta aventura.",
-      "¡Qué bien verte! ¿Seguimos construyendo cosas chulas?",
-      "¡Bienvenido de nuevo! Hoy es un gran día para aprender."
+      T("¡Hola! Soy <b>Tagui</b> 👋 Te acompañaré en esta aventura."),
+      T("¡Qué bien verte! ¿Seguimos construyendo cosas chulas?"),
+      T("¡Bienvenido de nuevo! Hoy es un gran día para aprender.")
     ],
     animo: [
-      "¡Casi lo tienes! Revisa lo que falta en la lista.",
-      "Equivocarse es parte de programar. ¡Sigue probando!",
-      "Respira, mira la lista de comprobaciones y ve paso a paso."
+      T("¡Casi lo tienes! Revisa lo que falta en la lista."),
+      T("Equivocarse es parte de programar. ¡Sigue probando!"),
+      T("Respira, mira la lista de comprobaciones y ve paso a paso.")
     ],
-    acierto: ["¡Bien hecho! 🎉", "¡Eso es! 💪", "¡Genial! ✨", "¡Perfecto! 🙌"],
-    fallo: ["Uy, esa no es. ¡Prueba otra vez!", "¡Casi! Piénsalo un poquito más.", "No pasa nada, inténtalo de nuevo."]
+    acierto: [T("¡Bien hecho! 🎉"), T("¡Eso es! 💪"), T("¡Genial! ✨"), T("¡Perfecto! 🙌")],
+    fallo: [T("Uy, esa no es. ¡Prueba otra vez!"), T("¡Casi! Piénsalo un poquito más."), T("No pasa nada, inténtalo de nuevo.")]
   };
 
   const azar = lista => lista[Math.floor(Math.random() * lista.length)];

@@ -144,7 +144,45 @@
     "🚧 La siguiente lección llegará pronto": "🚧 The next lesson is coming soon",
     "¡Lección completada!": "Lesson completed!",
     "🗺️ Mapa": "🗺️ Map",
-    "🔁 Repetir reto": "🔁 Retry the challenge"
+    "🔁 Repetir reto": "🔁 Retry the challenge",
+
+    // mascota.js
+    "¡Hola! Soy <b>Tagui</b> 👋 Te acompañaré en esta aventura.": "Hi there! I'm <b>Tagui</b> 👋 I'll be with you on this adventure.",
+    "¡Qué bien verte! ¿Seguimos construyendo cosas chulas?": "Great to see you! Shall we keep building cool stuff?",
+    "¡Bienvenido de nuevo! Hoy es un gran día para aprender.": "Welcome back! Today is a great day to learn.",
+    "¡Casi lo tienes! Revisa lo que falta en la lista.": "You're almost there! Check what's still missing on the list.",
+    "Equivocarse es parte de programar. ¡Sigue probando!": "Making mistakes is part of coding. Keep trying!",
+    "Respira, mira la lista de comprobaciones y ve paso a paso.": "Take a breath, look at the checklist, and go step by step.",
+    "¡Bien hecho! 🎉": "Well done! 🎉",
+    "¡Eso es! 💪": "That's it! 💪",
+    "¡Genial! ✨": "Awesome! ✨",
+    "¡Perfecto! 🙌": "Perfect! 🙌",
+    "Uy, esa no es. ¡Prueba otra vez!": "Oops, that's not it. Try again!",
+    "¡Casi! Piénsalo un poquito más.": "So close! Think it over a bit more.",
+    "No pasa nada, inténtalo de nuevo.": "No worries, give it another go.",
+
+    // sugerencias.js
+    "Algo falla": "Something is broken",
+    "Una idea": "An idea",
+    "Una duda": "A question",
+    "Otra cosa": "Something else",
+    "Buzón de sugerencias": "Suggestion box",
+    "¿Algo no funciona, no se entiende o se te ocurre una mejora? ¡Cuéntamelo!": "Is something broken, unclear, or do you have an idea to improve it? Tell me about it!",
+    "¿Qué es?": "What is it?",
+    "Tu mensaje": "Your message",
+    "Por ejemplo: en el paso 3, el botón Siguiente no se activa…": "For example: in step 3, the Next button doesn't become active…",
+    "Tu correo": "Your email",
+    "opcional, por si quieres respuesta": "optional, in case you'd like a reply",
+    "Se enviará también dónde estás:": "We'll also send where you are:",
+    "versión {n}": "version {n}",
+    "Cancelar": "Cancel",
+    "Enviar": "Send",
+    "✏️ Escribe un poco más para que pueda entenderlo.": "✏️ Write a bit more so I can understand it.",
+    "📨 Enviando…": "📨 Sending…",
+    "¡Gracias! 🧡": "Thank you! 🧡",
+    "Tu mensaje ha llegado. Lo leeré con calma para mejorar el curso.": "Your message is in. I'll read it carefully to make the course better.",
+    "Seguir aprendiendo": "Keep learning",
+    "😵 No se pudo enviar. ¿Tienes internet? Inténtalo otra vez.": "😵 Couldn't send it. Do you have internet? Please try again."
   };
 
   function T(texto, datos) {

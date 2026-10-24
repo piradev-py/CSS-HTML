@@ -26,7 +26,11 @@ Eres un agente junior. Cada tarea te dice qué archivos tocar y, a menudo, en qu
   el español**, y su inglés va al objeto `EN` de `js/textos.js`: `"texto en español": "English text",`.
 - Partes que cambian (números, nombres): `T("Lección {n}", { n: numero })` y en `EN` `"Lección {n}": "Lesson {n}"`.
 - No traduzcas: código, nombres de etiquetas/propiedades, clases, ids, claves de `localStorage`, rutas, emojis sueltos.
-- Si un texto lleva HTML (`<b>…</b>`), tradúcelo entero con su HTML dentro.
+- En `T()` va **el texto**, nunca la estructura: `'<button class="boton">' + T("Enviar") + "</button>"`. Un `T()` no
+  empieza nunca por una etiqueta, ni lleva `name=`, `id=` o `class=` de formularios o cajas.
+  Solo el formato dentro de una frase (`<b>`, `<code>`, `<span class="resaltado">`) puede ir dentro, con su frase entera.
+- Atributos visibles (`placeholder`, `title`, `aria-label`): solo su valor, `placeholder="' + T("Por ejemplo…") + '"`.
+- **En `EN`, siempre comillas dobles** `"…": "…",` (el inglés lleva apóstrofos: `don't`, `you'll`). Dentro, `\"` si hace falta.
 - Inglés claro y cercano, para principiantes (tutea: «you»), como el español del curso.
 - Al terminar, `node herramientas/traducciones.mjs` debe decir ✅ (cada `T()` con su inglés y los mismos `{marcadores}`).
 
