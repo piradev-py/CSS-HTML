@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.2 · 2026-10-25
+
+- Cuatro lecciones más del **Mundo CSS** en inglés: The box model, Borders and shadows, Display: block and inline y
+  Positioning (css-07 … css-10).
+
 ## 1.4.1 · 2026-10-25
 
 - Cuatro lecciones más del **Mundo CSS** en inglés: Colors, Text and fonts, The cascade: who wins? y Units of

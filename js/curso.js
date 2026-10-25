@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.4.1";
+  const VERSION = "1.4.2";
 
   const MUNDOS = [
     {
@@ -50,10 +50,10 @@
         { id: "css-04", archivo: "css-04-texto.js", titulo: "Texto y fuentes", en: "Text and fonts", listo: true },
         { id: "css-05", archivo: "css-05-cascada.js", titulo: "La cascada: ¿quién gana?", en: "The cascade: who wins?", listo: true },
         { id: "css-06", archivo: "css-06-unidades.js", titulo: "Unidades de medida", en: "Units of measurement", listo: true },
-        { id: "css-07", archivo: "css-07-modelo-de-caja.js", titulo: "El modelo de caja", listo: true },
-        { id: "css-08", archivo: "css-08-bordes-sombras.js", titulo: "Bordes y sombras", listo: true },
-        { id: "css-09", archivo: "css-09-display.js", titulo: "Display: bloque y en línea", listo: true },
-        { id: "css-10", archivo: "css-10-posicionamiento.js", titulo: "Posicionamiento", listo: true },
+        { id: "css-07", archivo: "css-07-modelo-de-caja.js", titulo: "El modelo de caja", en: "The box model", listo: true },
+        { id: "css-08", archivo: "css-08-bordes-sombras.js", titulo: "Bordes y sombras", en: "Borders and shadows", listo: true },
+        { id: "css-09", archivo: "css-09-display.js", titulo: "Display: bloque y en línea", en: "Display: block and inline", listo: true },
+        { id: "css-10", archivo: "css-10-posicionamiento.js", titulo: "Posicionamiento", en: "Positioning", listo: true },
         { id: "css-11", archivo: "css-11-flexbox-1.js", titulo: "Flexbox (I): en fila y alineados", listo: true },
         { id: "css-12", archivo: "css-12-flexbox-2.js", titulo: "Flexbox (II): repartir el espacio", listo: true },
         { id: "css-13", archivo: "css-13-grid.js", titulo: "Grid", listo: true },
