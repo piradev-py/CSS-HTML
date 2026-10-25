@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.1 · 2026-10-25
+
+- Cuatro lecciones más del **Mundo CSS** en inglés: Colors, Text and fonts, The cascade: who wins? y Units of
+  measurement (css-03 … css-06).
+
 ## 1.4.0 · 2026-10-24
 
 - **El curso, en inglés.** Se abre en inglés y el botón **ES** de la cabecera lo pasa a español (y **EN** al revés).

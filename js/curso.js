@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.4.0";
+  const VERSION = "1.4.1";
 
   const MUNDOS = [
     {
@@ -46,10 +46,10 @@
       lecciones: [
         { id: "css-01", archivo: "css-01-que-es-css.js", titulo: "¿Qué es CSS?", en: "What is CSS?", listo: true },
         { id: "css-02", archivo: "css-02-selectores.js", titulo: "Selectores", en: "Selectors", listo: true },
-        { id: "css-03", archivo: "css-03-colores.js", titulo: "Colores", listo: true },
-        { id: "css-04", archivo: "css-04-texto.js", titulo: "Texto y fuentes", listo: true },
-        { id: "css-05", archivo: "css-05-cascada.js", titulo: "La cascada: ¿quién gana?", listo: true },
-        { id: "css-06", archivo: "css-06-unidades.js", titulo: "Unidades de medida", listo: true },
+        { id: "css-03", archivo: "css-03-colores.js", titulo: "Colores", en: "Colors", listo: true },
+        { id: "css-04", archivo: "css-04-texto.js", titulo: "Texto y fuentes", en: "Text and fonts", listo: true },
+        { id: "css-05", archivo: "css-05-cascada.js", titulo: "La cascada: ¿quién gana?", en: "The cascade: who wins?", listo: true },
+        { id: "css-06", archivo: "css-06-unidades.js", titulo: "Unidades de medida", en: "Units of measurement", listo: true },
         { id: "css-07", archivo: "css-07-modelo-de-caja.js", titulo: "El modelo de caja", listo: true },
         { id: "css-08", archivo: "css-08-bordes-sombras.js", titulo: "Bordes y sombras", listo: true },
         { id: "css-09", archivo: "css-09-display.js", titulo: "Display: bloque y en línea", listo: true },
