@@ -16,6 +16,7 @@ los renombres de clases/ids y, si los hay, los textos que deben quedar exactos.
    Una clase o id que no esté en la lista y esté en español, tradúcela tú y cítala en el resumen.
    Las clases e ids de la web Huellas (sobre todo en los ejemplos del glosario: `.tarjeta-cita`, `.portada`…) tienen
    ya su inglés: búscalo con `grep '"nombre":' herramientas/huellas-en-tabla.mjs` (no leas ese archivo entero).
+   Los nombres de archivo de las imágenes (`servicio-medicina.jpg`…) **no** se traducen nunca.
    Sus variables CSS: `--principal`→`--primary`, `--principal-oscuro`→`--primary-dark`, `--oscuro`→`--dark`, `--texto`→`--text`, `--suave`→`--soft`,
    `--fondo`→`--background`, `--crema`→`--cream`, `--menta`→`--mint`, `--fuente-titulos`→`--font-headings`,
    `--fuente-texto`→`--font-body`, `--radio`→`--radius`, `--sombra`→`--shadow`.
