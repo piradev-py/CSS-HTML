@@ -19,6 +19,13 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.10 · 2026-10-27
+
+- **Mi clínica** en inglés: enseña y descarga la web de Huellas en inglés, con su nota `nota-en.png`.
+- El botón de idioma lleva el icono de traducir (文A) delante de EN/ES, para que se vea a la primera.
+- El **README** de GitHub, en inglés (`README.md`) y en español (`README.es.md`): habla de los dos idiomas y de
+  Huellas, el proyecto final que el alumno construye desde cero; corregido el número de lecciones de cada mundo.
+
 ## 1.4.9 · 2026-10-27
 
 - El **Mundo JavaScript** entero en inglés: Dates and times (js-16) y su Proyecto web (js-17).

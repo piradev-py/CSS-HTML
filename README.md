@@ -1,210 +1,255 @@
+<p align="right">🌐 <b>English</b> · <a href="README.es.md">Español</a></p>
+
 <p align="center">
-  <img src="recursos/marca/tagui-logo.png" alt="Tagui, la mascota del curso, con birrete y un portátil" width="190">
+  <img src="recursos/marca/tagui-logo.png" alt="Tagui, the course mascot, wearing a graduation cap and holding a laptop" width="190">
 </p>
 
 <h1 align="center">&lt;CSS-HTML&gt;</h1>
 
 <p align="center">
-  <b>Aprende a crear páginas web desde cero… ¡jugando!</b><br>
-  HTML, CSS y JavaScript en español, paso a paso y sin instalar nada.
+  <b>Learn to build web pages from scratch… by playing!</b><br>
+  HTML, CSS and JavaScript in English and Spanish, step by step and with nothing to install.
 </p>
 
 <p align="center">
-  <img alt="56 lecciones" src="https://img.shields.io/badge/lecciones-56-f26b38?style=for-the-badge">
-  <img alt="Gratis" src="https://img.shields.io/badge/precio-gratis-22c55e?style=for-the-badge">
-  <img alt="En español" src="https://img.shields.io/badge/idioma-español-3b82f6?style=for-the-badge">
-  <img alt="Sin instalar nada" src="https://img.shields.io/badge/instalar-nada-8b5cf6?style=for-the-badge">
+  <img alt="56 lessons" src="https://img.shields.io/badge/lessons-56-f26b38?style=for-the-badge">
+  <img alt="Free" src="https://img.shields.io/badge/price-free-22c55e?style=for-the-badge">
+  <img alt="In English and Spanish" src="https://img.shields.io/badge/language-english%20%C2%B7%20espa%C3%B1ol-3b82f6?style=for-the-badge">
+  <img alt="Nothing to install" src="https://img.shields.io/badge/install-nothing-8b5cf6?style=for-the-badge">
 </p>
 
 <p align="center">
-  <a href="https://piradev-py.github.io/CSS-HTML/"><img alt="▶ Jugar ahora: gratis, en el navegador" src="https://img.shields.io/badge/%E2%96%B6%20JUGAR%20AHORA-gratis%2C%20en%20tu%20navegador-f26b38?style=for-the-badge&labelColor=1f1b2e" height="44"></a>
+  <a href="https://piradev-py.github.io/CSS-HTML/"><img alt="▶ Play now: free, in your browser" src="https://img.shields.io/badge/%E2%96%B6%20PLAY%20NOW-free%2C%20in%20your%20browser-f26b38?style=for-the-badge&labelColor=1f1b2e" height="44"></a>
 </p>
 
 <p align="center">
-  <img src="docs/capturas/inicio.png" alt="Pantalla de inicio: Tagui da la bienvenida, a la izquierda las insignias y a la derecha los cuatro mundos del curso" width="900">
+  <img src="docs/capturas/inicio.png" alt="Home screen: Tagui says hello, the badges are on the left and the course's four worlds on the right" width="900">
 </p>
 
-## 👋 ¿Qué es esto?
+## 👋 What is this?
 
-Un curso para aprender a hacer páginas web **aunque nunca hayas programado**.
-Funciona como un videojuego: avanzas por un mapa de **4 mundos**, cada lección es cortita, escribes tu propio
-código y ves el resultado al instante. Te acompaña **Tagui**, una etiqueta con ojos que te da ánimos y consejos.
+A course to learn how to make web pages **even if you've never programmed**.
+It works like a video game: you move across a map of **4 worlds**, each lesson is short, you write your own
+code and see the result instantly. **Tagui**, a tag with eyes, keeps you company with encouragement and tips.
 
-## 🚀 Empieza ahora
+🌐 **In two languages:** the whole course is in **English** and **Spanish** (lessons, challenges, glossary and the
+final project). Switch languages whenever you like with the translate button at the top right; your progress stays the same.
 
-### Opción 1 · En el navegador (lo más fácil)
+## 🏥 The goal: your own complete website, from scratch
 
-👉 **[Abre el curso: piradev-py.github.io/CSS-HTML/](https://piradev-py.github.io/CSS-HTML/)** y pulsa **🚀 Empezar**. ¡Ya está! 🎉
+The whole course leads to a real project: **“Huellas”, a veterinary clinic's website**. It isn't a one-off
+exercise: you build it yourself, world by world, with what you've just learned, like a real client job.
 
-### Opción 2 · En tu ordenador, sin internet
+| World | What you add to Huellas |
+|---|---|
+| 🏗️ HTML | The whole page, well structured: header, services, team, opening hours, appointment form and footer. |
+| 🎨 CSS | Its identity: colors, fonts, cards and buttons. |
+| 🧩 HTML + CSS | The layout: it adapts to phones, with a folding menu and animations. |
+| ⚡ JavaScript | Make it work: service filters, an appointment book that checks, saves and remembers, and reviews that arrive from a data file. |
 
-1. Arriba en esta página, pulsa el botón verde **`<> Code`** y después **Download ZIP**.
-2. Descomprime la carpeta que se ha descargado.
-3. Abre la carpeta y haz **doble clic en `index.html`**.
+When you finish, in **🏥 My clinic** you see your website full screen and **download it as a .zip** to open it on your
+computer and show it to anyone you like. It's yours.
 
-> 💡 En los dos casos no necesitas crear una cuenta ni instalar programas. Tu progreso se guarda solo en tu
-> navegador (el de la web y el de la descarga van por separado).
-> Está pensado para **ordenador o tablet en horizontal**.
+<p align="center">
+  <img src="recursos/huellas/capturas-en/m3-encargo-5.png" alt="The Huellas website: header with the menu, hero with a dog and a cat and the button to book an appointment" width="720">
+</p>
 
-## 🗺️ Qué vas a aprender
+## 🚀 Start now
 
-| Mundo | Lecciones | Al terminarlo sabrás… |
+### Option 1 · In the browser (the easiest)
+
+👉 **[Open the course: piradev-py.github.io/CSS-HTML/](https://piradev-py.github.io/CSS-HTML/)** and press **🚀 Start**. That's it! 🎉
+
+### Option 2 · On your computer, offline
+
+1. At the top of this page, press the green **`<> Code`** button and then **Download ZIP**.
+2. Unzip the folder you downloaded.
+3. Open the folder and **double-click `index.html`**.
+
+> 💡 Either way, you don't need to create an account or install any programs. Your progress is saved only in your
+> browser (the website and the download keep separate progress).
+> It's designed for a **computer or a tablet in landscape**.
+
+## 🗺️ What you'll learn
+
+| World | Lessons | When you finish it, you'll know how to… |
 |---|:---:|---|
-| 🏗️ **HTML** · *Los ladrillos de toda página web* | 12 | Escribir una página completa: títulos, textos, listas, enlaces, imágenes, tablas y formularios, bien ordenada y accesible. |
-| 🎨 **CSS** · *Dale color y estilo a tus páginas* | 14 | Cambiar colores, letras y tamaños, entender por qué un estilo «gana» a otro y colocar cosas con Flexbox y Grid. |
-| 🧩 **HTML + CSS** · *Construye interfaces de verdad* | 12 | Hacer tarjetas, menús y formularios bonitos, páginas que se adaptan al móvil, animaciones y una landing page completa. |
-| ⚡ **JavaScript** · *Dale vida e interacción a tu web* | 14 | Que tu página reaccione a los clics, valide formularios, guarde datos y pida información a un servidor. Terminas creando tu propia **lista de tareas**. |
+| 🏗️ **HTML** · *The bricks of every web page* | 14 | Write a complete page: headings, text, lists, links, images, tables and forms, well organized and accessible. |
+| 🎨 **CSS** · *Give your pages color and style* | 15 | Change colors, fonts and sizes, understand why one style “wins” over another and place things with Flexbox and Grid. |
+| 🧩 **HTML + CSS** · *Build real interfaces* | 11 | Make nice cards, menus and forms, pages that adapt to phones, and animations. |
+| ⚡ **JavaScript** · *Bring your website to life* | 16 | Make your page react to clicks, check forms, save data and request information from a server. |
+
+Each world ends with its **Web project**: the next step of Huellas.
 
 <p align="center">
-  <img src="docs/capturas/mapa.png" alt="Mapa de un mundo: las lecciones forman un camino en zigzag; las terminadas tienen estrellas y la siguiente dice «¡Empieza aquí!»" width="900">
+  <img src="docs/capturas/mapa.png" alt="A world's map: the lessons form a zigzag path; finished ones have stars and the next one says “Start here!”" width="900">
 </p>
 
-## 🎮 Cómo es una lección
+## 🎮 What a lesson looks like
 
-La pantalla se divide en tres: **la lección** a la izquierda, **tu código** en el centro y **el resultado** a la derecha.
-Cada lección sigue el mismo ritmo:
+The screen is split in three: **the lesson** on the left, **your code** in the middle and **the result** on the right.
+Every lesson follows the same rhythm:
 
-- 📖 **Explicación** con un ejemplo que funciona de verdad.
-- 🧠 **Ejercicio**: escribes tú el código desde cero y pulsas **Revisar**.
-- 🎛️ **Controles** (en CSS): mueves deslizadores y ves cómo cambia el código.
-- ❓ **Pregunta rápida** para comprobar que lo has entendido.
-- 🏆 **Reto final**: una lista de objetivos que se van poniendo en verde mientras escribes.
+- 📖 **Explanation** with an example that really works.
+- 🧠 **Exercise**: you write the code from scratch and press **Check**.
+- 🎛️ **Controls** (in CSS): you move sliders and see how the code changes.
+- ❓ **Quick question** to check you've understood it.
+- 🏆 **Final challenge**: a list of goals that turn green as you type.
 
 <p align="center">
-  <img src="docs/capturas/leccion-explicacion.png" alt="Lección «Maqueta una tarjeta»: explicación a la izquierda, código del ejemplo en el centro y dos tarjetas con foto en el resultado" width="900">
+  <img src="docs/capturas/leccion-explicacion.png" alt="The “Lay out a card” lesson: explanation on the left, the example's code in the middle and two cards with photos in the result" width="900">
 </p>
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/capturas/leccion-controles.png" alt="Controles visuales: deslizadores que cambian bordes y sombras y muestran el CSS que generan"></td>
-    <td width="50%"><img src="docs/capturas/leccion-reto.png" alt="Reto final: lista de comprobaciones, algunas ya en verde, junto al editor"></td>
+    <td width="50%"><img src="docs/capturas/leccion-controles.png" alt="Visual controls: sliders that change borders and shadows and show the CSS they generate"></td>
+    <td width="50%"><img src="docs/capturas/leccion-reto.png" alt="Final challenge: list of checks, some already green, next to the editor"></td>
   </tr>
   <tr>
-    <td align="center"><b>Controles:</b> juega con el CSS sin escribirlo</td>
-    <td align="center"><b>Reto:</b> cada objetivo cumplido se pone en verde</td>
+    <td align="center"><b>Controls:</b> play with CSS without writing it</td>
+    <td align="center"><b>Challenge:</b> each goal you meet turns green</td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/capturas/leccion-javascript.png" alt="Lección de JavaScript: un botón en el resultado y la consola debajo mostrando mensajes"></td>
-    <td width="50%"><img src="docs/capturas/victoria.png" alt="Pantalla de victoria con tres estrellas, XP ganada y confeti"></td>
+    <td width="50%"><img src="docs/capturas/leccion-javascript.png" alt="JavaScript lesson: a button in the result and the console below showing messages"></td>
+    <td width="50%"><img src="docs/capturas/victoria.png" alt="Victory screen with three stars, XP earned and confetti"></td>
   </tr>
   <tr>
-    <td align="center"><b>JavaScript:</b> página interactiva y consola</td>
-    <td align="center"><b>¡Victoria!</b> estrellas, XP y confeti</td>
+    <td align="center"><b>JavaScript:</b> interactive page and console</td>
+    <td align="center"><b>Victory!</b> stars, XP and confetti</td>
   </tr>
 </table>
 
-## ⭐ Estrellas, niveles e insignias
+> The screenshots show the course in Spanish; in English it looks the same, with English texts.
 
-- ⭐⭐⭐ si superas el reto **sin pistas**, ⭐⭐ si usas pistas y ⭐ si miras la solución. Puedes repetirlo para mejorar.
-- Ganas **XP** y subes de nivel: de 🐣 *Novato* a 🚀 *Frontend Pro*.
-- Desbloqueas **insignias** (terminar un mundo, coleccionar estrellas, practicar varios días seguidos…).
-- Una **racha** 🔥 cuenta los días seguidos que practicas.
+## ⭐ Stars, levels and badges
 
-## 🆘 Si te atascas
+- ⭐⭐⭐ if you beat the challenge **without hints**, ⭐⭐ if you use hints and ⭐ if you look at the solution. You can repeat it to improve.
+- You earn **XP** and level up: from 🐣 *Rookie* to 🚀 *Frontend Pro*.
+- You unlock **badges** (finishing a world, collecting stars, practicing several days in a row…).
+- A 🔥 **streak** counts the days in a row you practice.
 
-- 💡 Cada ejercicio y cada reto tienen **pistas**, de menos a más. Después de verlas puedes ver la solución.
-- 🔍 El revisor te dice **qué falta y dónde**: *«falta el `;` al final de la línea 3»*, *«falta cerrar `<p>`»*.
-- 🐞 Los errores de JavaScript salen **explicados para novatos**, con el número de línea.
-- 🧪 El **modo prueba** te deja mirar cualquier lección sin que cuente para tu progreso.
+## 🆘 If you get stuck
 
-## 🌙 Modo claro y oscuro
+- 💡 Every exercise and challenge has **hints**, from small to big. After seeing them you can look at the solution.
+- 🔍 The checker tells you **what's missing and where**: *“the `;` at the end of line 3 is missing”*, *“`<p>` isn't closed”*.
+- 🐞 JavaScript errors are **explained for beginners**, with the line number.
+- 🧪 **Test mode** lets you look at any lesson without it counting toward your progress.
 
-Elige el tema con el botón 🌙 de arriba a la derecha.
+## 🌙 Light and dark mode
+
+Choose the theme with the 🌙 button at the top right.
 
 <p align="center">
-  <img src="docs/capturas/modo-oscuro.png" alt="Un ejercicio de CSS resuelto, con la web en modo oscuro" width="900">
+  <img src="docs/capturas/modo-oscuro.png" alt="A solved CSS exercise, with the website in dark mode" width="900">
 </p>
 
-## ❓ Preguntas frecuentes
+## ❓ Frequently asked questions
 
 <details>
-<summary><b>¿Necesito saber algo antes de empezar?</b></summary>
+<summary><b>Do I need to know anything before I start?</b></summary>
 
-Nada. Solo saber usar el ordenador y el navegador. Se explica todo desde cero: qué es una etiqueta, qué es una variable…
+Nothing. Just how to use a computer and a browser. Everything is explained from scratch: what a tag is, what a variable is…
 </details>
 
 <details>
-<summary><b>¿Dónde se guarda mi progreso? ¿Lo puedo perder?</b></summary>
+<summary><b>Where is my progress saved? Can I lose it?</b></summary>
 
-Se guarda en tu navegador, en ese ordenador. Si borras los datos del navegador o cambias de ordenador o de
-navegador, empezarás de cero. Si quieres empezar de nuevo a propósito, usa **Reiniciar curso** (al final del mapa).
+It's saved in your browser, on that computer. If you clear the browser's data or switch computers or
+browsers, you'll start from zero. If you want to start over on purpose, use **Restart course** (at the bottom of the map).
 </details>
 
 <details>
-<summary><b>¿Funciona sin internet?</b></summary>
+<summary><b>Does it work offline?</b></summary>
 
-Sí, si usas la **opción 2** (descargarlo): todo el curso funciona sin conexión; con internet solo cambian las fuentes de letra.
+Yes, if you use **option 2** (downloading it): the whole course works offline; with internet, only the fonts change.
 </details>
 
 <details>
-<summary><b>¿Puedo usarlo en el móvil?</b></summary>
+<summary><b>Can I switch languages halfway through?</b></summary>
 
-Se puede abrir, pero está pensado para **ordenador o tablet en horizontal**: escribir código en un móvil es incómodo.
+Yes. Press the translate button at the top right whenever you like: your stars, XP and badges stay the same.
 </details>
 
 <details>
-<summary><b>¿Puedo dejar una lección a medias?</b></summary>
+<summary><b>Can I use it on my phone?</b></summary>
 
-Sí. Las lecciones son cortitas y el código que escribes se guarda solo: al volver, lo encuentras donde lo dejaste.
+You can open it, but it's designed for a **computer or a tablet in landscape**: writing code on a phone is uncomfortable.
+</details>
+
+<details>
+<summary><b>Can I leave a lesson halfway through?</b></summary>
+
+Yes. Lessons are short and the code you write saves itself: when you come back, it's where you left it.
 </details>
 
 ---
 
-## 🛠️ Para programadores
+## 🛠️ For developers
 
 <details>
-<summary><b>Cómo está hecho</b></summary>
+<summary><b>How it's built</b></summary>
 
-- **HTML + CSS + JavaScript puro**, sin frameworks, sin dependencias y sin paso de compilación.
-- Scripts clásicos (sin módulos ni `fetch` de archivos locales) para que funcione abriendo `index.html` con doble clic (`file://`).
-- El resultado de cada ejercicio se pinta en un `<iframe srcdoc>` con un script ayudante que captura la consola, traduce
-  los errores, simula `localStorage` y sirve `fetch("datos/…")` sin internet.
-- El progreso, los borradores y los ajustes se guardan en `localStorage`.
+- **Plain HTML + CSS + JavaScript**, with no frameworks, no dependencies and no build step.
+- Classic scripts (no modules or `fetch` of local files) so it works by double-clicking `index.html` (`file://`).
+- Each exercise's result is rendered in an `<iframe srcdoc>` with a helper script that captures the console, translates
+  errors, simulates `localStorage` and serves `fetch("datos/…")` offline.
+- Progress, drafts and settings are saved in `localStorage`.
+- Two languages: the interface texts go through `T("…")` (`js/textos.js`) and each lesson has its English copy in `lecciones-en/`.
 </details>
 
 <details>
-<summary><b>Estructura del repositorio</b></summary>
+<summary><b>Repository structure</b></summary>
 
-| Carpeta / archivo | Qué contiene |
+| Folder / file | What it contains |
 |---|---|
-| `index.html` | Inicio: mapa de mundos e insignias |
-| `leccion.html?id=…` | Vista de una lección (3 columnas: lección, código, resultado) |
-| `css/` | Estilos: tema, componentes, mapa y lección |
-| `js/curso.js` | **Índice del curso**: mundos y lista de lecciones |
-| `js/editor.js` | Editor en vivo y resultado (consola, errores, `localStorage` de práctica, `fetch` simulado, vigilante de bucles) |
-| `js/ejercicios.js` | Revisor de ejercicios: compara con la solución (DOM, estilo calculado, consola, acciones simuladas) |
-| `js/escritura.js` | Revisor de escritura: etiquetas cerradas, `{ }` y `;` en CSS y JS |
-| `js/retos.js`, `js/pruebas.js` | Retos y ayudantes `PRUEBA` (estados `:hover`, anchos, recargar, escribir…) |
-| `js/` (resto) | Progreso, mapa, controles, mascota, celebraciones |
-| `lecciones/` | Contenido: un archivo `.js` por lección, en 4 carpetas (una por mundo) |
-| `recursos/` | Imágenes de las lecciones y la marca (logo de Tagui, icono) |
-| `docs/PLAN_CURSO.md` | Temario completo |
-| `docs/FORMATO_LECCION.md` | Contrato entre el motor y las lecciones: cómo se escribe una lección |
-| `docs/PENDIENTES.md` | Lista viva de tareas y decisiones abiertas |
-| `tests/` | Verificador de lecciones y escenarios de prueba en el navegador |
+| `index.html` | Home: map of worlds and badges |
+| `leccion.html?id=…` | A lesson's view (3 columns: lesson, code, result) |
+| `mi-clinica.html` | The end of the course: the student's Huellas website and its .zip download |
+| `css/` | Styles: theme, components, map and lesson |
+| `js/curso.js` | **Course index**: worlds and lesson list (with each lesson's English title) |
+| `js/textos.js` | The interface's English texts (`T("…")`) and the chosen language |
+| `js/editor.js` | Live editor and result (console, errors, practice `localStorage`, simulated `fetch`, loop watchdog) |
+| `js/ejercicios.js` | Exercise checker: compares with the solution (DOM, computed style, console, simulated actions) |
+| `js/escritura.js` | Writing checker: closed tags, `{ }` and `;` in CSS and JS |
+| `js/retos.js`, `js/pruebas.js` | Challenges and `PRUEBA` helpers (`:hover` states, widths, reload, typing…) |
+| `js/` (rest) | Progress, map, controls, mascot, celebrations |
+| `lecciones/` | Content: one `.js` file per lesson, in 4 folders (one per world), in Spanish |
+| `lecciones-en/` | The same lessons in English, with the same file names; the English Huellas website is generated from the Spanish one by `herramientas/huellas-en.mjs` |
+| `recursos/` | Lesson images, the Huellas website and the brand (Tagui's logo, icon) |
+| `docs/PLAN_CURSO.md` | Full syllabus |
+| `docs/FORMATO_LECCION.md` | Contract between the engine and the lessons: how a lesson is written |
+| `docs/PROYECTO_FINAL.md` | The Huellas final project, task by task |
+| `docs/PENDIENTES.md` | Living list of tasks and open decisions |
+| `tests/` | Lesson checker and in-browser test scenarios |
+
+The project docs (`docs/`) are in Spanish.
 </details>
 
 <details>
-<summary><b>Añadir o cambiar lecciones</b></summary>
+<summary><b>Adding or changing lessons</b></summary>
 
-1. Lee `docs/FORMATO_LECCION.md`: tipos de paso, cómo se revisan los ejercicios y cómo se escriben las comprobaciones de los retos.
-2. Crea el archivo en `lecciones/<mundo>/` y ponlo en `js/curso.js` con `listo: true`.
-3. Abre `tests/verificar-lecciones.html`: cada lección debe salir en ✓ (la solución aprueba, el código inicial no, y todo está bien escrito).
-4. Haz la lección como si fueras un alumno.
+1. Read `docs/FORMATO_LECCION.md`: step types, how exercises are checked and how challenge checks are written.
+2. Create the file in `lecciones/<world>/` and add it to `js/curso.js` with `listo: true`.
+3. Open `tests/verificar-lecciones.html`: every lesson must show ✓ (the solution passes, the starting code doesn't, and everything is well written).
+4. For the English version, copy it to `lecciones-en/` with the same name, add its `en: "…"` title in `js/curso.js` and
+   run `node herramientas/lecciones-en.mjs <id>`, which compares it with the original.
+5. Do the lesson as if you were a student.
 
-En Claude Code, el agente `.claude/agents/profesor-frontend.md` redacta lecciones siguiendo ese contrato.
+In Claude Code, the `.claude/agents/profesor-frontend.md` agent writes lessons following that contract.
 </details>
 
 <details>
-<summary><b>Pruebas automáticas en el navegador</b></summary>
+<summary><b>Automated browser tests</b></summary>
 
-Necesitan Node 22+ y Microsoft Edge. Controlan Edge sin ventana por DevTools (ver `tests/navegador/LEEME.md`):
+They need Node 22+ and Microsoft Edge. They drive a windowless Edge through DevTools (see `tests/navegador/LEEME.md`):
 
 ```bash
-node tests/navegador/cdp.mjs esc-tests.mjs          # verifica todas las lecciones
-node tests/navegador/cdp.mjs esc-motor.mjs          # motor de CSS con estado (hover, media queries…)
-node tests/navegador/cdp.mjs esc-motor-js.mjs       # motor del Mundo JavaScript
-MUNDO=4 node tests/navegador/cdp.mjs esc-mundo.mjs  # recorre un mundo entero como un alumno
-node tests/navegador/cdp.mjs esc-capturas-readme.mjs  # rehace las capturas de este README
+node tests/navegador/cdp.mjs esc-tests.mjs            # checks every lesson
+IDIOMA=en node tests/navegador/cdp.mjs esc-tests.mjs  # the same, in English
+node tests/navegador/cdp.mjs esc-motor.mjs            # CSS engine with state (hover, media queries…)
+node tests/navegador/cdp.mjs esc-motor-js.mjs         # JavaScript World engine
+MUNDO=4 node tests/navegador/cdp.mjs esc-mundo.mjs    # plays a whole world like a student
+node tests/navegador/cdp.mjs esc-mi-clinica.mjs       # My clinic and its .zip download
+node tests/navegador/cdp.mjs esc-capturas-readme.mjs  # retakes this README's screenshots
 ```
 </details>

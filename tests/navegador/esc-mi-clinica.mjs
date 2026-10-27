@@ -7,6 +7,10 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const BASE = new URL("../../", import.meta.url).href;
+// Con IDIOMA=en la web es la de Huellas en inglés (lecciones-en/huellas/versiones.js), con sus nombres
+const S = process.env.IDIOMA === "en"
+  ? { servicios: "#service-list .service", exoticos: "#filter-exotics", menu: ".menu-button", abierto: "open", opiniones: "#review-list .review" }
+  : { servicios: "#lista-servicios .servicio", exoticos: "#filtro-exoticos", menu: ".boton-menu", abierto: "abierto", opiniones: "#lista-opiniones .opinion" };
 const progreso = completadas => `localStorage.setItem('csshtml-progreso-v1', JSON.stringify({ xp: 0, completadas: ${JSON.stringify(completadas)}, insignias: [], racha: { dias: 0, ultimo: null }, ajustes: { sonido: false, tema: 'light', desbloquearTodo: false }, borradores: {} }))`;
 
 // Lee un .zip de archivos guardados sin comprimir (método 0), cabecera local a cabecera local
@@ -43,7 +47,7 @@ export default async function (b) {
   await b.ir(BASE + "mi-clinica.html");
   await b.esperar(2500);
   b.log("Con js-17 completada: " + await b.eval("document.querySelector('.mi-clinica-cierre') ? 'cierre del curso' : 'ERROR'") +
-    " · servicios en la web: " + await b.eval("document.querySelector('.marco-clinica').contentDocument.querySelectorAll('#lista-servicios .servicio').length"));
+    " · servicios en la web: " + await b.eval("document.querySelector('.marco-clinica').contentDocument.querySelectorAll('" + S.servicios + "').length"));
   await b.foto("mi-clinica");
 
   const base64 = await b.eval(`(() => { const z = ZIP.crear(MICLINICA.archivos()); let s = ""; for (let i = 0; i < z.length; i += 8192) s += String.fromCharCode(...z.subarray(i, i + 8192)); return btoa(s); })()`);
@@ -68,15 +72,15 @@ export default async function (b) {
   await b.esperar(1500);
   b.log("La web descomprimida, desde el disco: " + await b.eval(`(() => {
     const d = document;
-    const servicios = d.querySelectorAll("#lista-servicios .servicio").length;
+    const servicios = d.querySelectorAll("${S.servicios}").length;
     // Las de loading="lazy" que quedan fuera de la ventana todavía no se han pedido: se cuentan solo las demás
     const visibles = [...d.images].filter(i => i.loading !== "lazy");
     const fotos = visibles.filter(i => i.complete && i.naturalWidth > 0).length + "/" + visibles.length + " (sin contar las diferidas)";
-    d.querySelector("#filtro-exoticos").click();
-    const exoticos = d.querySelectorAll("#lista-servicios .servicio").length;
-    d.querySelector(".boton-menu").click();
-    const menu = d.querySelector("nav").classList.contains("abierto");
-    const opiniones = d.querySelectorAll("#lista-opiniones .opinion").length;
+    d.querySelector("${S.exoticos}").click();
+    const exoticos = d.querySelectorAll("${S.servicios}").length;
+    d.querySelector("${S.menu}").click();
+    const menu = d.querySelector("nav").classList.contains("${S.abierto}");
+    const opiniones = d.querySelectorAll("${S.opiniones}").length;
     return "servicios " + servicios + " · exóticos " + exoticos + " · menú " + menu + " · opiniones " + opiniones + " · imágenes cargadas " + fotos;
   })()`));
   await b.foto("mi-clinica-descargada");

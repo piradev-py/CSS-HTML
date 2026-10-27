@@ -131,10 +131,10 @@
         que buscan texto en español se adaptan, no solo se traducen. `node herramientas/lecciones-en.mjs` las compara
         con el original. Hechas: **Mundo 1 entero** (html-01 … html-14), **Mundo CSS entero** (css-01 … css-15), **Mundo HTML + CSS entero** (hc-01 … hc-13) y **Mundo JavaScript entero** (js-01 … js-17; no hay js-14).
         Mundo 1 terminado → `PUBLICADO = true` y 1.4.0: el inglés ya se ve en la web publicada (2026-10-24).
-        Lecciones terminadas (2026-10-27). Queda: «Mi clínica» y los ejemplos del laboratorio en inglés; las «Rota» de esc-proyecto-m*.mjs con IDIOMA=en buscan código español.
+        Lecciones terminadas (2026-10-27). Mi clínica en inglés (1.4.10). Queda: los ejemplos del laboratorio en inglés; las «Rota» de esc-proyecto-m*.mjs con IDIOMA=en buscan código español.
   - [~] Fase 4 · Huellas en inglés. Hecho: la web inglesa sale de la española con `herramientas/huellas-en.mjs` y su
         tabla (`huellas-en-tabla.mjs`), `esc-huellas-en` la prueba en los 4 mundos, `nota-en.png` (Caveat) y las capturas
-        de los Mundos 1 y 2 (`IDIOMA=en MUNDO=1 … esc-capturas-huellas.mjs`). Falta: capturas del Mundo 4 al traducir js-17, y Mi clínica en inglés (carga las versiones españolas; `imagenes.js` sin `nota-en.png`).
+        de los Mundos 1 y 2 (`IDIOMA=en MUNDO=1 … esc-capturas-huellas.mjs`). Mi clínica en inglés hecha (1.4.10). El Mundo 4 no tiene capturas (tampoco en español).
 - [x] Publicar la web con GitHub Pages → **https://piradev-py.github.io/CSS-HTML/** (rama `main`, carpeta raíz, con `.nojekyll`).
 
 ## Decisiones por tomar

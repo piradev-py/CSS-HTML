@@ -152,6 +152,8 @@
   flex-shrink: 0;
 }
 .boton-icono:hover { background: var(--superficie-2); }
+/* Idioma: icono de traducir + EN/ES, más ancho que los demás para que se vea */
+.boton-idioma { width: auto; display: inline-flex; align-items: center; gap: 5px; padding: 0 10px; font-size: 0.85rem; font-weight: 800; }
 
 .mini-boton {
   padding: 6px 10px;

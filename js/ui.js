@@ -158,14 +158,16 @@
   function montarCabecera(extraIzquierda = "") {
     const cab = document.querySelector(".cabecera");
     if (!cab) return;
+    // El icono de siempre para «traducir» (文A), para que el botón de idioma se vea a la primera
+    const ICONO_IDIOMA = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>';
     cab.innerHTML =
       extraIzquierda + LOGO +
       '<span class="espacio"></span>' +
       '<div class="estado-jugador" data-estado-jugador></div>' +
       (!IDIOMA.disponible ? ""
         : IDIOMA.actual === "en"
-        ? '<button class="boton-icono" data-accion="idioma" lang="es" aria-label="Cambiar a español" title="Cambiar a español">ES</button>'
-        : '<button class="boton-icono" data-accion="idioma" lang="en" aria-label="Switch to English" title="Switch to English">EN</button>') +
+        ? '<button class="boton-icono boton-idioma" data-accion="idioma" lang="es" aria-label="Cambiar a español" title="Cambiar a español">' + ICONO_IDIOMA + "ES</button>"
+        : '<button class="boton-icono boton-idioma" data-accion="idioma" lang="en" aria-label="Switch to English" title="Switch to English">' + ICONO_IDIOMA + "EN</button>") +
       '<button class="boton-icono ocultar-movil" data-accion="sonido" aria-label="' + T("Activar o silenciar sonido") + '"></button>' +
       '<button class="boton-icono" data-accion="tema" aria-label="' + T("Cambiar modo claro u oscuro") + '"></button>' +
       '<button class="boton-icono" data-accion="sugerencias" aria-label="' + T("Enviar una sugerencia o avisar de un error") + '" title="' + T("Sugerencias y errores") + '">💬</button>' +
