@@ -19,6 +19,12 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.9 · 2026-10-27
+
+- El **Mundo JavaScript** entero en inglés: Dates and times (js-16) y su Proyecto web (js-17).
+- Huellas en inglés (Mundo 4): las opiniones vuelven a cargarse desde `datos/opiniones.json`, el resumen de la
+  cita y el botón «Cancel» ya salen en inglés.
+
 ## 1.4.8 · 2026-10-27
 
 - Tres lecciones más del **Mundo JavaScript** en inglés: Validating forms (js-11), Fetching data with fetch (js-13)

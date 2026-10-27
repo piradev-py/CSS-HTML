@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.4.8";
+  const VERSION = "1.4.9";
 
   const MUNDOS = [
     {
@@ -104,11 +104,11 @@
         { id: "js-10", archivo: "js-10-crear-elementos.js", titulo: "Crear elementos desde JS", en: "Creating elements from JS", listo: true },
         // Los ids no cambian nunca: las lecciones nuevas llevan el siguiente número libre aunque vayan en medio
         { id: "js-15", archivo: "js-15-filtrar-listas.js", titulo: "Filtrar listas", en: "Filtering lists", listo: true },
-        { id: "js-16", archivo: "js-16-fechas-y-horas.js", titulo: "Fechas y horas", listo: true },
+        { id: "js-16", archivo: "js-16-fechas-y-horas.js", titulo: "Fechas y horas", en: "Dates and times", listo: true },
         { id: "js-11", archivo: "js-11-validar-formularios.js", titulo: "Validar formularios", en: "Validating forms", listo: true },
         { id: "js-12", archivo: "js-12-localstorage.js", titulo: "Guardar datos: localStorage", en: "Saving data: localStorage", listo: true },
         { id: "js-13", archivo: "js-13-fetch.js", titulo: "Pedir datos con fetch", en: "Fetching data with fetch", listo: true },
-        { id: "js-17", archivo: "js-17-proyecto-web.js", titulo: "Proyecto web: la agenda de Huellas", listo: true, huellas: true }
+        { id: "js-17", archivo: "js-17-proyecto-web.js", titulo: "Proyecto web: la agenda de Huellas", en: "Web project: Huellas's appointment book", listo: true, huellas: true }
       ]
     }
   ];

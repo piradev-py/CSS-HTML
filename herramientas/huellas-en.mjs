@@ -30,7 +30,7 @@ const borde = (es, lado) => /[\p{L}\p{N}_]/u.test(lado === "ini" ? es[0] : es[es
 const textos = Object.entries(TEXTOS).filter(([, en]) => en).sort((a, b) => b[0].length - a[0].length)
   .map(([es, en]) => [new RegExp(borde(es, "ini") + escapar(es).replace(/ +/g, "\\s+") + borde(es, "fin"), "gu"), en, es]);
 const nombres = Object.entries(NOMBRES).filter(([, en]) => en).sort((a, b) => b[0].length - a[0].length)
-  .map(([es, en]) => [new RegExp("(?<![\\w\\-/])" + escapar(es) + "(?![\\w\\-/]|\\.(?:jpe?g|png|svg|html|css|js|json)\\b)", "g"), en, es]);
+  .map(([es, en]) => [new RegExp("(?<![\\w\\-/])" + escapar(es) + "(?![\\w\\-/]|\\.(?:jpe?g|png|svg|html|css|js|json)\\b(?!\\())", "g"), en, es]);
 const usados = new Set();
 // Dos nombres españoles con el mismo inglés fundirían dos ids/clases/variables distintos sin dar error
 const destinos = {};

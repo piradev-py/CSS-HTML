@@ -22,7 +22,7 @@ CURSO.registrar({
     { termino: "document.createElement()", tema: "Creating elements", para: "Builds a new tag (still outside the page).", ejemplo: "const card = document.createElement(\"article\");", buscar: "create new tag element" },
     { termino: "append()", tema: "Creating elements", para: "Puts an element inside another one, at the end.", ejemplo: "list.append(card);", buscar: "put add inside page" },
     { termino: "remove()", tema: "Creating elements", para: "Takes an element off the page.", ejemplo: "notice.remove();", buscar: "remove delete element" },
-    { termino: "painting a list", tema: "Creating elements", para: "Empty the container and create one element per piece of data.", ejemplo: "list.textContent = \"\";\nfor (const appointment of appointments) {\n  const li = document.createElement(\"li\");\n  li.textContent = appointment.date;\n  list.append(li);\n}", buscar: "paint repaint show data" }
+    { termino: "rendering a list", tema: "Creating elements", para: "Empty the container and create one element per piece of data.", ejemplo: "list.textContent = \"\";\nfor (const appointment of appointments) {\n  const li = document.createElement(\"li\");\n  li.textContent = appointment.date;\n  list.append(li);\n}", buscar: "paint repaint show data" }
   ],
   pasos: [
     {

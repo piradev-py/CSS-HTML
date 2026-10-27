@@ -23,9 +23,9 @@ CURSO.registrar({
   xp: 50,
   objetivo: "You'll learn to check what the user types into a form with JavaScript and to let them know with clear, accessible messages.",
   glosario: [
-    { termino: "\"submit\" y preventDefault()", tema: "Forms", para: "When the form is submitted; `preventDefault()` stops the page from reloading.", ejemplo: "form.addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n});", buscar: "submit form reload" },
+    { termino: "\"submit\" and preventDefault()", tema: "Forms", para: "When the form is submitted; `preventDefault()` stops the page from reloading.", ejemplo: "form.addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n});", buscar: "submit form reload" },
     { termino: ".trim()", tema: "Forms", para: "Removes the spaces at the beginning and the end.", ejemplo: "const name = field.value.trim();", buscar: "spaces remove trim" },
-    { termino: ".includes() (texto)", tema: "Forms", para: "Does the text contain this?", ejemplo: "if (email.includes(\"@\")) {\n  console.log(\"It has an @\");\n}", buscar: "contains search text" },
+    { termino: ".includes() (text)", tema: "Forms", para: "Does the text contain this?", ejemplo: "if (email.includes(\"@\")) {\n  console.log(\"It has an @\");\n}", buscar: "contains search text" },
     { termino: ".checked", tema: "Forms", para: "Is the checkbox (or the radio) checked?", ejemplo: "if (!checkbox.checked) {\n  error.textContent = \"Accept the privacy policy\";\n}", buscar: "checkbox checked radio" },
     { termino: "Number.isNaN()", tema: "Forms", para: "Is it not a number? To check that digits were typed.", ejemplo: "const onlyDigits = !Number.isNaN(Number(phone));", buscar: "number digits check" },
     { termino: "allGood flag", tema: "Forms", para: "A variable that starts at `true` and becomes `false` if any field fails.", ejemplo: "let allGood = true;\nif (name === \"\") {\n  allGood = false;\n}", buscar: "flag several fields errors" }
