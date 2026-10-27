@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.5 · 2026-10-27
+
+- Nueve lecciones más del **Mundo HTML + CSS** en inglés: de Pseudo-classes a Styled forms (hc-02 … hc-10).
+  Solo falta su Proyecto web.
+
 ## 1.4.4 · 2026-10-27
 
 - El **Mundo CSS** entero en inglés, incluido su Proyecto web con la clínica Huellas (css-15) y sus capturas.

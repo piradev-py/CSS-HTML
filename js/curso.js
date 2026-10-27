@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.4.4";
+  const VERSION = "1.4.5";
 
   const MUNDOS = [
     {
@@ -71,15 +71,15 @@
       pestanas: ["html", "css"],
       lecciones: [
         { id: "hc-01", archivo: "hc-01-tarjeta.js", titulo: "Maqueta una tarjeta", en: "Build a card", listo: true },
-        { id: "hc-02", archivo: "hc-02-pseudoclases.js", titulo: "Pseudo-clases", listo: true },
-        { id: "hc-03", archivo: "hc-03-pseudoelementos.js", titulo: "Pseudo-elementos", listo: true },
-        { id: "hc-04", archivo: "hc-04-navegacion.js", titulo: "Barra de navegación", listo: true },
-        { id: "hc-05", archivo: "hc-05-responsive.js", titulo: "Responsive y media queries", listo: true },
-        { id: "hc-06", archivo: "hc-06-mobile-first.js", titulo: "Mobile first", listo: true },
-        { id: "hc-07", archivo: "hc-07-transformaciones.js", titulo: "Transformaciones", listo: true },
-        { id: "hc-08", archivo: "hc-08-transiciones.js", titulo: "Transiciones", listo: true },
-        { id: "hc-09", archivo: "hc-09-animaciones.js", titulo: "Animaciones", listo: true },
-        { id: "hc-10", archivo: "hc-10-formularios-estilo.js", titulo: "Formularios con estilo", listo: true },
+        { id: "hc-02", archivo: "hc-02-pseudoclases.js", titulo: "Pseudo-clases", en: "Pseudo-classes", listo: true },
+        { id: "hc-03", archivo: "hc-03-pseudoelementos.js", titulo: "Pseudo-elementos", en: "Pseudo-elements", listo: true },
+        { id: "hc-04", archivo: "hc-04-navegacion.js", titulo: "Barra de navegación", en: "Navigation bar", listo: true },
+        { id: "hc-05", archivo: "hc-05-responsive.js", titulo: "Responsive y media queries", en: "Responsive design and media queries", listo: true },
+        { id: "hc-06", archivo: "hc-06-mobile-first.js", titulo: "Mobile first", en: "Mobile first", listo: true },
+        { id: "hc-07", archivo: "hc-07-transformaciones.js", titulo: "Transformaciones", en: "Transforms", listo: true },
+        { id: "hc-08", archivo: "hc-08-transiciones.js", titulo: "Transiciones", en: "Transitions", listo: true },
+        { id: "hc-09", archivo: "hc-09-animaciones.js", titulo: "Animaciones", en: "Animations", listo: true },
+        { id: "hc-10", archivo: "hc-10-formularios-estilo.js", titulo: "Formularios con estilo", en: "Styled forms", listo: true },
         { id: "hc-13", archivo: "hc-13-proyecto-web.js", titulo: "Proyecto web: la maqueta de Huellas", listo: true, huellas: true }
       ]
     },
