@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.4.6";
+  const VERSION = "1.4.7";
 
   const MUNDOS = [
     {
@@ -93,20 +93,20 @@
       pestanas: ["html", "css", "js"],
       lecciones: [
         { id: "js-01", archivo: "js-01-que-es-js.js", titulo: "¿Qué es JavaScript?", en: "What is JavaScript?", listo: true },
-        { id: "js-02", archivo: "js-02-variables.js", titulo: "Variables y consola", listo: true },
-        { id: "js-03", archivo: "js-03-dom.js", titulo: "Seleccionar elementos (DOM)", listo: true },
-        { id: "js-04", archivo: "js-04-cambiar-dom.js", titulo: "Cambiar texto, estilos y clases", listo: true },
-        { id: "js-05", archivo: "js-05-funciones.js", titulo: "Funciones", listo: true },
-        { id: "js-06", archivo: "js-06-eventos.js", titulo: "Eventos", listo: true },
-        { id: "js-07", archivo: "js-07-condiciones.js", titulo: "Condiciones", listo: true },
-        { id: "js-08", archivo: "js-08-arrays-y-bucles.js", titulo: "Arrays y bucles", listo: true },
-        { id: "js-09", archivo: "js-09-objetos.js", titulo: "Objetos", listo: true },
-        { id: "js-10", archivo: "js-10-crear-elementos.js", titulo: "Crear elementos desde JS", listo: true },
+        { id: "js-02", archivo: "js-02-variables.js", titulo: "Variables y consola", en: "Variables and the console", listo: true },
+        { id: "js-03", archivo: "js-03-dom.js", titulo: "Seleccionar elementos (DOM)", en: "Selecting elements (DOM)", listo: true },
+        { id: "js-04", archivo: "js-04-cambiar-dom.js", titulo: "Cambiar texto, estilos y clases", en: "Changing the page (DOM)", listo: true },
+        { id: "js-05", archivo: "js-05-funciones.js", titulo: "Funciones", en: "Functions", listo: true },
+        { id: "js-06", archivo: "js-06-eventos.js", titulo: "Eventos", en: "Events: responding to the user", listo: true },
+        { id: "js-07", archivo: "js-07-condiciones.js", titulo: "Condiciones", en: "Conditions", listo: true },
+        { id: "js-08", archivo: "js-08-arrays-y-bucles.js", titulo: "Arrays y bucles", en: "Arrays and loops", listo: true },
+        { id: "js-09", archivo: "js-09-objetos.js", titulo: "Objetos", en: "Objects", listo: true },
+        { id: "js-10", archivo: "js-10-crear-elementos.js", titulo: "Crear elementos desde JS", en: "Creating elements from JS", listo: true },
         // Los ids no cambian nunca: las lecciones nuevas llevan el siguiente número libre aunque vayan en medio
         { id: "js-15", archivo: "js-15-filtrar-listas.js", titulo: "Filtrar listas", listo: true },
         { id: "js-16", archivo: "js-16-fechas-y-horas.js", titulo: "Fechas y horas", listo: true },
         { id: "js-11", archivo: "js-11-validar-formularios.js", titulo: "Validar formularios", listo: true },
-        { id: "js-12", archivo: "js-12-localstorage.js", titulo: "Guardar datos: localStorage", listo: true },
+        { id: "js-12", archivo: "js-12-localstorage.js", titulo: "Guardar datos: localStorage", en: "Saving data: localStorage", listo: true },
         { id: "js-13", archivo: "js-13-fetch.js", titulo: "Pedir datos con fetch", listo: true },
         { id: "js-17", archivo: "js-17-proyecto-web.js", titulo: "Proyecto web: la agenda de Huellas", listo: true, huellas: true }
       ]

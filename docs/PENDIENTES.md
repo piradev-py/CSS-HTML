@@ -129,9 +129,9 @@
         `IDIOMA=en` para el inglés). Con `IDIOMA=en`, `esc-tests` carga las lecciones de `lecciones-en/` que existan.
   - [ ] Fase 3 · lecciones, mundo a mundo, en `lecciones-en/` (opencode, una lección por tarea): las comprobaciones
         que buscan texto en español se adaptan, no solo se traducen. `node herramientas/lecciones-en.mjs` las compara
-        con el original. Hechas: **Mundo 1 entero** (html-01 … html-14), **Mundo CSS entero** (css-01 … css-15), **Mundo HTML + CSS entero** (hc-01 … hc-13) y js-01.
+        con el original. Hechas: **Mundo 1 entero** (html-01 … html-14), **Mundo CSS entero** (css-01 … css-15), **Mundo HTML + CSS entero** (hc-01 … hc-13) y js-01 … js-10 y js-12.
         Mundo 1 terminado → `PUBLICADO = true` y 1.4.0: el inglés ya se ve en la web publicada (2026-10-24).
-        Siguientes: js-02 (opencode) … js-17 (js-17 es el proyecto del Mundo 4: Claude, con capturas m4 en inglés).
+        Siguientes: js-11 (opencode, en curso), js-13 … js-17 (js-17 es el proyecto del Mundo 4: Claude, con capturas m4 en inglés).
   - [~] Fase 4 · Huellas en inglés. Hecho: la web inglesa sale de la española con `herramientas/huellas-en.mjs` y su
         tabla (`huellas-en-tabla.mjs`), `esc-huellas-en` la prueba en los 4 mundos, `nota-en.png` (Caveat) y las capturas
         de los Mundos 1 y 2 (`IDIOMA=en MUNDO=1 … esc-capturas-huellas.mjs`). Falta: capturas del Mundo 4 al traducir js-17, y Mi clínica en inglés (carga las versiones españolas; `imagenes.js` sin `nota-en.png`).

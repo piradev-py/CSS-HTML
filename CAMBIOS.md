@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.7 · 2026-10-27
+
+- Diez lecciones más del **Mundo JavaScript** en inglés: de Variables and the console a Saving data: localStorage
+  (js-02 … js-10 y js-12).
+
 ## 1.4.6 · 2026-10-27
 
 - El **Mundo HTML + CSS** entero en inglés, con su Proyecto web (hc-13) y sus capturas.
