@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.4 · 2026-10-27
+
+- El **Mundo CSS** entero en inglés, incluido su Proyecto web con la clínica Huellas (css-15) y sus capturas.
+- Primera lección del **Mundo HTML + CSS** en inglés: Build a card (hc-01).
+
 ## 1.4.3 · 2026-10-27
 
 - Cuatro lecciones más del **Mundo CSS** en inglés: Flexbox (I) y (II), Grid y CSS variables (css-11 … css-14).

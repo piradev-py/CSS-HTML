@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.4.3";
+  const VERSION = "1.4.4";
 
   const MUNDOS = [
     {
@@ -58,7 +58,7 @@
         { id: "css-12", archivo: "css-12-flexbox-2.js", titulo: "Flexbox (II): repartir el espacio", en: "Flexbox (II): sharing out the space", listo: true },
         { id: "css-13", archivo: "css-13-grid.js", titulo: "Grid", en: "Grid", listo: true },
         { id: "css-14", archivo: "css-14-variables.js", titulo: "Variables CSS", en: "CSS variables", listo: true },
-        { id: "css-15", archivo: "css-15-proyecto-web.js", titulo: "Proyecto web: la identidad de Huellas", listo: true, huellas: true }
+        { id: "css-15", archivo: "css-15-proyecto-web.js", titulo: "Proyecto web: la identidad de Huellas", en: "Web project: Huellas's identity", listo: true, huellas: true }
       ]
     },
     {
@@ -70,7 +70,7 @@
       lema: "Construye interfaces de verdad",
       pestanas: ["html", "css"],
       lecciones: [
-        { id: "hc-01", archivo: "hc-01-tarjeta.js", titulo: "Maqueta una tarjeta", listo: true },
+        { id: "hc-01", archivo: "hc-01-tarjeta.js", titulo: "Maqueta una tarjeta", en: "Build a card", listo: true },
         { id: "hc-02", archivo: "hc-02-pseudoclases.js", titulo: "Pseudo-clases", listo: true },
         { id: "hc-03", archivo: "hc-03-pseudoelementos.js", titulo: "Pseudo-elementos", listo: true },
         { id: "hc-04", archivo: "hc-04-navegacion.js", titulo: "Barra de navegación", listo: true },

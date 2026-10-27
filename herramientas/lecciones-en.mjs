@@ -33,7 +33,7 @@ const huellas = ruta => { const c = { window: {}, console }; c.window = c; if (e
 const BASES = { es: huellas("lecciones/huellas/versiones.js"), en: huellas("lecciones-en/huellas/versiones.js") };
 function cargar(ruta) {
   let leccion = null;
-  const ctx = Object.assign({}, BASES[ruta.startsWith("lecciones-en/") ? "en" : "es"], { CURSO: { registrar: l => { leccion = l; } } });
+  const ctx = Object.assign({}, BASES[ruta.startsWith("lecciones-en/") ? "en" : "es"], { CURSO: { registrar: l => { leccion = l; } }, RETOS: { guiaCSS: css => css } });
   ctx.window = ctx;
   vm.runInNewContext(leer(ruta), ctx);
   return leccion;
