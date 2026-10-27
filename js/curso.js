@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.4.2";
+  const VERSION = "1.4.3";
 
   const MUNDOS = [
     {
@@ -54,10 +54,10 @@
         { id: "css-08", archivo: "css-08-bordes-sombras.js", titulo: "Bordes y sombras", en: "Borders and shadows", listo: true },
         { id: "css-09", archivo: "css-09-display.js", titulo: "Display: bloque y en línea", en: "Display: block and inline", listo: true },
         { id: "css-10", archivo: "css-10-posicionamiento.js", titulo: "Posicionamiento", en: "Positioning", listo: true },
-        { id: "css-11", archivo: "css-11-flexbox-1.js", titulo: "Flexbox (I): en fila y alineados", listo: true },
-        { id: "css-12", archivo: "css-12-flexbox-2.js", titulo: "Flexbox (II): repartir el espacio", listo: true },
-        { id: "css-13", archivo: "css-13-grid.js", titulo: "Grid", listo: true },
-        { id: "css-14", archivo: "css-14-variables.js", titulo: "Variables CSS", listo: true },
+        { id: "css-11", archivo: "css-11-flexbox-1.js", titulo: "Flexbox (I): en fila y alineados", en: "Flexbox (I): in a row and aligned", listo: true },
+        { id: "css-12", archivo: "css-12-flexbox-2.js", titulo: "Flexbox (II): repartir el espacio", en: "Flexbox (II): sharing out the space", listo: true },
+        { id: "css-13", archivo: "css-13-grid.js", titulo: "Grid", en: "Grid", listo: true },
+        { id: "css-14", archivo: "css-14-variables.js", titulo: "Variables CSS", en: "CSS variables", listo: true },
         { id: "css-15", archivo: "css-15-proyecto-web.js", titulo: "Proyecto web: la identidad de Huellas", listo: true, huellas: true }
       ]
     },

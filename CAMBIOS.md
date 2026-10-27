@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.3 · 2026-10-27
+
+- Cuatro lecciones más del **Mundo CSS** en inglés: Flexbox (I) y (II), Grid y CSS variables (css-11 … css-14).
+  Solo falta su Proyecto web.
+
 ## 1.4.2 · 2026-10-25
 
 - Cuatro lecciones más del **Mundo CSS** en inglés: The box model, Borders and shadows, Display: block and inline y
