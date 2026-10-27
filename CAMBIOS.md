@@ -19,6 +19,11 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.8 · 2026-10-27
+
+- Tres lecciones más del **Mundo JavaScript** en inglés: Validating forms (js-11), Fetching data with fetch (js-13)
+  y Filtering lists (js-15).
+
 ## 1.4.7 · 2026-10-27
 
 - Diez lecciones más del **Mundo JavaScript** en inglés: de Variables and the console a Saving data: localStorage
