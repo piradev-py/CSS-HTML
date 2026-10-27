@@ -14,8 +14,11 @@ los renombres de clases/ids y, si los hay, los textos que deben quedar exactos.
 3. Aplica cada renombre en **todo** el archivo a la vez: explicaciones, ejemplos, enunciados, pistas, `inicial`,
    `solucion`, `cssBase`, el `html` y los `selector` de los pasos `controles`, y los selectores de las comprobaciones.
    Una clase o id que no esté en la lista y esté en español, tradúcela tú y cítala en el resumen.
-   Las de la web Huellas (sobre todo en los ejemplos del glosario: `.tarjeta-cita`, `.portada`, `--sombra`…) tienen
+   Las clases e ids de la web Huellas (sobre todo en los ejemplos del glosario: `.tarjeta-cita`, `.portada`…) tienen
    ya su inglés: búscalo con `grep '"nombre":' herramientas/huellas-en-tabla.mjs` (no leas ese archivo entero).
+   Sus variables CSS: `--principal`→`--primary`, `--principal-oscuro`→`--primary-dark`, `--oscuro`→`--dark`, `--texto`→`--text`, `--suave`→`--soft`,
+   `--fondo`→`--background`, `--crema`→`--cream`, `--menta`→`--mint`, `--fuente-titulos`→`--font-headings`,
+   `--fuente-texto`→`--font-body`, `--radio`→`--radius`, `--sombra`→`--shadow`.
 4. Si una comprobación busca texto (`includes(…)`, `textContent`, mensajes de consola), adáptala al inglés de la solución.
 5. Comprueba, y corrige hasta que salga bien:
    - `node --check <archivo nuevo>`
