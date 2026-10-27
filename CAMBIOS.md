@@ -19,6 +19,12 @@ Para publicar una versión:
 
 Gracias al `?v=`, una recarga normal (F5) ya trae los archivos nuevos.
 
+## 1.4.6 · 2026-10-27
+
+- El **Mundo HTML + CSS** entero en inglés, con su Proyecto web (hc-13) y sus capturas.
+- Primera lección del **Mundo JavaScript** en inglés: What is JavaScript? (js-01).
+- En la Huellas inglesa, la animación de la portada se llama `fade-in` (antes se quedaba en español, `aparecer`).
+
 ## 1.4.5 · 2026-10-27
 
 - Nueve lecciones más del **Mundo HTML + CSS** en inglés: de Pseudo-classes a Styled forms (hc-02 … hc-10).

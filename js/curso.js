@@ -7,7 +7,7 @@
 (function () {
   // Versión publicada. No la cambies a mano: usa `node herramientas/version.mjs X.Y.Z`,
   // que también actualiza los ?v= de index.html y leccion.html (ver CAMBIOS.md)
-  const VERSION = "1.4.5";
+  const VERSION = "1.4.6";
 
   const MUNDOS = [
     {
@@ -80,7 +80,7 @@
         { id: "hc-08", archivo: "hc-08-transiciones.js", titulo: "Transiciones", en: "Transitions", listo: true },
         { id: "hc-09", archivo: "hc-09-animaciones.js", titulo: "Animaciones", en: "Animations", listo: true },
         { id: "hc-10", archivo: "hc-10-formularios-estilo.js", titulo: "Formularios con estilo", en: "Styled forms", listo: true },
-        { id: "hc-13", archivo: "hc-13-proyecto-web.js", titulo: "Proyecto web: la maqueta de Huellas", listo: true, huellas: true }
+        { id: "hc-13", archivo: "hc-13-proyecto-web.js", titulo: "Proyecto web: la maqueta de Huellas", en: "Web project: Huellas's layout", listo: true, huellas: true }
       ]
     },
     {
@@ -92,7 +92,7 @@
       lema: "Dale vida e interacción a tu web",
       pestanas: ["html", "css", "js"],
       lecciones: [
-        { id: "js-01", archivo: "js-01-que-es-js.js", titulo: "¿Qué es JavaScript?", listo: true },
+        { id: "js-01", archivo: "js-01-que-es-js.js", titulo: "¿Qué es JavaScript?", en: "What is JavaScript?", listo: true },
         { id: "js-02", archivo: "js-02-variables.js", titulo: "Variables y consola", listo: true },
         { id: "js-03", archivo: "js-03-dom.js", titulo: "Seleccionar elementos (DOM)", listo: true },
         { id: "js-04", archivo: "js-04-cambiar-dom.js", titulo: "Cambiar texto, estilos y clases", listo: true },

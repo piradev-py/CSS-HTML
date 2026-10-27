@@ -234,6 +234,7 @@ export const NOMBRES = {
   "animation": "",
   "anio": "year",
   "antetitulo": "kicker",
+  "aparecer": "fade-in",
   "archivo": "",
   "autor": "author",
   "estrellas": "stars",
